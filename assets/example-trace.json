@@ -1,0 +1,35 @@
+{
+  "instruction": "打开美团并搜索附近的咖啡店",
+  "steps": [
+    {
+      "step": 1,
+      "observation": "当前位于手机桌面，需要先打开目标应用",
+      "action": "OPEN",
+      "parameters": {
+        "app_name": "美团"
+      }
+    },
+    {
+      "step": 2,
+      "observation": "美团首页顶部存在搜索入口",
+      "action": "CLICK",
+      "parameters": {
+        "point": [500, 86]
+      }
+    },
+    {
+      "step": 3,
+      "observation": "搜索输入框已激活",
+      "action": "TYPE",
+      "parameters": {
+        "text": "咖啡"
+      }
+    },
+    {
+      "step": 4,
+      "observation": "搜索结果已经清晰展示",
+      "action": "COMPLETE",
+      "parameters": {}
+    }
+  ]
+}
