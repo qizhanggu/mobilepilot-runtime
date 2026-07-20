@@ -18,6 +18,11 @@ htmlcov/
 venv/
 env/
 
+# Android local build configuration
+**/build/
+**/.gradle/
+**/local.properties
+
 # Generated evaluation artifacts
 output/
 logs/

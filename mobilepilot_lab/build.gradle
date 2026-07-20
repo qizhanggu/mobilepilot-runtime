@@ -1,0 +1,4 @@
+plugins {
+    // AGP 8.5.2 与本机已缓存的 Gradle 8.7 和 Android Studio JDK 17 对应。
+    id 'com.android.application' version '8.5.2' apply false
+}
