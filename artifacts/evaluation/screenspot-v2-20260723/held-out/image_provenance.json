@@ -1,0 +1,19 @@
+{
+  "benchmark": "ScreenSpot-v2 Mobile",
+  "subset": "held_out",
+  "samples": 471,
+  "source_repository": "Voxel51/ScreenSpot-v2",
+  "source_commit": "f221b744a2e73f64d5178a0548db8e667c4843e0",
+  "download_base": "https://hf-mirror.com/datasets/Voxel51/ScreenSpot-v2/resolve/f221b744a2e73f64d5178a0548db8e667c4843e0/",
+  "held_out_manifest_sha256": "719cdb167c12d3416499c0cf70dfbac480c142dd0e56b6a52f9ada52d322021d",
+  "integration_manifest_sha256": "26e8e1f9459e30628a008bc750b9f8d54bed1bad1f20abebd0449d7b07509485",
+  "mapping_sha256": "f44feffb44376b102ad24d1e5823b40ff7a797eb949adc3f2605f77c60f982fc",
+  "image_checks": {
+    "present": 471,
+    "openable": 471,
+    "valid_bbox": 471,
+    "unique_repository_paths": 471,
+    "unique_local_paths": 471,
+    "integration_overlap": 0
+  }
+}

@@ -1,0 +1,4712 @@
+[
+  {
+    "sample_id": "mobile-0000-32207e9d2d",
+    "image_repository_path": "data/mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "14e6ef211fbb612de93f568eb7a129cc529debf4321b36f06ff2d927f391ff7a"
+  },
+  {
+    "sample_id": "mobile-0001-8e9ba12895",
+    "image_repository_path": "data/mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "14e6ef211fbb612de93f568eb7a129cc529debf4321b36f06ff2d927f391ff7a"
+  },
+  {
+    "sample_id": "mobile-0002-ed55f04b3d",
+    "image_repository_path": "data/mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_2.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "14e6ef211fbb612de93f568eb7a129cc529debf4321b36f06ff2d927f391ff7a"
+  },
+  {
+    "sample_id": "mobile-0003-7bb9ce9f58",
+    "image_repository_path": "data/mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_3.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "14e6ef211fbb612de93f568eb7a129cc529debf4321b36f06ff2d927f391ff7a"
+  },
+  {
+    "sample_id": "mobile-0004-043666d223",
+    "image_repository_path": "data/mobile_6949b916-64c8-431f-8842-a29a9a557641_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6949b916-64c8-431f-8842-a29a9a557641_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "7d75308573cd97a7ac2009efb57b39fb78a9032bb9b29bc80a990f13b2db01d5"
+  },
+  {
+    "sample_id": "mobile-0005-c0b39328ea",
+    "image_repository_path": "data/mobile_6949b916-64c8-431f-8842-a29a9a557641_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6949b916-64c8-431f-8842-a29a9a557641_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "7d75308573cd97a7ac2009efb57b39fb78a9032bb9b29bc80a990f13b2db01d5"
+  },
+  {
+    "sample_id": "mobile-0006-b7440050b8",
+    "image_repository_path": "data/mobile_6949b916-64c8-431f-8842-a29a9a557641_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6949b916-64c8-431f-8842-a29a9a557641_2.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "7d75308573cd97a7ac2009efb57b39fb78a9032bb9b29bc80a990f13b2db01d5"
+  },
+  {
+    "sample_id": "mobile-0007-adce69adb9",
+    "image_repository_path": "data/mobile_702eab66-81f1-4aac-a252-37b5f7c3ae68_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_702eab66-81f1-4aac-a252-37b5f7c3ae68_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "5ede6fb1b8caf318b40632ced72a4d84c8053020ab1c0085d4ef21743badbe54"
+  },
+  {
+    "sample_id": "mobile-0008-b1f9040611",
+    "image_repository_path": "data/mobile_a1366f87-f1f1-402c-911a-d239eb60eac8_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a1366f87-f1f1-402c-911a-d239eb60eac8_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "857a8f22b2eab743b1535d2814bf5008da35261dc30369b8dcc45c93a5d96d52"
+  },
+  {
+    "sample_id": "mobile-0009-ecd240ff65",
+    "image_repository_path": "data/mobile_a1366f87-f1f1-402c-911a-d239eb60eac8_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a1366f87-f1f1-402c-911a-d239eb60eac8_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "857a8f22b2eab743b1535d2814bf5008da35261dc30369b8dcc45c93a5d96d52"
+  },
+  {
+    "sample_id": "mobile-0010-b9bd7309b6",
+    "image_repository_path": "data/mobile_a1366f87-f1f1-402c-911a-d239eb60eac8_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a1366f87-f1f1-402c-911a-d239eb60eac8_2.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "857a8f22b2eab743b1535d2814bf5008da35261dc30369b8dcc45c93a5d96d52"
+  },
+  {
+    "sample_id": "mobile-0011-b13d592911",
+    "image_repository_path": "data/mobile_a1366f87-f1f1-402c-911a-d239eb60eac8_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a1366f87-f1f1-402c-911a-d239eb60eac8_3.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "857a8f22b2eab743b1535d2814bf5008da35261dc30369b8dcc45c93a5d96d52"
+  },
+  {
+    "sample_id": "mobile-0012-0f9c2ee375",
+    "image_repository_path": "data/mobile_c71efbd9-cd10-4564-949e-50b3b034328a_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c71efbd9-cd10-4564-949e-50b3b034328a_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "3bf8bf2988ba7dd41a3225cfcc8988ab654229e04aaf7a7b335f81768ff48814"
+  },
+  {
+    "sample_id": "mobile-0013-025ab19c31",
+    "image_repository_path": "data/mobile_c71efbd9-cd10-4564-949e-50b3b034328a_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c71efbd9-cd10-4564-949e-50b3b034328a_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "3bf8bf2988ba7dd41a3225cfcc8988ab654229e04aaf7a7b335f81768ff48814"
+  },
+  {
+    "sample_id": "mobile-0014-84923a0a49",
+    "image_repository_path": "data/mobile_c71efbd9-cd10-4564-949e-50b3b034328a_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c71efbd9-cd10-4564-949e-50b3b034328a_2.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "3bf8bf2988ba7dd41a3225cfcc8988ab654229e04aaf7a7b335f81768ff48814"
+  },
+  {
+    "sample_id": "mobile-0015-d7c5b436c4",
+    "image_repository_path": "data/mobile_c71efbd9-cd10-4564-949e-50b3b034328a_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c71efbd9-cd10-4564-949e-50b3b034328a_3.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "3bf8bf2988ba7dd41a3225cfcc8988ab654229e04aaf7a7b335f81768ff48814"
+  },
+  {
+    "sample_id": "mobile-0017-b0599a92a1",
+    "image_repository_path": "data/mobile_1c1d54b4-5ac1-40cd-9dc6-21a8d3c97d6e_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1c1d54b4-5ac1-40cd-9dc6-21a8d3c97d6e_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "f4b78bb0bde49ffe175abf4731486c1113d2b7a8009bdd1b7457123793e9e1e6"
+  },
+  {
+    "sample_id": "mobile-0018-bcf3178d1b",
+    "image_repository_path": "data/mobile_1c1d54b4-5ac1-40cd-9dc6-21a8d3c97d6e_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1c1d54b4-5ac1-40cd-9dc6-21a8d3c97d6e_2.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "f4b78bb0bde49ffe175abf4731486c1113d2b7a8009bdd1b7457123793e9e1e6"
+  },
+  {
+    "sample_id": "mobile-0019-ac136365de",
+    "image_repository_path": "data/mobile_1c1d54b4-5ac1-40cd-9dc6-21a8d3c97d6e_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1c1d54b4-5ac1-40cd-9dc6-21a8d3c97d6e_3.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "f4b78bb0bde49ffe175abf4731486c1113d2b7a8009bdd1b7457123793e9e1e6"
+  },
+  {
+    "sample_id": "mobile-0020-d1314602f3",
+    "image_repository_path": "data/mobile_0570bb62-77b0-4d1d-90f4-5e322c2bca17_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_0570bb62-77b0-4d1d-90f4-5e322c2bca17_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "96ad2a35b87e296483f1671f4f16283e75b42bd36797e2eb7533e103cd60a265"
+  },
+  {
+    "sample_id": "mobile-0021-560a457173",
+    "image_repository_path": "data/mobile_0570bb62-77b0-4d1d-90f4-5e322c2bca17_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_0570bb62-77b0-4d1d-90f4-5e322c2bca17_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "96ad2a35b87e296483f1671f4f16283e75b42bd36797e2eb7533e103cd60a265"
+  },
+  {
+    "sample_id": "mobile-0022-f31a0cd0ce",
+    "image_repository_path": "data/mobile_4b1df148-c6ac-452a-b55d-f8e6c6dee059_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4b1df148-c6ac-452a-b55d-f8e6c6dee059_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "5142f1f95d9f7ec452e47e73eb21eb38cca1c8ffb8bf9f3bb58f6fffba390f00"
+  },
+  {
+    "sample_id": "mobile-0023-95a56789ef",
+    "image_repository_path": "data/mobile_4b1df148-c6ac-452a-b55d-f8e6c6dee059_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4b1df148-c6ac-452a-b55d-f8e6c6dee059_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "5142f1f95d9f7ec452e47e73eb21eb38cca1c8ffb8bf9f3bb58f6fffba390f00"
+  },
+  {
+    "sample_id": "mobile-0024-24236aa27a",
+    "image_repository_path": "data/mobile_4b1df148-c6ac-452a-b55d-f8e6c6dee059_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4b1df148-c6ac-452a-b55d-f8e6c6dee059_2.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "5142f1f95d9f7ec452e47e73eb21eb38cca1c8ffb8bf9f3bb58f6fffba390f00"
+  },
+  {
+    "sample_id": "mobile-0025-ee94eab403",
+    "image_repository_path": "data/mobile_a8181231-d30c-4051-9ff2-16808694adbf_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a8181231-d30c-4051-9ff2-16808694adbf_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "a189d3f23ef2fa6a62bdfa7c9ade6fff2a66d850f3eeb0b10b99997f0c6561cd"
+  },
+  {
+    "sample_id": "mobile-0026-e93ea319bf",
+    "image_repository_path": "data/mobile_a8181231-d30c-4051-9ff2-16808694adbf_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a8181231-d30c-4051-9ff2-16808694adbf_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "a189d3f23ef2fa6a62bdfa7c9ade6fff2a66d850f3eeb0b10b99997f0c6561cd"
+  },
+  {
+    "sample_id": "mobile-0027-f3377cd360",
+    "image_repository_path": "data/mobile_a8181231-d30c-4051-9ff2-16808694adbf_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a8181231-d30c-4051-9ff2-16808694adbf_2.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "a189d3f23ef2fa6a62bdfa7c9ade6fff2a66d850f3eeb0b10b99997f0c6561cd"
+  },
+  {
+    "sample_id": "mobile-0028-b186455865",
+    "image_repository_path": "data/mobile_5313a7b6-4c3a-442f-a5d3-6d53fc8d3ad9_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5313a7b6-4c3a-442f-a5d3-6d53fc8d3ad9_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "fc34c9dbdf2184cda06e3e73b9f6c25eea1de0e9ea94d147656538752be504ac"
+  },
+  {
+    "sample_id": "mobile-0029-f64a2f8b3b",
+    "image_repository_path": "data/mobile_5313a7b6-4c3a-442f-a5d3-6d53fc8d3ad9_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5313a7b6-4c3a-442f-a5d3-6d53fc8d3ad9_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "fc34c9dbdf2184cda06e3e73b9f6c25eea1de0e9ea94d147656538752be504ac"
+  },
+  {
+    "sample_id": "mobile-0030-d51479495d",
+    "image_repository_path": "data/mobile_5313a7b6-4c3a-442f-a5d3-6d53fc8d3ad9_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5313a7b6-4c3a-442f-a5d3-6d53fc8d3ad9_2.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "fc34c9dbdf2184cda06e3e73b9f6c25eea1de0e9ea94d147656538752be504ac"
+  },
+  {
+    "sample_id": "mobile-0032-451f96e3bf",
+    "image_repository_path": "data/mobile_1a514eae-4ee0-4780-a059-c47715828e3b_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1a514eae-4ee0-4780-a059-c47715828e3b_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "0f805f8ff57f3e562c66528f8316ced9049080977e093087b346f0eedc6c5a04"
+  },
+  {
+    "sample_id": "mobile-0033-1c53a52c9d",
+    "image_repository_path": "data/mobile_1a514eae-4ee0-4780-a059-c47715828e3b_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1a514eae-4ee0-4780-a059-c47715828e3b_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "0f805f8ff57f3e562c66528f8316ced9049080977e093087b346f0eedc6c5a04"
+  },
+  {
+    "sample_id": "mobile-0034-e3f38c4b25",
+    "image_repository_path": "data/mobile_1a514eae-4ee0-4780-a059-c47715828e3b_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1a514eae-4ee0-4780-a059-c47715828e3b_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "0f805f8ff57f3e562c66528f8316ced9049080977e093087b346f0eedc6c5a04"
+  },
+  {
+    "sample_id": "mobile-0035-6bc6cf3236",
+    "image_repository_path": "data/mobile_93dec21b-d612-41df-9f76-933ceadaba66_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_93dec21b-d612-41df-9f76-933ceadaba66_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "563533b2c38c28a88d1e805899aa88653188f6b818a49da9d20413e50e8f653d"
+  },
+  {
+    "sample_id": "mobile-0036-b483c8cefc",
+    "image_repository_path": "data/mobile_93dec21b-d612-41df-9f76-933ceadaba66_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_93dec21b-d612-41df-9f76-933ceadaba66_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "563533b2c38c28a88d1e805899aa88653188f6b818a49da9d20413e50e8f653d"
+  },
+  {
+    "sample_id": "mobile-0037-c51fcbb2f2",
+    "image_repository_path": "data/mobile_93dec21b-d612-41df-9f76-933ceadaba66_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_93dec21b-d612-41df-9f76-933ceadaba66_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "563533b2c38c28a88d1e805899aa88653188f6b818a49da9d20413e50e8f653d"
+  },
+  {
+    "sample_id": "mobile-0038-80939d74c6",
+    "image_repository_path": "data/mobile_93dec21b-d612-41df-9f76-933ceadaba66_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_93dec21b-d612-41df-9f76-933ceadaba66_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "563533b2c38c28a88d1e805899aa88653188f6b818a49da9d20413e50e8f653d"
+  },
+  {
+    "sample_id": "mobile-0039-3434ac81a0",
+    "image_repository_path": "data/mobile_3925834b-893d-4cdf-b9cf-a602466175f3_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3925834b-893d-4cdf-b9cf-a602466175f3_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "da86078e9e730859a9e92dee1b26b6fb617454fea673475b7604aedfd5c9a5b2"
+  },
+  {
+    "sample_id": "mobile-0040-eb0c3e654b",
+    "image_repository_path": "data/mobile_3925834b-893d-4cdf-b9cf-a602466175f3_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3925834b-893d-4cdf-b9cf-a602466175f3_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "da86078e9e730859a9e92dee1b26b6fb617454fea673475b7604aedfd5c9a5b2"
+  },
+  {
+    "sample_id": "mobile-0041-aa3bc095d1",
+    "image_repository_path": "data/mobile_3925834b-893d-4cdf-b9cf-a602466175f3_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3925834b-893d-4cdf-b9cf-a602466175f3_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "da86078e9e730859a9e92dee1b26b6fb617454fea673475b7604aedfd5c9a5b2"
+  },
+  {
+    "sample_id": "mobile-0042-5aa2b4df39",
+    "image_repository_path": "data/mobile_3925834b-893d-4cdf-b9cf-a602466175f3_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3925834b-893d-4cdf-b9cf-a602466175f3_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "da86078e9e730859a9e92dee1b26b6fb617454fea673475b7604aedfd5c9a5b2"
+  },
+  {
+    "sample_id": "mobile-0043-12c66291e2",
+    "image_repository_path": "data/mobile_9b66c296-5f43-4312-b933-4dfabf00247c_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9b66c296-5f43-4312-b933-4dfabf00247c_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "7d8acf485dc7b36b6220e9b1cd937465f18a404044f870352cfa0ba903cb4032"
+  },
+  {
+    "sample_id": "mobile-0044-739c33e086",
+    "image_repository_path": "data/mobile_9b66c296-5f43-4312-b933-4dfabf00247c_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9b66c296-5f43-4312-b933-4dfabf00247c_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "7d8acf485dc7b36b6220e9b1cd937465f18a404044f870352cfa0ba903cb4032"
+  },
+  {
+    "sample_id": "mobile-0045-8e1596cd0f",
+    "image_repository_path": "data/mobile_9b66c296-5f43-4312-b933-4dfabf00247c_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9b66c296-5f43-4312-b933-4dfabf00247c_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "7d8acf485dc7b36b6220e9b1cd937465f18a404044f870352cfa0ba903cb4032"
+  },
+  {
+    "sample_id": "mobile-0046-489bc4a783",
+    "image_repository_path": "data/mobile_5c9fb5f1-7d84-4283-8ba4-7821a9545c95_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5c9fb5f1-7d84-4283-8ba4-7821a9545c95_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "85aad49083497e57ff489062c65c63b6c7f5e804fc2e9c08c5db4ae371ad2f30"
+  },
+  {
+    "sample_id": "mobile-0047-011fea9003",
+    "image_repository_path": "data/mobile_5c9fb5f1-7d84-4283-8ba4-7821a9545c95_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5c9fb5f1-7d84-4283-8ba4-7821a9545c95_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "85aad49083497e57ff489062c65c63b6c7f5e804fc2e9c08c5db4ae371ad2f30"
+  },
+  {
+    "sample_id": "mobile-0048-2b569b7ff2",
+    "image_repository_path": "data/mobile_5c9fb5f1-7d84-4283-8ba4-7821a9545c95_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5c9fb5f1-7d84-4283-8ba4-7821a9545c95_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "85aad49083497e57ff489062c65c63b6c7f5e804fc2e9c08c5db4ae371ad2f30"
+  },
+  {
+    "sample_id": "mobile-0049-e5baaadfeb",
+    "image_repository_path": "data/mobile_5c9fb5f1-7d84-4283-8ba4-7821a9545c95_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5c9fb5f1-7d84-4283-8ba4-7821a9545c95_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "85aad49083497e57ff489062c65c63b6c7f5e804fc2e9c08c5db4ae371ad2f30"
+  },
+  {
+    "sample_id": "mobile-0050-815615cea7",
+    "image_repository_path": "data/mobile_70580ad8-f119-4db6-813b-81f950e0569e_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_70580ad8-f119-4db6-813b-81f950e0569e_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "25726b347bb5c99a736c9874dd30695a7b944a4134372f18c4f80aee54194e6b"
+  },
+  {
+    "sample_id": "mobile-0051-12924b6a68",
+    "image_repository_path": "data/mobile_70580ad8-f119-4db6-813b-81f950e0569e_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_70580ad8-f119-4db6-813b-81f950e0569e_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "25726b347bb5c99a736c9874dd30695a7b944a4134372f18c4f80aee54194e6b"
+  },
+  {
+    "sample_id": "mobile-0052-85ce79c788",
+    "image_repository_path": "data/mobile_70580ad8-f119-4db6-813b-81f950e0569e_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_70580ad8-f119-4db6-813b-81f950e0569e_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "25726b347bb5c99a736c9874dd30695a7b944a4134372f18c4f80aee54194e6b"
+  },
+  {
+    "sample_id": "mobile-0053-53bdd6d3df",
+    "image_repository_path": "data/mobile_8e7e6de4-2eac-400c-b845-291fa80c5c7c_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8e7e6de4-2eac-400c-b845-291fa80c5c7c_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "f2c8251782d320b933f199c0db9f0794a83ec34ca7f40760942e9d0eaac39a70"
+  },
+  {
+    "sample_id": "mobile-0054-4852e911d6",
+    "image_repository_path": "data/mobile_8e7e6de4-2eac-400c-b845-291fa80c5c7c_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8e7e6de4-2eac-400c-b845-291fa80c5c7c_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "f2c8251782d320b933f199c0db9f0794a83ec34ca7f40760942e9d0eaac39a70"
+  },
+  {
+    "sample_id": "mobile-0056-f8f80c7d42",
+    "image_repository_path": "data/mobile_8e7e6de4-2eac-400c-b845-291fa80c5c7c_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8e7e6de4-2eac-400c-b845-291fa80c5c7c_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "f2c8251782d320b933f199c0db9f0794a83ec34ca7f40760942e9d0eaac39a70"
+  },
+  {
+    "sample_id": "mobile-0057-4ba222ca59",
+    "image_repository_path": "data/mobile_db81809e-7672-4329-8453-f622d97fa7ca_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_db81809e-7672-4329-8453-f622d97fa7ca_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "10fc479afdcf15951666ece772d5782cc9706dddeb07d024d4b220378259d593"
+  },
+  {
+    "sample_id": "mobile-0058-4849805ef5",
+    "image_repository_path": "data/mobile_db81809e-7672-4329-8453-f622d97fa7ca_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_db81809e-7672-4329-8453-f622d97fa7ca_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "10fc479afdcf15951666ece772d5782cc9706dddeb07d024d4b220378259d593"
+  },
+  {
+    "sample_id": "mobile-0059-e099671ea3",
+    "image_repository_path": "data/mobile_db81809e-7672-4329-8453-f622d97fa7ca_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_db81809e-7672-4329-8453-f622d97fa7ca_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "10fc479afdcf15951666ece772d5782cc9706dddeb07d024d4b220378259d593"
+  },
+  {
+    "sample_id": "mobile-0060-f6ace5e159",
+    "image_repository_path": "data/mobile_e3249127-d727-4553-9a2a-db645f430d9b_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e3249127-d727-4553-9a2a-db645f430d9b_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "ae3b71458c1838a678e68104f416c470ab074851633ce0cc3bfe66de630f0c10"
+  },
+  {
+    "sample_id": "mobile-0061-86c53f73e6",
+    "image_repository_path": "data/mobile_e3249127-d727-4553-9a2a-db645f430d9b_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e3249127-d727-4553-9a2a-db645f430d9b_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "ae3b71458c1838a678e68104f416c470ab074851633ce0cc3bfe66de630f0c10"
+  },
+  {
+    "sample_id": "mobile-0062-fd8301d6ab",
+    "image_repository_path": "data/mobile_e3249127-d727-4553-9a2a-db645f430d9b_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e3249127-d727-4553-9a2a-db645f430d9b_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "ae3b71458c1838a678e68104f416c470ab074851633ce0cc3bfe66de630f0c10"
+  },
+  {
+    "sample_id": "mobile-0063-216a3ff261",
+    "image_repository_path": "data/mobile_907cb7d2-9953-476e-b589-5526587c3913_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_907cb7d2-9953-476e-b589-5526587c3913_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "7d22eed86b5dfea33e18101fbdc132d8d5a5f4f82d024f8bfb1c56f168545122"
+  },
+  {
+    "sample_id": "mobile-0064-f7476a1dcb",
+    "image_repository_path": "data/mobile_907cb7d2-9953-476e-b589-5526587c3913_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_907cb7d2-9953-476e-b589-5526587c3913_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "7d22eed86b5dfea33e18101fbdc132d8d5a5f4f82d024f8bfb1c56f168545122"
+  },
+  {
+    "sample_id": "mobile-0066-adbea4739a",
+    "image_repository_path": "data/mobile_907cb7d2-9953-476e-b589-5526587c3913_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_907cb7d2-9953-476e-b589-5526587c3913_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "7d22eed86b5dfea33e18101fbdc132d8d5a5f4f82d024f8bfb1c56f168545122"
+  },
+  {
+    "sample_id": "mobile-0067-dbbc60f911",
+    "image_repository_path": "data/mobile_f1247381-fcf6-440f-8787-19bce69e28de_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f1247381-fcf6-440f-8787-19bce69e28de_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3a522a4d6e064b5bbf65a734dfc8c201b1c869ec5874710d88fd3cc339df7f97"
+  },
+  {
+    "sample_id": "mobile-0068-1b84dfb4e8",
+    "image_repository_path": "data/mobile_f1247381-fcf6-440f-8787-19bce69e28de_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f1247381-fcf6-440f-8787-19bce69e28de_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3a522a4d6e064b5bbf65a734dfc8c201b1c869ec5874710d88fd3cc339df7f97"
+  },
+  {
+    "sample_id": "mobile-0069-326a2dd153",
+    "image_repository_path": "data/mobile_f1247381-fcf6-440f-8787-19bce69e28de_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f1247381-fcf6-440f-8787-19bce69e28de_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3a522a4d6e064b5bbf65a734dfc8c201b1c869ec5874710d88fd3cc339df7f97"
+  },
+  {
+    "sample_id": "mobile-0070-a3e0e959fa",
+    "image_repository_path": "data/mobile_f1247381-fcf6-440f-8787-19bce69e28de_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f1247381-fcf6-440f-8787-19bce69e28de_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3a522a4d6e064b5bbf65a734dfc8c201b1c869ec5874710d88fd3cc339df7f97"
+  },
+  {
+    "sample_id": "mobile-0071-c83238aff9",
+    "image_repository_path": "data/mobile_f1247381-fcf6-440f-8787-19bce69e28de_4.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f1247381-fcf6-440f-8787-19bce69e28de_4.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3a522a4d6e064b5bbf65a734dfc8c201b1c869ec5874710d88fd3cc339df7f97"
+  },
+  {
+    "sample_id": "mobile-0073-79c9f956c1",
+    "image_repository_path": "data/mobile_e9d69310-692c-4a78-8b8d-b961a5cfec70_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e9d69310-692c-4a78-8b8d-b961a5cfec70_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "ba54e669dc3581019210784a462a6cbf1cec6a54a12c927c9d8c157fcc4af1f2"
+  },
+  {
+    "sample_id": "mobile-0074-9702831ecb",
+    "image_repository_path": "data/mobile_1f9b6434-df6c-4c95-b325-4f7a4d90d304_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1f9b6434-df6c-4c95-b325-4f7a4d90d304_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "c88ad62ab5ec3d3f25f3f17f7f492476e87a86bdfe371955b3afa0c23167c320"
+  },
+  {
+    "sample_id": "mobile-0075-6a3b37c456",
+    "image_repository_path": "data/mobile_1f9b6434-df6c-4c95-b325-4f7a4d90d304_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1f9b6434-df6c-4c95-b325-4f7a4d90d304_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "c88ad62ab5ec3d3f25f3f17f7f492476e87a86bdfe371955b3afa0c23167c320"
+  },
+  {
+    "sample_id": "mobile-0076-41359d8779",
+    "image_repository_path": "data/mobile_1f9b6434-df6c-4c95-b325-4f7a4d90d304_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1f9b6434-df6c-4c95-b325-4f7a4d90d304_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "c88ad62ab5ec3d3f25f3f17f7f492476e87a86bdfe371955b3afa0c23167c320"
+  },
+  {
+    "sample_id": "mobile-0077-a9a8a3ed00",
+    "image_repository_path": "data/mobile_e0fb2f66-6e2c-42d6-8cfd-34e510f1ab2e_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e0fb2f66-6e2c-42d6-8cfd-34e510f1ab2e_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "23f85caf47eedbef4f061ce0ff326c8e4af4fe3462c0ccc60c1ca0752265c722"
+  },
+  {
+    "sample_id": "mobile-0078-e70361fed3",
+    "image_repository_path": "data/mobile_e0fb2f66-6e2c-42d6-8cfd-34e510f1ab2e_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e0fb2f66-6e2c-42d6-8cfd-34e510f1ab2e_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "23f85caf47eedbef4f061ce0ff326c8e4af4fe3462c0ccc60c1ca0752265c722"
+  },
+  {
+    "sample_id": "mobile-0079-d398b3ef05",
+    "image_repository_path": "data/mobile_2b707da9-bf86-410d-b886-cba08b6efb35_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_2b707da9-bf86-410d-b886-cba08b6efb35_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "83a87021424f0407a83fde415e308a93fef7f2524b2abf2d9ea18ad797b8c513"
+  },
+  {
+    "sample_id": "mobile-0080-ad9a9f46c2",
+    "image_repository_path": "data/mobile_2b707da9-bf86-410d-b886-cba08b6efb35_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_2b707da9-bf86-410d-b886-cba08b6efb35_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "83a87021424f0407a83fde415e308a93fef7f2524b2abf2d9ea18ad797b8c513"
+  },
+  {
+    "sample_id": "mobile-0081-12834f0ef7",
+    "image_repository_path": "data/mobile_2b707da9-bf86-410d-b886-cba08b6efb35_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_2b707da9-bf86-410d-b886-cba08b6efb35_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "83a87021424f0407a83fde415e308a93fef7f2524b2abf2d9ea18ad797b8c513"
+  },
+  {
+    "sample_id": "mobile-0082-3f9983fe59",
+    "image_repository_path": "data/mobile_0affae67-191e-43fa-890d-778555ffbab0_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_0affae67-191e-43fa-890d-778555ffbab0_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3d5646f7e34a7ec282672b9da8b015eb79a265f609b3b9bdf3fca6ee627eb3e3"
+  },
+  {
+    "sample_id": "mobile-0083-a47ae4dbdd",
+    "image_repository_path": "data/mobile_0affae67-191e-43fa-890d-778555ffbab0_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_0affae67-191e-43fa-890d-778555ffbab0_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3d5646f7e34a7ec282672b9da8b015eb79a265f609b3b9bdf3fca6ee627eb3e3"
+  },
+  {
+    "sample_id": "mobile-0084-b74721c731",
+    "image_repository_path": "data/mobile_0affae67-191e-43fa-890d-778555ffbab0_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_0affae67-191e-43fa-890d-778555ffbab0_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3d5646f7e34a7ec282672b9da8b015eb79a265f609b3b9bdf3fca6ee627eb3e3"
+  },
+  {
+    "sample_id": "mobile-0085-ddd00885ba",
+    "image_repository_path": "data/mobile_0affae67-191e-43fa-890d-778555ffbab0_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_0affae67-191e-43fa-890d-778555ffbab0_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3d5646f7e34a7ec282672b9da8b015eb79a265f609b3b9bdf3fca6ee627eb3e3"
+  },
+  {
+    "sample_id": "mobile-0086-96a8ee33be",
+    "image_repository_path": "data/mobile_0affae67-191e-43fa-890d-778555ffbab0_4.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_0affae67-191e-43fa-890d-778555ffbab0_4.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3d5646f7e34a7ec282672b9da8b015eb79a265f609b3b9bdf3fca6ee627eb3e3"
+  },
+  {
+    "sample_id": "mobile-0087-8191a6be57",
+    "image_repository_path": "data/mobile_5fb77d07-dd26-4a0c-959b-7c74fd49d22f_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5fb77d07-dd26-4a0c-959b-7c74fd49d22f_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "44638e6353bc99b987385fbfcb55a9388082e80150279771053463696c4d5ba5"
+  },
+  {
+    "sample_id": "mobile-0088-f98be33495",
+    "image_repository_path": "data/mobile_8da8fbf4-c2b0-495f-88d3-9eb682c15ce7_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8da8fbf4-c2b0-495f-88d3-9eb682c15ce7_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "427923e422b581e0f939e9969bf70eb7174ebcccc635cce2203f7d013e946d2d"
+  },
+  {
+    "sample_id": "mobile-0089-2d9e7fe2db",
+    "image_repository_path": "data/mobile_8da8fbf4-c2b0-495f-88d3-9eb682c15ce7_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8da8fbf4-c2b0-495f-88d3-9eb682c15ce7_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "427923e422b581e0f939e9969bf70eb7174ebcccc635cce2203f7d013e946d2d"
+  },
+  {
+    "sample_id": "mobile-0090-a6083ebf5d",
+    "image_repository_path": "data/mobile_8da8fbf4-c2b0-495f-88d3-9eb682c15ce7_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8da8fbf4-c2b0-495f-88d3-9eb682c15ce7_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "427923e422b581e0f939e9969bf70eb7174ebcccc635cce2203f7d013e946d2d"
+  },
+  {
+    "sample_id": "mobile-0091-ccda4c8a7b",
+    "image_repository_path": "data/mobile_8da8fbf4-c2b0-495f-88d3-9eb682c15ce7_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8da8fbf4-c2b0-495f-88d3-9eb682c15ce7_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "427923e422b581e0f939e9969bf70eb7174ebcccc635cce2203f7d013e946d2d"
+  },
+  {
+    "sample_id": "mobile-0092-6f4ad07e77",
+    "image_repository_path": "data/mobile_207efb5f-dce5-4c70-8c06-b16f2267c09e_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_207efb5f-dce5-4c70-8c06-b16f2267c09e_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "30945145d0be1c78628b82bf3f8b2df325ab39b22f41d1b71bc18ae397cfd210"
+  },
+  {
+    "sample_id": "mobile-0093-8395cdbde4",
+    "image_repository_path": "data/mobile_207efb5f-dce5-4c70-8c06-b16f2267c09e_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_207efb5f-dce5-4c70-8c06-b16f2267c09e_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "30945145d0be1c78628b82bf3f8b2df325ab39b22f41d1b71bc18ae397cfd210"
+  },
+  {
+    "sample_id": "mobile-0094-349c142874",
+    "image_repository_path": "data/mobile_efa861a6-0810-4c8a-9bca-4f481641d03d_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_efa861a6-0810-4c8a-9bca-4f481641d03d_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "4207ce91827d204106b109152a212f707cb55a2e952f5455ae80bc350143de9a"
+  },
+  {
+    "sample_id": "mobile-0095-0662a12fe2",
+    "image_repository_path": "data/mobile_efa861a6-0810-4c8a-9bca-4f481641d03d_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_efa861a6-0810-4c8a-9bca-4f481641d03d_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "4207ce91827d204106b109152a212f707cb55a2e952f5455ae80bc350143de9a"
+  },
+  {
+    "sample_id": "mobile-0096-ccf5b7d246",
+    "image_repository_path": "data/mobile_7d7609e2-696b-449e-a230-792dce8dd134_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_7d7609e2-696b-449e-a230-792dce8dd134_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "73aeaa94a48459f6b05bc4169241de1d4786407f44a2cff1f370513cb067e352"
+  },
+  {
+    "sample_id": "mobile-0097-641e3c5e17",
+    "image_repository_path": "data/mobile_7d7609e2-696b-449e-a230-792dce8dd134_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_7d7609e2-696b-449e-a230-792dce8dd134_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "73aeaa94a48459f6b05bc4169241de1d4786407f44a2cff1f370513cb067e352"
+  },
+  {
+    "sample_id": "mobile-0098-17483bb2e8",
+    "image_repository_path": "data/mobile_7d7609e2-696b-449e-a230-792dce8dd134_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_7d7609e2-696b-449e-a230-792dce8dd134_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "73aeaa94a48459f6b05bc4169241de1d4786407f44a2cff1f370513cb067e352"
+  },
+  {
+    "sample_id": "mobile-0099-5a3f1734af",
+    "image_repository_path": "data/mobile_c1f1188d-1bd3-4ce6-8e3f-96628d07b0b9_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c1f1188d-1bd3-4ce6-8e3f-96628d07b0b9_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "925391cc766410557e1036012e9cd101ff70e7ad2deb7e648e9ec89b1b5a9799"
+  },
+  {
+    "sample_id": "mobile-0101-82bae61961",
+    "image_repository_path": "data/mobile_c1f1188d-1bd3-4ce6-8e3f-96628d07b0b9_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c1f1188d-1bd3-4ce6-8e3f-96628d07b0b9_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "925391cc766410557e1036012e9cd101ff70e7ad2deb7e648e9ec89b1b5a9799"
+  },
+  {
+    "sample_id": "mobile-0102-bc19826d1e",
+    "image_repository_path": "data/mobile_fbadc3d2-cde6-43f5-a33c-a648a9299963_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_fbadc3d2-cde6-43f5-a33c-a648a9299963_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "8f04962bf3e028dd2518073e0fc960d2219b7b870244e645eac2b1d286bda6e1"
+  },
+  {
+    "sample_id": "mobile-0103-d921c49c63",
+    "image_repository_path": "data/mobile_fbadc3d2-cde6-43f5-a33c-a648a9299963_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_fbadc3d2-cde6-43f5-a33c-a648a9299963_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "8f04962bf3e028dd2518073e0fc960d2219b7b870244e645eac2b1d286bda6e1"
+  },
+  {
+    "sample_id": "mobile-0104-94f3939c06",
+    "image_repository_path": "data/mobile_3a1f306e-784a-411a-98cb-f11a2157a5c7_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3a1f306e-784a-411a-98cb-f11a2157a5c7_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b5bea1d3ee501f4d04058208a6e05f4025f62b1bd99ab34763073ae6b87f53e9"
+  },
+  {
+    "sample_id": "mobile-0105-5bdf1fb8b5",
+    "image_repository_path": "data/mobile_3a1f306e-784a-411a-98cb-f11a2157a5c7_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3a1f306e-784a-411a-98cb-f11a2157a5c7_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b5bea1d3ee501f4d04058208a6e05f4025f62b1bd99ab34763073ae6b87f53e9"
+  },
+  {
+    "sample_id": "mobile-0106-b8d0375b7c",
+    "image_repository_path": "data/mobile_3a1f306e-784a-411a-98cb-f11a2157a5c7_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3a1f306e-784a-411a-98cb-f11a2157a5c7_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b5bea1d3ee501f4d04058208a6e05f4025f62b1bd99ab34763073ae6b87f53e9"
+  },
+  {
+    "sample_id": "mobile-0107-254152a5a1",
+    "image_repository_path": "data/mobile_3a1f306e-784a-411a-98cb-f11a2157a5c7_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3a1f306e-784a-411a-98cb-f11a2157a5c7_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b5bea1d3ee501f4d04058208a6e05f4025f62b1bd99ab34763073ae6b87f53e9"
+  },
+  {
+    "sample_id": "mobile-0108-867e97fcbe",
+    "image_repository_path": "data/mobile_3a1f306e-784a-411a-98cb-f11a2157a5c7_4.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3a1f306e-784a-411a-98cb-f11a2157a5c7_4.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b5bea1d3ee501f4d04058208a6e05f4025f62b1bd99ab34763073ae6b87f53e9"
+  },
+  {
+    "sample_id": "mobile-0109-1a91c6b122",
+    "image_repository_path": "data/mobile_d8a4069b-ec35-4a62-a3cd-5b5e7d95b50c_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d8a4069b-ec35-4a62-a3cd-5b5e7d95b50c_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3f3193ca6327580e51907f2cc0e5d531ea38e564e30d74d7b97f8beb31d52534"
+  },
+  {
+    "sample_id": "mobile-0110-1d23a1d035",
+    "image_repository_path": "data/mobile_d8a4069b-ec35-4a62-a3cd-5b5e7d95b50c_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d8a4069b-ec35-4a62-a3cd-5b5e7d95b50c_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3f3193ca6327580e51907f2cc0e5d531ea38e564e30d74d7b97f8beb31d52534"
+  },
+  {
+    "sample_id": "mobile-0111-8d029565f1",
+    "image_repository_path": "data/mobile_d8a4069b-ec35-4a62-a3cd-5b5e7d95b50c_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d8a4069b-ec35-4a62-a3cd-5b5e7d95b50c_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3f3193ca6327580e51907f2cc0e5d531ea38e564e30d74d7b97f8beb31d52534"
+  },
+  {
+    "sample_id": "mobile-0112-6027b08bfa",
+    "image_repository_path": "data/mobile_d8a4069b-ec35-4a62-a3cd-5b5e7d95b50c_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d8a4069b-ec35-4a62-a3cd-5b5e7d95b50c_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3f3193ca6327580e51907f2cc0e5d531ea38e564e30d74d7b97f8beb31d52534"
+  },
+  {
+    "sample_id": "mobile-0113-a525942a43",
+    "image_repository_path": "data/mobile_20aa1fbd-f09f-4923-9fb4-15998cda6fe3_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_20aa1fbd-f09f-4923-9fb4-15998cda6fe3_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "c4f65147d6320a9cbc2328103245ed5f86589024d324cd7b70af142f5547397f"
+  },
+  {
+    "sample_id": "mobile-0114-434e379221",
+    "image_repository_path": "data/mobile_20aa1fbd-f09f-4923-9fb4-15998cda6fe3_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_20aa1fbd-f09f-4923-9fb4-15998cda6fe3_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "c4f65147d6320a9cbc2328103245ed5f86589024d324cd7b70af142f5547397f"
+  },
+  {
+    "sample_id": "mobile-0115-3e13f15076",
+    "image_repository_path": "data/mobile_20aa1fbd-f09f-4923-9fb4-15998cda6fe3_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_20aa1fbd-f09f-4923-9fb4-15998cda6fe3_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "c4f65147d6320a9cbc2328103245ed5f86589024d324cd7b70af142f5547397f"
+  },
+  {
+    "sample_id": "mobile-0116-0c6db593eb",
+    "image_repository_path": "data/mobile_20aa1fbd-f09f-4923-9fb4-15998cda6fe3_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_20aa1fbd-f09f-4923-9fb4-15998cda6fe3_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "c4f65147d6320a9cbc2328103245ed5f86589024d324cd7b70af142f5547397f"
+  },
+  {
+    "sample_id": "mobile-0117-a0d4fd2f17",
+    "image_repository_path": "data/mobile_20aa1fbd-f09f-4923-9fb4-15998cda6fe3_4.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_20aa1fbd-f09f-4923-9fb4-15998cda6fe3_4.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "c4f65147d6320a9cbc2328103245ed5f86589024d324cd7b70af142f5547397f"
+  },
+  {
+    "sample_id": "mobile-0118-ffe94b46e9",
+    "image_repository_path": "data/mobile_a14fb632-fab9-4537-8c7b-8c650fd91bd7_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a14fb632-fab9-4537-8c7b-8c650fd91bd7_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b8f58952cd7a121d8c4ba3a348e7e747bab086f7c68d3c68b1ec3fba0233df8d"
+  },
+  {
+    "sample_id": "mobile-0119-495a07d4ec",
+    "image_repository_path": "data/mobile_a14fb632-fab9-4537-8c7b-8c650fd91bd7_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a14fb632-fab9-4537-8c7b-8c650fd91bd7_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b8f58952cd7a121d8c4ba3a348e7e747bab086f7c68d3c68b1ec3fba0233df8d"
+  },
+  {
+    "sample_id": "mobile-0120-689800460b",
+    "image_repository_path": "data/mobile_a14fb632-fab9-4537-8c7b-8c650fd91bd7_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a14fb632-fab9-4537-8c7b-8c650fd91bd7_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b8f58952cd7a121d8c4ba3a348e7e747bab086f7c68d3c68b1ec3fba0233df8d"
+  },
+  {
+    "sample_id": "mobile-0121-ab0eecaade",
+    "image_repository_path": "data/mobile_a14fb632-fab9-4537-8c7b-8c650fd91bd7_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a14fb632-fab9-4537-8c7b-8c650fd91bd7_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b8f58952cd7a121d8c4ba3a348e7e747bab086f7c68d3c68b1ec3fba0233df8d"
+  },
+  {
+    "sample_id": "mobile-0122-c1e20fca75",
+    "image_repository_path": "data/mobile_a14fb632-fab9-4537-8c7b-8c650fd91bd7_4.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a14fb632-fab9-4537-8c7b-8c650fd91bd7_4.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b8f58952cd7a121d8c4ba3a348e7e747bab086f7c68d3c68b1ec3fba0233df8d"
+  },
+  {
+    "sample_id": "mobile-0123-7992c07692",
+    "image_repository_path": "data/mobile_9bd1779a-91ee-4a59-8904-3850434b1421_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9bd1779a-91ee-4a59-8904-3850434b1421_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "72d39ecca5dd962312f20b043a9a55ece6eed6c39e3bee113b1f20d4d5403aa7"
+  },
+  {
+    "sample_id": "mobile-0125-b33a9d0ade",
+    "image_repository_path": "data/mobile_9bd1779a-91ee-4a59-8904-3850434b1421_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9bd1779a-91ee-4a59-8904-3850434b1421_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "72d39ecca5dd962312f20b043a9a55ece6eed6c39e3bee113b1f20d4d5403aa7"
+  },
+  {
+    "sample_id": "mobile-0126-9eee497cc4",
+    "image_repository_path": "data/mobile_9bd1779a-91ee-4a59-8904-3850434b1421_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9bd1779a-91ee-4a59-8904-3850434b1421_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "72d39ecca5dd962312f20b043a9a55ece6eed6c39e3bee113b1f20d4d5403aa7"
+  },
+  {
+    "sample_id": "mobile-0127-9a917b3048",
+    "image_repository_path": "data/mobile_8d5dea76-69b8-4076-82ef-38b2fb8a1b30_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8d5dea76-69b8-4076-82ef-38b2fb8a1b30_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "40ad28585f0e84a0eeb450fe9f53e7cfb7588c161efc7eed4075ca9140cc6a25"
+  },
+  {
+    "sample_id": "mobile-0128-a9ed50dc67",
+    "image_repository_path": "data/mobile_8d5dea76-69b8-4076-82ef-38b2fb8a1b30_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8d5dea76-69b8-4076-82ef-38b2fb8a1b30_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "40ad28585f0e84a0eeb450fe9f53e7cfb7588c161efc7eed4075ca9140cc6a25"
+  },
+  {
+    "sample_id": "mobile-0129-4e13553720",
+    "image_repository_path": "data/mobile_8d5dea76-69b8-4076-82ef-38b2fb8a1b30_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8d5dea76-69b8-4076-82ef-38b2fb8a1b30_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "40ad28585f0e84a0eeb450fe9f53e7cfb7588c161efc7eed4075ca9140cc6a25"
+  },
+  {
+    "sample_id": "mobile-0130-e05be296b9",
+    "image_repository_path": "data/mobile_b012267b-fcd6-4d0c-991a-f2a4afd0a2ff_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b012267b-fcd6-4d0c-991a-f2a4afd0a2ff_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f079f4ea41b82b4f46a22be3f23f5d179bd720f202ac5a273a8f2a1922a44041"
+  },
+  {
+    "sample_id": "mobile-0132-1cc18d71b4",
+    "image_repository_path": "data/mobile_b012267b-fcd6-4d0c-991a-f2a4afd0a2ff_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b012267b-fcd6-4d0c-991a-f2a4afd0a2ff_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f079f4ea41b82b4f46a22be3f23f5d179bd720f202ac5a273a8f2a1922a44041"
+  },
+  {
+    "sample_id": "mobile-0134-7ad1f1d38d",
+    "image_repository_path": "data/mobile_faa33d8c-ff72-4c74-98df-cb46cc0516aa_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_faa33d8c-ff72-4c74-98df-cb46cc0516aa_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "bc7b9e62b5ee2b439aad5e5f176372609e442c87adbbc3d85c4c212e7bf9c002"
+  },
+  {
+    "sample_id": "mobile-0135-81c38ad5ae",
+    "image_repository_path": "data/mobile_faa33d8c-ff72-4c74-98df-cb46cc0516aa_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_faa33d8c-ff72-4c74-98df-cb46cc0516aa_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "bc7b9e62b5ee2b439aad5e5f176372609e442c87adbbc3d85c4c212e7bf9c002"
+  },
+  {
+    "sample_id": "mobile-0136-067735229f",
+    "image_repository_path": "data/mobile_db3c83d0-b179-4661-88d4-baf938bcf477_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_db3c83d0-b179-4661-88d4-baf938bcf477_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "e460ccecf8e7a1f5a648e31744bc521afaeb253b6a3c1ad130722e93abd4f203"
+  },
+  {
+    "sample_id": "mobile-0137-33d9340471",
+    "image_repository_path": "data/mobile_db3c83d0-b179-4661-88d4-baf938bcf477_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_db3c83d0-b179-4661-88d4-baf938bcf477_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "e460ccecf8e7a1f5a648e31744bc521afaeb253b6a3c1ad130722e93abd4f203"
+  },
+  {
+    "sample_id": "mobile-0139-df1a346fcc",
+    "image_repository_path": "data/mobile_06d5a5b9-8dda-439a-84a5-7af28ab2dab8_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_06d5a5b9-8dda-439a-84a5-7af28ab2dab8_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "d8241dbc0136ee39b7403283704c0212f55ac38aae04edcb4a0a1907ce7b4eac"
+  },
+  {
+    "sample_id": "mobile-0140-fbdd5e274e",
+    "image_repository_path": "data/mobile_06d5a5b9-8dda-439a-84a5-7af28ab2dab8_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_06d5a5b9-8dda-439a-84a5-7af28ab2dab8_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "d8241dbc0136ee39b7403283704c0212f55ac38aae04edcb4a0a1907ce7b4eac"
+  },
+  {
+    "sample_id": "mobile-0141-1def18c801",
+    "image_repository_path": "data/mobile_5c883ab7-6769-436e-a677-96b0f5a4c950_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5c883ab7-6769-436e-a677-96b0f5a4c950_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f2d31bd154f4c01c369637d4374ff49ccf37710e5d1f1958d7afc01587a23034"
+  },
+  {
+    "sample_id": "mobile-0142-20c54c49dc",
+    "image_repository_path": "data/mobile_c346d616-ffcb-4638-a049-2fc45d665e91_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c346d616-ffcb-4638-a049-2fc45d665e91_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "cff5a67858439942c46f01ae2657790778e66aabed10ba235ed70d2c4d952e2d"
+  },
+  {
+    "sample_id": "mobile-0143-73de41f58b",
+    "image_repository_path": "data/mobile_c346d616-ffcb-4638-a049-2fc45d665e91_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c346d616-ffcb-4638-a049-2fc45d665e91_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "cff5a67858439942c46f01ae2657790778e66aabed10ba235ed70d2c4d952e2d"
+  },
+  {
+    "sample_id": "mobile-0144-d5b839aacc",
+    "image_repository_path": "data/mobile_c346d616-ffcb-4638-a049-2fc45d665e91_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c346d616-ffcb-4638-a049-2fc45d665e91_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "cff5a67858439942c46f01ae2657790778e66aabed10ba235ed70d2c4d952e2d"
+  },
+  {
+    "sample_id": "mobile-0145-6be41db611",
+    "image_repository_path": "data/mobile_d7f5d515-e2c4-453e-9b5b-d97e3ecd5307_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d7f5d515-e2c4-453e-9b5b-d97e3ecd5307_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "a67c455aaa9e003909fe198fbdb57a2b564de3473736d5fc04f2f85b86129bf1"
+  },
+  {
+    "sample_id": "mobile-0146-0ad34cec87",
+    "image_repository_path": "data/mobile_d7f5d515-e2c4-453e-9b5b-d97e3ecd5307_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d7f5d515-e2c4-453e-9b5b-d97e3ecd5307_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "a67c455aaa9e003909fe198fbdb57a2b564de3473736d5fc04f2f85b86129bf1"
+  },
+  {
+    "sample_id": "mobile-0147-a96094c2d8",
+    "image_repository_path": "data/mobile_550b9efc-c475-4188-82b6-47f7ca1a56f7_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_550b9efc-c475-4188-82b6-47f7ca1a56f7_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "905b2251158f22c40daf0ddfbb6cbfd5c8b65f4c14c44b09e020772c62203276"
+  },
+  {
+    "sample_id": "mobile-0148-b20f671b7d",
+    "image_repository_path": "data/mobile_550b9efc-c475-4188-82b6-47f7ca1a56f7_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_550b9efc-c475-4188-82b6-47f7ca1a56f7_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "905b2251158f22c40daf0ddfbb6cbfd5c8b65f4c14c44b09e020772c62203276"
+  },
+  {
+    "sample_id": "mobile-0149-4722886372",
+    "image_repository_path": "data/mobile_550b9efc-c475-4188-82b6-47f7ca1a56f7_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_550b9efc-c475-4188-82b6-47f7ca1a56f7_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "905b2251158f22c40daf0ddfbb6cbfd5c8b65f4c14c44b09e020772c62203276"
+  },
+  {
+    "sample_id": "mobile-0150-0a96950546",
+    "image_repository_path": "data/mobile_c28ad441-0524-4e7b-ab97-4005072b53a3_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c28ad441-0524-4e7b-ab97-4005072b53a3_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "2d3922cace24dba58e687e7a85e9d0356283cfe2859c94175b5a1105ee6ecd7d"
+  },
+  {
+    "sample_id": "mobile-0151-27ec4f4e6c",
+    "image_repository_path": "data/mobile_c28ad441-0524-4e7b-ab97-4005072b53a3_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c28ad441-0524-4e7b-ab97-4005072b53a3_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "2d3922cace24dba58e687e7a85e9d0356283cfe2859c94175b5a1105ee6ecd7d"
+  },
+  {
+    "sample_id": "mobile-0152-8788365f76",
+    "image_repository_path": "data/mobile_ef01fd08-a7fd-42a3-b1aa-fe22b3f79730_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_ef01fd08-a7fd-42a3-b1aa-fe22b3f79730_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1a3fbedb1859ee7e2eea15ed68343e0a8c4d0ce84ffe6e0d004ba11879804c23"
+  },
+  {
+    "sample_id": "mobile-0154-eccb22eacf",
+    "image_repository_path": "data/mobile_ef01fd08-a7fd-42a3-b1aa-fe22b3f79730_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_ef01fd08-a7fd-42a3-b1aa-fe22b3f79730_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1a3fbedb1859ee7e2eea15ed68343e0a8c4d0ce84ffe6e0d004ba11879804c23"
+  },
+  {
+    "sample_id": "mobile-0155-5f6f4029e6",
+    "image_repository_path": "data/mobile_aae20de3-7aab-4bcc-8d83-f187fe3a2e76_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_aae20de3-7aab-4bcc-8d83-f187fe3a2e76_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6c4f4906a2d3d6e3efca24889e956ea487f4ec0ffd52608fac7a500eac2a78f6"
+  },
+  {
+    "sample_id": "mobile-0156-363924191e",
+    "image_repository_path": "data/mobile_aae20de3-7aab-4bcc-8d83-f187fe3a2e76_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_aae20de3-7aab-4bcc-8d83-f187fe3a2e76_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6c4f4906a2d3d6e3efca24889e956ea487f4ec0ffd52608fac7a500eac2a78f6"
+  },
+  {
+    "sample_id": "mobile-0157-6b563f5979",
+    "image_repository_path": "data/mobile_aae20de3-7aab-4bcc-8d83-f187fe3a2e76_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_aae20de3-7aab-4bcc-8d83-f187fe3a2e76_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6c4f4906a2d3d6e3efca24889e956ea487f4ec0ffd52608fac7a500eac2a78f6"
+  },
+  {
+    "sample_id": "mobile-0158-fc9cffca85",
+    "image_repository_path": "data/mobile_7bbecc1d-4220-4287-8ec7-14f9eec203e2_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_7bbecc1d-4220-4287-8ec7-14f9eec203e2_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "88f2cf05ac238d4f4edae01e79b8d2372de3d66c00446b2e6da9d09b4f9c0afb"
+  },
+  {
+    "sample_id": "mobile-0159-cbddbaa0bf",
+    "image_repository_path": "data/mobile_7bbecc1d-4220-4287-8ec7-14f9eec203e2_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_7bbecc1d-4220-4287-8ec7-14f9eec203e2_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "88f2cf05ac238d4f4edae01e79b8d2372de3d66c00446b2e6da9d09b4f9c0afb"
+  },
+  {
+    "sample_id": "mobile-0160-83388fcc01",
+    "image_repository_path": "data/mobile_dc3bbcd3-d7bb-4ce2-be50-eb6f564d2ddc_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_dc3bbcd3-d7bb-4ce2-be50-eb6f564d2ddc_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "eaa9159e921929093a7133f7594480be810c446283c52cb6fbac17a46dc4cf93"
+  },
+  {
+    "sample_id": "mobile-0161-49d231f1df",
+    "image_repository_path": "data/mobile_dc3bbcd3-d7bb-4ce2-be50-eb6f564d2ddc_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_dc3bbcd3-d7bb-4ce2-be50-eb6f564d2ddc_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "eaa9159e921929093a7133f7594480be810c446283c52cb6fbac17a46dc4cf93"
+  },
+  {
+    "sample_id": "mobile-0162-f4f9fb663e",
+    "image_repository_path": "data/mobile_dc3bbcd3-d7bb-4ce2-be50-eb6f564d2ddc_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_dc3bbcd3-d7bb-4ce2-be50-eb6f564d2ddc_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "eaa9159e921929093a7133f7594480be810c446283c52cb6fbac17a46dc4cf93"
+  },
+  {
+    "sample_id": "mobile-0163-d8b7d30079",
+    "image_repository_path": "data/mobile_74f38270-ccc5-423e-813e-b7f1ac6ff665_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_74f38270-ccc5-423e-813e-b7f1ac6ff665_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6cf20b864da8d28792d77c867dbcad674cad19087a3572b677d47bf532588b39"
+  },
+  {
+    "sample_id": "mobile-0164-e828b45561",
+    "image_repository_path": "data/mobile_74f38270-ccc5-423e-813e-b7f1ac6ff665_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_74f38270-ccc5-423e-813e-b7f1ac6ff665_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6cf20b864da8d28792d77c867dbcad674cad19087a3572b677d47bf532588b39"
+  },
+  {
+    "sample_id": "mobile-0165-5c89a4ebdd",
+    "image_repository_path": "data/mobile_275415f1-ade1-4210-9e92-8f998a671c96_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_275415f1-ade1-4210-9e92-8f998a671c96_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f3a21710b722ac49b1429acd23a67db7455ca6bc893ef411282deb4ef27797ff"
+  },
+  {
+    "sample_id": "mobile-0166-2c778de969",
+    "image_repository_path": "data/mobile_275415f1-ade1-4210-9e92-8f998a671c96_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_275415f1-ade1-4210-9e92-8f998a671c96_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f3a21710b722ac49b1429acd23a67db7455ca6bc893ef411282deb4ef27797ff"
+  },
+  {
+    "sample_id": "mobile-0167-5a4f1d19be",
+    "image_repository_path": "data/mobile_275415f1-ade1-4210-9e92-8f998a671c96_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_275415f1-ade1-4210-9e92-8f998a671c96_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f3a21710b722ac49b1429acd23a67db7455ca6bc893ef411282deb4ef27797ff"
+  },
+  {
+    "sample_id": "mobile-0168-b4e08e1571",
+    "image_repository_path": "data/mobile_1c87bbf1-afc8-4fe3-aaf0-d3bacc52a2bf_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1c87bbf1-afc8-4fe3-aaf0-d3bacc52a2bf_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "e203f0065a82f4cfe5d5cb3278e7c43a90f4378923f80d6b4c73bcc70f7a3bbb"
+  },
+  {
+    "sample_id": "mobile-0169-244a69814d",
+    "image_repository_path": "data/mobile_1c87bbf1-afc8-4fe3-aaf0-d3bacc52a2bf_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1c87bbf1-afc8-4fe3-aaf0-d3bacc52a2bf_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "e203f0065a82f4cfe5d5cb3278e7c43a90f4378923f80d6b4c73bcc70f7a3bbb"
+  },
+  {
+    "sample_id": "mobile-0170-ca82f85052",
+    "image_repository_path": "data/mobile_4fafbd92-0af2-4b02-9cf8-952227fd9993_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4fafbd92-0af2-4b02-9cf8-952227fd9993_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "932dd6845c1df4415392eadf61b9be37e09d0f360b4afa2e4960e59795bd6289"
+  },
+  {
+    "sample_id": "mobile-0171-e15a0a4538",
+    "image_repository_path": "data/mobile_4fafbd92-0af2-4b02-9cf8-952227fd9993_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4fafbd92-0af2-4b02-9cf8-952227fd9993_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "932dd6845c1df4415392eadf61b9be37e09d0f360b4afa2e4960e59795bd6289"
+  },
+  {
+    "sample_id": "mobile-0172-268f4b3a5e",
+    "image_repository_path": "data/mobile_4fafbd92-0af2-4b02-9cf8-952227fd9993_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4fafbd92-0af2-4b02-9cf8-952227fd9993_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "932dd6845c1df4415392eadf61b9be37e09d0f360b4afa2e4960e59795bd6289"
+  },
+  {
+    "sample_id": "mobile-0173-b736d29233",
+    "image_repository_path": "data/mobile_2b80c9bf-0040-492e-8dca-d81cc9042b5a_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_2b80c9bf-0040-492e-8dca-d81cc9042b5a_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "3a4a29c1a6c7e0b38e824c3e20c441a86690322655d1ffdf4f8dc42e525176a6"
+  },
+  {
+    "sample_id": "mobile-0174-cda7caafaa",
+    "image_repository_path": "data/mobile_2b80c9bf-0040-492e-8dca-d81cc9042b5a_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_2b80c9bf-0040-492e-8dca-d81cc9042b5a_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "3a4a29c1a6c7e0b38e824c3e20c441a86690322655d1ffdf4f8dc42e525176a6"
+  },
+  {
+    "sample_id": "mobile-0175-689ccc5034",
+    "image_repository_path": "data/mobile_2b80c9bf-0040-492e-8dca-d81cc9042b5a_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_2b80c9bf-0040-492e-8dca-d81cc9042b5a_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "3a4a29c1a6c7e0b38e824c3e20c441a86690322655d1ffdf4f8dc42e525176a6"
+  },
+  {
+    "sample_id": "mobile-0176-93f7af2a78",
+    "image_repository_path": "data/mobile_caaf7ec0-c1ee-4edc-8b42-37bfa11c4dd3_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_caaf7ec0-c1ee-4edc-8b42-37bfa11c4dd3_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c8d4e3da2ca79a5b8ac5cb17bc5b72bd6019afea808c6ef2f2c1dce8b293b609"
+  },
+  {
+    "sample_id": "mobile-0177-e992ff6446",
+    "image_repository_path": "data/mobile_caaf7ec0-c1ee-4edc-8b42-37bfa11c4dd3_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_caaf7ec0-c1ee-4edc-8b42-37bfa11c4dd3_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c8d4e3da2ca79a5b8ac5cb17bc5b72bd6019afea808c6ef2f2c1dce8b293b609"
+  },
+  {
+    "sample_id": "mobile-0178-1e1346c9d4",
+    "image_repository_path": "data/mobile_caaf7ec0-c1ee-4edc-8b42-37bfa11c4dd3_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_caaf7ec0-c1ee-4edc-8b42-37bfa11c4dd3_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c8d4e3da2ca79a5b8ac5cb17bc5b72bd6019afea808c6ef2f2c1dce8b293b609"
+  },
+  {
+    "sample_id": "mobile-0179-8197ce64d0",
+    "image_repository_path": "data/mobile_2a2da2de-b63c-46e0-88cf-f88ef8aec6e0_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_2a2da2de-b63c-46e0-88cf-f88ef8aec6e0_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "8e4c49b6aba7e7b32084037a6bbd02a086fac202ba68d724944264fb58e73d3d"
+  },
+  {
+    "sample_id": "mobile-0180-b043160361",
+    "image_repository_path": "data/mobile_2a2da2de-b63c-46e0-88cf-f88ef8aec6e0_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_2a2da2de-b63c-46e0-88cf-f88ef8aec6e0_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "8e4c49b6aba7e7b32084037a6bbd02a086fac202ba68d724944264fb58e73d3d"
+  },
+  {
+    "sample_id": "mobile-0181-2f4b517773",
+    "image_repository_path": "data/mobile_165687dd-c6c2-4f44-a84d-3e9a2af95ffe_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_165687dd-c6c2-4f44-a84d-3e9a2af95ffe_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "81521885c0a5cab5395dd093116a858bca4ba14bda57168b84232bc0d17b4d1c"
+  },
+  {
+    "sample_id": "mobile-0182-0b465abe7e",
+    "image_repository_path": "data/mobile_165687dd-c6c2-4f44-a84d-3e9a2af95ffe_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_165687dd-c6c2-4f44-a84d-3e9a2af95ffe_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "81521885c0a5cab5395dd093116a858bca4ba14bda57168b84232bc0d17b4d1c"
+  },
+  {
+    "sample_id": "mobile-0183-3a8409f5f6",
+    "image_repository_path": "data/mobile_414acb14-025e-462a-9d1c-6410df04db7f_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_414acb14-025e-462a-9d1c-6410df04db7f_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "77e8be9f142d6820fc1d2653ea3455b62ca32d79807a6e6a181e04ee72888312"
+  },
+  {
+    "sample_id": "mobile-0184-802a8c7503",
+    "image_repository_path": "data/mobile_414acb14-025e-462a-9d1c-6410df04db7f_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_414acb14-025e-462a-9d1c-6410df04db7f_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "77e8be9f142d6820fc1d2653ea3455b62ca32d79807a6e6a181e04ee72888312"
+  },
+  {
+    "sample_id": "mobile-0185-9a0f428c70",
+    "image_repository_path": "data/mobile_414acb14-025e-462a-9d1c-6410df04db7f_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_414acb14-025e-462a-9d1c-6410df04db7f_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "77e8be9f142d6820fc1d2653ea3455b62ca32d79807a6e6a181e04ee72888312"
+  },
+  {
+    "sample_id": "mobile-0186-e139141a54",
+    "image_repository_path": "data/mobile_d17dfa46-fc13-4f38-9261-3f9f7171067b_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d17dfa46-fc13-4f38-9261-3f9f7171067b_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "681f5ffc14ca8d8abd4470682e712b5f46033be34a2da3a24472010ac12f242a"
+  },
+  {
+    "sample_id": "mobile-0187-36fe80f431",
+    "image_repository_path": "data/mobile_d17dfa46-fc13-4f38-9261-3f9f7171067b_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d17dfa46-fc13-4f38-9261-3f9f7171067b_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "681f5ffc14ca8d8abd4470682e712b5f46033be34a2da3a24472010ac12f242a"
+  },
+  {
+    "sample_id": "mobile-0188-d2c981b0b1",
+    "image_repository_path": "data/mobile_d17dfa46-fc13-4f38-9261-3f9f7171067b_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d17dfa46-fc13-4f38-9261-3f9f7171067b_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "681f5ffc14ca8d8abd4470682e712b5f46033be34a2da3a24472010ac12f242a"
+  },
+  {
+    "sample_id": "mobile-0189-5ddf9833f3",
+    "image_repository_path": "data/mobile_0dcb6532-d25e-4bb0-8746-ccdbec623bce_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_0dcb6532-d25e-4bb0-8746-ccdbec623bce_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "d017963d506a6dd27b01bbbeae4310a7df28a928d51eb9803cafb20c483f52d6"
+  },
+  {
+    "sample_id": "mobile-0190-8dbefc3eb8",
+    "image_repository_path": "data/mobile_0dcb6532-d25e-4bb0-8746-ccdbec623bce_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_0dcb6532-d25e-4bb0-8746-ccdbec623bce_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "d017963d506a6dd27b01bbbeae4310a7df28a928d51eb9803cafb20c483f52d6"
+  },
+  {
+    "sample_id": "mobile-0191-d6c5a9ce4b",
+    "image_repository_path": "data/mobile_6e08b93a-9271-40ac-9dd0-f1f95f8d8675_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6e08b93a-9271-40ac-9dd0-f1f95f8d8675_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "2b37a22cbcb103c3481050c2b43b096b9886cdde2e644c320d962e28a1708df4"
+  },
+  {
+    "sample_id": "mobile-0192-28e5743d01",
+    "image_repository_path": "data/mobile_6e08b93a-9271-40ac-9dd0-f1f95f8d8675_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6e08b93a-9271-40ac-9dd0-f1f95f8d8675_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "2b37a22cbcb103c3481050c2b43b096b9886cdde2e644c320d962e28a1708df4"
+  },
+  {
+    "sample_id": "mobile-0193-bf5d4741b7",
+    "image_repository_path": "data/mobile_6e08b93a-9271-40ac-9dd0-f1f95f8d8675_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6e08b93a-9271-40ac-9dd0-f1f95f8d8675_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "2b37a22cbcb103c3481050c2b43b096b9886cdde2e644c320d962e28a1708df4"
+  },
+  {
+    "sample_id": "mobile-0194-18367ecb33",
+    "image_repository_path": "data/mobile_d52263df-908a-4f53-93de-b51d691ad995_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d52263df-908a-4f53-93de-b51d691ad995_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "8aaa5c5ff83990773eb33be797f56dbb9c0a323262240c9b54a69a9a01bb3ccf"
+  },
+  {
+    "sample_id": "mobile-0195-2d54c88c84",
+    "image_repository_path": "data/mobile_d52263df-908a-4f53-93de-b51d691ad995_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d52263df-908a-4f53-93de-b51d691ad995_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "8aaa5c5ff83990773eb33be797f56dbb9c0a323262240c9b54a69a9a01bb3ccf"
+  },
+  {
+    "sample_id": "mobile-0196-58017adb27",
+    "image_repository_path": "data/mobile_d52263df-908a-4f53-93de-b51d691ad995_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d52263df-908a-4f53-93de-b51d691ad995_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "8aaa5c5ff83990773eb33be797f56dbb9c0a323262240c9b54a69a9a01bb3ccf"
+  },
+  {
+    "sample_id": "mobile-0197-1998b019b9",
+    "image_repository_path": "data/mobile_3607031a-15bb-48cd-a2e6-84a7ce433173_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3607031a-15bb-48cd-a2e6-84a7ce433173_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6854ab82beb116035ffa86f1a19df1a3791e8b966436904c7b9d10e9fe19f3ec"
+  },
+  {
+    "sample_id": "mobile-0198-459b195413",
+    "image_repository_path": "data/mobile_3607031a-15bb-48cd-a2e6-84a7ce433173_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3607031a-15bb-48cd-a2e6-84a7ce433173_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6854ab82beb116035ffa86f1a19df1a3791e8b966436904c7b9d10e9fe19f3ec"
+  },
+  {
+    "sample_id": "mobile-0199-6f329beac6",
+    "image_repository_path": "data/mobile_f61ea850-a79c-41b8-891f-8c55326e1530_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f61ea850-a79c-41b8-891f-8c55326e1530_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6e920e2bfe3324e2c04b2eefa0246f84fd1c9c39d2345aea6f414bb5953497d4"
+  },
+  {
+    "sample_id": "mobile-0200-258b04cb07",
+    "image_repository_path": "data/mobile_f61ea850-a79c-41b8-891f-8c55326e1530_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f61ea850-a79c-41b8-891f-8c55326e1530_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6e920e2bfe3324e2c04b2eefa0246f84fd1c9c39d2345aea6f414bb5953497d4"
+  },
+  {
+    "sample_id": "mobile-0201-6b1fd82cd6",
+    "image_repository_path": "data/mobile_04545977-3f36-4a33-a787-72ec8a9dd4f2_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_04545977-3f36-4a33-a787-72ec8a9dd4f2_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "131b137949667565c64ecc1cb770b2ef5629ff5370a063b2b598a4a47a4a8c5e"
+  },
+  {
+    "sample_id": "mobile-0202-30ea0b3f42",
+    "image_repository_path": "data/mobile_04545977-3f36-4a33-a787-72ec8a9dd4f2_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_04545977-3f36-4a33-a787-72ec8a9dd4f2_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "131b137949667565c64ecc1cb770b2ef5629ff5370a063b2b598a4a47a4a8c5e"
+  },
+  {
+    "sample_id": "mobile-0203-60c7eca3bc",
+    "image_repository_path": "data/mobile_04545977-3f36-4a33-a787-72ec8a9dd4f2_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_04545977-3f36-4a33-a787-72ec8a9dd4f2_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "131b137949667565c64ecc1cb770b2ef5629ff5370a063b2b598a4a47a4a8c5e"
+  },
+  {
+    "sample_id": "mobile-0204-fb393db66f",
+    "image_repository_path": "data/mobile_3b5ab7d3-8e84-4be1-83ba-801882db294b_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3b5ab7d3-8e84-4be1-83ba-801882db294b_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "69a39654e0c81c9ac38c16e4d57e9683dab92573da26cff614a81f7f6061c27a"
+  },
+  {
+    "sample_id": "mobile-0205-e2779c1b92",
+    "image_repository_path": "data/mobile_3b5ab7d3-8e84-4be1-83ba-801882db294b_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3b5ab7d3-8e84-4be1-83ba-801882db294b_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "69a39654e0c81c9ac38c16e4d57e9683dab92573da26cff614a81f7f6061c27a"
+  },
+  {
+    "sample_id": "mobile-0207-da55b773af",
+    "image_repository_path": "data/mobile_4c2df330-55c0-4272-80c0-6e2cf8f96903_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4c2df330-55c0-4272-80c0-6e2cf8f96903_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "931fbc8554bae61414ce82102fd53f9fcd951b8b97bc12f6aeaa58176c3bd443"
+  },
+  {
+    "sample_id": "mobile-0208-e72a847093",
+    "image_repository_path": "data/mobile_cebc7e07-8ab3-4232-acdd-aa2884af2e66_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_cebc7e07-8ab3-4232-acdd-aa2884af2e66_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "4e4e0d88f6e95fbb705435ca7d4e5ec54d0d4a02e424e38450daf196faf1165b"
+  },
+  {
+    "sample_id": "mobile-0209-1296ea7798",
+    "image_repository_path": "data/mobile_cebc7e07-8ab3-4232-acdd-aa2884af2e66_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_cebc7e07-8ab3-4232-acdd-aa2884af2e66_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "4e4e0d88f6e95fbb705435ca7d4e5ec54d0d4a02e424e38450daf196faf1165b"
+  },
+  {
+    "sample_id": "mobile-0210-97ca1479ef",
+    "image_repository_path": "data/mobile_569a4f5a-01f0-4386-89ba-768e1f88d38e_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_569a4f5a-01f0-4386-89ba-768e1f88d38e_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "a5a4eb672ab988e23894495ff16bd8a7a6ea293453293819c4d9001370509425"
+  },
+  {
+    "sample_id": "mobile-0211-3564d07cca",
+    "image_repository_path": "data/mobile_569a4f5a-01f0-4386-89ba-768e1f88d38e_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_569a4f5a-01f0-4386-89ba-768e1f88d38e_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "a5a4eb672ab988e23894495ff16bd8a7a6ea293453293819c4d9001370509425"
+  },
+  {
+    "sample_id": "mobile-0212-057d59784d",
+    "image_repository_path": "data/mobile_9aa2c4bf-aa52-43ed-ac30-f22798c14668_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9aa2c4bf-aa52-43ed-ac30-f22798c14668_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "9d0131c40b5b646914f6d2864f750c38d0dbf8606d517000a9127db0ebf6dc33"
+  },
+  {
+    "sample_id": "mobile-0213-0bbab75ede",
+    "image_repository_path": "data/mobile_9aa2c4bf-aa52-43ed-ac30-f22798c14668_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9aa2c4bf-aa52-43ed-ac30-f22798c14668_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "9d0131c40b5b646914f6d2864f750c38d0dbf8606d517000a9127db0ebf6dc33"
+  },
+  {
+    "sample_id": "mobile-0214-8a06392848",
+    "image_repository_path": "data/mobile_9aa2c4bf-aa52-43ed-ac30-f22798c14668_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9aa2c4bf-aa52-43ed-ac30-f22798c14668_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "9d0131c40b5b646914f6d2864f750c38d0dbf8606d517000a9127db0ebf6dc33"
+  },
+  {
+    "sample_id": "mobile-0215-813b5a2b0e",
+    "image_repository_path": "data/mobile_88c8a639-8051-4241-943c-41104b363caa_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_88c8a639-8051-4241-943c-41104b363caa_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "3d65e1add4e434c0b4c7a9959126ef5b9eb1cbdaa2bddc4a2a0ba24393533def"
+  },
+  {
+    "sample_id": "mobile-0216-592f155df8",
+    "image_repository_path": "data/mobile_88c8a639-8051-4241-943c-41104b363caa_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_88c8a639-8051-4241-943c-41104b363caa_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "3d65e1add4e434c0b4c7a9959126ef5b9eb1cbdaa2bddc4a2a0ba24393533def"
+  },
+  {
+    "sample_id": "mobile-0217-db8fec46c8",
+    "image_repository_path": "data/mobile_88c8a639-8051-4241-943c-41104b363caa_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_88c8a639-8051-4241-943c-41104b363caa_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "3d65e1add4e434c0b4c7a9959126ef5b9eb1cbdaa2bddc4a2a0ba24393533def"
+  },
+  {
+    "sample_id": "mobile-0218-cf9dc9d585",
+    "image_repository_path": "data/mobile_df5320bc-03e4-4e4e-bcc2-67cfd9b344ec_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_df5320bc-03e4-4e4e-bcc2-67cfd9b344ec_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1b2926d1260bcee011b8524dc0f2df16956eeb499abf057c801124a102775f5c"
+  },
+  {
+    "sample_id": "mobile-0219-45451b852d",
+    "image_repository_path": "data/mobile_df5320bc-03e4-4e4e-bcc2-67cfd9b344ec_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_df5320bc-03e4-4e4e-bcc2-67cfd9b344ec_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1b2926d1260bcee011b8524dc0f2df16956eeb499abf057c801124a102775f5c"
+  },
+  {
+    "sample_id": "mobile-0220-3e75a1b6eb",
+    "image_repository_path": "data/mobile_df5320bc-03e4-4e4e-bcc2-67cfd9b344ec_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_df5320bc-03e4-4e4e-bcc2-67cfd9b344ec_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1b2926d1260bcee011b8524dc0f2df16956eeb499abf057c801124a102775f5c"
+  },
+  {
+    "sample_id": "mobile-0221-9fad7323d3",
+    "image_repository_path": "data/mobile_e277f0fc-fe73-4304-9d8e-2bc4613e1986_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e277f0fc-fe73-4304-9d8e-2bc4613e1986_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "3fe08c19293be9f24bb09c323492144da75eeec78ee97ca053ca6ae314f10c3c"
+  },
+  {
+    "sample_id": "mobile-0222-c24406b8db",
+    "image_repository_path": "data/mobile_e277f0fc-fe73-4304-9d8e-2bc4613e1986_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e277f0fc-fe73-4304-9d8e-2bc4613e1986_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "3fe08c19293be9f24bb09c323492144da75eeec78ee97ca053ca6ae314f10c3c"
+  },
+  {
+    "sample_id": "mobile-0223-af74e4f56e",
+    "image_repository_path": "data/mobile_e277f0fc-fe73-4304-9d8e-2bc4613e1986_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e277f0fc-fe73-4304-9d8e-2bc4613e1986_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "3fe08c19293be9f24bb09c323492144da75eeec78ee97ca053ca6ae314f10c3c"
+  },
+  {
+    "sample_id": "mobile-0224-f5bcdb7697",
+    "image_repository_path": "data/mobile_f515dd3d-41eb-4fe9-b74a-ac66e60a8b75_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f515dd3d-41eb-4fe9-b74a-ac66e60a8b75_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "74d85a233888d8dcfdc93f0a2eaf40a063e98b9b475cd0125e9cb0d24437f978"
+  },
+  {
+    "sample_id": "mobile-0225-dc4a145e42",
+    "image_repository_path": "data/mobile_f515dd3d-41eb-4fe9-b74a-ac66e60a8b75_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f515dd3d-41eb-4fe9-b74a-ac66e60a8b75_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "74d85a233888d8dcfdc93f0a2eaf40a063e98b9b475cd0125e9cb0d24437f978"
+  },
+  {
+    "sample_id": "mobile-0226-b40459b908",
+    "image_repository_path": "data/mobile_63949247-1001-4d4e-9f49-81c85f7308e8_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_63949247-1001-4d4e-9f49-81c85f7308e8_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "493fb91dd8f075bf246a1a3fa1fadc4e598bb0a30332352559a6c6497f519504"
+  },
+  {
+    "sample_id": "mobile-0227-e108aa19d6",
+    "image_repository_path": "data/mobile_63949247-1001-4d4e-9f49-81c85f7308e8_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_63949247-1001-4d4e-9f49-81c85f7308e8_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "493fb91dd8f075bf246a1a3fa1fadc4e598bb0a30332352559a6c6497f519504"
+  },
+  {
+    "sample_id": "mobile-0228-e7178ec289",
+    "image_repository_path": "data/mobile_63949247-1001-4d4e-9f49-81c85f7308e8_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_63949247-1001-4d4e-9f49-81c85f7308e8_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "493fb91dd8f075bf246a1a3fa1fadc4e598bb0a30332352559a6c6497f519504"
+  },
+  {
+    "sample_id": "mobile-0229-76ba73783f",
+    "image_repository_path": "data/mobile_6bbaccfd-a0c4-49d3-a68d-050210ff5a6e_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6bbaccfd-a0c4-49d3-a68d-050210ff5a6e_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c9919c9dfe840881dfa2ff7e3559ff6fb37197ac583434c170e2bcf86ca43423"
+  },
+  {
+    "sample_id": "mobile-0230-38d56d5f8f",
+    "image_repository_path": "data/mobile_6bbaccfd-a0c4-49d3-a68d-050210ff5a6e_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6bbaccfd-a0c4-49d3-a68d-050210ff5a6e_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c9919c9dfe840881dfa2ff7e3559ff6fb37197ac583434c170e2bcf86ca43423"
+  },
+  {
+    "sample_id": "mobile-0231-929b6431bf",
+    "image_repository_path": "data/mobile_6bbaccfd-a0c4-49d3-a68d-050210ff5a6e_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6bbaccfd-a0c4-49d3-a68d-050210ff5a6e_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c9919c9dfe840881dfa2ff7e3559ff6fb37197ac583434c170e2bcf86ca43423"
+  },
+  {
+    "sample_id": "mobile-0232-02a05db493",
+    "image_repository_path": "data/mobile_182c66dd-3836-4bce-909f-166abd570fde_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_182c66dd-3836-4bce-909f-166abd570fde_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "a8a7dde290a5fe63bb1eebd34c0454bbab37d2ee10e91b7f41315779400dde41"
+  },
+  {
+    "sample_id": "mobile-0233-2347fe5759",
+    "image_repository_path": "data/mobile_182c66dd-3836-4bce-909f-166abd570fde_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_182c66dd-3836-4bce-909f-166abd570fde_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "a8a7dde290a5fe63bb1eebd34c0454bbab37d2ee10e91b7f41315779400dde41"
+  },
+  {
+    "sample_id": "mobile-0234-821f2d3767",
+    "image_repository_path": "data/mobile_182c66dd-3836-4bce-909f-166abd570fde_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_182c66dd-3836-4bce-909f-166abd570fde_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "a8a7dde290a5fe63bb1eebd34c0454bbab37d2ee10e91b7f41315779400dde41"
+  },
+  {
+    "sample_id": "mobile-0235-51c0960eb0",
+    "image_repository_path": "data/mobile_6a0ba48e-0ed8-44ba-a40b-adbbdba2dee4_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6a0ba48e-0ed8-44ba-a40b-adbbdba2dee4_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "7e1b7c7ec0741ffdaa5351a573fce665c36a9b6aa31ba30f8708ae7fccf357e2"
+  },
+  {
+    "sample_id": "mobile-0236-880d1c50d0",
+    "image_repository_path": "data/mobile_6a0ba48e-0ed8-44ba-a40b-adbbdba2dee4_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6a0ba48e-0ed8-44ba-a40b-adbbdba2dee4_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "7e1b7c7ec0741ffdaa5351a573fce665c36a9b6aa31ba30f8708ae7fccf357e2"
+  },
+  {
+    "sample_id": "mobile-0237-fa697d2ed9",
+    "image_repository_path": "data/mobile_6a0ba48e-0ed8-44ba-a40b-adbbdba2dee4_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6a0ba48e-0ed8-44ba-a40b-adbbdba2dee4_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "7e1b7c7ec0741ffdaa5351a573fce665c36a9b6aa31ba30f8708ae7fccf357e2"
+  },
+  {
+    "sample_id": "mobile-0238-a63d7166a3",
+    "image_repository_path": "data/mobile_ee2362d3-17a7-479e-9f99-fd8378aae866_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_ee2362d3-17a7-479e-9f99-fd8378aae866_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "187ee65f95f2e0066fa9d8673e3518e1879dcf2e992c9c2d53c345e3c2fe581a"
+  },
+  {
+    "sample_id": "mobile-0239-ffaff808ce",
+    "image_repository_path": "data/mobile_ee2362d3-17a7-479e-9f99-fd8378aae866_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_ee2362d3-17a7-479e-9f99-fd8378aae866_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "187ee65f95f2e0066fa9d8673e3518e1879dcf2e992c9c2d53c345e3c2fe581a"
+  },
+  {
+    "sample_id": "mobile-0240-9325e7cd03",
+    "image_repository_path": "data/mobile_f53240ec-a09f-4857-9ca1-db5fb79455c3_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f53240ec-a09f-4857-9ca1-db5fb79455c3_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "ee64b1205c6d6917650b6577b930d0dae957edbf961fa48d5275322ca779aff4"
+  },
+  {
+    "sample_id": "mobile-0241-d4ca39229c",
+    "image_repository_path": "data/mobile_f53240ec-a09f-4857-9ca1-db5fb79455c3_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f53240ec-a09f-4857-9ca1-db5fb79455c3_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "ee64b1205c6d6917650b6577b930d0dae957edbf961fa48d5275322ca779aff4"
+  },
+  {
+    "sample_id": "mobile-0242-d68926ed5c",
+    "image_repository_path": "data/mobile_f53240ec-a09f-4857-9ca1-db5fb79455c3_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f53240ec-a09f-4857-9ca1-db5fb79455c3_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "ee64b1205c6d6917650b6577b930d0dae957edbf961fa48d5275322ca779aff4"
+  },
+  {
+    "sample_id": "mobile-0243-072c6a043a",
+    "image_repository_path": "data/mobile_b9537ded-e771-43c7-bab4-1db747625d87_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b9537ded-e771-43c7-bab4-1db747625d87_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "bcb961fa628d8f508abbc1f6391f8e1ee5ffc4c7160b30450cb39739d4d532fc"
+  },
+  {
+    "sample_id": "mobile-0244-fce1ced28b",
+    "image_repository_path": "data/mobile_49f35b0d-59ea-46f9-b215-0e0e70d06a9a_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_49f35b0d-59ea-46f9-b215-0e0e70d06a9a_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "efb1ceba5da04a272e8b594f958d48c1b8e22cb581bca5ae55d7fb7e57712149"
+  },
+  {
+    "sample_id": "mobile-0245-2384d1e692",
+    "image_repository_path": "data/mobile_4e17db8b-85df-4278-ba0a-9f03e5ca85da_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4e17db8b-85df-4278-ba0a-9f03e5ca85da_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "10fb038a22e9ebefe693e175fcb6e13b6fd44c848a7ceaef62d65c0ea02b14f5"
+  },
+  {
+    "sample_id": "mobile-0246-fa8a27e6e6",
+    "image_repository_path": "data/mobile_6ded1777-d4c3-485f-b28a-7754e0e9c024_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6ded1777-d4c3-485f-b28a-7754e0e9c024_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "c86e33943029b943d4e1aa0f935be38eabc8cfae303c6ff4430bcb136e74a7f1"
+  },
+  {
+    "sample_id": "mobile-0248-167ae7597f",
+    "image_repository_path": "data/mobile_124e877d-d29c-45e4-bdc2-cbc729c702c9_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_124e877d-d29c-45e4-bdc2-cbc729c702c9_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "4f2bc97d765aedea97a6b4e01459d82a616bcbd67dd784a67a1f843b4ae1cc7b"
+  },
+  {
+    "sample_id": "mobile-0249-6924239dd8",
+    "image_repository_path": "data/mobile_f859f69e-20c1-4630-9435-e959c43590d5_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f859f69e-20c1-4630-9435-e959c43590d5_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "5beea24f7992493c589bda71db49189db09286e63a07c03b675b06566c3c5af6"
+  },
+  {
+    "sample_id": "mobile-0250-e58bf79dd2",
+    "image_repository_path": "data/mobile_f859f69e-20c1-4630-9435-e959c43590d5_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f859f69e-20c1-4630-9435-e959c43590d5_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "5beea24f7992493c589bda71db49189db09286e63a07c03b675b06566c3c5af6"
+  },
+  {
+    "sample_id": "mobile-0251-5ed2fb896a",
+    "image_repository_path": "data/mobile_f859f69e-20c1-4630-9435-e959c43590d5_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f859f69e-20c1-4630-9435-e959c43590d5_2.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "5beea24f7992493c589bda71db49189db09286e63a07c03b675b06566c3c5af6"
+  },
+  {
+    "sample_id": "mobile-0252-c555685085",
+    "image_repository_path": "data/mobile_41aa1b5c-01f3-455d-807e-9c90c705dd1f_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_41aa1b5c-01f3-455d-807e-9c90c705dd1f_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "f81ca40465bcd25d47ee65d23dac1b97c018e8ad81dfc3a2845d7baadd9d3a82"
+  },
+  {
+    "sample_id": "mobile-0253-f75be4b103",
+    "image_repository_path": "data/mobile_41aa1b5c-01f3-455d-807e-9c90c705dd1f_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_41aa1b5c-01f3-455d-807e-9c90c705dd1f_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "f81ca40465bcd25d47ee65d23dac1b97c018e8ad81dfc3a2845d7baadd9d3a82"
+  },
+  {
+    "sample_id": "mobile-0254-4be077db95",
+    "image_repository_path": "data/mobile_95b2eec8-7804-474f-bf47-7c13a7a02595_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_95b2eec8-7804-474f-bf47-7c13a7a02595_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "74d1f842ac8db1d45c1e1a7f7303bbd145a8f4a24e41ec9bedce227e3962810c"
+  },
+  {
+    "sample_id": "mobile-0255-06eaa8af15",
+    "image_repository_path": "data/mobile_663faca5-79a3-48f6-b64c-9f7989292d17_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_663faca5-79a3-48f6-b64c-9f7989292d17_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "d9241615366a80312582631e2b0fb6b120218af4dc602e66a51f7c179dbeda07"
+  },
+  {
+    "sample_id": "mobile-0256-0098b3a823",
+    "image_repository_path": "data/mobile_9d30c621-fe06-4f6a-86e7-6664cc3bb566_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9d30c621-fe06-4f6a-86e7-6664cc3bb566_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "b20fdb69e2b7a348a3ca9e6e76804e7bd19a3bc2b3a603418c9858d1106a90a3"
+  },
+  {
+    "sample_id": "mobile-0257-00719fab0b",
+    "image_repository_path": "data/mobile_d3771dd7-e526-4b87-8971-247ca5582e85_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d3771dd7-e526-4b87-8971-247ca5582e85_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "ed99d59e3f9dd7c515bcd7ddc104b4d7fd4aa1f56fb4fed16230a62d0964f4cd"
+  },
+  {
+    "sample_id": "mobile-0258-b05d8a33dc",
+    "image_repository_path": "data/mobile_f5b4ae93-55f8-4f0c-9c9e-dda8685c37b5_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f5b4ae93-55f8-4f0c-9c9e-dda8685c37b5_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "33110060629f21767e77dc690026bf16d3c62c27b5949cc86f26184e19e7c8c9"
+  },
+  {
+    "sample_id": "mobile-0259-c2e8ad495b",
+    "image_repository_path": "data/mobile_63cdee53-9026-46c9-9b69-639452091dcc_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_63cdee53-9026-46c9-9b69-639452091dcc_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "046f7414178168c24e3032e05188ecb44486ea81a4571a84de28bd00f75b4778"
+  },
+  {
+    "sample_id": "mobile-0260-71766d3ad4",
+    "image_repository_path": "data/mobile_63cdee53-9026-46c9-9b69-639452091dcc_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_63cdee53-9026-46c9-9b69-639452091dcc_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "046f7414178168c24e3032e05188ecb44486ea81a4571a84de28bd00f75b4778"
+  },
+  {
+    "sample_id": "mobile-0261-d64fc94f04",
+    "image_repository_path": "data/mobile_043c3a5e-c12c-4991-bb7f-676c617b2f9b_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_043c3a5e-c12c-4991-bb7f-676c617b2f9b_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "7045fed23b0c6f29433ca9c52213e56cb527d28146f8d2542380e9e5160cc9ed"
+  },
+  {
+    "sample_id": "mobile-0262-2fe539cdd1",
+    "image_repository_path": "data/mobile_3d3cacff-2019-4577-9395-21b45a0c548b_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3d3cacff-2019-4577-9395-21b45a0c548b_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "2f3de827e9b5e83c7fce08e843648e961cc0e188cdd4a02996aa6d15e7921344"
+  },
+  {
+    "sample_id": "mobile-0263-13eee050ff",
+    "image_repository_path": "data/mobile_6778b255-174f-401e-ab98-b5bbe554a141_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6778b255-174f-401e-ab98-b5bbe554a141_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "c91bd50bc2d190e2cfb1e501f9c7951adfbc9f069c7380896a127584bd129438"
+  },
+  {
+    "sample_id": "mobile-0264-f0048a9d3b",
+    "image_repository_path": "data/mobile_6778b255-174f-401e-ab98-b5bbe554a141_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6778b255-174f-401e-ab98-b5bbe554a141_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "c91bd50bc2d190e2cfb1e501f9c7951adfbc9f069c7380896a127584bd129438"
+  },
+  {
+    "sample_id": "mobile-0265-4394b665de",
+    "image_repository_path": "data/mobile_e3f2b3d7-4c56-44ba-af3f-ae885a3e0dbb_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e3f2b3d7-4c56-44ba-af3f-ae885a3e0dbb_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "8f9279984619a78ed1e338fe7cde9096c7132fc0746228805682ad3218e928f7"
+  },
+  {
+    "sample_id": "mobile-0266-5a9de5a64a",
+    "image_repository_path": "data/mobile_08782c89-65da-43ca-8eb6-8ca71e9f8ea7_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_08782c89-65da-43ca-8eb6-8ca71e9f8ea7_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "585685a46ba5cf5f5643ae649bae0850a4699ad3910c3184c7060ebd85245d91"
+  },
+  {
+    "sample_id": "mobile-0267-ec3d2547f6",
+    "image_repository_path": "data/mobile_08782c89-65da-43ca-8eb6-8ca71e9f8ea7_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_08782c89-65da-43ca-8eb6-8ca71e9f8ea7_1.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "585685a46ba5cf5f5643ae649bae0850a4699ad3910c3184c7060ebd85245d91"
+  },
+  {
+    "sample_id": "mobile-0268-ea5603cb19",
+    "image_repository_path": "data/mobile_c784c6c1-0203-4193-8131-f34cef16d400_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c784c6c1-0203-4193-8131-f34cef16d400_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b472576d89d9eead9a5ed1ed1f0651c1be433a1fc6347c004021e3f76910195b"
+  },
+  {
+    "sample_id": "mobile-0269-b6d6ebcd09",
+    "image_repository_path": "data/mobile_1152be83-7090-45b9-9465-e5acc02d867d_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1152be83-7090-45b9-9465-e5acc02d867d_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "d018dacfd7ff931b237b8c58e83aba1fe820e3d79906fbd02046bd06f5631b9d"
+  },
+  {
+    "sample_id": "mobile-0270-47a575f703",
+    "image_repository_path": "data/mobile_1152be83-7090-45b9-9465-e5acc02d867d_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1152be83-7090-45b9-9465-e5acc02d867d_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "d018dacfd7ff931b237b8c58e83aba1fe820e3d79906fbd02046bd06f5631b9d"
+  },
+  {
+    "sample_id": "mobile-0271-1b664b1207",
+    "image_repository_path": "data/mobile_d8a299f2-f432-4bef-abc4-5a005cf4c40f_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d8a299f2-f432-4bef-abc4-5a005cf4c40f_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "25062396f978b8ab07d575a4d6917029a2d1521eac75846523329ec61c6ebe12"
+  },
+  {
+    "sample_id": "mobile-0272-aaa567f9e9",
+    "image_repository_path": "data/mobile_45d2f820-fe5f-4e31-9554-34156e66179c_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_45d2f820-fe5f-4e31-9554-34156e66179c_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "8a7809ec20170f71cf3668b7f026141e1ed77f6981045cc894f32af461ccbbf2"
+  },
+  {
+    "sample_id": "mobile-0273-57369d03ec",
+    "image_repository_path": "data/mobile_f45826c5-d796-46cf-b0c3-c4095206735c_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f45826c5-d796-46cf-b0c3-c4095206735c_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "9b6f91ba9d72ef6f7076eb0e75c2b48668a25df569595ffa1ab6daf9668d320a"
+  },
+  {
+    "sample_id": "mobile-0274-c909a714dd",
+    "image_repository_path": "data/mobile_a2719c16-da39-48ea-8c1c-1239414f0778_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a2719c16-da39-48ea-8c1c-1239414f0778_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "637da4240075d9620819d02aa5655f55fc0571271ebf702017bcc54a711fafdd"
+  },
+  {
+    "sample_id": "mobile-0275-ef03736091",
+    "image_repository_path": "data/mobile_63adf499-326a-44b4-8b3f-0ecd1935745e_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_63adf499-326a-44b4-8b3f-0ecd1935745e_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "f83807e0101dfdfab1f01b3b465ca5c43c70ab83632d1aeb4698259af84a1f18"
+  },
+  {
+    "sample_id": "mobile-0276-5add6e870b",
+    "image_repository_path": "data/mobile_18b2ff57-9a0c-48e6-a754-de728b5a0479_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_18b2ff57-9a0c-48e6-a754-de728b5a0479_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "a345af328d2e70792a8d0ed0cbbbde6e1b8508a9be9719555d51a0e94640c1d8"
+  },
+  {
+    "sample_id": "mobile-0277-b5313ba71e",
+    "image_repository_path": "data/mobile_18b2ff57-9a0c-48e6-a754-de728b5a0479_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_18b2ff57-9a0c-48e6-a754-de728b5a0479_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "a345af328d2e70792a8d0ed0cbbbde6e1b8508a9be9719555d51a0e94640c1d8"
+  },
+  {
+    "sample_id": "mobile-0278-4ddea8366d",
+    "image_repository_path": "data/mobile_acb1d28f-ddf9-4098-b749-51bf6600705b_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_acb1d28f-ddf9-4098-b749-51bf6600705b_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "1b4b6fbbc70e342c70e60addd1dad527aff46f0484b627468f0ec7db29543f73"
+  },
+  {
+    "sample_id": "mobile-0279-efbe9e5d03",
+    "image_repository_path": "data/mobile_105a4c27-8695-4555-9121-0dd7cacb5ec2_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_105a4c27-8695-4555-9121-0dd7cacb5ec2_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "64916c6de45110456730858b7904be877ff5ec6842d651a70c3bb81472078dd2"
+  },
+  {
+    "sample_id": "mobile-0280-6722a2cdd5",
+    "image_repository_path": "data/mobile_2e804aba-afb6-48a0-ad55-2f242652eb33_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_2e804aba-afb6-48a0-ad55-2f242652eb33_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "ad44b86ff1eee35401e3bea5223b11d593a6c5d418b472e292784b73af5aade9"
+  },
+  {
+    "sample_id": "mobile-0281-a68ffe9bff",
+    "image_repository_path": "data/mobile_d97a442a-6912-4a26-9387-fe5dee9b3d0a_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d97a442a-6912-4a26-9387-fe5dee9b3d0a_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "393d91b899acde24fb4f680cefe64aa8b2dde0efc093d7bd103cf082eba54fe7"
+  },
+  {
+    "sample_id": "mobile-0282-7671c14f23",
+    "image_repository_path": "data/mobile_d97a442a-6912-4a26-9387-fe5dee9b3d0a_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d97a442a-6912-4a26-9387-fe5dee9b3d0a_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "393d91b899acde24fb4f680cefe64aa8b2dde0efc093d7bd103cf082eba54fe7"
+  },
+  {
+    "sample_id": "mobile-0283-78844d95a4",
+    "image_repository_path": "data/mobile_7e2e6586-4c35-414e-8608-863b7ceba272_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_7e2e6586-4c35-414e-8608-863b7ceba272_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "1bc1d569c955af9e40bd3013ff8686ca5950bb8e10a9f22977c97786a0c285e8"
+  },
+  {
+    "sample_id": "mobile-0284-79d573fd38",
+    "image_repository_path": "data/mobile_d3865883-8214-4bff-9834-13987580abe8_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d3865883-8214-4bff-9834-13987580abe8_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "7303f569579000423865527f10ec41f11ccb8fccb0ca977b970aef0b30f8ef07"
+  },
+  {
+    "sample_id": "mobile-0285-06b0e32118",
+    "image_repository_path": "data/mobile_8c25fc62-ca0e-4280-ae68-9146b66089b2_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8c25fc62-ca0e-4280-ae68-9146b66089b2_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "eabed86c179613d1afde2145f3ee57fef01751ca66252b698d19e02e8972bd7d"
+  },
+  {
+    "sample_id": "mobile-0286-f3e568eb36",
+    "image_repository_path": "data/mobile_6cc4e2c1-b5bd-4347-bee4-63a1217d052c_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6cc4e2c1-b5bd-4347-bee4-63a1217d052c_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "d407cf768832f37097e34bb25545129a5a95072142825940fb2bf7210edde8e1"
+  },
+  {
+    "sample_id": "mobile-0287-7bbdfc330b",
+    "image_repository_path": "data/mobile_6cc4e2c1-b5bd-4347-bee4-63a1217d052c_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6cc4e2c1-b5bd-4347-bee4-63a1217d052c_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "d407cf768832f37097e34bb25545129a5a95072142825940fb2bf7210edde8e1"
+  },
+  {
+    "sample_id": "mobile-0288-883ffed7f9",
+    "image_repository_path": "data/mobile_4e55ce53-bc82-44c3-a81a-8282f55ec4c9_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4e55ce53-bc82-44c3-a81a-8282f55ec4c9_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "19d9916663f2015205415239449a2ffbccb02c548c2cbc920eab37b1fc51ee43"
+  },
+  {
+    "sample_id": "mobile-0289-b2998cd400",
+    "image_repository_path": "data/mobile_4e55ce53-bc82-44c3-a81a-8282f55ec4c9_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4e55ce53-bc82-44c3-a81a-8282f55ec4c9_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "19d9916663f2015205415239449a2ffbccb02c548c2cbc920eab37b1fc51ee43"
+  },
+  {
+    "sample_id": "mobile-0290-7e1676d302",
+    "image_repository_path": "data/mobile_f6f4bdd0-01eb-41a4-b696-42fcc45097b6_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f6f4bdd0-01eb-41a4-b696-42fcc45097b6_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "04db6839856006bbdd7af4fbfa03607ae87a3ae63a924021350de84d2a2eec61"
+  },
+  {
+    "sample_id": "mobile-0291-057f7c8384",
+    "image_repository_path": "data/mobile_f6f4bdd0-01eb-41a4-b696-42fcc45097b6_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f6f4bdd0-01eb-41a4-b696-42fcc45097b6_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "04db6839856006bbdd7af4fbfa03607ae87a3ae63a924021350de84d2a2eec61"
+  },
+  {
+    "sample_id": "mobile-0292-ccfdd1a5d5",
+    "image_repository_path": "data/mobile_73a629d6-0fe4-4663-a727-d3b78ec52175_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_73a629d6-0fe4-4663-a727-d3b78ec52175_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "0c557e6a76cc80b917221c11688f63d9ed4a7d9e98c6d0c21895899014ad60d5"
+  },
+  {
+    "sample_id": "mobile-0293-49757beb63",
+    "image_repository_path": "data/mobile_c81bb812-68b7-4557-95bb-1260f3b787f1_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c81bb812-68b7-4557-95bb-1260f3b787f1_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "5087bd0371550c9fff9fa2a196ede617533d3ca15d23a8c9d0419f3d351e7bb3"
+  },
+  {
+    "sample_id": "mobile-0294-e592b9a1dd",
+    "image_repository_path": "data/mobile_c81bb812-68b7-4557-95bb-1260f3b787f1_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c81bb812-68b7-4557-95bb-1260f3b787f1_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "5087bd0371550c9fff9fa2a196ede617533d3ca15d23a8c9d0419f3d351e7bb3"
+  },
+  {
+    "sample_id": "mobile-0295-d62d28e126",
+    "image_repository_path": "data/mobile_c9c47c96-1b18-45dd-8e88-f0b48c54617d_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c9c47c96-1b18-45dd-8e88-f0b48c54617d_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "3117e9631daecf48cf36922ba5aeca080ccaa3dc0882f8400292574c13005b66"
+  },
+  {
+    "sample_id": "mobile-0296-21c397c092",
+    "image_repository_path": "data/mobile_12280689-e3e1-4a36-ba3c-709acb969b32_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_12280689-e3e1-4a36-ba3c-709acb969b32_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "033eff6aebd858f20743e0615d2e187b6763825405ddb5b14cf72d7bd0d4f5af"
+  },
+  {
+    "sample_id": "mobile-0297-5c3a72dea1",
+    "image_repository_path": "data/mobile_a2cdff8e-fd92-46fb-8d83-228f2116c087_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a2cdff8e-fd92-46fb-8d83-228f2116c087_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "adf3d3b6f759366336aa998802c04a761bda0cdc76eff8e9e4bd6b5e499f6bd2"
+  },
+  {
+    "sample_id": "mobile-0298-bf939412b0",
+    "image_repository_path": "data/mobile_a2cdff8e-fd92-46fb-8d83-228f2116c087_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a2cdff8e-fd92-46fb-8d83-228f2116c087_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "adf3d3b6f759366336aa998802c04a761bda0cdc76eff8e9e4bd6b5e499f6bd2"
+  },
+  {
+    "sample_id": "mobile-0299-de855aa4fd",
+    "image_repository_path": "data/mobile_641346f3-50a8-4235-8a74-e0c9ee49136f_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_641346f3-50a8-4235-8a74-e0c9ee49136f_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "9eeef69f26421b266d4142789b8665e0c37af6afa7d803f6022aaeef52462f63"
+  },
+  {
+    "sample_id": "mobile-0300-3bc1c8e37a",
+    "image_repository_path": "data/mobile_641346f3-50a8-4235-8a74-e0c9ee49136f_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_641346f3-50a8-4235-8a74-e0c9ee49136f_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "9eeef69f26421b266d4142789b8665e0c37af6afa7d803f6022aaeef52462f63"
+  },
+  {
+    "sample_id": "mobile-0301-f711c00f68",
+    "image_repository_path": "data/mobile_6126718c-82ef-4406-8d00-3d4bf7a414c4_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6126718c-82ef-4406-8d00-3d4bf7a414c4_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "6686b4df5eebe9cc7f60422a10cd1568f121ca58c7f2abb46ee06b01cfc3f141"
+  },
+  {
+    "sample_id": "mobile-0302-687b89c285",
+    "image_repository_path": "data/mobile_6126718c-82ef-4406-8d00-3d4bf7a414c4_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6126718c-82ef-4406-8d00-3d4bf7a414c4_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "6686b4df5eebe9cc7f60422a10cd1568f121ca58c7f2abb46ee06b01cfc3f141"
+  },
+  {
+    "sample_id": "mobile-0303-9f986f3db7",
+    "image_repository_path": "data/mobile_b4a1ee35-b1b3-4ea6-bd37-22e326ea8620_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b4a1ee35-b1b3-4ea6-bd37-22e326ea8620_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "6ed6470efeac645fafe10a888b33fdd6302658e2bf56674f8896ff2d97e6b78e"
+  },
+  {
+    "sample_id": "mobile-0304-f86a057987",
+    "image_repository_path": "data/mobile_8632848c-d399-4879-bb2e-c06478785a16_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8632848c-d399-4879-bb2e-c06478785a16_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "d66c969dde93bddb7ad21c1058c83be7b20051e32a439ca6329e770895af0dee"
+  },
+  {
+    "sample_id": "mobile-0305-50d7b1959f",
+    "image_repository_path": "data/mobile_3475adcf-26f0-43b9-8758-cae8601d33d1_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_3475adcf-26f0-43b9-8758-cae8601d33d1_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "81c82a808cd0cbe6f93c450401d3144180028ec58bb0d412c3330afcfcb874fe"
+  },
+  {
+    "sample_id": "mobile-0306-7baa4821a2",
+    "image_repository_path": "data/mobile_35047157-7939-4491-ab8d-4d1da41acc74_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_35047157-7939-4491-ab8d-4d1da41acc74_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "35950f5e7b2b449081cdd95794cf756506fe793a73b3a70cf7a7e5365759451c"
+  },
+  {
+    "sample_id": "mobile-0307-c611ab30bc",
+    "image_repository_path": "data/mobile_39d89f43-f1df-40b7-a0db-eef4bc2521d0_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_39d89f43-f1df-40b7-a0db-eef4bc2521d0_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "6dd4c6ffd869f7d4ab587319f8280cdb136b0781ecf3e30addd45adfd2f9c846"
+  },
+  {
+    "sample_id": "mobile-0308-9da2c96eca",
+    "image_repository_path": "data/mobile_268e1246-9870-47c7-a702-cadd117e11d4_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_268e1246-9870-47c7-a702-cadd117e11d4_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "41d6391127bd32853f54a2b49274758d80b7f7ab07184398694c01061f15aeb7"
+  },
+  {
+    "sample_id": "mobile-0309-4754ba11ec",
+    "image_repository_path": "data/mobile_085c4ffc-e423-4798-a09f-702ded3d1987_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_085c4ffc-e423-4798-a09f-702ded3d1987_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "f0b2cab70cfaca22f8063345c1d75c865ed381fe11797a24fd992fb63787ebd3"
+  },
+  {
+    "sample_id": "mobile-0310-395582d003",
+    "image_repository_path": "data/mobile_0b63fa69-df33-442d-b7ea-9393432f71ea_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_0b63fa69-df33-442d-b7ea-9393432f71ea_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "d159299edb40bd7385d7f425f7fc556b4927026761091265f61bbd699a576834"
+  },
+  {
+    "sample_id": "mobile-0311-5632701a4e",
+    "image_repository_path": "data/mobile_9f4d72cc-149d-4613-b19a-759ee34d8a47_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9f4d72cc-149d-4613-b19a-759ee34d8a47_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "43e8f5efe8558ec6f292ca54bdc453b28ddebb2f45b7b246d49682fc0a2dfabf"
+  },
+  {
+    "sample_id": "mobile-0312-6e439cc977",
+    "image_repository_path": "data/mobile_9f4d72cc-149d-4613-b19a-759ee34d8a47_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9f4d72cc-149d-4613-b19a-759ee34d8a47_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "43e8f5efe8558ec6f292ca54bdc453b28ddebb2f45b7b246d49682fc0a2dfabf"
+  },
+  {
+    "sample_id": "mobile-0313-6054df1cba",
+    "image_repository_path": "data/mobile_76682c29-846c-4673-be8b-ebfbe0e5c9a9_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_76682c29-846c-4673-be8b-ebfbe0e5c9a9_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "e4d12d9bb5e7fedd1a36deee0fb6cf85067c3bb9cb1f7288dbd931da988812b2"
+  },
+  {
+    "sample_id": "mobile-0314-330ab28219",
+    "image_repository_path": "data/mobile_79ef2997-19a2-4520-8647-b1ad1fc00ce8_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_79ef2997-19a2-4520-8647-b1ad1fc00ce8_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "0f7c6a9358346426864e78f00e73e58bc40f2446f7e2c2a832b4230efa4889c0"
+  },
+  {
+    "sample_id": "mobile-0315-8a83c4d07a",
+    "image_repository_path": "data/mobile_e8581791-9dca-4a18-a9c3-0ddd782aaf96_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e8581791-9dca-4a18-a9c3-0ddd782aaf96_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "5ae5e1804d037ff707cf02f58dbb79b0af63103d963b958f8da8e906debaec44"
+  },
+  {
+    "sample_id": "mobile-0316-89600c5250",
+    "image_repository_path": "data/mobile_bdefb309-2aeb-4b5f-920b-1e9952f1ddfe_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_bdefb309-2aeb-4b5f-920b-1e9952f1ddfe_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "f0e0a4f456f0dad67e632a67e69eebd770fde2c018024386a7e962719b943e34"
+  },
+  {
+    "sample_id": "mobile-0318-05a04adbfa",
+    "image_repository_path": "data/mobile_bed2b5e8-9102-405e-80f3-85207ed1bbf0_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_bed2b5e8-9102-405e-80f3-85207ed1bbf0_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "12c368d42fa5dd764752577dfd20dbce1842b16cb9c0d0c35ebc5af99811ede2"
+  },
+  {
+    "sample_id": "mobile-0319-9ebcfc46e4",
+    "image_repository_path": "data/mobile_97ca06a1-8d37-4ece-b7ed-79517c61da2f_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_97ca06a1-8d37-4ece-b7ed-79517c61da2f_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "5ef7f6467f557c5e6e5b040f44c08219f0f7ba81f95037c34acc807ff2e28a80"
+  },
+  {
+    "sample_id": "mobile-0320-0885698fff",
+    "image_repository_path": "data/mobile_97ca06a1-8d37-4ece-b7ed-79517c61da2f_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_97ca06a1-8d37-4ece-b7ed-79517c61da2f_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "5ef7f6467f557c5e6e5b040f44c08219f0f7ba81f95037c34acc807ff2e28a80"
+  },
+  {
+    "sample_id": "mobile-0321-a2392e186c",
+    "image_repository_path": "data/mobile_f6431461-6800-4054-a29d-d74b01514198_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f6431461-6800-4054-a29d-d74b01514198_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "b361a73b6d8bb0518e2236fe2ead1430a9e1b72ee6019b04ede38e3a28e1acb3"
+  },
+  {
+    "sample_id": "mobile-0322-9c28b5425d",
+    "image_repository_path": "data/mobile_f6431461-6800-4054-a29d-d74b01514198_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f6431461-6800-4054-a29d-d74b01514198_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "b361a73b6d8bb0518e2236fe2ead1430a9e1b72ee6019b04ede38e3a28e1acb3"
+  },
+  {
+    "sample_id": "mobile-0323-c563e3f6c2",
+    "image_repository_path": "data/mobile_b099c8b7-0ff4-404b-a1a2-10691a313a8b_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b099c8b7-0ff4-404b-a1a2-10691a313a8b_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c9a86f924c5e14a5f6b87ca5f2c62fb242a0f55457887a4a944f851f8ae7bf3c"
+  },
+  {
+    "sample_id": "mobile-0324-6b4a9fdfc4",
+    "image_repository_path": "data/mobile_b099c8b7-0ff4-404b-a1a2-10691a313a8b_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b099c8b7-0ff4-404b-a1a2-10691a313a8b_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c9a86f924c5e14a5f6b87ca5f2c62fb242a0f55457887a4a944f851f8ae7bf3c"
+  },
+  {
+    "sample_id": "mobile-0325-fcc223fa04",
+    "image_repository_path": "data/mobile_8ed6041f-f845-4495-8ca6-def7f40471fd_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8ed6041f-f845-4495-8ca6-def7f40471fd_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6bd1ccda81551c9a0e0f45f8cb417abbfd16b42734d05af63ed9b389b4bd7108"
+  },
+  {
+    "sample_id": "mobile-0326-cff61db602",
+    "image_repository_path": "data/mobile_8ed6041f-f845-4495-8ca6-def7f40471fd_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8ed6041f-f845-4495-8ca6-def7f40471fd_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6bd1ccda81551c9a0e0f45f8cb417abbfd16b42734d05af63ed9b389b4bd7108"
+  },
+  {
+    "sample_id": "mobile-0327-092dd722fb",
+    "image_repository_path": "data/mobile_13b715bb-dd6e-462c-80f3-3ea629b114c0_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_13b715bb-dd6e-462c-80f3-3ea629b114c0_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "0d742306fa36fa35588e649c1201a88a7122ac2094d862ba73a5d5fd21e00ee2"
+  },
+  {
+    "sample_id": "mobile-0328-befc39e47f",
+    "image_repository_path": "data/mobile_13b715bb-dd6e-462c-80f3-3ea629b114c0_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_13b715bb-dd6e-462c-80f3-3ea629b114c0_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "0d742306fa36fa35588e649c1201a88a7122ac2094d862ba73a5d5fd21e00ee2"
+  },
+  {
+    "sample_id": "mobile-0329-19c4b65d6f",
+    "image_repository_path": "data/mobile_53e09f46-876e-4552-9037-ae4ef338dad3_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_53e09f46-876e-4552-9037-ae4ef338dad3_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "7b07e719c35a03f675ce965fafdb208c16674b226d2866da3b64eab2c0924598"
+  },
+  {
+    "sample_id": "mobile-0330-813fc28893",
+    "image_repository_path": "data/mobile_53e09f46-876e-4552-9037-ae4ef338dad3_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_53e09f46-876e-4552-9037-ae4ef338dad3_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "7b07e719c35a03f675ce965fafdb208c16674b226d2866da3b64eab2c0924598"
+  },
+  {
+    "sample_id": "mobile-0331-1678d96887",
+    "image_repository_path": "data/mobile_07c1d6c0-7f94-457e-94b4-1e855dc1aded_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_07c1d6c0-7f94-457e-94b4-1e855dc1aded_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "bf84be1698142af6787fb4e8f8a7eb5295f78c27d2216f1dce1d007a6a1547ce"
+  },
+  {
+    "sample_id": "mobile-0332-497d340cf5",
+    "image_repository_path": "data/mobile_97752e81-d94b-49a1-8cb2-709395d63372_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_97752e81-d94b-49a1-8cb2-709395d63372_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f3b2d4eab4aab483258bbcfb0922b3bac9c9ecc4f2587b8f8abeaaf2db8c3299"
+  },
+  {
+    "sample_id": "mobile-0333-f0c1b0cade",
+    "image_repository_path": "data/mobile_97752e81-d94b-49a1-8cb2-709395d63372_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_97752e81-d94b-49a1-8cb2-709395d63372_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f3b2d4eab4aab483258bbcfb0922b3bac9c9ecc4f2587b8f8abeaaf2db8c3299"
+  },
+  {
+    "sample_id": "mobile-0334-725f130c31",
+    "image_repository_path": "data/mobile_97752e81-d94b-49a1-8cb2-709395d63372_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_97752e81-d94b-49a1-8cb2-709395d63372_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f3b2d4eab4aab483258bbcfb0922b3bac9c9ecc4f2587b8f8abeaaf2db8c3299"
+  },
+  {
+    "sample_id": "mobile-0335-3cc56e24ba",
+    "image_repository_path": "data/mobile_6049f1b2-a8b8-4e39-bbac-ddd647cd3248_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6049f1b2-a8b8-4e39-bbac-ddd647cd3248_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "958ff6c2dd516dfd3d3fee8ca309dd079a82bdcd0385c1232ccfbf2ff98a3fd7"
+  },
+  {
+    "sample_id": "mobile-0336-9ff5b166fb",
+    "image_repository_path": "data/mobile_6049f1b2-a8b8-4e39-bbac-ddd647cd3248_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6049f1b2-a8b8-4e39-bbac-ddd647cd3248_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "958ff6c2dd516dfd3d3fee8ca309dd079a82bdcd0385c1232ccfbf2ff98a3fd7"
+  },
+  {
+    "sample_id": "mobile-0337-e75aecb19d",
+    "image_repository_path": "data/mobile_6049f1b2-a8b8-4e39-bbac-ddd647cd3248_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6049f1b2-a8b8-4e39-bbac-ddd647cd3248_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "958ff6c2dd516dfd3d3fee8ca309dd079a82bdcd0385c1232ccfbf2ff98a3fd7"
+  },
+  {
+    "sample_id": "mobile-0338-83e5d05451",
+    "image_repository_path": "data/mobile_b92938f8-6822-49e4-9612-67debab64e9d_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b92938f8-6822-49e4-9612-67debab64e9d_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "8873d6508eee1c35fdab24a260ea9854aa78c1edb2f4676bda7ccf9f921f65bc"
+  },
+  {
+    "sample_id": "mobile-0339-9635660a88",
+    "image_repository_path": "data/mobile_b92938f8-6822-49e4-9612-67debab64e9d_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b92938f8-6822-49e4-9612-67debab64e9d_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "8873d6508eee1c35fdab24a260ea9854aa78c1edb2f4676bda7ccf9f921f65bc"
+  },
+  {
+    "sample_id": "mobile-0340-4000853350",
+    "image_repository_path": "data/mobile_b92938f8-6822-49e4-9612-67debab64e9d_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b92938f8-6822-49e4-9612-67debab64e9d_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "8873d6508eee1c35fdab24a260ea9854aa78c1edb2f4676bda7ccf9f921f65bc"
+  },
+  {
+    "sample_id": "mobile-0341-572cf86002",
+    "image_repository_path": "data/mobile_aacb7bd4-e54a-4798-876a-eef079e17b2d_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_aacb7bd4-e54a-4798-876a-eef079e17b2d_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1de47a333efd6ca0719da3ae09cbb495896b449c7913b4ea6e2122e6e77f1df4"
+  },
+  {
+    "sample_id": "mobile-0342-97f3a57850",
+    "image_repository_path": "data/mobile_aacb7bd4-e54a-4798-876a-eef079e17b2d_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_aacb7bd4-e54a-4798-876a-eef079e17b2d_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1de47a333efd6ca0719da3ae09cbb495896b449c7913b4ea6e2122e6e77f1df4"
+  },
+  {
+    "sample_id": "mobile-0345-6ecbd4167f",
+    "image_repository_path": "data/mobile_b7323848-f2e7-492c-95aa-e33e731ff196_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b7323848-f2e7-492c-95aa-e33e731ff196_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f2a4e8421511f605c47aca92649483fc089df1c4f41685c88c642d052162e41b"
+  },
+  {
+    "sample_id": "mobile-0346-3c3ad9f6aa",
+    "image_repository_path": "data/mobile_b7323848-f2e7-492c-95aa-e33e731ff196_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b7323848-f2e7-492c-95aa-e33e731ff196_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f2a4e8421511f605c47aca92649483fc089df1c4f41685c88c642d052162e41b"
+  },
+  {
+    "sample_id": "mobile-0347-4232c7ebb2",
+    "image_repository_path": "data/mobile_b7323848-f2e7-492c-95aa-e33e731ff196_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b7323848-f2e7-492c-95aa-e33e731ff196_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "f2a4e8421511f605c47aca92649483fc089df1c4f41685c88c642d052162e41b"
+  },
+  {
+    "sample_id": "mobile-0348-e903e7bd0e",
+    "image_repository_path": "data/mobile_35351ad5-e887-4f0c-8e11-b0ae43776394_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_35351ad5-e887-4f0c-8e11-b0ae43776394_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "276942705bd257a398692817d2a5a481e1d15bd1af6049fd1c07596de8a0c200"
+  },
+  {
+    "sample_id": "mobile-0349-da55381beb",
+    "image_repository_path": "data/mobile_35351ad5-e887-4f0c-8e11-b0ae43776394_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_35351ad5-e887-4f0c-8e11-b0ae43776394_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "276942705bd257a398692817d2a5a481e1d15bd1af6049fd1c07596de8a0c200"
+  },
+  {
+    "sample_id": "mobile-0350-d105dac6cd",
+    "image_repository_path": "data/mobile_5beaa36a-b6a1-44ee-9684-0d0b8afd0c0b_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5beaa36a-b6a1-44ee-9684-0d0b8afd0c0b_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "898255dbc6557f4f7fcce430a58fe880d50ba1b100a45ea235c23a8cb8d99872"
+  },
+  {
+    "sample_id": "mobile-0351-86ce0a0bdc",
+    "image_repository_path": "data/mobile_5beaa36a-b6a1-44ee-9684-0d0b8afd0c0b_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5beaa36a-b6a1-44ee-9684-0d0b8afd0c0b_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "898255dbc6557f4f7fcce430a58fe880d50ba1b100a45ea235c23a8cb8d99872"
+  },
+  {
+    "sample_id": "mobile-0352-f75dcbdc67",
+    "image_repository_path": "data/mobile_5beaa36a-b6a1-44ee-9684-0d0b8afd0c0b_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5beaa36a-b6a1-44ee-9684-0d0b8afd0c0b_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "898255dbc6557f4f7fcce430a58fe880d50ba1b100a45ea235c23a8cb8d99872"
+  },
+  {
+    "sample_id": "mobile-0353-748682a271",
+    "image_repository_path": "data/mobile_a1c4c142-4b8e-4db8-a74f-f84f047cbf46_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a1c4c142-4b8e-4db8-a74f-f84f047cbf46_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c30bd461454e4949a757bc531191400dcc32cbb17835e0be8c90006100d5ba57"
+  },
+  {
+    "sample_id": "mobile-0354-cb59c4a04d",
+    "image_repository_path": "data/mobile_a1c4c142-4b8e-4db8-a74f-f84f047cbf46_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a1c4c142-4b8e-4db8-a74f-f84f047cbf46_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c30bd461454e4949a757bc531191400dcc32cbb17835e0be8c90006100d5ba57"
+  },
+  {
+    "sample_id": "mobile-0355-b456abab6e",
+    "image_repository_path": "data/mobile_a1c4c142-4b8e-4db8-a74f-f84f047cbf46_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a1c4c142-4b8e-4db8-a74f-f84f047cbf46_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c30bd461454e4949a757bc531191400dcc32cbb17835e0be8c90006100d5ba57"
+  },
+  {
+    "sample_id": "mobile-0356-ea5cfc5121",
+    "image_repository_path": "data/mobile_8d60dcfe-4771-4a34-9053-9195df7264c9_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8d60dcfe-4771-4a34-9053-9195df7264c9_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c2c08061b2a3857eecc2ac47b6806ac461057138092db0b888b2e88d00c1d24c"
+  },
+  {
+    "sample_id": "mobile-0357-35bee51b48",
+    "image_repository_path": "data/mobile_8d60dcfe-4771-4a34-9053-9195df7264c9_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8d60dcfe-4771-4a34-9053-9195df7264c9_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c2c08061b2a3857eecc2ac47b6806ac461057138092db0b888b2e88d00c1d24c"
+  },
+  {
+    "sample_id": "mobile-0358-18f33cf48d",
+    "image_repository_path": "data/mobile_8d60dcfe-4771-4a34-9053-9195df7264c9_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8d60dcfe-4771-4a34-9053-9195df7264c9_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "c2c08061b2a3857eecc2ac47b6806ac461057138092db0b888b2e88d00c1d24c"
+  },
+  {
+    "sample_id": "mobile-0359-991d601a6d",
+    "image_repository_path": "data/mobile_791a59b0-e0dd-452f-b3c3-94238f7636f0_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_791a59b0-e0dd-452f-b3c3-94238f7636f0_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "4c1dcc3fac7d2429c5d947aa05608176ee1ac9b128892fdc8d15bd26cbede9fe"
+  },
+  {
+    "sample_id": "mobile-0360-525a512f19",
+    "image_repository_path": "data/mobile_791a59b0-e0dd-452f-b3c3-94238f7636f0_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_791a59b0-e0dd-452f-b3c3-94238f7636f0_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "4c1dcc3fac7d2429c5d947aa05608176ee1ac9b128892fdc8d15bd26cbede9fe"
+  },
+  {
+    "sample_id": "mobile-0361-575462631d",
+    "image_repository_path": "data/mobile_791a59b0-e0dd-452f-b3c3-94238f7636f0_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_791a59b0-e0dd-452f-b3c3-94238f7636f0_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "4c1dcc3fac7d2429c5d947aa05608176ee1ac9b128892fdc8d15bd26cbede9fe"
+  },
+  {
+    "sample_id": "mobile-0362-df411ae3fb",
+    "image_repository_path": "data/mobile_71a65a77-a4ba-4853-9530-5e781cbbaa67_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_71a65a77-a4ba-4853-9530-5e781cbbaa67_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "5fe10ef5eeec1f078834d80af01f9cfeada46f5ae3830c66895fa1f6c38d7d48"
+  },
+  {
+    "sample_id": "mobile-0363-cce3ae6189",
+    "image_repository_path": "data/mobile_71a65a77-a4ba-4853-9530-5e781cbbaa67_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_71a65a77-a4ba-4853-9530-5e781cbbaa67_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "5fe10ef5eeec1f078834d80af01f9cfeada46f5ae3830c66895fa1f6c38d7d48"
+  },
+  {
+    "sample_id": "mobile-0364-dbca66582d",
+    "image_repository_path": "data/mobile_48d10f78-a92e-43fb-ace1-c1a4f5bccb90_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_48d10f78-a92e-43fb-ace1-c1a4f5bccb90_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "440c02312db8b19f08cb59e5ed8213b30f927039156a81d96bb8b8238746009c"
+  },
+  {
+    "sample_id": "mobile-0365-9dfe21c3be",
+    "image_repository_path": "data/mobile_48d10f78-a92e-43fb-ace1-c1a4f5bccb90_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_48d10f78-a92e-43fb-ace1-c1a4f5bccb90_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "440c02312db8b19f08cb59e5ed8213b30f927039156a81d96bb8b8238746009c"
+  },
+  {
+    "sample_id": "mobile-0366-272bf8ef3a",
+    "image_repository_path": "data/mobile_48d10f78-a92e-43fb-ace1-c1a4f5bccb90_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_48d10f78-a92e-43fb-ace1-c1a4f5bccb90_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "440c02312db8b19f08cb59e5ed8213b30f927039156a81d96bb8b8238746009c"
+  },
+  {
+    "sample_id": "mobile-0367-596b15830e",
+    "image_repository_path": "data/mobile_d9e451e3-6238-496f-8cc4-37e019e1a9c3_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d9e451e3-6238-496f-8cc4-37e019e1a9c3_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "931fbc8554bae61414ce82102fd53f9fcd951b8b97bc12f6aeaa58176c3bd443"
+  },
+  {
+    "sample_id": "mobile-0368-33c9f3c481",
+    "image_repository_path": "data/mobile_41049254-5e60-485c-b974-174ad6e98bd0_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_41049254-5e60-485c-b974-174ad6e98bd0_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "8636f88c27319aac83edb8f1563431165cdb7d7ace91c0de670bb21143a42281"
+  },
+  {
+    "sample_id": "mobile-0369-20d0a54901",
+    "image_repository_path": "data/mobile_41049254-5e60-485c-b974-174ad6e98bd0_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_41049254-5e60-485c-b974-174ad6e98bd0_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "8636f88c27319aac83edb8f1563431165cdb7d7ace91c0de670bb21143a42281"
+  },
+  {
+    "sample_id": "mobile-0370-c320f9962b",
+    "image_repository_path": "data/mobile_b4e274d0-a7b6-4cad-97ee-5581ef41c6a0_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b4e274d0-a7b6-4cad-97ee-5581ef41c6a0_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "7c323e28769f6b350125a6885e7df196bddf7b1a99c15f7d39639cbfb674f5c9"
+  },
+  {
+    "sample_id": "mobile-0371-b1bf49bbf7",
+    "image_repository_path": "data/mobile_b4e274d0-a7b6-4cad-97ee-5581ef41c6a0_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b4e274d0-a7b6-4cad-97ee-5581ef41c6a0_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "7c323e28769f6b350125a6885e7df196bddf7b1a99c15f7d39639cbfb674f5c9"
+  },
+  {
+    "sample_id": "mobile-0372-279960dad6",
+    "image_repository_path": "data/mobile_b4e274d0-a7b6-4cad-97ee-5581ef41c6a0_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b4e274d0-a7b6-4cad-97ee-5581ef41c6a0_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "7c323e28769f6b350125a6885e7df196bddf7b1a99c15f7d39639cbfb674f5c9"
+  },
+  {
+    "sample_id": "mobile-0373-d863af5729",
+    "image_repository_path": "data/mobile_508e7610-9e30-4626-9ea3-37bf194cb1dd_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_508e7610-9e30-4626-9ea3-37bf194cb1dd_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "9b4d17b5de122404bcb0bde244e05fac302632fb57303720d20814480fd4dd7c"
+  },
+  {
+    "sample_id": "mobile-0375-348638d5d1",
+    "image_repository_path": "data/mobile_508e7610-9e30-4626-9ea3-37bf194cb1dd_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_508e7610-9e30-4626-9ea3-37bf194cb1dd_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "9b4d17b5de122404bcb0bde244e05fac302632fb57303720d20814480fd4dd7c"
+  },
+  {
+    "sample_id": "mobile-0376-b2ca44643f",
+    "image_repository_path": "data/mobile_5c444b03-c5ca-41d8-b4cb-e12f4f4a4387_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5c444b03-c5ca-41d8-b4cb-e12f4f4a4387_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "a5ebe20e1bd0241afd6e065b9ef9081527674154bbe57f0792f976d7f6214fe8"
+  },
+  {
+    "sample_id": "mobile-0378-39240c0edd",
+    "image_repository_path": "data/mobile_5c444b03-c5ca-41d8-b4cb-e12f4f4a4387_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5c444b03-c5ca-41d8-b4cb-e12f4f4a4387_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "a5ebe20e1bd0241afd6e065b9ef9081527674154bbe57f0792f976d7f6214fe8"
+  },
+  {
+    "sample_id": "mobile-0379-e82179a02a",
+    "image_repository_path": "data/mobile_f0b711c8-ab3c-4af5-b43b-452a718637ae_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f0b711c8-ab3c-4af5-b43b-452a718637ae_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "180441c4fbd954022ae453cf0c4a854a6049afd8127fb200dc8cee5513d64312"
+  },
+  {
+    "sample_id": "mobile-0380-54d8967b8b",
+    "image_repository_path": "data/mobile_f0b711c8-ab3c-4af5-b43b-452a718637ae_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f0b711c8-ab3c-4af5-b43b-452a718637ae_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "180441c4fbd954022ae453cf0c4a854a6049afd8127fb200dc8cee5513d64312"
+  },
+  {
+    "sample_id": "mobile-0381-d14ef36f3e",
+    "image_repository_path": "data/mobile_b84d7f20-7c25-4613-829f-6c620e223593_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b84d7f20-7c25-4613-829f-6c620e223593_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1001155a98aea41fa6f138e848c59717e3d1f1475dc88bec26f45a1635248cac"
+  },
+  {
+    "sample_id": "mobile-0382-29c94fe87b",
+    "image_repository_path": "data/mobile_b84d7f20-7c25-4613-829f-6c620e223593_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b84d7f20-7c25-4613-829f-6c620e223593_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1001155a98aea41fa6f138e848c59717e3d1f1475dc88bec26f45a1635248cac"
+  },
+  {
+    "sample_id": "mobile-0383-35b3aa2753",
+    "image_repository_path": "data/mobile_b84d7f20-7c25-4613-829f-6c620e223593_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b84d7f20-7c25-4613-829f-6c620e223593_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1001155a98aea41fa6f138e848c59717e3d1f1475dc88bec26f45a1635248cac"
+  },
+  {
+    "sample_id": "mobile-0384-80a4be39ae",
+    "image_repository_path": "data/mobile_1931c317-b01b-46c9-8c28-a5b81ad5495b_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1931c317-b01b-46c9-8c28-a5b81ad5495b_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "06530ff5985d6f5349ee98507925b12e13417b590ef659e7a2ebd1e1fcdbd558"
+  },
+  {
+    "sample_id": "mobile-0385-2099d78174",
+    "image_repository_path": "data/mobile_1931c317-b01b-46c9-8c28-a5b81ad5495b_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_1931c317-b01b-46c9-8c28-a5b81ad5495b_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "06530ff5985d6f5349ee98507925b12e13417b590ef659e7a2ebd1e1fcdbd558"
+  },
+  {
+    "sample_id": "mobile-0386-41f289049d",
+    "image_repository_path": "data/mobile_df977636-55ed-4c99-8ff1-569ef8e6c78a_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_df977636-55ed-4c99-8ff1-569ef8e6c78a_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6054b8b4afd047c81b97ba7df64d20b0ce9ad892665a5334383239af942db6ff"
+  },
+  {
+    "sample_id": "mobile-0387-f6c889d236",
+    "image_repository_path": "data/mobile_df977636-55ed-4c99-8ff1-569ef8e6c78a_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_df977636-55ed-4c99-8ff1-569ef8e6c78a_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6054b8b4afd047c81b97ba7df64d20b0ce9ad892665a5334383239af942db6ff"
+  },
+  {
+    "sample_id": "mobile-0388-273ad91587",
+    "image_repository_path": "data/mobile_df977636-55ed-4c99-8ff1-569ef8e6c78a_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_df977636-55ed-4c99-8ff1-569ef8e6c78a_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6054b8b4afd047c81b97ba7df64d20b0ce9ad892665a5334383239af942db6ff"
+  },
+  {
+    "sample_id": "mobile-0389-f1b5c45d15",
+    "image_repository_path": "data/mobile_c988d05c-1c6d-4b0d-aacb-eafb866320fb_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c988d05c-1c6d-4b0d-aacb-eafb866320fb_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "31b2faff7797c4390cfa757e4eb5935a6c58c518faa038444278980fcd015d6d"
+  },
+  {
+    "sample_id": "mobile-0390-c8e6f90d2a",
+    "image_repository_path": "data/mobile_c988d05c-1c6d-4b0d-aacb-eafb866320fb_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c988d05c-1c6d-4b0d-aacb-eafb866320fb_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "31b2faff7797c4390cfa757e4eb5935a6c58c518faa038444278980fcd015d6d"
+  },
+  {
+    "sample_id": "mobile-0391-7393bc5c04",
+    "image_repository_path": "data/mobile_c988d05c-1c6d-4b0d-aacb-eafb866320fb_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c988d05c-1c6d-4b0d-aacb-eafb866320fb_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "31b2faff7797c4390cfa757e4eb5935a6c58c518faa038444278980fcd015d6d"
+  },
+  {
+    "sample_id": "mobile-0392-f3d9989b19",
+    "image_repository_path": "data/mobile_8f5ecfa3-33b9-4306-bc67-87aacadfc45b_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8f5ecfa3-33b9-4306-bc67-87aacadfc45b_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "ca642770f0c9e9030e1d7bcb70423aca4b0fa992cf231b48b1c5d8c4b3f6a615"
+  },
+  {
+    "sample_id": "mobile-0393-3e595d568a",
+    "image_repository_path": "data/mobile_8f5ecfa3-33b9-4306-bc67-87aacadfc45b_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8f5ecfa3-33b9-4306-bc67-87aacadfc45b_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "ca642770f0c9e9030e1d7bcb70423aca4b0fa992cf231b48b1c5d8c4b3f6a615"
+  },
+  {
+    "sample_id": "mobile-0394-9b977c3874",
+    "image_repository_path": "data/mobile_8f5ecfa3-33b9-4306-bc67-87aacadfc45b_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8f5ecfa3-33b9-4306-bc67-87aacadfc45b_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "ca642770f0c9e9030e1d7bcb70423aca4b0fa992cf231b48b1c5d8c4b3f6a615"
+  },
+  {
+    "sample_id": "mobile-0395-4849465854",
+    "image_repository_path": "data/mobile_a84e2cd2-1d45-42c1-8e2e-5c06fa3419af_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a84e2cd2-1d45-42c1-8e2e-5c06fa3419af_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "e10557ae9e01016e108bddba4bb9187acaca538007e582062010c6a795a7dd4f"
+  },
+  {
+    "sample_id": "mobile-0396-d899d4f225",
+    "image_repository_path": "data/mobile_a84e2cd2-1d45-42c1-8e2e-5c06fa3419af_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a84e2cd2-1d45-42c1-8e2e-5c06fa3419af_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "e10557ae9e01016e108bddba4bb9187acaca538007e582062010c6a795a7dd4f"
+  },
+  {
+    "sample_id": "mobile-0397-458875d4dc",
+    "image_repository_path": "data/mobile_a84e2cd2-1d45-42c1-8e2e-5c06fa3419af_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_a84e2cd2-1d45-42c1-8e2e-5c06fa3419af_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "e10557ae9e01016e108bddba4bb9187acaca538007e582062010c6a795a7dd4f"
+  },
+  {
+    "sample_id": "mobile-0398-c78799a991",
+    "image_repository_path": "data/mobile_99daacb4-408c-4cdf-8f14-2c01675fda1f_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_99daacb4-408c-4cdf-8f14-2c01675fda1f_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "bc9f5909a61b5e315212526a09ef916a4773e801fdb1a5f4ac9e4199f3fe8eba"
+  },
+  {
+    "sample_id": "mobile-0399-959be1fdc4",
+    "image_repository_path": "data/mobile_99daacb4-408c-4cdf-8f14-2c01675fda1f_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_99daacb4-408c-4cdf-8f14-2c01675fda1f_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "bc9f5909a61b5e315212526a09ef916a4773e801fdb1a5f4ac9e4199f3fe8eba"
+  },
+  {
+    "sample_id": "mobile-0400-99ecac2d5e",
+    "image_repository_path": "data/mobile_99daacb4-408c-4cdf-8f14-2c01675fda1f_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_99daacb4-408c-4cdf-8f14-2c01675fda1f_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "bc9f5909a61b5e315212526a09ef916a4773e801fdb1a5f4ac9e4199f3fe8eba"
+  },
+  {
+    "sample_id": "mobile-0401-dd8e9c50ea",
+    "image_repository_path": "data/mobile_597cf265-2586-43ab-8048-99e06141f39f_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_597cf265-2586-43ab-8048-99e06141f39f_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "25060a8d748736567db672e85c6798737b1805c49214583f50c0312564dcef9c"
+  },
+  {
+    "sample_id": "mobile-0402-353def071d",
+    "image_repository_path": "data/mobile_7618dc0d-3998-4dd2-82db-86df2cc97da3_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_7618dc0d-3998-4dd2-82db-86df2cc97da3_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6cfe1dafee1ac72dcf1f1a450ea7f5b09e034119f420d10bcc9d35fc05fe3c0c"
+  },
+  {
+    "sample_id": "mobile-0403-af3ab272b1",
+    "image_repository_path": "data/mobile_7618dc0d-3998-4dd2-82db-86df2cc97da3_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_7618dc0d-3998-4dd2-82db-86df2cc97da3_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6cfe1dafee1ac72dcf1f1a450ea7f5b09e034119f420d10bcc9d35fc05fe3c0c"
+  },
+  {
+    "sample_id": "mobile-0404-9c20f20f92",
+    "image_repository_path": "data/mobile_7618dc0d-3998-4dd2-82db-86df2cc97da3_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_7618dc0d-3998-4dd2-82db-86df2cc97da3_2.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "6cfe1dafee1ac72dcf1f1a450ea7f5b09e034119f420d10bcc9d35fc05fe3c0c"
+  },
+  {
+    "sample_id": "mobile-0405-06885bb1e7",
+    "image_repository_path": "data/mobile_c3af996a-2d6c-47c2-ba3d-aae699016f0e_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c3af996a-2d6c-47c2-ba3d-aae699016f0e_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "267dbddb34c06f0b9d860498a5cb8e17d469f5a037987f30c8b023a0b8616922"
+  },
+  {
+    "sample_id": "mobile-0406-24b6a6353b",
+    "image_repository_path": "data/mobile_bce7a892-9cb2-432a-b678-2429d4f51d3d_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_bce7a892-9cb2-432a-b678-2429d4f51d3d_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "2153458b5aeb50acea9b80e5e54b2d3cac48042bb8f78bdd7a17ede795589e59"
+  },
+  {
+    "sample_id": "mobile-0407-6b89aeeabe",
+    "image_repository_path": "data/mobile_bce7a892-9cb2-432a-b678-2429d4f51d3d_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_bce7a892-9cb2-432a-b678-2429d4f51d3d_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "2153458b5aeb50acea9b80e5e54b2d3cac48042bb8f78bdd7a17ede795589e59"
+  },
+  {
+    "sample_id": "mobile-0408-80465616c3",
+    "image_repository_path": "data/mobile_daf338f0-ebfc-488e-9a55-f8cc03394148_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_daf338f0-ebfc-488e-9a55-f8cc03394148_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "31cf888a7ea9582324c196dd50dccddf0fd3d153d4da9c66df414946cb7f24fb"
+  },
+  {
+    "sample_id": "mobile-0409-9bb3065143",
+    "image_repository_path": "data/mobile_31f8a5c2-e28a-488c-bb28-a31c823c9c83_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_31f8a5c2-e28a-488c-bb28-a31c823c9c83_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "e7a0d3234b70d31f7879a0e8349a475b7cabc012efaf0a0785c2128775f2a730"
+  },
+  {
+    "sample_id": "mobile-0410-8311dbfe19",
+    "image_repository_path": "data/mobile_6ad7dd8f-82d3-4e73-b437-667dc1b24574_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6ad7dd8f-82d3-4e73-b437-667dc1b24574_0.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1f121f63114718f6526eca8d009986a14ffd1b34b74d4ec58f932803b164ce65"
+  },
+  {
+    "sample_id": "mobile-0411-756909ab25",
+    "image_repository_path": "data/mobile_6ad7dd8f-82d3-4e73-b437-667dc1b24574_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6ad7dd8f-82d3-4e73-b437-667dc1b24574_1.png",
+    "image_size": [
+      1080,
+      2400
+    ],
+    "sha256": "1f121f63114718f6526eca8d009986a14ffd1b34b74d4ec58f932803b164ce65"
+  },
+  {
+    "sample_id": "mobile-0412-9f48f2a732",
+    "image_repository_path": "data/mobile_5a0b24f9-66fe-4593-bcf5-4752d5332bcf_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5a0b24f9-66fe-4593-bcf5-4752d5332bcf_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "64c2ba715d3c2305608a2b7b743b58c96d036fd0050e90b51e8aeeee9d9c7b38"
+  },
+  {
+    "sample_id": "mobile-0413-75c777bac5",
+    "image_repository_path": "data/mobile_5a0b24f9-66fe-4593-bcf5-4752d5332bcf_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5a0b24f9-66fe-4593-bcf5-4752d5332bcf_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "64c2ba715d3c2305608a2b7b743b58c96d036fd0050e90b51e8aeeee9d9c7b38"
+  },
+  {
+    "sample_id": "mobile-0415-41daea3ecd",
+    "image_repository_path": "data/mobile_9bbed1c6-3a9f-46ea-b2d3-39ae8abde54e_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9bbed1c6-3a9f-46ea-b2d3-39ae8abde54e_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "92ff1f4a7af99236804a87bb4800591e86a27aa2ce414c079f08095f3b529f76"
+  },
+  {
+    "sample_id": "mobile-0416-1b6a95326f",
+    "image_repository_path": "data/mobile_9bbed1c6-3a9f-46ea-b2d3-39ae8abde54e_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9bbed1c6-3a9f-46ea-b2d3-39ae8abde54e_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "92ff1f4a7af99236804a87bb4800591e86a27aa2ce414c079f08095f3b529f76"
+  },
+  {
+    "sample_id": "mobile-0417-167840ab94",
+    "image_repository_path": "data/mobile_6bfcd1af-894e-4c63-b1c1-c5fabf589029_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6bfcd1af-894e-4c63-b1c1-c5fabf589029_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "28facb44afde661473ac842b44f4c7d360d1f85d8e8f66c3942738b98aa6b78e"
+  },
+  {
+    "sample_id": "mobile-0418-2705847108",
+    "image_repository_path": "data/mobile_6bfcd1af-894e-4c63-b1c1-c5fabf589029_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6bfcd1af-894e-4c63-b1c1-c5fabf589029_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "28facb44afde661473ac842b44f4c7d360d1f85d8e8f66c3942738b98aa6b78e"
+  },
+  {
+    "sample_id": "mobile-0419-554a204677",
+    "image_repository_path": "data/mobile_6bfcd1af-894e-4c63-b1c1-c5fabf589029_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6bfcd1af-894e-4c63-b1c1-c5fabf589029_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "28facb44afde661473ac842b44f4c7d360d1f85d8e8f66c3942738b98aa6b78e"
+  },
+  {
+    "sample_id": "mobile-0420-40d9e169e0",
+    "image_repository_path": "data/mobile_59fde6e1-8df2-4009-ad8d-aa44bffd2bf2_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_59fde6e1-8df2-4009-ad8d-aa44bffd2bf2_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "497039a7a32e15a426311a49b3cb90bec7ea12309bdf64f69b4345b6c645e25c"
+  },
+  {
+    "sample_id": "mobile-0421-4d83ea36ab",
+    "image_repository_path": "data/mobile_46f8e4b9-c563-43f2-a651-4b1e80ee9907_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_46f8e4b9-c563-43f2-a651-4b1e80ee9907_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "de9b98284d0a7d55ea30213797fef022c926ce7ebf0e2a7034280a26b510d65d"
+  },
+  {
+    "sample_id": "mobile-0422-0964b57dfc",
+    "image_repository_path": "data/mobile_46f8e4b9-c563-43f2-a651-4b1e80ee9907_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_46f8e4b9-c563-43f2-a651-4b1e80ee9907_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "de9b98284d0a7d55ea30213797fef022c926ce7ebf0e2a7034280a26b510d65d"
+  },
+  {
+    "sample_id": "mobile-0423-84f44686c1",
+    "image_repository_path": "data/mobile_46f8e4b9-c563-43f2-a651-4b1e80ee9907_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_46f8e4b9-c563-43f2-a651-4b1e80ee9907_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "de9b98284d0a7d55ea30213797fef022c926ce7ebf0e2a7034280a26b510d65d"
+  },
+  {
+    "sample_id": "mobile-0424-1eecb6e3e4",
+    "image_repository_path": "data/mobile_46f8e4b9-c563-43f2-a651-4b1e80ee9907_3.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_46f8e4b9-c563-43f2-a651-4b1e80ee9907_3.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "de9b98284d0a7d55ea30213797fef022c926ce7ebf0e2a7034280a26b510d65d"
+  },
+  {
+    "sample_id": "mobile-0425-b8fbc1a371",
+    "image_repository_path": "data/mobile_c47a7b32-1c13-414c-af34-f8ec2c7a0731_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c47a7b32-1c13-414c-af34-f8ec2c7a0731_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "09c64f4b3a5d236a6065fb666d16b9cc8da5c959298fe4f68dc9e1018a719381"
+  },
+  {
+    "sample_id": "mobile-0426-6d6e7929e4",
+    "image_repository_path": "data/mobile_c47a7b32-1c13-414c-af34-f8ec2c7a0731_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c47a7b32-1c13-414c-af34-f8ec2c7a0731_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "09c64f4b3a5d236a6065fb666d16b9cc8da5c959298fe4f68dc9e1018a719381"
+  },
+  {
+    "sample_id": "mobile-0427-e62bd8635e",
+    "image_repository_path": "data/mobile_c47a7b32-1c13-414c-af34-f8ec2c7a0731_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c47a7b32-1c13-414c-af34-f8ec2c7a0731_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "09c64f4b3a5d236a6065fb666d16b9cc8da5c959298fe4f68dc9e1018a719381"
+  },
+  {
+    "sample_id": "mobile-0428-246f754bd2",
+    "image_repository_path": "data/mobile_8a1fada9-3afa-4eb7-8cef-8896bb2ab30e_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8a1fada9-3afa-4eb7-8cef-8896bb2ab30e_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "541cf48d47cfc4e75e8c817a32c88d1be9a8ba45a853898cbc9c33be195df1b1"
+  },
+  {
+    "sample_id": "mobile-0429-d335206ce8",
+    "image_repository_path": "data/mobile_8a1fada9-3afa-4eb7-8cef-8896bb2ab30e_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8a1fada9-3afa-4eb7-8cef-8896bb2ab30e_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "541cf48d47cfc4e75e8c817a32c88d1be9a8ba45a853898cbc9c33be195df1b1"
+  },
+  {
+    "sample_id": "mobile-0430-405f562a28",
+    "image_repository_path": "data/mobile_8a1fada9-3afa-4eb7-8cef-8896bb2ab30e_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8a1fada9-3afa-4eb7-8cef-8896bb2ab30e_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "541cf48d47cfc4e75e8c817a32c88d1be9a8ba45a853898cbc9c33be195df1b1"
+  },
+  {
+    "sample_id": "mobile-0431-cd632fd85d",
+    "image_repository_path": "data/mobile_16545bc1-c614-4dc3-a81c-3d349a93e07d_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_16545bc1-c614-4dc3-a81c-3d349a93e07d_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "1a8699bdc087c094cda3562ec72aee53c8b50165c5cfd02beea0ba13420dbb8b"
+  },
+  {
+    "sample_id": "mobile-0432-c2a0334a28",
+    "image_repository_path": "data/mobile_16545bc1-c614-4dc3-a81c-3d349a93e07d_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_16545bc1-c614-4dc3-a81c-3d349a93e07d_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "1a8699bdc087c094cda3562ec72aee53c8b50165c5cfd02beea0ba13420dbb8b"
+  },
+  {
+    "sample_id": "mobile-0433-edd713bdae",
+    "image_repository_path": "data/mobile_b550b4ed-79ce-446a-a1c3-a164b314bfe8_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_b550b4ed-79ce-446a-a1c3-a164b314bfe8_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "f0317d748d97a35241587d7b3a33dbcf39ac815ee781bd489ecc3274aa39033b"
+  },
+  {
+    "sample_id": "mobile-0434-925a55ad60",
+    "image_repository_path": "data/mobile_6e041214-1095-476a-8779-04db83de5781_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6e041214-1095-476a-8779-04db83de5781_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "94a980d05554db0b3e194a760835b6fbe7145ebaa73898c3b18980c358cf9d40"
+  },
+  {
+    "sample_id": "mobile-0435-2264380f02",
+    "image_repository_path": "data/mobile_6e041214-1095-476a-8779-04db83de5781_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_6e041214-1095-476a-8779-04db83de5781_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "94a980d05554db0b3e194a760835b6fbe7145ebaa73898c3b18980c358cf9d40"
+  },
+  {
+    "sample_id": "mobile-0436-c768661ee3",
+    "image_repository_path": "data/mobile_f6313b8a-4258-47d1-97af-7868e04979a4_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f6313b8a-4258-47d1-97af-7868e04979a4_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "6638bff1bf0256e96f1aa0c2db8d6f49f44edc7e63bae599d1862b04e9a88210"
+  },
+  {
+    "sample_id": "mobile-0437-7cfc4e2357",
+    "image_repository_path": "data/mobile_f6313b8a-4258-47d1-97af-7868e04979a4_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f6313b8a-4258-47d1-97af-7868e04979a4_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "6638bff1bf0256e96f1aa0c2db8d6f49f44edc7e63bae599d1862b04e9a88210"
+  },
+  {
+    "sample_id": "mobile-0439-f55e911c5d",
+    "image_repository_path": "data/mobile_ec01cb13-de9a-4a4b-9a79-5f810b034474_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_ec01cb13-de9a-4a4b-9a79-5f810b034474_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "b395117af8e61d57a4b0659df8e2e3fc6d16855e8f33d1155d06f272ed3201de"
+  },
+  {
+    "sample_id": "mobile-0440-286e9e245d",
+    "image_repository_path": "data/mobile_e550d5f2-308d-4027-ad04-8c2ba9e8d2d1_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_e550d5f2-308d-4027-ad04-8c2ba9e8d2d1_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "88780bbef77a74e78efe788a4988604f0e67c45ea56070de5601bcc665415a16"
+  },
+  {
+    "sample_id": "mobile-0441-52976fdd65",
+    "image_repository_path": "data/mobile_86bad4a5-d11b-4f2d-b367-5180a49ca4b5_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_86bad4a5-d11b-4f2d-b367-5180a49ca4b5_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "da77712745e65a183695f586d4e667d8548c5abaddbf76fd2f88c1acce87d1b1"
+  },
+  {
+    "sample_id": "mobile-0442-6cca91d738",
+    "image_repository_path": "data/mobile_86bad4a5-d11b-4f2d-b367-5180a49ca4b5_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_86bad4a5-d11b-4f2d-b367-5180a49ca4b5_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "da77712745e65a183695f586d4e667d8548c5abaddbf76fd2f88c1acce87d1b1"
+  },
+  {
+    "sample_id": "mobile-0443-6f445c926b",
+    "image_repository_path": "data/mobile_88d4e5a0-ca4e-4dc7-9b43-1932dc5aa896_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_88d4e5a0-ca4e-4dc7-9b43-1932dc5aa896_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "a8f31fa0fd76c224a26e54599f18d1cb7a25bd846c6014fa8e48e56de7dbba11"
+  },
+  {
+    "sample_id": "mobile-0444-b8e1265294",
+    "image_repository_path": "data/mobile_88d4e5a0-ca4e-4dc7-9b43-1932dc5aa896_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_88d4e5a0-ca4e-4dc7-9b43-1932dc5aa896_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "a8f31fa0fd76c224a26e54599f18d1cb7a25bd846c6014fa8e48e56de7dbba11"
+  },
+  {
+    "sample_id": "mobile-0445-02ffbe942a",
+    "image_repository_path": "data/mobile_88d4e5a0-ca4e-4dc7-9b43-1932dc5aa896_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_88d4e5a0-ca4e-4dc7-9b43-1932dc5aa896_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "a8f31fa0fd76c224a26e54599f18d1cb7a25bd846c6014fa8e48e56de7dbba11"
+  },
+  {
+    "sample_id": "mobile-0446-630d785d11",
+    "image_repository_path": "data/mobile_c9fe8f06-aa80-4f6a-abe2-5886567fdea3_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c9fe8f06-aa80-4f6a-abe2-5886567fdea3_0.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "17b52672277874b1c4b140f22cd4c368643f6213b57ee749e4a530beb05a96a1"
+  },
+  {
+    "sample_id": "mobile-0447-8ff532a19f",
+    "image_repository_path": "data/mobile_c9fe8f06-aa80-4f6a-abe2-5886567fdea3_1.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c9fe8f06-aa80-4f6a-abe2-5886567fdea3_1.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "17b52672277874b1c4b140f22cd4c368643f6213b57ee749e4a530beb05a96a1"
+  },
+  {
+    "sample_id": "mobile-0448-00afbf3685",
+    "image_repository_path": "data/mobile_c9fe8f06-aa80-4f6a-abe2-5886567fdea3_2.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_c9fe8f06-aa80-4f6a-abe2-5886567fdea3_2.png",
+    "image_size": [
+      1170,
+      2532
+    ],
+    "sha256": "17b52672277874b1c4b140f22cd4c368643f6213b57ee749e4a530beb05a96a1"
+  },
+  {
+    "sample_id": "mobile-0450-0198189904",
+    "image_repository_path": "data/mobile_0ze76a_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_0ze76a_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "34f98aa071b80d87dd470cecf0e9edba2a1fb44c2219ec253ec41c66810b841a"
+  },
+  {
+    "sample_id": "mobile-0451-be478e7065",
+    "image_repository_path": "data/mobile_456lbi_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_456lbi_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "53aeeab39828ec852d9d0450fe7436b4102c18818adc0224d416f2996cecb4d1"
+  },
+  {
+    "sample_id": "mobile-0452-18ce4eb751",
+    "image_repository_path": "data/mobile_47gvof_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_47gvof_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "cb6361e969939416445d5c61b589e0c77b511aab4ca56a43c2c61c2763c93389"
+  },
+  {
+    "sample_id": "mobile-0453-efb0c6eeeb",
+    "image_repository_path": "data/mobile_4kk4kc_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4kk4kc_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "af6fe6d15c304222ee84927e9e62e8e57cdaf730d934244196cb56b4a46740b3"
+  },
+  {
+    "sample_id": "mobile-0454-5d072ebd6c",
+    "image_repository_path": "data/mobile_4yoej9_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_4yoej9_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "c256c91f3945530090db67a1d54883d027c398fb0ed8f3d59c2a27c0bc7d8aa9"
+  },
+  {
+    "sample_id": "mobile-0455-4fccfade7a",
+    "image_repository_path": "data/mobile_51nu75_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_51nu75_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "984dc6e7b660c1743d8e6f1095478ac40a91b3c54f22a4d7ba73595c9c17736f"
+  },
+  {
+    "sample_id": "mobile-0456-5ad140b561",
+    "image_repository_path": "data/mobile_51vhbq_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_51vhbq_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "500c8e4b31c771097ccc668d88fd17fe5980acc15a29ba53f4ee64ec917910bc"
+  },
+  {
+    "sample_id": "mobile-0457-3aa27bfc41",
+    "image_repository_path": "data/mobile_5a33tm_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_5a33tm_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "64da6be71083e8bf23a8f10d2102c79b675dc7c9eb083e624ea8ba212dcce4c2"
+  },
+  {
+    "sample_id": "mobile-0459-df7bd195ea",
+    "image_repository_path": "data/mobile_7ug1dm_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_7ug1dm_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "8cad7612c5f611a4c8f93a2ad4917e48a61e60e444c30fb5eee0adf6ddd3fbde"
+  },
+  {
+    "sample_id": "mobile-0460-174fae94a3",
+    "image_repository_path": "data/mobile_7us4hm_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_7us4hm_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "d8fc8a39a2145d032360340e7287b22f44eceb5047e23164be5e9ac9548cccd9"
+  },
+  {
+    "sample_id": "mobile-0461-8d52e5d83f",
+    "image_repository_path": "data/mobile_8u6mj9_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_8u6mj9_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "3baac9eddcbca9538978382bb0e1d2667a0a138a0c1c12ae2adff91f5c0442b7"
+  },
+  {
+    "sample_id": "mobile-0462-7ce92bdb8d",
+    "image_repository_path": "data/mobile_9go02u_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_9go02u_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "535af99d2f65e7f4a9dabc7a98976604eebaa586d9b420d247e11a75fc56c4f4"
+  },
+  {
+    "sample_id": "mobile-0463-a5a977fa2f",
+    "image_repository_path": "data/mobile_anffus_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_anffus_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "0380ba723834d342457eb93bd6bb253f283d7a56229f4a74d30aa936cd07dadc"
+  },
+  {
+    "sample_id": "mobile-0465-e3847b08f0",
+    "image_repository_path": "data/mobile_bin70f_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_bin70f_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "b6f0417861abd352ae01160214f57b79c0bcfa0b3d95772c49ed02b2a6821cb0"
+  },
+  {
+    "sample_id": "mobile-0466-dc7e770ca4",
+    "image_repository_path": "data/mobile_bojubn_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_bojubn_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "c7f5617a23e47989d95c6441601ad2c664138be190f83415e30633e9c957e804"
+  },
+  {
+    "sample_id": "mobile-0468-c30a192f73",
+    "image_repository_path": "data/mobile_d6m47l_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_d6m47l_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "eca5c5340b4aa020987259463c68b605b8e6f2351c8c58f1554fb69741e7a45e"
+  },
+  {
+    "sample_id": "mobile-0469-ad24f36ce5",
+    "image_repository_path": "data/mobile_de4puu_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_de4puu_0.jpg",
+    "image_size": [
+      1242,
+      2688
+    ],
+    "sha256": "6266cfc07443c4d7e5f03389dadd1afb694b423bcf92d33e19f1ae4fb25c5e0a"
+  },
+  {
+    "sample_id": "mobile-0471-402cfc48e4",
+    "image_repository_path": "data/mobile_ei9pzn_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_ei9pzn_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "aad10e16032dbc69fdd4293e8078fa8c1aaef1caf6eeaf49a188fc01c429f88e"
+  },
+  {
+    "sample_id": "mobile-0472-7f966025c6",
+    "image_repository_path": "data/mobile_ezvzt1_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_ezvzt1_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "08d48ebd3afc8ccc38ec548a223cf77c7a35aff4cf113b7b53cd7864bfaac578"
+  },
+  {
+    "sample_id": "mobile-0473-715160510e",
+    "image_repository_path": "data/mobile_f4j7l5_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_f4j7l5_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "b77216100b4241cfa557264b58777e0f6f63a9df6751ed92d539bdd9a8c49ca3"
+  },
+  {
+    "sample_id": "mobile-0475-967ea34764",
+    "image_repository_path": "data/mobile_ghbnwh_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_ghbnwh_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "f7e84b0eeddefef49e28f56af26c0576e53b94a670e51b738e7252d976504269"
+  },
+  {
+    "sample_id": "mobile-0477-aaf032eb7f",
+    "image_repository_path": "data/mobile_gxel80_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_gxel80_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "415147e867e369e7519864aa27184db25c4fdff8340334cd7a1c6172f669676e"
+  },
+  {
+    "sample_id": "mobile-0479-22912aa742",
+    "image_repository_path": "data/mobile_inxnbt_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_inxnbt_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "c85e7b8cc23ed3d9a3ba13e1424e11eddaa4c28800215850a8c99b974e274bcd"
+  },
+  {
+    "sample_id": "mobile-0481-aecbad07a7",
+    "image_repository_path": "data/mobile_kxukat_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_kxukat_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "f626e2532b33cbf1f37c293d5216cd6affd686b199d131494d05d4a2c9b9a48c"
+  },
+  {
+    "sample_id": "mobile-0482-ee7745848f",
+    "image_repository_path": "data/mobile_lgsxb6_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_lgsxb6_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "ffe35b318042cfc4fc3e1a5a3dcdb362bfb156cf15270718ab531fe1ccfbf67c"
+  },
+  {
+    "sample_id": "mobile-0483-11d3ce1a5f",
+    "image_repository_path": "data/mobile_ly188d_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_ly188d_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "c263dfbd8a7fd09f0d9035a15bf33ff9bc8de4ef5e267864878d6e950ed37d50"
+  },
+  {
+    "sample_id": "mobile-0484-69c7bf50a9",
+    "image_repository_path": "data/mobile_macajw_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_macajw_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "f3c858c5fc2b7acbcee9923fc0072966afcd4018a3c913faa7db4f8266c2ca6f"
+  },
+  {
+    "sample_id": "mobile-0485-7daa65b9b9",
+    "image_repository_path": "data/mobile_oap5oc_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_oap5oc_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "69d7e452b634a9a40a78bf199a8f05b87f7cef39c73de0d29eadf4034ba2266d"
+  },
+  {
+    "sample_id": "mobile-0486-7699a05b7e",
+    "image_repository_path": "data/mobile_pouj3h_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_pouj3h_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "6750a43cd45f1f2c478d55d18a902e2bbbae0c6c9c9621b2e35d282dd456e7d2"
+  },
+  {
+    "sample_id": "mobile-0487-44d07646da",
+    "image_repository_path": "data/mobile_q24p8x_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_q24p8x_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "0d02f328add33502251f0f16b31238a465fe83a9e7dfb947ef281bb06848473a"
+  },
+  {
+    "sample_id": "mobile-0488-31ea71bc9d",
+    "image_repository_path": "data/mobile_r2v2ix_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_r2v2ix_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "42454748f8fcd335372cabe4ca53c92bb1e9e18befd7c280ef757040a8e1ae70"
+  },
+  {
+    "sample_id": "mobile-0489-3c6c8b3ace",
+    "image_repository_path": "data/mobile_rhb1da_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_rhb1da_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "376e218df7a3b92d80490f658f883a0c21992e44ea72f218bbfa3383117c9e2c"
+  },
+  {
+    "sample_id": "mobile-0490-4fc263fae9",
+    "image_repository_path": "data/mobile_rwsoe7_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_rwsoe7_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "c97c70294a2aecdaa43affd7de3bcc6aa085f47e6a451191fbd0c7c4b990735d"
+  },
+  {
+    "sample_id": "mobile-0491-24f2862596",
+    "image_repository_path": "data/mobile_rxb2i5_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_rxb2i5_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "1b7c2215b0f96b14613500444d5d4c1ee6cbb123430da4a3780752f4cba2ebb4"
+  },
+  {
+    "sample_id": "mobile-0493-bb93ecfc61",
+    "image_repository_path": "data/mobile_wn61sa_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_wn61sa_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "dabda4b822b0303dd936d585d4b4f36664559b31e2bbc471bee94e055ae9a5b7"
+  },
+  {
+    "sample_id": "mobile-0494-2cf33aa3d5",
+    "image_repository_path": "data/mobile_y6mqo1_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_y6mqo1_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "b4f6918094d493e199a88b5076a12e09cdcd201a52b57d1f98db696a1bace7b8"
+  },
+  {
+    "sample_id": "mobile-0495-2bb3809d7c",
+    "image_repository_path": "data/mobile_y8n283_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_y8n283_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "05898498b6fd3966486e93f598b43df5eaeb7e3d8aea32108e2ada4474474fce"
+  },
+  {
+    "sample_id": "mobile-0496-fd40d8b246",
+    "image_repository_path": "data/mobile_yoaurq_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_yoaurq_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "f20c1457e47b8b4978dab2ff664bba76aa3ad37a8e5d5815af9908f43766f2f1"
+  },
+  {
+    "sample_id": "mobile-0497-e8c2ee9edb",
+    "image_repository_path": "data/mobile_z0bava_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_z0bava_0.jpg",
+    "image_size": [
+      1280,
+      2774
+    ],
+    "sha256": "2af1bf87f622a9f608ab15f15ff5d558a226c23adef5399b4fba5ad0dd374c4f"
+  },
+  {
+    "sample_id": "mobile-0498-d25d6f1fc1",
+    "image_repository_path": "data/mobile_zigyqt_0.jpg",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_zigyqt_0.jpg",
+    "image_size": [
+      1242,
+      2688
+    ],
+    "sha256": "9f705491cbf2f56fbe25eff09b79aeda57c58633c377fa75af0ff5be705353d2"
+  },
+  {
+    "sample_id": "mobile-0499-fc6397aee0",
+    "image_repository_path": "data/mobile_zn2mmo_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_zn2mmo_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "f9273767914ff442bbc62ed167c0b81b383cc7650b68bfb2bb690cd2f5c9114f"
+  },
+  {
+    "sample_id": "mobile-0500-6bf1f24417",
+    "image_repository_path": "data/mobile_zvu1nq_0.png",
+    "local_path": "data/screenspot-v2/held-out-images/mobile_zvu1nq_0.png",
+    "image_size": [
+      2360,
+      1640
+    ],
+    "sha256": "d5c518f68131f4496e5062ec880d79477b200c716468611ee206d36aea0b1f3e"
+  }
+]

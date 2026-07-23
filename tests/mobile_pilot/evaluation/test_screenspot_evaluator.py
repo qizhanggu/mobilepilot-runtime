@@ -3,6 +3,7 @@ from mobile_pilot.evaluation.screenspot.evaluator import (
     point_in_bbox_xywh,
     summarize_records,
 )
+from mobile_pilot.evaluation.screenspot.statistics import paired_comparison
 
 
 def test_point_in_xywh_bbox_counts_boundaries_and_rejects_outside():
@@ -57,3 +58,33 @@ def test_summary_separates_text_icon_and_invalid_outputs():
     assert summary["icon_accuracy"] == 0.0
     assert summary["invalid_output_rate"] == 0.5
     assert summary["mean_latency_seconds"] == 2.0
+
+
+def test_paired_comparison_counts_outcomes_and_uses_exact_mcnemar():
+    records = []
+    outcomes = [(True, True)] * 3 + [(True, False)] + [(False, True)] * 5 + [(False, False)] * 2
+    for index, (raw, grid) in enumerate(outcomes):
+        records.extend(
+            [
+                {
+                    "sample_id": f"sample-{index}",
+                    "config": "raw__vision_only",
+                    "correct": raw,
+                },
+                {
+                    "sample_id": f"sample-{index}",
+                    "config": "grid_10x10__vision_only",
+                    "correct": grid,
+                },
+            ]
+        )
+
+    result = paired_comparison(records)
+
+    assert result["samples"] == 11
+    assert result["both_success"] == 3
+    assert result["raw_only_success"] == 1
+    assert result["grid_10x10_only_success"] == 5
+    assert result["both_failed"] == 2
+    assert result["accuracy_difference_grid_minus_raw"] == 4 / 11
+    assert result["exact_mcnemar_two_sided_p_value"] == 0.21875
