@@ -1,0 +1,55 @@
+{
+  "stage": "B4_pre_run_freeze",
+  "created_before_first_held_out_model_call": true,
+  "git_commit": "3d9fe5ff0d3c2b9a39162794db1bc0850502b271",
+  "held_out_manifest_sha256": "719cdb167c12d3416499c0cf70dfbac480c142dd0e56b6a52f9ada52d322021d",
+  "integration_manifest_sha256": "26e8e1f9459e30628a008bc750b9f8d54bed1bad1f20abebd0449d7b07509485",
+  "frozen_grid_sha256": "b51967b6368ea293b79b68f719753841dc03ccba08e2f083fcbea8a1796d2db1",
+  "image_mapping_sha256": "f44feffb44376b102ad24d1e5823b40ff7a797eb949adc3f2605f77c60f982fc",
+  "prompt_sha256": "31c96331a537a0606b73a5aa2d42e1067983a5cefa44cea53f388924dc657379",
+  "model": "gui-plus-2026-02-26",
+  "configs": [
+    {
+      "name": "raw__vision_only",
+      "image_variant": "raw"
+    },
+    {
+      "name": "grid_10x10__vision_only",
+      "image_variant": "grid_10x10"
+    }
+  ],
+  "api_parameters": {
+    "base_url_sha256": "88b2578f986bf6705fc4c077ba84db2de09ce73fceaff2de0a17494fcdf1c0ac",
+    "vl_high_resolution_images": true,
+    "sdk_max_retries": 0,
+    "request_timeout_seconds": 90.0
+  },
+  "logical_call_limit": 942,
+  "estimated_cost_limit_cny": 6.0,
+  "pass_k": 1,
+  "source_hashes": {
+    "mobile_pilot/policy/gui_plus.py": "ef3a617918e410a0a8b6bc96b4a964b775ee6b2ae6bb238baf1b215b79fe082a",
+    "mobile_pilot/evaluation/screenspot/dataset.py": "7c4ba4f153376221b583e8ad6d6b19bf3b170d0f372fa4353b0515d56933be0d",
+    "mobile_pilot/evaluation/screenspot/preprocess.py": "746e248732660bdef4392c364a171866864234f764b74d75f8d85cc9757080e3",
+    "mobile_pilot/evaluation/screenspot/evaluator.py": "2cb1440ba319b9a8d4ac1a62232f102e06689ce8b06533da57ba49bca5ae52f1",
+    "mobile_pilot/evaluation/screenspot/reporting.py": "5b2b8f966df4b882b840148e9f563ee3b8de2d826144a8ac856452ee6a42af79",
+    "mobile_pilot/evaluation/screenspot/runner.py": "f7432c878ba95df375f8dd881d5289640f0e1fb4f4ed379f12ba36f126de6ed9",
+    "mobile_pilot/evaluation/screenspot/held_out_runner.py": "ea5f6211f67e5f9b518afb364ae565ac3c8c5c1542bd6e9f06a2f84d96c64dfa",
+    "mobile_pilot/evaluation/screenspot/statistics.py": "9b1172ca49c8b3aaa9b60eca916d694255c68a66db0c9e6245f05e3db1dbebee",
+    "mobile_pilot/evaluation/screenspot/release_reporting.py": "a549425e575a6ff9f411f97412d3b077131061f4c7c8ffc043807958f7c34d44"
+  },
+  "frozen_evaluator": {
+    "rule": "predicted point falls inside inclusive ground-truth bbox",
+    "coordinate_space": "normalized_0_1000_to_original_pixels",
+    "llm_as_judge": false
+  },
+  "prohibited_after_first_call": [
+    "prompt changes",
+    "grid changes",
+    "model changes",
+    "parser changes",
+    "coordinate conversion changes",
+    "evaluator changes",
+    "single-sample retries"
+  ]
+}
