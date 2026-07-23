@@ -13,7 +13,7 @@
   ],
   "logical_calls": 942,
   "model": "gui-plus-2026-02-26",
-  "freeze_git_commit": "3d9fe5ff0d3c2b9a39162794db1bc0850502b271",
+  "freeze_git_commit": "5b5dfc6596a7242daae0f207313fc55c0cef57bb",
   "manifest_sha256": "719cdb167c12d3416499c0cf70dfbac480c142dd0e56b6a52f9ada52d322021d",
   "image_mapping_sha256": "f44feffb44376b102ad24d1e5823b40ff7a797eb949adc3f2605f77c60f982fc"
 }

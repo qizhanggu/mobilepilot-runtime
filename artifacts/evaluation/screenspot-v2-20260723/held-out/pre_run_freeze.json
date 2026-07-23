@@ -1,7 +1,7 @@
 {
   "stage": "B4_pre_run_freeze",
   "created_before_first_held_out_model_call": true,
-  "git_commit": "3d9fe5ff0d3c2b9a39162794db1bc0850502b271",
+  "git_commit": "5b5dfc6596a7242daae0f207313fc55c0cef57bb",
   "held_out_manifest_sha256": "719cdb167c12d3416499c0cf70dfbac480c142dd0e56b6a52f9ada52d322021d",
   "integration_manifest_sha256": "26e8e1f9459e30628a008bc750b9f8d54bed1bad1f20abebd0449d7b07509485",
   "frozen_grid_sha256": "b51967b6368ea293b79b68f719753841dc03ccba08e2f083fcbea8a1796d2db1",
@@ -34,7 +34,7 @@
     "mobile_pilot/evaluation/screenspot/evaluator.py": "2cb1440ba319b9a8d4ac1a62232f102e06689ce8b06533da57ba49bca5ae52f1",
     "mobile_pilot/evaluation/screenspot/reporting.py": "5b2b8f966df4b882b840148e9f563ee3b8de2d826144a8ac856452ee6a42af79",
     "mobile_pilot/evaluation/screenspot/runner.py": "f7432c878ba95df375f8dd881d5289640f0e1fb4f4ed379f12ba36f126de6ed9",
-    "mobile_pilot/evaluation/screenspot/held_out_runner.py": "ea5f6211f67e5f9b518afb364ae565ac3c8c5c1542bd6e9f06a2f84d96c64dfa",
+    "mobile_pilot/evaluation/screenspot/held_out_runner.py": "106393547764320394565e8b6dc4747c95964208a09ca3b86b4b62e95d321cda",
     "mobile_pilot/evaluation/screenspot/statistics.py": "9b1172ca49c8b3aaa9b60eca916d694255c68a66db0c9e6245f05e3db1dbebee",
     "mobile_pilot/evaluation/screenspot/release_reporting.py": "a549425e575a6ff9f411f97412d3b077131061f4c7c8ffc043807958f7c34d44"
   },
