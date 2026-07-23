@@ -12,6 +12,7 @@
 | Phase 1：真机 Adapter + 测试 App 选择 | 只读诊断真机能力，并确定可复现的测试 App 环境。 | 设备截图与 UI Tree 可读；已有 App 已评估或 `MobilePilot Lab` 已立项。 |
 | Phase 2：混合感知与策略 Adapter | 打通真实视觉与 UI Tree 的可配置组合，并接入 LegacyVisionPolicy。 | 视觉定位与语义基线均可验证；完成 ADB/uiautomator2 决策门。 |
 | Phase 3：任务闭环与 Critic | 让任务拥有计划、执行前审查、验证、有限恢复和可回放 Trace。 | 自然语言任务在真机可控环境中真实完成，失败也能定位原因。 |
+| 公共 Benchmark 评测阶段 | 先用 ScreenSpot-v2 Mobile 验证单步视觉定位泛化，再为 AndroidWorld 多步任务接入做设计准备。 | 冻结网格配置后形成可审计的公开数据集结果，且与自建真机结果严格分开。 |
 | Phase 4：安全与接管 | 为有副作用的操作增加风险分级、确认绑定、暂停和人工接管。 | 未确认的发送/删除/下单等动作被阻止，状态改变后旧确认失效。 |
 | Phase 5：Tool + GUI | 用少量确定性工具与 GUI 操作组合，完成可解释的跨应用信息任务。 | 可生成跨应用任务结果或消息草稿，发送前必经用户确认。 |
 | Phase 6：评测与求职材料 | 用重复运行、消融、Demo 与文档把真实能力沉淀为可展示证据。 | README、Trace、测试、评测和简历候选描述可以互相对应。 |
@@ -228,6 +229,77 @@ mobile_pilot/
 - 通过 FakeDevice 覆盖页面无变化、元素消失、弹窗、输入失败和有限重试。
 - 任一次失败都能从 Trace 判断问题发生在感知、策略、设备执行、验证还是恢复。
 
+## 公共 Benchmark 评测阶段：ScreenSpot-v2 Mobile
+
+### 阶段定位
+
+现有 8 个任务、7 种配置、每种重复 3 次的 168 条记录继续完整保留，但只定位为**自建受控任务集上的消融实验**：它们用于解释网格、Tree 辅助、Verifier 和恢复机制的作用，不能作为公共界面泛化成功率。
+
+项目采用三级评测体系：
+
+1. **ScreenSpot-v2 Mobile**：单步 GUI Grounding，验证模型能否根据截图和指令点中目标；
+2. **AndroidWorld**：标准模拟器中的多步任务，验证 Agent 能否持续观察、执行、验证和恢复；
+3. **自建真机任务集**：验证中文输入、设备兼容、状态变化、动作恢复与真实设备稳定性。
+
+本阶段只实施 ScreenSpot-v2 Mobile；AndroidWorld 只形成接入方案，MobileWorld、GUI-Owl 和 Mobile-Agent-v3.5 暂不展开。
+
+### 里程碑与执行边界
+
+1. **B0：官方协议核验**
+   - 固定数据版本或 commit，核验 Mobile 标注字段、图片尺寸、`bbox` 坐标约定和公开评分方法；
+   - 优先直接调用官方 Evaluator；若官方仓库没有可独立复用的脚本，则实现等价的确定性 point-in-bbox 评分，并用边界样例做一致性测试，报告中明确写“等价实现”，不冒充官方脚本。
+2. **B1：网格开发集选择**
+   - 只在自建任务集或独立开发集比较 `10×10`、`8×16`、`10×20`；
+   - 相同模型、Prompt、输出解析、采样参数和重复次数，只改变图像预处理；
+   - 回答“长宽比感知网格是否明显优于 10×10”，不进行无限参数搜索；
+   - 必须从三者中选出**唯一冻结网格**，写入冻结配置和哈希；正式 ScreenSpot-v2 测试只比较原图与该网格，不将落选网格带入公开测试集。
+3. **B2：30 条分层冒烟评测**
+   - 将固定的 30 条 Mobile 样本标记为 `integration/audit subset`，按 `text` 与 `icon/widget` 各 15 条确定性抽样，并覆盖不同 `data_source`；
+   - 只比较“原图纯视觉”与“B1 唯一冻结网格”，共 60 次模型调用；如果 `10×10` 胜出，则比较 Raw 与 `10×10`；
+   - 30 条结果只用于验证接入、解析、坐标换算、计费、记录链路和失败审计，不写成主要 held-out 或完整 Benchmark 结果；
+   - 看到结果后只允许修复数据解析、坐标换算、记录丢失等机械性 Bug，不允许修改 Prompt、网格、策略或输出规则；
+   - 所有允许的修复必须写入变更记录，代码重新冻结后重跑全部 30 条。
+4. **B3：首个汇报节点**
+   - 审计逐样本 JSONL、无效输出、坐标换算、失败截图和成本统计；
+   - 汇报开发集网格结论和 30 条 `integration/audit subset` 结果，在此暂停，等待批准后才运行 472 条未参与调试的主要 held-out 集。
+5. **B4：正式评测（B3 获批后）**
+   - 在冻结配置上运行剩余 472 条主要 held-out 集；
+   - 输出 Mobile 整体、Text、Icon/Widget 准确率，以及无效输出率、平均延迟、Token、调用次数和估算成本；
+   - 可额外报告 502 条全量汇总，但必须同时单独报告 472 条未用于调试的 held-out 结果；
+   - 保留原始模型响应、目标框、预测坐标、逐样本 JSONL、汇总 JSON/CSV、失败案例和可视化样例。
+
+### 计划新增模块
+
+```text
+mobile_pilot/evaluation/screenspot/
+├── dataset.py       # 官方格式解析、版本与样本清单
+├── preprocess.py    # raw、10×10、8×16、10×20 图像预处理
+├── evaluator.py     # 确定性 point-in-bbox 与分组指标
+├── runner.py        # 固定模型参数、断点续跑、调用与原始响应记录
+└── reporting.py     # JSONL、JSON/CSV、失败案例与可视化导出
+```
+
+测试放入 `tests/mobile_pilot/evaluation/`；数据集原图不提交 Git，只保存来源、版本、校验信息和可复现实验配置。
+
+### 指标与真实性约束
+
+- 主要评分只使用标注框与预测点的确定性判断，不以 LLM-as-Judge 代替；
+- 网格只作为视觉参照，Actor 仍输出精确坐标；如果实现变为只能点击格子中心，必须另算离散化误差；
+- 同一模型、Prompt、解析和调用参数下只改变预处理方式，避免把模型变化误写成框架收益；
+- 子集、单次运行和重复稳定性必须分别命名，不得混写为完整 Benchmark 或泛化成功率；
+- 不删除或修改现有 168 条记录，不为具体公开测试样本硬编码。
+
+### 首个汇报节点资源上限
+
+- 开发集网格比较最多 72 次调用，30 条 ScreenSpot-v2 `integration/audit subset` 的 Raw/冻结网格矩阵 60 次调用，共不超过 132 次；如发生允许的机械性 Bug 修复，重跑所需调用单独记录并解释；
+- 按现有 GUI-Plus 受控实验的实测单次成本外推，先设置 **人民币 5 元硬预算上限**；真实账单、免费额度与 Token 以本次 API 返回和平台账单为准；
+- 官方仓库当前约 1.33 GB，预留 3 GB 磁盘用于下载、解压、缓存和评测产物；
+- API 模型评测不要求本地 GPU，也不需要连接真机；使用现有 Python 环境并按需增加图像与数据读取依赖。
+
+### ScreenSpot-v2 后的 AndroidWorld 准备
+
+完成并汇报 ScreenSpot-v2 后，只调研 MobilePilot 对 AndroidWorld Agent 接口的适配：截图、UI Tree、动作接口映射，可复用的 Actor/Critic/Verifier/Recovery，首批 10 个代表性任务，以及环境、API 成本和工作量；本阶段不直接部署，也不并行扩展其他 Benchmark。
+
 ## Phase 4：安全、确认与人工接管
 
 ### 目标
@@ -307,7 +379,8 @@ flowchart LR
     P0["Phase 0\n协议与兼容基线"] --> P1["Phase 1\n真机 Adapter"]
     P1 --> P2["Phase 2\nScreenState 与 UI Tree"]
     P2 --> P3["Phase 3\nRuntime、验证、恢复"]
-    P3 --> P4["Phase 4\nSafety 与接管"]
+    P3 --> PB["公共 Benchmark\nScreenSpot-v2 Mobile"]
+    PB --> P4["Phase 4\nSafety 与接管"]
     P4 --> P5["Phase 5\nTool + GUI 与跨应用"]
     P5 --> P6["Phase 6\n评测、Demo、求职材料"]
 ```
