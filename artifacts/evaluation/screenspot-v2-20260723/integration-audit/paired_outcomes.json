@@ -1,0 +1,896 @@
+[
+  {
+    "sample_id": "mobile-0016-c49de68fe4",
+    "instruction": "click to lock rotation",
+    "data_type": "icon",
+    "data_source": "ios",
+    "target_bbox_xyxy": [
+      1678,
+      436,
+      1818,
+      573
+    ],
+    "outcome_category": "raw_failure__grid_success",
+    "raw": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": "Action: Click the screen rotation lock icon in the middle row of the Control Center to lock screen rotation.\n<tool_call>\n{\"action\":most likely \"left_click\",\"coordinate\": [804, 312]}}\n}"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        1746,
+        503
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the lock icon in the middle section of the iOS Control Center to toggle screen rotation lock.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [740, 307]}}\n</think>"
+    }
+  },
+  {
+    "sample_id": "mobile-0031-e0fb4e2a42",
+    "instruction": "open flight mode",
+    "data_type": "icon",
+    "data_source": "ios",
+    "target_bbox_xyxy": [
+      137,
+      435,
+      309,
+      607
+    ],
+    "outcome_category": "raw_failure__grid_success",
+    "raw": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": ""
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        222,
+        521
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Tap the airplane icon to enable flight mode.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [190, 206]}"
+    }
+  },
+  {
+    "sample_id": "mobile-0055-28e68c5e9d",
+    "instruction": "view iphone storage",
+    "data_type": "text",
+    "data_source": "ios",
+    "target_bbox_xyxy": [
+      49,
+      1515,
+      1121,
+      1641
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        272,
+        1577
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on \"iPhone Storage\".\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [233, 623]}}\n</tool_call>"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        272,
+        1577
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the \"iPhone Storage\" option in the settings list.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [233, 623]}}\n<tool_call>"
+    }
+  },
+  {
+    "sample_id": "mobile-0065-e9331fcb1a",
+    "instruction": "invert the lens",
+    "data_type": "icon",
+    "data_source": "ios",
+    "target_bbox_xyxy": [
+      965,
+      2105,
+      1110,
+      2258
+    ],
+    "outcome_category": "raw_failure__grid_failure",
+    "raw": {
+      "correct": false,
+      "prediction_point": [
+        1095,
+        169
+      ],
+      "failure_reason": "prediction_outside_target",
+      "raw_model_response": "Action: Click the circular icon with the grid-like pattern in the top right corner of the camera interface.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [936, 67]}}\n</tool_call>"
+    },
+    "grid_10x10": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": "Action: Click the circular icon with two arrows forming a circle at the bottom right to invert the lens.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [880, 860]}\n\n##"
+    }
+  },
+  {
+    "sample_id": "mobile-0072-86a79caf03",
+    "instruction": "cancel the event",
+    "data_type": "text",
+    "data_source": "ios",
+    "target_bbox_xyxy": [
+      32,
+      210,
+      221,
+      300
+    ],
+    "outcome_category": "raw_failure__grid_success",
+    "raw": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": "av\nleft_click\ncoordinate: [107, 100]"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        127,
+        253
+      ],
+      "failure_reason": "",
+      "raw_model_response": "left_click(109, 100)\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [109, 100]}}\n"
+    }
+  },
+  {
+    "sample_id": "mobile-0100-1b7cc98dbc",
+    "instruction": "view settings",
+    "data_type": "icon",
+    "data_source": "ios",
+    "target_bbox_xyxy": [
+      53,
+      141,
+      156,
+      229
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        102,
+        184
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the gear icon at the top left corner.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [88, 73]}}\n</tool_call>"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        100,
+        184
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the settings icon at the top-left corner to open the settings menu.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [86, 73]}}\n</think>"
+    }
+  },
+  {
+    "sample_id": "mobile-0124-9a26af916e",
+    "instruction": "back to filters",
+    "data_type": "text",
+    "data_source": "ios",
+    "target_bbox_xyxy": [
+      5,
+      160,
+      251,
+      257
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        126,
+        212
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the back arrow next to \"Filters\" at the top left.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [108, 84]}}\n<tool_call>"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        118,
+        212
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Tap the 'Filters' text in the top-left corner to return to the filters view.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [101, 84]}}\n</tool_call>"
+    }
+  },
+  {
+    "sample_id": "mobile-0131-23acce2e49",
+    "instruction": "display data by week",
+    "data_type": "text",
+    "data_source": "android",
+    "target_bbox_xyxy": [
+      524,
+      386,
+      1024,
+      561
+    ],
+    "outcome_category": "raw_failure__grid_success",
+    "raw": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": "left_click(675, 208)"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        774,
+        480
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the \"Week\" tab to switch the view to a weekly overview.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [717, 200]}}\n"
+    }
+  },
+  {
+    "sample_id": "mobile-0133-b314c871af",
+    "instruction": "open system apps settings",
+    "data_type": "text",
+    "data_source": "android",
+    "target_bbox_xyxy": [
+      48,
+      488,
+      1061,
+      602
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        363,
+        537
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on \"System app settings\".\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [337, 224]}"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        363,
+        537
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on \"System app settings\".\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [337, 224]}"
+    }
+  },
+  {
+    "sample_id": "mobile-0138-2294c40760",
+    "instruction": "turn on earpiece mode",
+    "data_type": "icon",
+    "data_source": "android",
+    "target_bbox_xyxy": [
+      796,
+      529,
+      1012,
+      651
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        936,
+        602
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the toggle switch next to \"Earpiece mode\".\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [867, 251]}}\n</tool_call>"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        929,
+        597
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the toggle switch next to \"Earpiece mode\".\n<tool_call>\n{\"type\":\"function\",\"description\": \"Click the toggle switch next to 'Earpiece mode' to enable it.\", \"name\": \"computer_use\", \"parameters\": {\"action\": \"left_click\", \"coordinate\": [861, 249]}}\n<tool_call>"
+    }
+  },
+  {
+    "sample_id": "mobile-0153-8d1ca0eb94",
+    "instruction": "disagree the agreement",
+    "data_type": "text",
+    "data_source": "android",
+    "target_bbox_xyxy": [
+      88,
+      2103,
+      548,
+      2310
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        304,
+        2210
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the \"Disagree\" button.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [282, 921]}}\n"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        303,
+        2208
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the \"Disagree\" button.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [281, 920]}}\n"
+    }
+  },
+  {
+    "sample_id": "mobile-0206-37b20d21dd",
+    "instruction": "Tap the division sign in the calculator",
+    "data_type": "icon",
+    "data_source": "android",
+    "target_bbox_xyxy": [
+      780,
+      1102,
+      1020,
+      1322
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        875,
+        1207
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Tap the division sign (÷) button located in the fourth column of the top row of the calculator.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [811, 503]}}\n</tool_call>"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        898,
+        1209
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Tap the division sign (÷) button located in the top row of the number keys, to the right of the '%' button.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [832, 504]}}\n</tool_call>"
+    }
+  },
+  {
+    "sample_id": "mobile-0247-a93f8e6962",
+    "instruction": "switch to show link attributes",
+    "data_type": "text",
+    "data_source": "ios",
+    "target_bbox_xyxy": [
+      930,
+      798,
+      2261,
+      885
+    ],
+    "outcome_category": "raw_success__grid_failure",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        1121,
+        849
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the 'Show Ink Attributes' row to enable it.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [475, 518]}}\n"
+    },
+    "grid_10x10": {
+      "correct": false,
+      "prediction_point": [
+        993,
+        928
+      ],
+      "failure_reason": "prediction_outside_target",
+      "raw_model_response": "Action: Click on the \"Off\" option under \"Show Ink Attributes\" to enable it.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [421, 566]}"
+    }
+  },
+  {
+    "sample_id": "mobile-0317-62c116e49f",
+    "instruction": "open high resolution 50mp mode",
+    "data_type": "icon",
+    "data_source": "android",
+    "target_bbox_xyxy": [
+      121,
+      390,
+      532,
+      819
+    ],
+    "outcome_category": "raw_success__grid_failure",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        369,
+        561
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the '50MP' button located at the top-left area of the screen to activate high resolution 50MP mode.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [342, 234]}}\n"
+    },
+    "grid_10x10": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": "Action: Tap on the '50MP' button in the top-left area of the camera interface to open high-resolution 50MP mode.\n<tool_call>\n{\"type\":\"function\",\"function\":{\"name\":\"computer_use\",\"parameters\":{\"action\":\"left_click\",\"coordinate\":290, 250]}}\n</think>"
+    }
+  },
+  {
+    "sample_id": "mobile-0343-91bd061123",
+    "instruction": "post a new article",
+    "data_type": "icon",
+    "data_source": "android",
+    "target_bbox_xyxy": [
+      926,
+      119,
+      1052,
+      220
+    ],
+    "outcome_category": "raw_success__grid_failure",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        995,
+        165
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the red circular button with the white plus sign at the top right corner.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [922, 69]}}\n</tool_call>"
+    },
+    "grid_10x10": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": "Action: Click the red plus button at the top right corner to start creating a new post.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [929, 68]}\n\n# Action"
+    }
+  },
+  {
+    "sample_id": "mobile-0344-0d96eaaf36",
+    "instruction": "play music",
+    "data_type": "icon",
+    "data_source": "android",
+    "target_bbox_xyxy": [
+      818,
+      2082,
+      941,
+      2208
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        873,
+        2133
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the play button in the music player bar at the bottom of the screen to start playing the song '破顎都板 - 逝昏'.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [809, 889]}}\n</tool_call>"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        872,
+        2136
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the play button (circular icon with a triangle) on the right side of the music player bar at the bottom of the screen to start playing the song \"破顎都板 - 逝昏\".\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [808, 890]}}\n</think>"
+    }
+  },
+  {
+    "sample_id": "mobile-0374-e25f72748e",
+    "instruction": "display more information",
+    "data_type": "text",
+    "data_source": "android",
+    "target_bbox_xyxy": [
+      453,
+      1104,
+      738,
+      1173
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        599,
+        1135
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the \"Learn more\" link.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [555, 473]}}\n</tool_call>"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        575,
+        1135
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the \"Learn more\" text.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [533, 473]}}\n</tool_call>"
+    }
+  },
+  {
+    "sample_id": "mobile-0377-8d93610c4a",
+    "instruction": "search in this app",
+    "data_type": "text",
+    "data_source": "android",
+    "target_bbox_xyxy": [
+      121,
+      339,
+      309,
+      588
+    ],
+    "outcome_category": "raw_failure__grid_success",
+    "raw": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": "left_click(188, 191)"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        209,
+        434
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the \"Search\" icon at the top of the screen.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [194, 181]}\n\n"
+    }
+  },
+  {
+    "sample_id": "mobile-0414-e65fec2d2d",
+    "instruction": "view last month cellular data",
+    "data_type": "text",
+    "data_source": "ios",
+    "target_bbox_xyxy": [
+      572,
+      1536,
+      1108,
+      1626
+    ],
+    "outcome_category": "raw_success__grid_failure",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        731,
+        1582
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Click on the \"Last Month\" tab to view the cellular data usage for the previous month.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [625, 625]}}\n<tool_call>"
+    },
+    "grid_10x10": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": "left_click(725, 625)"
+    }
+  },
+  {
+    "sample_id": "mobile-0438-d4b4fc01b4",
+    "instruction": "use airplay",
+    "data_type": "icon",
+    "data_source": "ios",
+    "target_bbox_xyxy": [
+      509,
+      2276,
+      660,
+      2417
+    ],
+    "outcome_category": "raw_failure__grid_failure",
+    "raw": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": "Action: Click the icon resembling a smart TV with a Wi-Fi symbol in the bottom navigation bar.\n<tool_call>\n{\"action\": \"left_click\", 493, 929}"
+    },
+    "grid_10x10": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": "Action: Click the icon in the bottom navigation bar that looks like a speaker with radio waves.\n<tool_call>\n{\"action\": \"left_click\", 500, 930}"
+    }
+  },
+  {
+    "sample_id": "mobile-0449-c1b3c1e166",
+    "instruction": "view the photo pictured in Apr 11",
+    "data_type": "icon",
+    "data_source": "shop",
+    "target_bbox_xyxy": [
+      645,
+      625,
+      2361,
+      1590
+    ],
+    "outcome_category": "raw_failure__grid_success",
+    "raw": {
+      "correct": false,
+      "prediction_point": null,
+      "failure_reason": "invalid_model_output",
+      "raw_model_response": ""
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        1180,
+        965
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the 'CLK' photo in the photo grid to view it in detail.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [500, 589]}}\n</think>"
+    }
+  },
+  {
+    "sample_id": "mobile-0458-c96aaf01f2",
+    "instruction": "switch on automatic downloads using cellular data",
+    "data_type": "icon",
+    "data_source": "shop",
+    "target_bbox_xyxy": [
+      26,
+      1095,
+      293,
+      1231
+    ],
+    "outcome_category": "raw_failure__grid_failure",
+    "raw": {
+      "correct": false,
+      "prediction_point": [
+        1096,
+        2502
+      ],
+      "failure_reason": "prediction_outside_target",
+      "raw_model_response": "Action: Click the toggle switch next to \"Automatic Downloads\".\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [857, 902]}\n</think>"
+    },
+    "grid_10x10": {
+      "correct": false,
+      "prediction_point": [
+        1079,
+        2496
+      ],
+      "failure_reason": "prediction_outside_target",
+      "raw_model_response": "Action: Click the toggle switch next to \"Automatic Downloads\".\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [843, 900]}}\n"
+    }
+  },
+  {
+    "sample_id": "mobile-0464-41200ff26b",
+    "instruction": "show more awards",
+    "data_type": "text",
+    "data_source": "shop",
+    "target_bbox_xyxy": [
+      951,
+      1723,
+      1246,
+      1816
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        1096,
+        1761
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the \"Show More\" text in the Awards section.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [857, 635]}}\n<tool_call>"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        1076,
+        1769
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click \"Show More\" in the \"Awards\" section.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [841, 638]}}\n</tool_call>"
+    }
+  },
+  {
+    "sample_id": "mobile-0467-38b033cbdc",
+    "instruction": "switch the service to onedrive",
+    "data_type": "text",
+    "data_source": "shop",
+    "target_bbox_xyxy": [
+      997,
+      538,
+      1845,
+      618
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        1175,
+        574
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the 'OneDrive' option in the 'SELECT SERVICE' list to switch the backup service to OneDrive.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [498, 350]}}\n"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        1163,
+        574
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the 'OneDrive' option in the 'SELECT SERVICE' list to switch the backup service to OneDrive.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [493, 350]}}\n"
+    }
+  },
+  {
+    "sample_id": "mobile-0470-53bb99047b",
+    "instruction": "check out the information of restaurants in  Disney ",
+    "data_type": "icon",
+    "data_source": "shop",
+    "target_bbox_xyxy": [
+      817,
+      1399,
+      963,
+      1628
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        888,
+        1514
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the \"Dining\" icon.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [694, 546]}}\n"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        889,
+        1545
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the \"Dining\" icon.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [695, 557]}}\n"
+    }
+  },
+  {
+    "sample_id": "mobile-0474-5f427a7a58",
+    "instruction": "disallow notability to access my microphone",
+    "data_type": "icon",
+    "data_source": "shop",
+    "target_bbox_xyxy": [
+      2079,
+      322,
+      2197,
+      386
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        2157,
+        360
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the toggle switch next to \"Microphone\" to disable it.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [914, 220]}}\n</think>"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        2147,
+        359
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the green toggle switch next to 'Microphone' in the 'ALLOW NOTABILITY TO ACCESS' section to disable microphone access.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [910, 219]}\n</think>"
+    }
+  },
+  {
+    "sample_id": "mobile-0476-ff6fcc7ef5",
+    "instruction": "display notifications as list format",
+    "data_type": "text",
+    "data_source": "shop",
+    "target_bbox_xyxy": [
+      923,
+      479,
+      1129,
+      868
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        1026,
+        665
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the \"List\" option.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [802, 240]}}\n</tool_call>"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        1025,
+        699
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the \"List\" option to change the notification display format.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [801, 252]}\n\n<tool_call>\n"
+    }
+  },
+  {
+    "sample_id": "mobile-0478-9e85dd8cd6",
+    "instruction": "exclude the control of calculator",
+    "data_type": "icon",
+    "data_source": "shop",
+    "target_bbox_xyxy": [
+      88,
+      1370,
+      214,
+      1476
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        155,
+        1424
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the red minus icon next to the \"Calculator\" option.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [125, 530]}}\n</think>"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        155,
+        1424
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click the red minus icon next to \"Calculator\".\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [125, 530]}}\n</think>"
+    }
+  },
+  {
+    "sample_id": "mobile-0480-0fad99a5d9",
+    "instruction": "view my reading list",
+    "data_type": "text",
+    "data_source": "shop",
+    "target_bbox_xyxy": [
+      419,
+      1108,
+      635,
+      1375
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        522,
+        1220
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the \"Reading List\" icon to view the reading list.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [408, 440]}"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        506,
+        1239
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the \"Reading List\" icon.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [396, 447]}"
+    }
+  },
+  {
+    "sample_id": "mobile-0492-75097b6330",
+    "instruction": "check the weather of ottawa",
+    "data_type": "text",
+    "data_source": "shop",
+    "target_bbox_xyxy": [
+      51,
+      2386,
+      1219,
+      2706
+    ],
+    "outcome_category": "raw_success__grid_success",
+    "raw": {
+      "correct": true,
+      "prediction_point": [
+        637,
+        2535
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the Ottawa weather card to view detailed weather information.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [498, 914]}}\n"
+    },
+    "grid_10x10": {
+      "correct": true,
+      "prediction_point": [
+        646,
+        2529
+      ],
+      "failure_reason": "",
+      "raw_model_response": "Action: Click on the Ottawa weather card at the bottom of the screen.\n<tool_call>\n{\"type\":\"function\",\"description\": \"Click on the Ottawa weather card to view detailed weather information for Ottawa.\", \"parameters\": {\"action\": \"left_click\", \"coordinate\": [505, 912]}}\n</think>"
+    }
+  }
+]

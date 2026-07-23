@@ -11,6 +11,9 @@
 | [progress/phase-03-runtime-loop.md](progress/phase-03-runtime-loop.md) | Phase 3 的真实 VLM fallback、任务闭环、Trace 与三次真机复跑证据。 |
 | [evaluation/device-adapter-ab-2026-07-22.md](evaluation/device-adapter-ab-2026-07-22.md) | ADB 与 uiautomator2 的中文输入、UI Tree 和端到端耗时真机对照。 |
 | [evaluation/visual-mainline-batch-01.md](evaluation/visual-mainline-batch-01.md) | 8 个任务、7 种配置、3 次重复的视觉主链路完整矩阵与失败分析。 |
+| [evaluation/screenspot-v2-b0-protocol.md](evaluation/screenspot-v2-b0-protocol.md) | ScreenSpot-v2 Mobile 官方发布版本、501/502差异、划分与确定性评分协议。 |
+| [evaluation/grid-development-b1-2026-07-23.md](evaluation/grid-development-b1-2026-07-23.md) | 10×10、8×16、10×20私有开发集对照及唯一网格冻结。 |
+| [evaluation/screenspot-v2-b3-integration-audit.md](evaluation/screenspot-v2-b3-integration-audit.md) | 30条 integration/audit subset 上 Raw 与冻结10×10的60次调用结果。 |
 | 后续 `architecture/`、`evaluation/` | 仅在对应能力真正实现后添加的当前设计与评测文档。 |
 
 原离线竞赛原型的架构、实验和失败复盘已保存在 [archive/legacy-prototype/docs/](../archive/legacy-prototype/docs/)，用于追溯基线，不作为当前架构说明。

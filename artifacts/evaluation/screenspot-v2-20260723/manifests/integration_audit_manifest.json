@@ -1,0 +1,692 @@
+[
+  {
+    "index": 16,
+    "sample_id": "mobile-0016-c49de68fe4",
+    "img_filename": "mobile_1c1d54b4-5ac1-40cd-9dc6-21a8d3c97d6e.png",
+    "bbox_xywh": [
+      1678,
+      436,
+      140,
+      137
+    ],
+    "instruction": "click to lock rotation",
+    "data_type": "icon",
+    "data_source": "ios",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_1c1d54b4-5ac1-40cd-9dc6-21a8d3c97d6e_0.png",
+    "image_repository_path": "data/mobile_1c1d54b4-5ac1-40cd-9dc6-21a8d3c97d6e_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      1678,
+      436,
+      1818,
+      573
+    ]
+  },
+  {
+    "index": 31,
+    "sample_id": "mobile-0031-e0fb4e2a42",
+    "img_filename": "mobile_1a514eae-4ee0-4780-a059-c47715828e3b.png",
+    "bbox_xywh": [
+      137,
+      435,
+      172,
+      172
+    ],
+    "instruction": "open flight mode",
+    "data_type": "icon",
+    "data_source": "ios",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_1a514eae-4ee0-4780-a059-c47715828e3b_0.png",
+    "image_repository_path": "data/mobile_1a514eae-4ee0-4780-a059-c47715828e3b_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      137,
+      435,
+      309,
+      607
+    ]
+  },
+  {
+    "index": 55,
+    "sample_id": "mobile-0055-28e68c5e9d",
+    "img_filename": "mobile_8e7e6de4-2eac-400c-b845-291fa80c5c7c.png",
+    "bbox_xywh": [
+      49,
+      1515,
+      1072,
+      126
+    ],
+    "instruction": "view iphone storage",
+    "data_type": "text",
+    "data_source": "ios",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_8e7e6de4-2eac-400c-b845-291fa80c5c7c_2.png",
+    "image_repository_path": "data/mobile_8e7e6de4-2eac-400c-b845-291fa80c5c7c_2.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      49,
+      1515,
+      1121,
+      1641
+    ]
+  },
+  {
+    "index": 65,
+    "sample_id": "mobile-0065-e9331fcb1a",
+    "img_filename": "mobile_907cb7d2-9953-476e-b589-5526587c3913.png",
+    "bbox_xywh": [
+      965,
+      2105,
+      145,
+      153
+    ],
+    "instruction": "invert the lens",
+    "data_type": "icon",
+    "data_source": "ios",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_907cb7d2-9953-476e-b589-5526587c3913_2.png",
+    "image_repository_path": "data/mobile_907cb7d2-9953-476e-b589-5526587c3913_2.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      965,
+      2105,
+      1110,
+      2258
+    ]
+  },
+  {
+    "index": 72,
+    "sample_id": "mobile-0072-86a79caf03",
+    "img_filename": "mobile_e9d69310-692c-4a78-8b8d-b961a5cfec70.png",
+    "bbox_xywh": [
+      32,
+      210,
+      189,
+      90
+    ],
+    "instruction": "cancel the event",
+    "data_type": "text",
+    "data_source": "ios",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_e9d69310-692c-4a78-8b8d-b961a5cfec70_0.png",
+    "image_repository_path": "data/mobile_e9d69310-692c-4a78-8b8d-b961a5cfec70_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      32,
+      210,
+      221,
+      300
+    ]
+  },
+  {
+    "index": 100,
+    "sample_id": "mobile-0100-1b7cc98dbc",
+    "img_filename": "mobile_c1f1188d-1bd3-4ce6-8e3f-96628d07b0b9.png",
+    "bbox_xywh": [
+      53,
+      141,
+      103,
+      88
+    ],
+    "instruction": "view settings",
+    "data_type": "icon",
+    "data_source": "ios",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_c1f1188d-1bd3-4ce6-8e3f-96628d07b0b9_1.png",
+    "image_repository_path": "data/mobile_c1f1188d-1bd3-4ce6-8e3f-96628d07b0b9_1.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      53,
+      141,
+      156,
+      229
+    ]
+  },
+  {
+    "index": 124,
+    "sample_id": "mobile-0124-9a26af916e",
+    "img_filename": "mobile_9bd1779a-91ee-4a59-8904-3850434b1421.png",
+    "bbox_xywh": [
+      5,
+      160,
+      246,
+      97
+    ],
+    "instruction": "back to filters",
+    "data_type": "text",
+    "data_source": "ios",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_9bd1779a-91ee-4a59-8904-3850434b1421_1.png",
+    "image_repository_path": "data/mobile_9bd1779a-91ee-4a59-8904-3850434b1421_1.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      5,
+      160,
+      251,
+      257
+    ]
+  },
+  {
+    "index": 131,
+    "sample_id": "mobile-0131-23acce2e49",
+    "img_filename": "mobile_b012267b-fcd6-4d0c-991a-f2a4afd0a2ff.png",
+    "bbox_xywh": [
+      524,
+      386,
+      500,
+      175
+    ],
+    "instruction": "display data by week",
+    "data_type": "text",
+    "data_source": "android",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_b012267b-fcd6-4d0c-991a-f2a4afd0a2ff_1.png",
+    "image_repository_path": "data/mobile_b012267b-fcd6-4d0c-991a-f2a4afd0a2ff_1.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      524,
+      386,
+      1024,
+      561
+    ]
+  },
+  {
+    "index": 133,
+    "sample_id": "mobile-0133-b314c871af",
+    "img_filename": "mobile_faa33d8c-ff72-4c74-98df-cb46cc0516aa.png",
+    "bbox_xywh": [
+      48,
+      488,
+      1013,
+      114
+    ],
+    "instruction": "open system apps settings",
+    "data_type": "text",
+    "data_source": "android",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_faa33d8c-ff72-4c74-98df-cb46cc0516aa_0.png",
+    "image_repository_path": "data/mobile_faa33d8c-ff72-4c74-98df-cb46cc0516aa_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      48,
+      488,
+      1061,
+      602
+    ]
+  },
+  {
+    "index": 138,
+    "sample_id": "mobile-0138-2294c40760",
+    "img_filename": "mobile_06d5a5b9-8dda-439a-84a5-7af28ab2dab8.png",
+    "bbox_xywh": [
+      796,
+      529,
+      216,
+      122
+    ],
+    "instruction": "turn on earpiece mode",
+    "data_type": "icon",
+    "data_source": "android",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_06d5a5b9-8dda-439a-84a5-7af28ab2dab8_0.png",
+    "image_repository_path": "data/mobile_06d5a5b9-8dda-439a-84a5-7af28ab2dab8_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      796,
+      529,
+      1012,
+      651
+    ]
+  },
+  {
+    "index": 153,
+    "sample_id": "mobile-0153-8d1ca0eb94",
+    "img_filename": "mobile_ef01fd08-a7fd-42a3-b1aa-fe22b3f79730.png",
+    "bbox_xywh": [
+      88,
+      2103,
+      460,
+      207
+    ],
+    "instruction": "disagree the agreement",
+    "data_type": "text",
+    "data_source": "android",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_ef01fd08-a7fd-42a3-b1aa-fe22b3f79730_1.png",
+    "image_repository_path": "data/mobile_ef01fd08-a7fd-42a3-b1aa-fe22b3f79730_1.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      88,
+      2103,
+      548,
+      2310
+    ]
+  },
+  {
+    "index": 206,
+    "sample_id": "mobile-0206-37b20d21dd",
+    "img_filename": "mobile_3b5ab7d3-8e84-4be1-83ba-801882db294b.png",
+    "bbox_xywh": [
+      780,
+      1102,
+      240,
+      220
+    ],
+    "instruction": "Tap the division sign in the calculator",
+    "data_type": "icon",
+    "data_source": "android",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_3b5ab7d3-8e84-4be1-83ba-801882db294b_2.png",
+    "image_repository_path": "data/mobile_3b5ab7d3-8e84-4be1-83ba-801882db294b_2.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      780,
+      1102,
+      1020,
+      1322
+    ]
+  },
+  {
+    "index": 247,
+    "sample_id": "mobile-0247-a93f8e6962",
+    "img_filename": "mobile_6ded1777-d4c3-485f-b28a-7754e0e9c024.png",
+    "bbox_xywh": [
+      930,
+      798,
+      1331,
+      87
+    ],
+    "instruction": "switch to show link attributes",
+    "data_type": "text",
+    "data_source": "ios",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_6ded1777-d4c3-485f-b28a-7754e0e9c024_1.png",
+    "image_repository_path": "data/mobile_6ded1777-d4c3-485f-b28a-7754e0e9c024_1.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      930,
+      798,
+      2261,
+      885
+    ]
+  },
+  {
+    "index": 317,
+    "sample_id": "mobile-0317-62c116e49f",
+    "img_filename": "mobile_bed2b5e8-9102-405e-80f3-85207ed1bbf0.png",
+    "bbox_xywh": [
+      121,
+      390,
+      411,
+      429
+    ],
+    "instruction": "open high resolution 50mp mode",
+    "data_type": "icon",
+    "data_source": "android",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_bed2b5e8-9102-405e-80f3-85207ed1bbf0_0.png",
+    "image_repository_path": "data/mobile_bed2b5e8-9102-405e-80f3-85207ed1bbf0_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      121,
+      390,
+      532,
+      819
+    ]
+  },
+  {
+    "index": 343,
+    "sample_id": "mobile-0343-91bd061123",
+    "img_filename": "mobile_674f6746-05c0-4e7d-93de-adf054f0eaf6.png",
+    "bbox_xywh": [
+      926,
+      119,
+      126,
+      101
+    ],
+    "instruction": "post a new article",
+    "data_type": "icon",
+    "data_source": "android",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_674f6746-05c0-4e7d-93de-adf054f0eaf6_0.png",
+    "image_repository_path": "data/mobile_674f6746-05c0-4e7d-93de-adf054f0eaf6_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      926,
+      119,
+      1052,
+      220
+    ]
+  },
+  {
+    "index": 344,
+    "sample_id": "mobile-0344-0d96eaaf36",
+    "img_filename": "mobile_674f6746-05c0-4e7d-93de-adf054f0eaf6.png",
+    "bbox_xywh": [
+      818,
+      2082,
+      123,
+      126
+    ],
+    "instruction": "play music",
+    "data_type": "icon",
+    "data_source": "android",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_674f6746-05c0-4e7d-93de-adf054f0eaf6_1.png",
+    "image_repository_path": "data/mobile_674f6746-05c0-4e7d-93de-adf054f0eaf6_1.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      818,
+      2082,
+      941,
+      2208
+    ]
+  },
+  {
+    "index": 374,
+    "sample_id": "mobile-0374-e25f72748e",
+    "img_filename": "mobile_508e7610-9e30-4626-9ea3-37bf194cb1dd.png",
+    "bbox_xywh": [
+      453,
+      1104,
+      285,
+      69
+    ],
+    "instruction": "display more information",
+    "data_type": "text",
+    "data_source": "android",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_508e7610-9e30-4626-9ea3-37bf194cb1dd_1.png",
+    "image_repository_path": "data/mobile_508e7610-9e30-4626-9ea3-37bf194cb1dd_1.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      453,
+      1104,
+      738,
+      1173
+    ]
+  },
+  {
+    "index": 377,
+    "sample_id": "mobile-0377-8d93610c4a",
+    "img_filename": "mobile_5c444b03-c5ca-41d8-b4cb-e12f4f4a4387.png",
+    "bbox_xywh": [
+      121,
+      339,
+      188,
+      249
+    ],
+    "instruction": "search in this app",
+    "data_type": "text",
+    "data_source": "android",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_5c444b03-c5ca-41d8-b4cb-e12f4f4a4387_1.png",
+    "image_repository_path": "data/mobile_5c444b03-c5ca-41d8-b4cb-e12f4f4a4387_1.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      121,
+      339,
+      309,
+      588
+    ]
+  },
+  {
+    "index": 414,
+    "sample_id": "mobile-0414-e65fec2d2d",
+    "img_filename": "mobile_9bbed1c6-3a9f-46ea-b2d3-39ae8abde54e.png",
+    "bbox_xywh": [
+      572,
+      1536,
+      536,
+      90
+    ],
+    "instruction": "view last month cellular data",
+    "data_type": "text",
+    "data_source": "ios",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_9bbed1c6-3a9f-46ea-b2d3-39ae8abde54e_0.png",
+    "image_repository_path": "data/mobile_9bbed1c6-3a9f-46ea-b2d3-39ae8abde54e_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      572,
+      1536,
+      1108,
+      1626
+    ]
+  },
+  {
+    "index": 438,
+    "sample_id": "mobile-0438-d4b4fc01b4",
+    "img_filename": "mobile_ec01cb13-de9a-4a4b-9a79-5f810b034474.png",
+    "bbox_xywh": [
+      509,
+      2276,
+      151,
+      141
+    ],
+    "instruction": "use airplay",
+    "data_type": "icon",
+    "data_source": "ios",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_ec01cb13-de9a-4a4b-9a79-5f810b034474_0.png",
+    "image_repository_path": "data/mobile_ec01cb13-de9a-4a4b-9a79-5f810b034474_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      509,
+      2276,
+      660,
+      2417
+    ]
+  },
+  {
+    "index": 449,
+    "sample_id": "mobile-0449-c1b3c1e166",
+    "img_filename": "mobile_02e9bl.png",
+    "bbox_xywh": [
+      645,
+      625,
+      1716,
+      965
+    ],
+    "instruction": "view the photo pictured in Apr 11",
+    "data_type": "icon",
+    "data_source": "shop",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_02e9bl_0.png",
+    "image_repository_path": "data/mobile_02e9bl_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      645,
+      625,
+      2361,
+      1590
+    ]
+  },
+  {
+    "index": 458,
+    "sample_id": "mobile-0458-c96aaf01f2",
+    "img_filename": "mobile_6edzq7.jpg",
+    "bbox_xywh": [
+      26,
+      1095,
+      267,
+      136
+    ],
+    "instruction": "switch on automatic downloads using cellular data",
+    "data_type": "icon",
+    "data_source": "shop",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_6edzq7_0.jpg",
+    "image_repository_path": "data/mobile_6edzq7_0.jpg",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      26,
+      1095,
+      293,
+      1231
+    ]
+  },
+  {
+    "index": 464,
+    "sample_id": "mobile-0464-41200ff26b",
+    "img_filename": "mobile_ax0vnf.jpg",
+    "bbox_xywh": [
+      951,
+      1723,
+      295,
+      93
+    ],
+    "instruction": "show more awards",
+    "data_type": "text",
+    "data_source": "shop",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_ax0vnf_0.jpg",
+    "image_repository_path": "data/mobile_ax0vnf_0.jpg",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      951,
+      1723,
+      1246,
+      1816
+    ]
+  },
+  {
+    "index": 467,
+    "sample_id": "mobile-0467-38b033cbdc",
+    "img_filename": "mobile_c9n6vg.png",
+    "bbox_xywh": [
+      997,
+      538,
+      848,
+      80
+    ],
+    "instruction": "switch the service to onedrive",
+    "data_type": "text",
+    "data_source": "shop",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_c9n6vg_0.png",
+    "image_repository_path": "data/mobile_c9n6vg_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      997,
+      538,
+      1845,
+      618
+    ]
+  },
+  {
+    "index": 470,
+    "sample_id": "mobile-0470-53bb99047b",
+    "img_filename": "mobile_drmphj.jpg",
+    "bbox_xywh": [
+      817,
+      1399,
+      146,
+      229
+    ],
+    "instruction": "check out the information of restaurants in  Disney ",
+    "data_type": "icon",
+    "data_source": "shop",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_drmphj_0.jpg",
+    "image_repository_path": "data/mobile_drmphj_0.jpg",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      817,
+      1399,
+      963,
+      1628
+    ]
+  },
+  {
+    "index": 474,
+    "sample_id": "mobile-0474-5f427a7a58",
+    "img_filename": "mobile_fgypk7.png",
+    "bbox_xywh": [
+      2079,
+      322,
+      118,
+      64
+    ],
+    "instruction": "disallow notability to access my microphone",
+    "data_type": "icon",
+    "data_source": "shop",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_fgypk7_0.png",
+    "image_repository_path": "data/mobile_fgypk7_0.png",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      2079,
+      322,
+      2197,
+      386
+    ]
+  },
+  {
+    "index": 476,
+    "sample_id": "mobile-0476-ff6fcc7ef5",
+    "img_filename": "mobile_gtq93d.jpg",
+    "bbox_xywh": [
+      923,
+      479,
+      206,
+      389
+    ],
+    "instruction": "display notifications as list format",
+    "data_type": "text",
+    "data_source": "shop",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_gtq93d_0.jpg",
+    "image_repository_path": "data/mobile_gtq93d_0.jpg",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      923,
+      479,
+      1129,
+      868
+    ]
+  },
+  {
+    "index": 478,
+    "sample_id": "mobile-0478-9e85dd8cd6",
+    "img_filename": "mobile_hydu17.jpg",
+    "bbox_xywh": [
+      88,
+      1370,
+      126,
+      106
+    ],
+    "instruction": "exclude the control of calculator",
+    "data_type": "icon",
+    "data_source": "shop",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_hydu17_0.jpg",
+    "image_repository_path": "data/mobile_hydu17_0.jpg",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      88,
+      1370,
+      214,
+      1476
+    ]
+  },
+  {
+    "index": 480,
+    "sample_id": "mobile-0480-0fad99a5d9",
+    "img_filename": "mobile_je83pz.jpg",
+    "bbox_xywh": [
+      419,
+      1108,
+      216,
+      267
+    ],
+    "instruction": "view my reading list",
+    "data_type": "text",
+    "data_source": "shop",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_je83pz_0.jpg",
+    "image_repository_path": "data/mobile_je83pz_0.jpg",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      419,
+      1108,
+      635,
+      1375
+    ]
+  },
+  {
+    "index": 492,
+    "sample_id": "mobile-0492-75097b6330",
+    "img_filename": "mobile_vqzf88.jpg",
+    "bbox_xywh": [
+      51,
+      2386,
+      1168,
+      320
+    ],
+    "instruction": "check the weather of ottawa",
+    "data_type": "text",
+    "data_source": "shop",
+    "image_path": "data\\screenspot-v2\\audit-images\\mobile_vqzf88_0.jpg",
+    "image_repository_path": "data/mobile_vqzf88_0.jpg",
+    "subset": "integration_audit",
+    "bbox_xyxy": [
+      51,
+      2386,
+      1219,
+      2706
+    ]
+  }
+]

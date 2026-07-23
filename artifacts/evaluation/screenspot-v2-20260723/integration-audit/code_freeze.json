@@ -1,0 +1,12 @@
+{
+  "stage": "B2_pre_run_freeze",
+  "files": {
+    "mobile_pilot/policy/gui_plus.py": "ef3a617918e410a0a8b6bc96b4a964b775ee6b2ae6bb238baf1b215b79fe082a",
+    "mobile_pilot/evaluation/screenspot/preprocess.py": "746e248732660bdef4392c364a171866864234f764b74d75f8d85cc9757080e3",
+    "mobile_pilot/evaluation/screenspot/evaluator.py": "2cb1440ba319b9a8d4ac1a62232f102e06689ce8b06533da57ba49bca5ae52f1",
+    "mobile_pilot/evaluation/screenspot/runner.py": "f7432c878ba95df375f8dd881d5289640f0e1fb4f4ed379f12ba36f126de6ed9",
+    "artifacts/evaluation/grid-development-20260723/frozen_grid.json": "b51967b6368ea293b79b68f719753841dc03ccba08e2f083fcbea8a1796d2db1",
+    "artifacts/evaluation/screenspot-v2-20260723/manifests/integration_audit_manifest.json": "26e8e1f9459e30628a008bc750b9f8d54bed1bad1f20abebd0449d7b07509485"
+  },
+  "freeze_sha256": "e2847c85ab9972fbb9069daf6c37bd2a86f7939bac474a419d71276fb2ed0f12"
+}

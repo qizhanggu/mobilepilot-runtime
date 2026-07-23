@@ -26,6 +26,7 @@ env/
 # Generated evaluation artifacts
 output/
 logs/
+data/
 *.log
 *.xlsx
 *.zip

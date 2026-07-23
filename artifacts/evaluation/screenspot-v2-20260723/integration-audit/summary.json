@@ -1,0 +1,48 @@
+[
+  {
+    "config": "grid_10x10__vision_only",
+    "samples": 30,
+    "correct": 23,
+    "accuracy": 0.7666666666666667,
+    "invalid_outputs": 5,
+    "invalid_output_rate": 0.16666666666666666,
+    "model_call_count": 30,
+    "prompt_tokens": 96643,
+    "completion_tokens": 3113,
+    "total_tokens": 99756,
+    "estimated_list_cost_cny": 0.158973,
+    "mean_latency_seconds": 4.544527506666418,
+    "failure_reasons": {
+      "success": 23,
+      "invalid_model_output": 5,
+      "prediction_outside_target": 2
+    },
+    "text_samples": 15,
+    "text_accuracy": 0.8666666666666667,
+    "icon_samples": 15,
+    "icon_accuracy": 0.6666666666666666
+  },
+  {
+    "config": "raw__vision_only",
+    "samples": 30,
+    "correct": 21,
+    "accuracy": 0.7,
+    "invalid_outputs": 7,
+    "invalid_output_rate": 0.23333333333333334,
+    "model_call_count": 30,
+    "prompt_tokens": 89628,
+    "completion_tokens": 3240,
+    "total_tokens": 92868,
+    "estimated_list_cost_cny": 0.149022,
+    "mean_latency_seconds": 10.56170201666658,
+    "failure_reasons": {
+      "invalid_model_output": 7,
+      "success": 21,
+      "prediction_outside_target": 2
+    },
+    "text_samples": 15,
+    "text_accuracy": 0.8,
+    "icon_samples": 15,
+    "icon_accuracy": 0.6
+  }
+]

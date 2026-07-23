@@ -1,0 +1,12 @@
+{
+  "records": 60,
+  "unique_sample_config_pairs": 60,
+  "samples": 30,
+  "duplicate_or_missing_pairs": [],
+  "raw_response_replay_errors": [],
+  "freeze_hash_mismatches": [],
+  "records_missing_usage": 2,
+  "missing_usage_reason": "Two timed-out API calls returned no usage metadata.",
+  "mechanical_bug_found_after_results": false,
+  "rerun_required": false
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "timestamp": "2026-07-23T17:18:00+08:00",
+    "stage": "B1",
+    "category": "mechanical_api_transport",
+    "observed_after_completed_records": 23,
+    "suspected_unrecorded_api_calls": 1,
+    "symptom": "One GUI-Plus request remained pending for more than four minutes.",
+    "action": "Terminated the hanging runner, preserved 23 completed JSONL rows, set a 90-second client timeout, disabled SDK implicit retries, and resumed from JSONL.",
+    "prompt_changed": false,
+    "grid_changed": false,
+    "strategy_changed": false,
+    "output_rule_changed": false
+  }
+]

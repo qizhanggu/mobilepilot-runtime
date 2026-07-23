@@ -1,0 +1,14 @@
+[
+  {
+    "stage": "B2/B3",
+    "category": "audit",
+    "mechanical_bug_found": false,
+    "changes_after_results": [],
+    "prompt_changed": false,
+    "grid_changed": false,
+    "strategy_changed": false,
+    "output_rule_changed": false,
+    "rerun_performed": false,
+    "reason": "All 60 records replayed consistently and freeze hashes matched; model parse failures and timeouts are retained as benchmark failures."
+  }
+]

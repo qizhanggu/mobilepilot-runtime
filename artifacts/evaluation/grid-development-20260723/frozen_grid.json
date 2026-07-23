@@ -1,0 +1,49 @@
+{
+  "selected_variant": "grid_10x10",
+  "selection_rule": [
+    "maximize_correct",
+    "minimize_invalid_outputs",
+    "minimize_grid_density",
+    "lexicographic_variant"
+  ],
+  "ranking": [
+    {
+      "variant": "grid_10x10",
+      "runs": 24,
+      "correct": 20,
+      "accuracy": 0.8333333333333334,
+      "invalid_outputs": 2,
+      "mean_latency_seconds": 7.465154791666919,
+      "prompt_tokens": 14581,
+      "completion_tokens": 2239,
+      "estimated_list_cost_cny": 0.031947,
+      "grid_density": 100
+    },
+    {
+      "variant": "grid_8x16",
+      "runs": 24,
+      "correct": 20,
+      "accuracy": 0.8333333333333334,
+      "invalid_outputs": 2,
+      "mean_latency_seconds": 3.4201814458336535,
+      "prompt_tokens": 15243,
+      "completion_tokens": 2137,
+      "estimated_list_cost_cny": 0.032480999999999996,
+      "grid_density": 128
+    },
+    {
+      "variant": "grid_10x20",
+      "runs": 24,
+      "correct": 16,
+      "accuracy": 0.6666666666666666,
+      "invalid_outputs": 8,
+      "mean_latency_seconds": 7.368702358333546,
+      "prompt_tokens": 14581,
+      "completion_tokens": 2243,
+      "estimated_list_cost_cny": 0.031965,
+      "grid_density": 200
+    }
+  ],
+  "public_test_results_used": false,
+  "freeze_sha256": "a5ca5c11337a73ccc099204d4414a17a4c578b635706ddfa058344e9b8838176"
+}

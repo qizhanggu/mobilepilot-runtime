@@ -1,0 +1,62 @@
+[
+  {
+    "path": "artifacts/evaluation/grid-development-20260723/runs.jsonl",
+    "bytes": 52066,
+    "sha256": "cee7f3b446cd1fa63fd0d3b1f987596b36e6b7da3b4993c92b26682a9570187c"
+  },
+  {
+    "path": "artifacts/evaluation/grid-development-20260723/summary.json",
+    "bytes": 969,
+    "sha256": "5a5c3ed36459be08455c7a4bc2ecd62e8d6bd999e2d86aac3f6fcfba7840b78f"
+  },
+  {
+    "path": "artifacts/evaluation/grid-development-20260723/frozen_grid.json",
+    "bytes": 1371,
+    "sha256": "b51967b6368ea293b79b68f719753841dc03ccba08e2f083fcbea8a1796d2db1"
+  },
+  {
+    "path": "artifacts/evaluation/screenspot-v2-20260723/provenance.json",
+    "bytes": 1068,
+    "sha256": "3c20324954be221575b98e3234776624aaeec97d64d34dda53ec3ecf6b2c5ecc"
+  },
+  {
+    "path": "artifacts/evaluation/screenspot-v2-20260723/manifests/integration_audit_manifest.json",
+    "bytes": 18029,
+    "sha256": "26e8e1f9459e30628a008bc750b9f8d54bed1bad1f20abebd0449d7b07509485"
+  },
+  {
+    "path": "artifacts/evaluation/screenspot-v2-20260723/manifests/held_out_manifest.json",
+    "bytes": 226973,
+    "sha256": "719cdb167c12d3416499c0cf70dfbac480c142dd0e56b6a52f9ada52d322021d"
+  },
+  {
+    "path": "artifacts/evaluation/screenspot-v2-20260723/integration-audit/runs.jsonl",
+    "bytes": 81062,
+    "sha256": "e3ce995113c1657a804bd63310972fdfbcd4016c1b10627df4a09cf1645c0874"
+  },
+  {
+    "path": "artifacts/evaluation/screenspot-v2-20260723/integration-audit/summary.json",
+    "bytes": 1301,
+    "sha256": "8dd7242c349e1b44be4c7e7d13170c6a87adaf247cf6c4f781dbcdccd60f7308"
+  },
+  {
+    "path": "artifacts/evaluation/screenspot-v2-20260723/integration-audit/summary.csv",
+    "bytes": 507,
+    "sha256": "33a5c59e5ad307d3a7b5218806734bff895e0d29a1342cc5943bf9b91117db0d"
+  },
+  {
+    "path": "artifacts/evaluation/screenspot-v2-20260723/integration-audit/audit.json",
+    "bytes": 372,
+    "sha256": "2cceab9f1551824a01e1445a02ea65f1412c92dadfaa3296f25ce84e0aca94db"
+  },
+  {
+    "path": "artifacts/evaluation/screenspot-v2-20260723/integration-audit/change_log.json",
+    "bytes": 440,
+    "sha256": "0452534094687ff5c5dbfe822b11b13c676dd1393ceb53c91345b2da91dda678"
+  },
+  {
+    "path": "artifacts/evaluation/screenspot-v2-20260723/integration-audit/paired_outcomes.json",
+    "bytes": 28192,
+    "sha256": "efefb26a0a588dcac12aec7fae5902c86095457e09dcc7f76fa8f55e3a83491a"
+  }
+]

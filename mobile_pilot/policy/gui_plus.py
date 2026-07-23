@@ -70,11 +70,15 @@ class GuiPlusVisionPolicy:
         api_key: str | None = None,
         base_url: str | None = None,
         model: str | None = None,
+        request_timeout_seconds: float | None = None,
         client_factory: Callable[..., Any] | None = None,
     ):
         self._api_key = api_key or os.getenv("DASHSCOPE_API_KEY")
         self._base_url = base_url or os.getenv("DASHSCOPE_BASE_URL")
         self._model = model or os.getenv("MOBILEPILOT_ACTOR_MODEL", "gui-plus-2026-02-26")
+        self._request_timeout_seconds = request_timeout_seconds or float(
+            os.getenv("MOBILEPILOT_API_TIMEOUT_SECONDS", "90")
+        )
         self._client_factory = client_factory
 
     def decide(self, request: GuiPlusRequest) -> ParseResult:
@@ -146,7 +150,13 @@ class GuiPlusVisionPolicy:
             return self._client_factory(api_key=self._api_key, base_url=self._base_url)
         from openai import OpenAI
 
-        return OpenAI(api_key=self._api_key, base_url=self._base_url)
+        # Benchmark 需要真实调用次数可审计，因此禁用 SDK 隐式重试；失败由上层显式记录。
+        return OpenAI(
+            api_key=self._api_key,
+            base_url=self._base_url,
+            timeout=self._request_timeout_seconds,
+            max_retries=0,
+        )
 
 
 def parse_gui_plus_output(raw_output: str) -> ParseResult:

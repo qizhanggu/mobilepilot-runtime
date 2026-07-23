@@ -1,0 +1,25 @@
+{
+  "benchmark": "ScreenSpot-v2 Mobile",
+  "official_repository": "OS-Copilot/ScreenSpot-v2",
+  "official_commit": "5efbb1f1b5463a575f2eb7bc30fe29e49c15f93c",
+  "annotation_file": "screenspot_mobile_v2.json",
+  "annotation_sha256": "fdd1595b64179e31407eed5929fa12e80adc6ba2ee372a3802d36da379ea1825",
+  "paper_reported_mobile_samples": 502,
+  "released_annotation_samples": 501,
+  "released_counts": {
+    "text": 290,
+    "icon": 211,
+    "ios": 238,
+    "android": 211,
+    "shop": 52
+  },
+  "integration_audit_samples": 30,
+  "released_held_out_samples": 471,
+  "image_conversion_repository": "Voxel51/ScreenSpot-v2",
+  "image_conversion_commit": "f221b744a2e73f64d5178a0548db8e667c4843e0",
+  "image_conversion_manifest_sha256": "a71c69bb89123ad97cc0977f71736b902333cbbdad174e7776afcce90419b5df",
+  "exact_annotation_signature_matches": 501,
+  "official_evaluator_script_available": false,
+  "primary_metric": "predicted point falls inside the ground-truth bounding box",
+  "evaluator_implementation": "deterministic equivalent implementation with boundary tests"
+}

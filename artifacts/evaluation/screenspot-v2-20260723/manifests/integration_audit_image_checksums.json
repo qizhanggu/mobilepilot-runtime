@@ -1,0 +1,223 @@
+{
+  "images": [
+    {
+      "sample_id": "mobile-0016-c49de68fe4",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_1c1d54b4-5ac1-40cd-9dc6-21a8d3c97d6e_0.png",
+      "width": 2360,
+      "height": 1640,
+      "sha256": "f4b78bb0bde49ffe175abf4731486c1113d2b7a8009bdd1b7457123793e9e1e6"
+    },
+    {
+      "sample_id": "mobile-0031-e0fb4e2a42",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_1a514eae-4ee0-4780-a059-c47715828e3b_0.png",
+      "width": 1170,
+      "height": 2532,
+      "sha256": "0f805f8ff57f3e562c66528f8316ced9049080977e093087b346f0eedc6c5a04"
+    },
+    {
+      "sample_id": "mobile-0055-28e68c5e9d",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_8e7e6de4-2eac-400c-b845-291fa80c5c7c_2.png",
+      "width": 1170,
+      "height": 2532,
+      "sha256": "f2c8251782d320b933f199c0db9f0794a83ec34ca7f40760942e9d0eaac39a70"
+    },
+    {
+      "sample_id": "mobile-0065-e9331fcb1a",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_907cb7d2-9953-476e-b589-5526587c3913_2.png",
+      "width": 1170,
+      "height": 2532,
+      "sha256": "7d22eed86b5dfea33e18101fbdc132d8d5a5f4f82d024f8bfb1c56f168545122"
+    },
+    {
+      "sample_id": "mobile-0072-86a79caf03",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_e9d69310-692c-4a78-8b8d-b961a5cfec70_0.png",
+      "width": 1170,
+      "height": 2532,
+      "sha256": "ba54e669dc3581019210784a462a6cbf1cec6a54a12c927c9d8c157fcc4af1f2"
+    },
+    {
+      "sample_id": "mobile-0100-1b7cc98dbc",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_c1f1188d-1bd3-4ce6-8e3f-96628d07b0b9_1.png",
+      "width": 1170,
+      "height": 2532,
+      "sha256": "925391cc766410557e1036012e9cd101ff70e7ad2deb7e648e9ec89b1b5a9799"
+    },
+    {
+      "sample_id": "mobile-0124-9a26af916e",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_9bd1779a-91ee-4a59-8904-3850434b1421_1.png",
+      "width": 1170,
+      "height": 2532,
+      "sha256": "72d39ecca5dd962312f20b043a9a55ece6eed6c39e3bee113b1f20d4d5403aa7"
+    },
+    {
+      "sample_id": "mobile-0131-23acce2e49",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_b012267b-fcd6-4d0c-991a-f2a4afd0a2ff_1.png",
+      "width": 1080,
+      "height": 2400,
+      "sha256": "f079f4ea41b82b4f46a22be3f23f5d179bd720f202ac5a273a8f2a1922a44041"
+    },
+    {
+      "sample_id": "mobile-0133-b314c871af",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_faa33d8c-ff72-4c74-98df-cb46cc0516aa_0.png",
+      "width": 1080,
+      "height": 2400,
+      "sha256": "bc7b9e62b5ee2b439aad5e5f176372609e442c87adbbc3d85c4c212e7bf9c002"
+    },
+    {
+      "sample_id": "mobile-0138-2294c40760",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_06d5a5b9-8dda-439a-84a5-7af28ab2dab8_0.png",
+      "width": 1080,
+      "height": 2400,
+      "sha256": "d8241dbc0136ee39b7403283704c0212f55ac38aae04edcb4a0a1907ce7b4eac"
+    },
+    {
+      "sample_id": "mobile-0153-8d1ca0eb94",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_ef01fd08-a7fd-42a3-b1aa-fe22b3f79730_1.png",
+      "width": 1080,
+      "height": 2400,
+      "sha256": "1a3fbedb1859ee7e2eea15ed68343e0a8c4d0ce84ffe6e0d004ba11879804c23"
+    },
+    {
+      "sample_id": "mobile-0206-37b20d21dd",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_3b5ab7d3-8e84-4be1-83ba-801882db294b_2.png",
+      "width": 1080,
+      "height": 2400,
+      "sha256": "69a39654e0c81c9ac38c16e4d57e9683dab92573da26cff614a81f7f6061c27a"
+    },
+    {
+      "sample_id": "mobile-0247-a93f8e6962",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_6ded1777-d4c3-485f-b28a-7754e0e9c024_1.png",
+      "width": 2360,
+      "height": 1640,
+      "sha256": "c86e33943029b943d4e1aa0f935be38eabc8cfae303c6ff4430bcb136e74a7f1"
+    },
+    {
+      "sample_id": "mobile-0317-62c116e49f",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_bed2b5e8-9102-405e-80f3-85207ed1bbf0_0.png",
+      "width": 1080,
+      "height": 2400,
+      "sha256": "12c368d42fa5dd764752577dfd20dbce1842b16cb9c0d0c35ebc5af99811ede2"
+    },
+    {
+      "sample_id": "mobile-0343-91bd061123",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_674f6746-05c0-4e7d-93de-adf054f0eaf6_0.png",
+      "width": 1080,
+      "height": 2400,
+      "sha256": "9eebae5ab520f7ea677c34fa96b0e8c33766712b660d4a4f7b957856b1b36af5"
+    },
+    {
+      "sample_id": "mobile-0344-0d96eaaf36",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_674f6746-05c0-4e7d-93de-adf054f0eaf6_1.png",
+      "width": 1080,
+      "height": 2400,
+      "sha256": "9eebae5ab520f7ea677c34fa96b0e8c33766712b660d4a4f7b957856b1b36af5"
+    },
+    {
+      "sample_id": "mobile-0374-e25f72748e",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_508e7610-9e30-4626-9ea3-37bf194cb1dd_1.png",
+      "width": 1080,
+      "height": 2400,
+      "sha256": "9b4d17b5de122404bcb0bde244e05fac302632fb57303720d20814480fd4dd7c"
+    },
+    {
+      "sample_id": "mobile-0377-8d93610c4a",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_5c444b03-c5ca-41d8-b4cb-e12f4f4a4387_1.png",
+      "width": 1080,
+      "height": 2400,
+      "sha256": "a5ebe20e1bd0241afd6e065b9ef9081527674154bbe57f0792f976d7f6214fe8"
+    },
+    {
+      "sample_id": "mobile-0414-e65fec2d2d",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_9bbed1c6-3a9f-46ea-b2d3-39ae8abde54e_0.png",
+      "width": 1170,
+      "height": 2532,
+      "sha256": "92ff1f4a7af99236804a87bb4800591e86a27aa2ce414c079f08095f3b529f76"
+    },
+    {
+      "sample_id": "mobile-0438-d4b4fc01b4",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_ec01cb13-de9a-4a4b-9a79-5f810b034474_0.png",
+      "width": 1170,
+      "height": 2532,
+      "sha256": "b395117af8e61d57a4b0659df8e2e3fc6d16855e8f33d1155d06f272ed3201de"
+    },
+    {
+      "sample_id": "mobile-0449-c1b3c1e166",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_02e9bl_0.png",
+      "width": 2360,
+      "height": 1640,
+      "sha256": "8b03880d676b2f9f789ae8e621953b87f7e3e7e83a7612a179658b615bffd36e"
+    },
+    {
+      "sample_id": "mobile-0458-c96aaf01f2",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_6edzq7_0.jpg",
+      "width": 1280,
+      "height": 2774,
+      "sha256": "f203fee135714ea4fed95a89aedd57b795fdee6808444a6082b4b3f776dc3346"
+    },
+    {
+      "sample_id": "mobile-0464-41200ff26b",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_ax0vnf_0.jpg",
+      "width": 1280,
+      "height": 2774,
+      "sha256": "c88d6928b7187873c1ed70a7e9cc9545bb3ff5463ae0e1f84bb7a6edd55bca6c"
+    },
+    {
+      "sample_id": "mobile-0467-38b033cbdc",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_c9n6vg_0.png",
+      "width": 2360,
+      "height": 1640,
+      "sha256": "882c9ae0dad2c8e337f5a698899c33eac74c32b41f5bc259d0bb2daa78fa1bb6"
+    },
+    {
+      "sample_id": "mobile-0470-53bb99047b",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_drmphj_0.jpg",
+      "width": 1280,
+      "height": 2774,
+      "sha256": "001768ea6cc33b904e8bd89f6db4e28eaf30307ca9e5cc24d5cda34d0de4c7e4"
+    },
+    {
+      "sample_id": "mobile-0474-5f427a7a58",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_fgypk7_0.png",
+      "width": 2360,
+      "height": 1640,
+      "sha256": "c0e891087a9773bc868c59595b55caa8920eee1ed1331be9117bec3bcc590c1f"
+    },
+    {
+      "sample_id": "mobile-0476-ff6fcc7ef5",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_gtq93d_0.jpg",
+      "width": 1280,
+      "height": 2774,
+      "sha256": "2764e9e5c589997f21202bba2097f71d3dbd6d4a4ccec18356a7afd68e317bfb"
+    },
+    {
+      "sample_id": "mobile-0478-9e85dd8cd6",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_hydu17_0.jpg",
+      "width": 1242,
+      "height": 2688,
+      "sha256": "0ebc229295bc2435ef3515c354e09b66bc2e761a5181d1198ee89e871c8b7e08"
+    },
+    {
+      "sample_id": "mobile-0480-0fad99a5d9",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_je83pz_0.jpg",
+      "width": 1280,
+      "height": 2774,
+      "sha256": "17aa888b33a1ec47edf9933f8550c80e6c8e0f5fe7486f523c60958980d0388a"
+    },
+    {
+      "sample_id": "mobile-0492-75097b6330",
+      "image_path": "data\\screenspot-v2\\audit-images\\mobile_vqzf88_0.jpg",
+      "width": 1280,
+      "height": 2774,
+      "sha256": "898bdb10828f156a99ebf081500e658186302d9393d9f3bd37380bf760286e78"
+    }
+  ],
+  "annotation_rounding_overflows": [
+    {
+      "sample_id": "mobile-0449-c1b3c1e166",
+      "overflow_pixels": [
+        1,
+        0
+      ]
+    }
+  ]
+}
