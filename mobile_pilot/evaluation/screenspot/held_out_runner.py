@@ -356,7 +356,6 @@ def preflight() -> dict[str, Any]:
         "configs": [asdict(config) for config in configs],
         "logical_calls": len(samples) * len(configs),
         "model": EXPECTED_MODEL,
-        "git_commit": current_git_commit(),
         "freeze_git_commit": freeze["git_commit"],
         "manifest_sha256": EXPECTED_MANIFEST_SHA256,
         "image_mapping_sha256": sha256_file(IMAGE_MAPPING_PATH),
