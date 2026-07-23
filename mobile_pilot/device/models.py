@@ -23,8 +23,8 @@ class DeviceInfo:
 class DeviceObservation:
     """设备当前的只读观察结果。
 
-    截图只保存在内存中；调用者决定是否脱敏并持久化。UI XML 在 Phase 1
-    尝试无文件流式读取，若设备不支持会通过 ``ui_tree_error`` 明确记录。
+    截图只保存在内存中；调用者决定是否脱敏并持久化。UI XML 会先尝试无文件
+    流式读取，失败时使用随机临时文件读取后立即删除。
     """
 
     image: Image.Image

@@ -2,6 +2,8 @@
 
 from abc import ABC, abstractmethod
 
+from mobile_pilot.core import ActionResult
+
 from .models import DeviceInfo, DeviceObservation
 
 
@@ -19,3 +21,11 @@ class DeviceAdapter(ABC):
     @abstractmethod
     def observe(self, *, include_ui_tree: bool = False) -> DeviceObservation:
         """在内存中获取截图，并可选尝试获取 UI Tree。"""
+
+    @abstractmethod
+    def tap_point(self, x: int, y: int) -> ActionResult:
+        """执行一个已被上层策略和安全 Gate 批准的坐标点击。"""
+
+    @abstractmethod
+    def type_text(self, text: str) -> ActionResult:
+        """向当前已聚焦输入框输入经过上层批准的文本。"""

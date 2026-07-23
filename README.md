@@ -13,7 +13,7 @@
 
 ## 项目简介
 
-Mobile GUI Agent 接收一条用户指令和当前手机截图，通过视觉语言模型理解页面状态、回顾历史操作，并输出下一步结构化动作。
+Mobile GUI Agent 接收一条用户指令和当前手机截图，通过视觉语言模型理解页面状态、回顾历史操作，并输出下一步结构化动作。当前 MobilePilot 重构的核心定位是：**视觉感知与 VLM 决策为主、UI Tree 按需辅助、真实 Android Runtime 负责执行、验证和恢复。**
 
 例如，面对“去美团搜索附近的咖啡店”这样的指令，Agent 会逐步完成：
 
@@ -23,24 +23,25 @@ OPEN 美团 → CLICK 搜索框 → TYPE 咖啡 → CLICK 搜索按钮 → COMPL
 
 这个项目关注的不只是“调用视觉 API”，而是 GUI Agent 在长链路任务中的稳定性：如何让模型找准坐标、记住已经做过的动作、稳定输出机器可解析的格式，并在异常输出时安全降级。
 
-> 当前仓库实现的是“截图到动作”的决策层和离线评测流程，尚未集成 ADB 或真实设备执行器。
+> 当前仓库已具备真实 Android DeviceAdapter、GUI-Plus 视觉候选、受控五步 Runtime、Critic、Verifier、局部视觉 Recovery 和 JSONL Trace。三次同任务 5/5 只证明重复运行稳定性，不能描述成任意 App 的泛化成功率；统一 Safety Gate 和正式视觉任务集仍在后续阶段。
 
 ## 系统架构
 
 ```mermaid
 flowchart LR
-    A["自然语言指令"] --> C["上下文构造"]
-    B["当前手机截图"] --> G["10×10 视觉网格"]
-    G --> C
-    H["历史 Thought + Action"] --> C
-    C --> V["视觉语言模型"]
-    V --> P["三层输出解析"]
-    P --> R["坐标检查与后处理"]
-    R --> O["结构化 GUI 动作"]
-    O --> H
+    A["主任务与当前子目标"] --> C["视觉上下文"]
+    B["原图 / 网格 / 局部裁剪"] --> C
+    C --> V["VLM Actor"]
+    V --> P["候选动作"]
+    T["按需 UI Tree"] -. "辅助检查" .-> K["Critic / Verifier"]
+    P --> K
+    K --> D["ADB / uiautomator2 DeviceAdapter"]
+    D --> O["真实手机"]
+    O --> R["重新观察与恢复"]
+    R --> C
 ```
 
-每轮 API 请求只发送当前截图；历史图片不会重复上传，过去的操作则压缩为文本语义记忆。
+视觉实验不会预设网格优于原图，将统一比较 `vision_only`、`vision_with_tree_aux` 和 `tree_first`，并记录成功率、错误点击率、调用次数、延迟和 Token。
 
 ## 核心设计
 
@@ -150,13 +151,14 @@ mobile-gui-agent/
 └── docs/                    # 架构、实验和失败案例说明
 ```
 
-## 实验与迭代
+## 历史实验与当前重构
 
 开发过程中围绕 Prompt 长度、API 限流、JPEG/PNG、Self-Correction、输出解析策略和场景规则进行过多轮实验。最终保留的是更短、更可控的单次决策链路；一些看似“更智能”的复杂机制反而会放大模型随机性。
 
-- [架构与数据流](docs/architecture.md)
-- [实验与技术决策](docs/experiments.md)
-- [失败案例与反思](docs/failure-analysis.md)
+- [当前 MobilePilot 重构文档](docs/README.md)
+- [重构路线与阶段验收](docs/roadmap.md)
+- [阶段进展报告](docs/progress/)
+- [原离线原型架构与实验资料](archive/legacy-prototype/docs/)
 
 ## 项目来源
 
@@ -169,7 +171,7 @@ mobile-gui-agent/
 - 视觉模型输出存在随机性，单次评测无法完整反映稳定性。
 - 特殊场景规则仍混合在 Prompt 中，未来可拆成可配置策略层。
 
-下一步计划加入 ADB/Appium 执行器、自建公开数据集、重复运行统计和更多跨应用任务，把展示原型继续演进为可实际操作手机的 GUI Agent。
+下一步将补齐 Task Runtime、Pre-action Critic、验证/恢复与 Trace，再开展重复运行统计和跨应用任务；是否引入 `uiautomator2` 将按 [Phase 2 决策门](docs/design/adb-uiautomator2-decision.md)重新评估。
 
 ## License
 

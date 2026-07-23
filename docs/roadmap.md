@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | Phase 0：兼容基线 | 固化旧项目能力、错误语义和逐阶段评测基线。 | 原离线测试保持通过；新 Runtime 不会把异常记为成功。 |
 | Phase 1：真机 Adapter + 测试 App 选择 | 只读诊断真机能力，并确定可复现的测试 App 环境。 | 设备截图与 UI Tree 可读；已有 App 已评估或 `MobilePilot Lab` 已立项。 |
-| Phase 2：混合感知与策略 Adapter | 打通真实 UI Tree 优先、视觉 fallback，并接入 LegacyVisionPolicy。 | 语义元素操作与视觉降级均可验证；完成 ADB/uiautomator2 决策门。 |
+| Phase 2：混合感知与策略 Adapter | 打通真实视觉与 UI Tree 的可配置组合，并接入 LegacyVisionPolicy。 | 视觉定位与语义基线均可验证；完成 ADB/uiautomator2 决策门。 |
 | Phase 3：任务闭环与 Critic | 让任务拥有计划、执行前审查、验证、有限恢复和可回放 Trace。 | 自然语言任务在真机可控环境中真实完成，失败也能定位原因。 |
 | Phase 4：安全与接管 | 为有副作用的操作增加风险分级、确认绑定、暂停和人工接管。 | 未确认的发送/删除/下单等动作被阻止，状态改变后旧确认失效。 |
 | Phase 5：Tool + GUI | 用少量确定性工具与 GUI 操作组合，完成可解释的跨应用信息任务。 | 可生成跨应用任务结果或消息草稿，发送前必经用户确认。 |
@@ -159,11 +159,11 @@ mobile_pilot/
 - 已有小 App 得到“可复用 / 不可复用 / 需改造”的明确结论，或 `MobilePilot Lab` 的最小页面范围已确定。
 - FakeDevice 的只读观察流程可在不连接手机的情况下测试。
 
-## Phase 2：ScreenState、真实 UI Tree → 视觉 fallback 与策略 Adapter
+## Phase 2：ScreenState、视觉主链路与可配置辅助模式
 
 ### 目标
 
-将“截图 + 坐标”升级为“结构化 UI 优先、视觉兜底”的可解释感知和定位层。
+将“截图 + 坐标”升级为可配置的视觉定位层；保留结构化 UI 基线，但不把 UI Tree 写死为主路径。
 
 ### 工作内容
 
@@ -220,7 +220,7 @@ mobile_pilot/
 
 > “打开 MobilePilot Lab，搜索咖啡，筛选评分 4.5 以上，并读取前三个结果。”
 
-该任务应优先由 UI Tree 完成；可故意关闭某个元素的可访问属性，用于验证视觉 fallback，但不能把 fallback 当默认能力。
+该任务保留 `tree_first` 作为可靠基线，同时建设 `vision_only` 与 `vision_with_tree_aux`；视觉结果和 UI Tree 结果必须分开记录，不能混合成一个成功率。
 
 ### 验收标准
 

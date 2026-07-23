@@ -6,10 +6,13 @@ from dataclasses import dataclass
 import io
 import re
 import subprocess
+import uuid
 from pathlib import Path
 from typing import Iterable, List, Optional, Sequence, Tuple
 
 from PIL import Image
+
+from mobile_pilot.core import Action, ActionResult, ActionType
 
 from .base import DeviceAdapter
 from .models import DeviceInfo, DeviceObservation
@@ -31,8 +34,8 @@ class AdbDevice:
 class ADBDeviceAdapter(DeviceAdapter):
     """只读 ADB Adapter。
 
-    所有命令都显式携带 ``-s <serial>``。该类在 Phase 1 不提供 tap、input、
-    start activity 等写操作，因此不会因为默认行为误操作用户手机。
+    所有命令都显式携带 ``-s <serial>``。``tap_point`` 仅执行已经由上层策略、
+    Safety Gate 和用户授权批准的坐标点击；它不包含任何自动决策逻辑。
     """
 
     def __init__(self, serial: str, adb_path: str | Path = r"D:\Android\platform-tools\adb.exe"):
@@ -102,20 +105,68 @@ class ADBDeviceAdapter(DeviceAdapter):
             ui_tree_error=ui_tree_error,
         )
 
-    def _stream_ui_xml(self) -> tuple[Optional[str], Optional[str]]:
-        """尝试从 ``/dev/tty`` 无文件读取 UI XML。
+    def tap_point(self, x: int, y: int) -> ActionResult:
+        """点击已验证的真实屏幕坐标；调用方负责安全审批。"""
 
-        某些 Android 厂商构建只返回“已写入 /dev/tty”的提示而不转发 XML；这是
-        设备能力差异，不会静默伪装成空页面。Phase 2 将根据决策门选择更可靠的
-        临时文件方案或可选 uiautomator2 Adapter。
-        """
+        if x < 0 or y < 0:
+            raise ValueError("tap coordinates must be non-negative")
+        action = Action(
+            type=ActionType.CLICK_POINT,
+            parameters={"point": [x, y]},
+            source="adb_input",
+        )
+        self._run("shell", "input", "tap", str(x), str(y))
+        return ActionResult(
+            executed=True,
+            action=action,
+            message="ADB input tap completed",
+            details={"serial": self.serial},
+        )
+
+    def type_text(self, text: str) -> ActionResult:
+        """使用 Android ``input text`` 输入文本；调用方负责先聚焦目标输入框。"""
+
+        if not text:
+            raise ValueError("text is required")
+        action = Action(
+            type=ActionType.TYPE_TEXT,
+            parameters={"text": text},
+            source="adb_input",
+        )
+        adb_text = text.replace(" ", "%s")
+        self._run("shell", "input", "text", adb_text)
+        return ActionResult(
+            executed=True,
+            action=action,
+            message="ADB input text completed",
+            details={"serial": self.serial},
+        )
+
+    def _stream_ui_xml(self) -> tuple[Optional[str], Optional[str]]:
+        """读取 UI XML，并保证临时设备文件在读取后立即删除。"""
 
         response = self._text("shell", "uiautomator", "dump", "/dev/tty")
         xml_start = response.find("<?xml")
-        if xml_start < 0:
-            compact = " ".join(response.split())
-            return None, f"streaming UI XML unavailable: {compact or 'no output'}"
-        return response[xml_start:], None
+        if xml_start >= 0:
+            return response[xml_start:], None
+
+        stream_message = " ".join(response.split()) or "no output"
+        temp_path = f"/data/local/tmp/mobilepilot-ui-{uuid.uuid4().hex}.xml"
+        try:
+            self._text("shell", "uiautomator", "dump", temp_path)
+            xml = self._text("exec-out", "cat", temp_path)
+            xml_start = xml.find("<?xml")
+            if xml_start >= 0:
+                return xml[xml_start:], None
+            compact = " ".join(xml.split()) or "no XML content"
+            return None, f"temporary UI XML read failed: {compact}; stream: {stream_message}"
+        except AdbCommandError as exc:
+            return None, f"temporary UI XML dump failed: {exc}; stream: {stream_message}"
+        finally:
+            try:
+                self._run("shell", "rm", "-f", temp_path)
+            except AdbCommandError:
+                pass
 
     def _text(self, *args: str) -> str:
         return _decode(self._run(*args).stdout)

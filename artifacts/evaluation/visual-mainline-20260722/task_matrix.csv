@@ -1,0 +1,9 @@
+﻿task_id,coarse_fine__tree_aux,coarse_fine__vision_only,grid10__tree_aux,grid10__vision_only,raw__tree_aux,raw__vision_only,tree_first
+home_debug_dialog,2/3,1/3,3/3,3/3,3/3,3/3,3/3
+home_search_button,3/3,3/3,3/3,3/3,3/3,3/3,3/3
+home_search_input,0/3,0/3,2/3,3/3,3/3,3/3,3/3
+home_visual_canvas,3/3,3/3,3/3,3/3,3/3,3/3,2/3
+results_filter,3/3,3/3,3/3,3/3,1/3,0/3,3/3
+results_review,3/3,3/3,3/3,3/3,3/3,3/3,3/3
+test_dialog_close,3/3,3/3,3/3,3/3,3/3,3/3,3/3
+visual_dialog_close,3/3,3/3,3/3,3/3,3/3,3/3,3/3

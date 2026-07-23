@@ -29,6 +29,9 @@ logs/
 *.log
 *.xlsx
 *.zip
+# Private device traces and disposable API smoke runs
+artifacts/traces/
+artifacts/evaluation/visual-pilot*/
 
 # Editors and OS
 .idea/

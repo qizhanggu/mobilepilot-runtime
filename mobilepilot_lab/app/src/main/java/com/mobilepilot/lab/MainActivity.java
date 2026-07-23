@@ -2,10 +2,14 @@ package com.mobilepilot.lab;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -74,6 +78,8 @@ public class MainActivity extends Activity {
         Button popup = button(R.id.debug_dialog_button, "显示测试弹窗", "显示可关闭的测试弹窗");
         popup.setOnClickListener(view -> showTestDialog());
         content.addView(popup, fullWidth());
+
+        addVisualOnlyChallenge();
     }
 
     private void showResults() {
@@ -132,6 +138,22 @@ public class MainActivity extends Activity {
                 .show();
     }
 
+    private void addVisualOnlyChallenge() {
+        VisualOnlyChallenge challenge = new VisualOnlyChallenge();
+        // 不提供 id、text 或 content description，且从 Accessibility/UI Tree 中隐藏。
+        // 这个控件仅用于验证截图视觉定位 fallback，不承载任何真实业务动作。
+        challenge.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        content.addView(challenge, fullWidth(dp(86)));
+    }
+
+    private void showVisualOnlySuccessDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("视觉定位验证成功")
+                .setMessage("Canvas 控件未暴露语义节点，已通过视觉定位触发。")
+                .setPositiveButton("关闭", null)
+                .show();
+    }
+
     private void resetLab() {
         query = "";
         highRatingOnly = false;
@@ -171,7 +193,55 @@ public class MainActivity extends Activity {
         );
     }
 
+    private LinearLayout.LayoutParams fullWidth(int height) {
+        return new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                height
+        );
+    }
+
     private int dp(int value) {
         return Math.round(value * getResources().getDisplayMetrics().density);
+    }
+
+    private final class VisualOnlyChallenge extends View {
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final RectF bounds = new RectF();
+
+        VisualOnlyChallenge() {
+            super(MainActivity.this);
+            setFocusable(false);
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            float margin = dp(4);
+            bounds.set(margin, margin, getWidth() - margin, getHeight() - margin);
+            paint.setColor(Color.rgb(28, 107, 214));
+            canvas.drawRoundRect(bounds, dp(12), dp(12), paint);
+
+            paint.setColor(Color.WHITE);
+            paint.setTextSize(dp(18));
+            paint.setTextAlign(Paint.Align.CENTER);
+            Paint.FontMetrics metrics = paint.getFontMetrics();
+            float baseline = getHeight() / 2f - (metrics.ascent + metrics.descent) / 2f;
+            canvas.drawText("视觉专用按钮：点我验证", getWidth() / 2f, baseline, paint);
+        }
+
+        @Override
+        public boolean onTouchEvent(MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_UP && bounds.contains(event.getX(), event.getY())) {
+                showVisualOnlySuccessDialog();
+                performClick();
+            }
+            return true;
+        }
+
+        @Override
+        public boolean performClick() {
+            super.performClick();
+            return true;
+        }
     }
 }

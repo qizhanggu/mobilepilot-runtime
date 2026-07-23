@@ -8,12 +8,12 @@ from mobile_pilot.device.models import DeviceInfo
 def test_parses_ready_and_unauthorized_adb_devices():
     devices = _parse_adb_devices(
         "List of devices attached\n"
-        "10CE8Q0P8U000B1 device product:V2352A model:V2352A\n"
+        "emulator-5554 device product:sdk model:sdk_gphone\n"
         "emulator-5554 unauthorized transport_id:2\n"
     )
 
     assert [(device.serial, device.state) for device in devices] == [
-        ("10CE8Q0P8U000B1", "device"),
+        ("emulator-5554", "device"),
         ("emulator-5554", "unauthorized"),
     ]
 
@@ -34,3 +34,25 @@ def test_fake_device_observes_without_a_real_phone():
     assert observation.device_info.serial == "fake-1"
     assert observation.image.size == (100, 200)
     assert observation.ui_xml == "<hierarchy />"
+
+
+def test_fake_device_records_pixel_taps_without_a_real_phone():
+    info = DeviceInfo(serial="fake-1", state="device", physical_size=(100, 200))
+    adapter = FakeDeviceAdapter(info, Image.new("RGB", (100, 200), "white"))
+
+    result = adapter.tap_point(12, 34)
+
+    assert result.executed
+    assert result.action.parameters == {"point": [12, 34]}
+    assert adapter.taps == [(12, 34)]
+
+
+def test_fake_device_records_text_input_without_a_real_phone():
+    info = DeviceInfo(serial="fake-1", state="device", physical_size=(100, 200))
+    adapter = FakeDeviceAdapter(info, Image.new("RGB", (100, 200), "white"))
+
+    result = adapter.type_text("coffee")
+
+    assert result.executed
+    assert result.action.parameters == {"text": "coffee"}
+    assert adapter.typed_texts == ["coffee"]
