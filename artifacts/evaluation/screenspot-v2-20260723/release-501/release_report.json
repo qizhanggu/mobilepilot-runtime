@@ -1,0 +1,411 @@
+{
+  "primary_result": "held_out_471",
+  "integration_audit_samples": 30,
+  "held_out_samples": 471,
+  "combined_samples": 501,
+  "held_out_summary": [
+    {
+      "config": "grid_10x10__vision_only",
+      "samples": 471,
+      "correct": 314,
+      "accuracy": 0.6666666666666666,
+      "invalid_outputs": 123,
+      "invalid_output_rate": 0.2611464968152866,
+      "model_call_count": 471,
+      "prompt_tokens": 1434902,
+      "completion_tokens": 48548,
+      "total_tokens": 1483450,
+      "estimated_list_cost_cny": 2.370819,
+      "mean_latency_seconds": 4.369126901698623,
+      "failure_reasons": {
+        "success": 314,
+        "invalid_model_output": 122,
+        "prediction_outside_target": 34,
+        "recording_failure_after_model_call": 1
+      },
+      "text_samples": 275,
+      "text_accuracy": 0.7054545454545454,
+      "icon_samples": 196,
+      "icon_accuracy": 0.6122448979591837
+    },
+    {
+      "config": "raw__vision_only",
+      "samples": 471,
+      "correct": 332,
+      "accuracy": 0.7048832271762208,
+      "invalid_outputs": 110,
+      "invalid_output_rate": 0.23354564755838642,
+      "model_call_count": 471,
+      "prompt_tokens": 1440316,
+      "completion_tokens": 51004,
+      "total_tokens": 1491320,
+      "estimated_list_cost_cny": 2.389992,
+      "mean_latency_seconds": 4.288950516560474,
+      "failure_reasons": {
+        "invalid_model_output": 110,
+        "success": 332,
+        "prediction_outside_target": 29
+      },
+      "text_samples": 275,
+      "text_accuracy": 0.7490909090909091,
+      "icon_samples": 196,
+      "icon_accuracy": 0.6428571428571429
+    }
+  ],
+  "integration_audit_summary": [
+    {
+      "config": "grid_10x10__vision_only",
+      "samples": 30,
+      "correct": 23,
+      "accuracy": 0.7666666666666667,
+      "invalid_outputs": 5,
+      "invalid_output_rate": 0.16666666666666666,
+      "model_call_count": 30,
+      "prompt_tokens": 96643,
+      "completion_tokens": 3113,
+      "total_tokens": 99756,
+      "estimated_list_cost_cny": 0.158973,
+      "mean_latency_seconds": 4.544527506666418,
+      "failure_reasons": {
+        "success": 23,
+        "invalid_model_output": 5,
+        "prediction_outside_target": 2
+      },
+      "text_samples": 15,
+      "text_accuracy": 0.8666666666666667,
+      "icon_samples": 15,
+      "icon_accuracy": 0.6666666666666666
+    },
+    {
+      "config": "raw__vision_only",
+      "samples": 30,
+      "correct": 21,
+      "accuracy": 0.7,
+      "invalid_outputs": 7,
+      "invalid_output_rate": 0.23333333333333334,
+      "model_call_count": 30,
+      "prompt_tokens": 89628,
+      "completion_tokens": 3240,
+      "total_tokens": 92868,
+      "estimated_list_cost_cny": 0.149022,
+      "mean_latency_seconds": 10.56170201666658,
+      "failure_reasons": {
+        "invalid_model_output": 7,
+        "success": 21,
+        "prediction_outside_target": 2
+      },
+      "text_samples": 15,
+      "text_accuracy": 0.8,
+      "icon_samples": 15,
+      "icon_accuracy": 0.6
+    }
+  ],
+  "combined_summary": [
+    {
+      "config": "grid_10x10__vision_only",
+      "samples": 501,
+      "correct": 337,
+      "accuracy": 0.6726546906187625,
+      "invalid_outputs": 128,
+      "invalid_output_rate": 0.2554890219560878,
+      "model_call_count": 501,
+      "prompt_tokens": 1531545,
+      "completion_tokens": 51661,
+      "total_tokens": 1583206,
+      "estimated_list_cost_cny": 2.529792,
+      "mean_latency_seconds": 4.379629931936216,
+      "failure_reasons": {
+        "success": 337,
+        "invalid_model_output": 127,
+        "prediction_outside_target": 36,
+        "recording_failure_after_model_call": 1
+      },
+      "text_samples": 290,
+      "text_accuracy": 0.7137931034482758,
+      "icon_samples": 211,
+      "icon_accuracy": 0.6161137440758294
+    },
+    {
+      "config": "raw__vision_only",
+      "samples": 501,
+      "correct": 353,
+      "accuracy": 0.7045908183632734,
+      "invalid_outputs": 117,
+      "invalid_output_rate": 0.23353293413173654,
+      "model_call_count": 501,
+      "prompt_tokens": 1529944,
+      "completion_tokens": 54244,
+      "total_tokens": 1584188,
+      "estimated_list_cost_cny": 2.539014,
+      "mean_latency_seconds": 4.664564378842277,
+      "failure_reasons": {
+        "invalid_model_output": 117,
+        "success": 353,
+        "prediction_outside_target": 31
+      },
+      "text_samples": 290,
+      "text_accuracy": 0.7517241379310344,
+      "icon_samples": 211,
+      "icon_accuracy": 0.6398104265402843
+    }
+  ],
+  "held_out_paired_comparison": {
+    "samples": 471,
+    "both_success": 253,
+    "raw_only_success": 79,
+    "grid_10x10_only_success": 61,
+    "both_failed": 78,
+    "raw_accuracy": 0.7048832271762208,
+    "grid_10x10_accuracy": 0.6666666666666666,
+    "accuracy_difference_grid_minus_raw": -0.03821656050955414,
+    "discordant_pairs": 140,
+    "exact_mcnemar_two_sided_p_value": 0.1505276971716133
+  },
+  "combined_paired_comparison": {
+    "samples": 501,
+    "both_success": 270,
+    "raw_only_success": 83,
+    "grid_10x10_only_success": 67,
+    "both_failed": 81,
+    "raw_accuracy": 0.7045908183632734,
+    "grid_10x10_accuracy": 0.6726546906187625,
+    "accuracy_difference_grid_minus_raw": -0.031936127744510975,
+    "discordant_pairs": 150,
+    "exact_mcnemar_two_sided_p_value": 0.22054483769441574
+  },
+  "held_out_outside_bbox": {
+    "raw__vision_only": {
+      "outside_bbox_clicks": 29,
+      "outside_bbox_click_rate": 0.06157112526539278
+    },
+    "grid_10x10__vision_only": {
+      "outside_bbox_clicks": 34,
+      "outside_bbox_click_rate": 0.07218683651804671
+    }
+  },
+  "combined_outside_bbox": {
+    "raw__vision_only": {
+      "outside_bbox_clicks": 31,
+      "outside_bbox_click_rate": 0.06187624750499002
+    },
+    "grid_10x10__vision_only": {
+      "outside_bbox_clicks": 36,
+      "outside_bbox_click_rate": 0.0718562874251497
+    }
+  },
+  "typical_held_out_cases": {
+    "grid_corrects_raw": {
+      "sample_id": "mobile-0000-32207e9d2d",
+      "instruction": "check the weather",
+      "data_type": "icon",
+      "target_bbox_xyxy": [
+        223,
+        78,
+        824,
+        671
+      ],
+      "image_path": "D:\\Users\\Admin\\Desktop\\mobile-gui-agent\\data\\screenspot-v2\\held-out-images\\mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_0.png",
+      "raw": {
+        "correct": false,
+        "prediction_point": null,
+        "failure_reason": "invalid_model_output",
+        "parse_error_kind": "PARSE_ERROR",
+        "latency_seconds": 7.968635900000663,
+        "total_tokens": 4025,
+        "estimated_list_cost_cny": 0.0063225,
+        "raw_model_response": "Action: Click on the Shanghai weather widget located in the top left section of the desktop to view detailed weather information.\n<tool_call>\n{\"type\":\"function\",\"arguments\":{}}\n</think>"
+      },
+      "grid_10x10": {
+        "correct": true,
+        "prediction_point": [
+          280,
+          168
+        ],
+        "failure_reason": "",
+        "parse_error_kind": null,
+        "latency_seconds": 4.606569100000343,
+        "total_tokens": 3976,
+        "estimated_list_cost_cny": 0.006102,
+        "raw_model_response": "Action: Click on the temperature value \"3°\" in the weather widget to get more detailed weather information.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [119, 103]}\n\n"
+      }
+    },
+    "grid_harms_raw": {
+      "sample_id": "mobile-0003-7bb9ce9f58",
+      "instruction": "open the camera",
+      "data_type": "text",
+      "target_bbox_xyxy": [
+        1936,
+        806,
+        2056,
+        972
+      ],
+      "image_path": "D:\\Users\\Admin\\Desktop\\mobile-gui-agent\\data\\screenspot-v2\\held-out-images\\mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_3.png",
+      "raw": {
+        "correct": true,
+        "prediction_point": [
+          1994,
+          883
+        ],
+        "failure_reason": "",
+        "parse_error_kind": null,
+        "latency_seconds": 4.57371989999956,
+        "total_tokens": 4070,
+        "estimated_list_cost_cny": 0.006525,
+        "raw_model_response": "Action: Click the Camera icon located in the second row of the desktop, sixth from the left, to open the Camera application.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [845, 539]}}\n</think>"
+      },
+      "grid_10x10": {
+        "correct": false,
+        "prediction_point": null,
+        "failure_reason": "invalid_model_output",
+        "parse_error_kind": "PARSE_ERROR",
+        "latency_seconds": 3.9550447999972675,
+        "total_tokens": 4038,
+        "estimated_list_cost_cny": 0.006381,
+        "raw_model_response": "Action: Left-click on the Camera app icon, which has a dark background with a camera symbol and is located in the second row of apps on the right side of the screen.\n<tool_call>\n{\"coordinate\": [848, 539]}"
+      }
+    },
+    "both_fail": {
+      "sample_id": "mobile-0004-043666d223",
+      "instruction": "view the menu",
+      "data_type": "icon",
+      "target_bbox_xyxy": [
+        40,
+        64,
+        120,
+        130
+      ],
+      "image_path": "D:\\Users\\Admin\\Desktop\\mobile-gui-agent\\data\\screenspot-v2\\held-out-images\\mobile_6949b916-64c8-431f-8842-a29a9a557641_0.png",
+      "raw": {
+        "correct": false,
+        "prediction_point": [
+          1170,
+          26
+        ],
+        "failure_reason": "prediction_outside_target",
+        "parse_error_kind": null,
+        "latency_seconds": 3.879845799998293,
+        "total_tokens": 4049,
+        "estimated_list_cost_cny": 0.0064305000000000005,
+        "raw_model_response": "Action: Click on the three-dot menu icon in the top navigation bar to view the menu options.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [496, 16]}}\n</tool_call>"
+      },
+      "grid_10x10": {
+        "correct": false,
+        "prediction_point": [
+          1156,
+          26
+        ],
+        "failure_reason": "prediction_outside_target",
+        "parse_error_kind": null,
+        "latency_seconds": 4.171068499999819,
+        "total_tokens": 4085,
+        "estimated_list_cost_cny": 0.0065925,
+        "raw_model_response": "Action: Click the hamburger menu icon or three-dot menu button located at the top of the screen to open the menu.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [490, 16]}}\n</think>"
+      }
+    },
+    "invalid_output": {
+      "sample_id": "mobile-0000-32207e9d2d",
+      "instruction": "check the weather",
+      "data_type": "icon",
+      "target_bbox_xyxy": [
+        223,
+        78,
+        824,
+        671
+      ],
+      "image_path": "D:\\Users\\Admin\\Desktop\\mobile-gui-agent\\data\\screenspot-v2\\held-out-images\\mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_0.png",
+      "raw": {
+        "correct": false,
+        "prediction_point": null,
+        "failure_reason": "invalid_model_output",
+        "parse_error_kind": "PARSE_ERROR",
+        "latency_seconds": 7.968635900000663,
+        "total_tokens": 4025,
+        "estimated_list_cost_cny": 0.0063225,
+        "raw_model_response": "Action: Click on the Shanghai weather widget located in the top left section of the desktop to view detailed weather information.\n<tool_call>\n{\"type\":\"function\",\"arguments\":{}}\n</think>"
+      },
+      "grid_10x10": {
+        "correct": true,
+        "prediction_point": [
+          280,
+          168
+        ],
+        "failure_reason": "",
+        "parse_error_kind": null,
+        "latency_seconds": 4.606569100000343,
+        "total_tokens": 3976,
+        "estimated_list_cost_cny": 0.006102,
+        "raw_model_response": "Action: Click on the temperature value \"3°\" in the weather widget to get more detailed weather information.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [119, 103]}\n\n"
+      }
+    },
+    "text_difference": {
+      "sample_id": "mobile-0003-7bb9ce9f58",
+      "instruction": "open the camera",
+      "data_type": "text",
+      "target_bbox_xyxy": [
+        1936,
+        806,
+        2056,
+        972
+      ],
+      "image_path": "D:\\Users\\Admin\\Desktop\\mobile-gui-agent\\data\\screenspot-v2\\held-out-images\\mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_3.png",
+      "raw": {
+        "correct": true,
+        "prediction_point": [
+          1994,
+          883
+        ],
+        "failure_reason": "",
+        "parse_error_kind": null,
+        "latency_seconds": 4.57371989999956,
+        "total_tokens": 4070,
+        "estimated_list_cost_cny": 0.006525,
+        "raw_model_response": "Action: Click the Camera icon located in the second row of the desktop, sixth from the left, to open the Camera application.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [845, 539]}}\n</think>"
+      },
+      "grid_10x10": {
+        "correct": false,
+        "prediction_point": null,
+        "failure_reason": "invalid_model_output",
+        "parse_error_kind": "PARSE_ERROR",
+        "latency_seconds": 3.9550447999972675,
+        "total_tokens": 4038,
+        "estimated_list_cost_cny": 0.006381,
+        "raw_model_response": "Action: Left-click on the Camera app icon, which has a dark background with a camera symbol and is located in the second row of apps on the right side of the screen.\n<tool_call>\n{\"coordinate\": [848, 539]}"
+      }
+    },
+    "icon_difference": {
+      "sample_id": "mobile-0000-32207e9d2d",
+      "instruction": "check the weather",
+      "data_type": "icon",
+      "target_bbox_xyxy": [
+        223,
+        78,
+        824,
+        671
+      ],
+      "image_path": "D:\\Users\\Admin\\Desktop\\mobile-gui-agent\\data\\screenspot-v2\\held-out-images\\mobile_1ca5b944-293a-46a1-af95-eb35bc8a0b2a_0.png",
+      "raw": {
+        "correct": false,
+        "prediction_point": null,
+        "failure_reason": "invalid_model_output",
+        "parse_error_kind": "PARSE_ERROR",
+        "latency_seconds": 7.968635900000663,
+        "total_tokens": 4025,
+        "estimated_list_cost_cny": 0.0063225,
+        "raw_model_response": "Action: Click on the Shanghai weather widget located in the top left section of the desktop to view detailed weather information.\n<tool_call>\n{\"type\":\"function\",\"arguments\":{}}\n</think>"
+      },
+      "grid_10x10": {
+        "correct": true,
+        "prediction_point": [
+          280,
+          168
+        ],
+        "failure_reason": "",
+        "parse_error_kind": null,
+        "latency_seconds": 4.606569100000343,
+        "total_tokens": 3976,
+        "estimated_list_cost_cny": 0.006102,
+        "raw_model_response": "Action: Click on the temperature value \"3°\" in the weather widget to get more detailed weather information.\n<tool_call>\n{\"action\": \"left_click\", \"coordinate\": [119, 103]}\n\n"
+      }
+    }
+  }
+}

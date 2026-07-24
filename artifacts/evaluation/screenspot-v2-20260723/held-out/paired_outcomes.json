@@ -1,0 +1,12 @@
+{
+  "samples": 471,
+  "both_success": 253,
+  "raw_only_success": 79,
+  "grid_10x10_only_success": 61,
+  "both_failed": 78,
+  "raw_accuracy": 0.7048832271762208,
+  "grid_10x10_accuracy": 0.6666666666666666,
+  "accuracy_difference_grid_minus_raw": -0.03821656050955414,
+  "discordant_pairs": 140,
+  "exact_mcnemar_two_sided_p_value": 0.1505276971716133
+}

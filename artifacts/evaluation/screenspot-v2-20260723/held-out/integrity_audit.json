@@ -1,0 +1,51 @@
+{
+  "subset": "held_out",
+  "samples": 471,
+  "terminal_records": 942,
+  "unique_sample_config_pairs": 942,
+  "logical_calls": 942,
+  "records_by_config": {
+    "raw__vision_only": 471,
+    "grid_10x10__vision_only": 471
+  },
+  "known_tokens": 2974770,
+  "known_catalog_cost_cny": 4.760811,
+  "missing_usage_records": {
+    "raw__vision_only": 3,
+    "grid_10x10__vision_only": 5
+  },
+  "failure_reasons": {
+    "raw__vision_only": {
+      "success": 332,
+      "invalid_model_output": 110,
+      "prediction_outside_target": 29
+    },
+    "grid_10x10__vision_only": {
+      "success": 314,
+      "invalid_model_output": 122,
+      "prediction_outside_target": 34,
+      "recording_failure_after_model_call": 1
+    }
+  },
+  "latency_seconds_excluding_lost_record": {
+    "raw__vision_only": 4.288950516560474,
+    "grid_10x10__vision_only": 4.378422916383088
+  },
+  "recording_incidents": [
+    {
+      "logical_call": 730,
+      "sample_id": "mobile-0382-29c94fe87b",
+      "config": "grid_10x10__vision_only",
+      "treatment": "forced incorrect; no retry; usage, latency and raw response unknown"
+    }
+  ],
+  "duplicate_terminal_pairs": 0,
+  "missing_terminal_pairs": 0,
+  "single_sample_retries": 0,
+  "prompt_changes": 0,
+  "model_changes": 0,
+  "grid_changes": 0,
+  "parser_changes": 0,
+  "coordinate_conversion_changes": 0,
+  "evaluator_changes": 0
+}
