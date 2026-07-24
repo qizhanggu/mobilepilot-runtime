@@ -1,0 +1,21 @@
+{
+  "incident": "recording_failure_after_model_call",
+  "observed_after_terminal_records": 729,
+  "affected_logical_call": 730,
+  "affected_sample_id": "mobile-0382-29c94fe87b",
+  "affected_config": "grid_10x10__vision_only",
+  "failure_point": "after run_one returned and before append_jsonl",
+  "local_error": "git rev-parse HEAD returned non-zero exit status 3221226091",
+  "github_authentication_related": false,
+  "model_call_occurred": true,
+  "raw_response_recoverable": false,
+  "retry_performed": false,
+  "scoring_treatment": "forced incorrect terminal record with unknown usage and latency",
+  "repair": "read git revision once before entering the model-call loop",
+  "prompt_changed": false,
+  "model_changed": false,
+  "grid_changed": false,
+  "parser_changed": false,
+  "coordinate_conversion_changed": false,
+  "evaluator_changed": false
+}

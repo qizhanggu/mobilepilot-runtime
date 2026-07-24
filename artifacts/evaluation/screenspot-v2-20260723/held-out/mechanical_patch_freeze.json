@@ -1,0 +1,35 @@
+{
+  "stage": "B4_mechanical_patch_after_call_730",
+  "repair_git_commit": "a01b29e8e586a5d0f5f285fd2cf20cbd3112e88a",
+  "pre_run_freeze_sha256": "ab9ae68e77455b7bd9026ca99928d230cc3497c3871ce83d54e0502a270c208b",
+  "change_kind": "cache_git_commit_before_model_loop",
+  "allowed_source_change": "mobile_pilot/evaluation/screenspot/held_out_runner.py",
+  "source_hashes_before": {
+    "mobile_pilot/policy/gui_plus.py": "ef3a617918e410a0a8b6bc96b4a964b775ee6b2ae6bb238baf1b215b79fe082a",
+    "mobile_pilot/evaluation/screenspot/dataset.py": "7c4ba4f153376221b583e8ad6d6b19bf3b170d0f372fa4353b0515d56933be0d",
+    "mobile_pilot/evaluation/screenspot/preprocess.py": "746e248732660bdef4392c364a171866864234f764b74d75f8d85cc9757080e3",
+    "mobile_pilot/evaluation/screenspot/evaluator.py": "2cb1440ba319b9a8d4ac1a62232f102e06689ce8b06533da57ba49bca5ae52f1",
+    "mobile_pilot/evaluation/screenspot/reporting.py": "5b2b8f966df4b882b840148e9f563ee3b8de2d826144a8ac856452ee6a42af79",
+    "mobile_pilot/evaluation/screenspot/runner.py": "f7432c878ba95df375f8dd881d5289640f0e1fb4f4ed379f12ba36f126de6ed9",
+    "mobile_pilot/evaluation/screenspot/held_out_runner.py": "106393547764320394565e8b6dc4747c95964208a09ca3b86b4b62e95d321cda",
+    "mobile_pilot/evaluation/screenspot/statistics.py": "9b1172ca49c8b3aaa9b60eca916d694255c68a66db0c9e6245f05e3db1dbebee",
+    "mobile_pilot/evaluation/screenspot/release_reporting.py": "a549425e575a6ff9f411f97412d3b077131061f4c7c8ffc043807958f7c34d44"
+  },
+  "source_hashes_after": {
+    "mobile_pilot/policy/gui_plus.py": "ef3a617918e410a0a8b6bc96b4a964b775ee6b2ae6bb238baf1b215b79fe082a",
+    "mobile_pilot/evaluation/screenspot/dataset.py": "7c4ba4f153376221b583e8ad6d6b19bf3b170d0f372fa4353b0515d56933be0d",
+    "mobile_pilot/evaluation/screenspot/preprocess.py": "746e248732660bdef4392c364a171866864234f764b74d75f8d85cc9757080e3",
+    "mobile_pilot/evaluation/screenspot/evaluator.py": "2cb1440ba319b9a8d4ac1a62232f102e06689ce8b06533da57ba49bca5ae52f1",
+    "mobile_pilot/evaluation/screenspot/reporting.py": "5b2b8f966df4b882b840148e9f563ee3b8de2d826144a8ac856452ee6a42af79",
+    "mobile_pilot/evaluation/screenspot/runner.py": "f7432c878ba95df375f8dd881d5289640f0e1fb4f4ed379f12ba36f126de6ed9",
+    "mobile_pilot/evaluation/screenspot/held_out_runner.py": "2b528b0cae3729809a18a0b53e68d5e74ed7057b32b37e400587727e9d1da26c",
+    "mobile_pilot/evaluation/screenspot/statistics.py": "9b1172ca49c8b3aaa9b60eca916d694255c68a66db0c9e6245f05e3db1dbebee",
+    "mobile_pilot/evaluation/screenspot/release_reporting.py": "a549425e575a6ff9f411f97412d3b077131061f4c7c8ffc043807958f7c34d44"
+  },
+  "scoring_files_unchanged": [
+    "mobile_pilot/policy/gui_plus.py",
+    "mobile_pilot/evaluation/screenspot/preprocess.py",
+    "mobile_pilot/evaluation/screenspot/evaluator.py",
+    "mobile_pilot/evaluation/screenspot/runner.py"
+  ]
+}
