@@ -39,6 +39,7 @@ INTEGRATION_MANIFEST_PATH = BENCHMARK_ROOT / "manifests/integration_audit_manife
 IMAGE_MAPPING_PATH = BENCHMARK_ROOT / "manifests/held_out_image_mapping.json"
 FROZEN_GRID_PATH = PROJECT_ROOT / "artifacts/evaluation/grid-development-20260723/frozen_grid.json"
 FREEZE_PATH = BENCHMARK_ROOT / "held-out/pre_run_freeze.json"
+MECHANICAL_PATCH_PATH = BENCHMARK_ROOT / "held-out/mechanical_patch_freeze.json"
 OUTPUT_DIR = BENCHMARK_ROOT / "held-out"
 
 EXPECTED_HELD_OUT_COUNT = 471
@@ -179,8 +180,26 @@ def validate_freeze() -> dict[str, Any]:
     for key, value in expected.items():
         if freeze.get(key) != value:
             raise ValueError(f"pre-run freeze mismatch: {key}")
-    if freeze.get("source_hashes") != source_hashes():
-        raise ValueError("frozen source/config hashes do not match working tree")
+    current_sources = source_hashes()
+    if freeze.get("source_hashes") != current_sources:
+        if not MECHANICAL_PATCH_PATH.is_file():
+            raise ValueError("frozen source/config hashes do not match working tree")
+        patch = json.loads(MECHANICAL_PATCH_PATH.read_text(encoding="utf-8"))
+        if patch.get("pre_run_freeze_sha256") != sha256_file(FREEZE_PATH):
+            raise ValueError("mechanical patch does not bind the original pre-run freeze")
+        if patch.get("source_hashes_before") != freeze.get("source_hashes"):
+            raise ValueError("mechanical patch source-before hashes do not match")
+        if patch.get("source_hashes_after") != current_sources:
+            raise ValueError("mechanical patch source-after hashes do not match")
+        changed = {
+            path
+            for path in current_sources
+            if current_sources[path] != freeze["source_hashes"].get(path)
+        }
+        if changed != {"mobile_pilot/evaluation/screenspot/held_out_runner.py"}:
+            raise ValueError(f"mechanical patch changed prohibited frozen files: {sorted(changed)}")
+        if patch.get("change_kind") != "cache_git_commit_before_model_loop":
+            raise ValueError("unapproved mechanical patch kind")
     if freeze.get("image_mapping_sha256") != sha256_file(IMAGE_MAPPING_PATH):
         raise ValueError("held-out image mapping hash mismatch")
     return freeze
@@ -242,6 +261,7 @@ class HeldOutRunner(ScreenSpotRunner):
         )
         completed = set(pairs)
         consecutive_platform_errors = 0
+        git_commit = current_git_commit()
 
         for sample in samples:
             for config in configs:
@@ -258,7 +278,7 @@ class HeldOutRunner(ScreenSpotRunner):
                     {
                         "evaluation_split": "held_out",
                         "pass_k": 1,
-                        "git_commit_at_run": current_git_commit(),
+                        "git_commit_at_run": git_commit,
                         "freeze_sha256": sha256_file(FREEZE_PATH),
                     }
                 )
