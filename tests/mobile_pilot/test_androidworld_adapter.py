@@ -30,6 +30,11 @@ def test_propose_complete_is_not_local_success():
     assert mapped.payload is None
 
 
+def test_open_app_normalizes_display_name_before_androidworld_mapping():
+    mapped = AndroidWorldAdapter.map_action(Action(ActionType.OPEN_APP, {"app_name": "The Clock"}))
+    assert mapped.payload == {"action_type": "open_app", "app_name": "Clock"}
+
+
 def test_observe_uses_or_omits_accessibility_elements_by_mode():
     raw_element = SimpleNamespace(
         bbox_pixels=SimpleNamespace(x_min=1, y_min=2, x_max=30, y_max=40),

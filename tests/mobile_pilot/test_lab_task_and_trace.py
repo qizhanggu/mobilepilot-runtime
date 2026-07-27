@@ -37,3 +37,12 @@ def test_jsonl_trace_redacts_secret_fields(tmp_path):
     assert record["api_key"] == "[REDACTED]"
     assert record["nested"]["authorization"] == "[REDACTED]"
     assert record["ok"] is True
+
+
+def test_jsonl_trace_keeps_token_accounting_fields(tmp_path):
+    path = tmp_path / "trace.jsonl"
+    writer = JsonlTraceWriter(path, run_id="test-run")
+    writer.write("model_call", metrics={"prompt_tokens": 123, "completion_tokens": 4})
+
+    record = json.loads(path.read_text(encoding="utf-8"))
+    assert record["metrics"] == {"completion_tokens": 4, "prompt_tokens": 123}

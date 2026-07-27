@@ -9,6 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import hashlib
 import io
+import re
 from typing import Any, Callable
 
 from PIL import Image
@@ -67,7 +68,15 @@ class AndroidWorldAdapter:
         assert mapped.payload is not None
         from android_world.env import json_action
 
-        self._env.execute_action(json_action.JSONAction(**mapped.payload))
+        try:
+            self._env.execute_action(json_action.JSONAction(**mapped.payload))
+        except Exception as exc:
+            return ActionResult(
+                executed=False,
+                action=action,
+                message=f"AndroidWorld execution failed: {exc}",
+                details={"androidworld_action": mapped.payload, "exception_type": type(exc).__name__},
+            )
         return ActionResult(
             executed=True,
             action=action,
@@ -98,7 +107,7 @@ class AndroidWorldAdapter:
             return MappedAndroidWorldAction({"action_type": "navigate_back"}, False)
         if action.type is ActionType.OPEN_APP:
             return MappedAndroidWorldAction(
-                {"action_type": "open_app", "app_name": _required_string(params, "app_name")}, False
+                {"action_type": "open_app", "app_name": _normalize_app_name(_required_string(params, "app_name"))}, False
             )
         if action.type is ActionType.WAIT:
             return MappedAndroidWorldAction({"action_type": "wait"}, False)
@@ -162,3 +171,14 @@ def _direction(params: dict[str, Any]) -> str:
     if direction not in {"left", "right", "up", "down"}:
         raise ValueError("direction must be one of left, right, up, down")
     return direction
+
+
+def _normalize_app_name(app_name: str) -> str:
+    """Remove display-name articles before AndroidWorld resolves its app key.
+
+    AndroidWorld accepts canonical keys such as ``clock`` and otherwise treats
+    text as an Android package.  This is a task-independent compatibility
+    normalization; it does not map one benchmark task to an action sequence.
+    """
+    normalized = re.sub(r"^\s*(?:the|an|a)\s+", "", app_name, flags=re.IGNORECASE).strip()
+    return normalized or app_name

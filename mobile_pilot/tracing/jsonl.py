@@ -9,7 +9,10 @@ from typing import Any
 import uuid
 
 
-_SENSITIVE_PARTS = ("api_key", "token", "password", "secret", "authorization")
+_SENSITIVE_KEYS = {
+    "api_key", "apikey", "authorization", "password", "secret",
+    "access_token", "refresh_token", "token",
+}
 
 
 class JsonlTraceWriter:
@@ -31,7 +34,9 @@ class JsonlTraceWriter:
 
 def _sanitize(value: Any, key: str = "") -> Any:
     lowered = key.lower()
-    if any(part in lowered for part in _SENSITIVE_PARTS):
+    # Keep accounting fields (for example ``prompt_tokens``) auditable while
+    # still removing actual credential fields.
+    if lowered in _SENSITIVE_KEYS or lowered.endswith("_api_key"):
         return "[REDACTED]"
     if isinstance(value, dict):
         return {str(child_key): _sanitize(child_value, str(child_key)) for child_key, child_value in value.items()}

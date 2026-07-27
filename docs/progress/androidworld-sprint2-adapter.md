@@ -1,7 +1,7 @@
 # AndroidWorld Sprint 2 Adapter 进度
 
 日期：2026-07-27
-状态：**Adapter 基础桥接已真实验证；多步 Actor Loop 尚未完成。**
+状态：**多步 Actor / Agent Loop 已接入；首条模型驱动任务待运行。**
 
 ## 本次完成
 
@@ -34,7 +34,29 @@ official_reward_after = 0.0
 
 - AndroidWorld首次获取 Accessibility Tree 仍可能出现一次 retry；Trace 与评测中将记录它，
   不能将其吞掉。
-- 目前尚未接入会根据完整目标、历史、Verifier和剩余步数连续决策的多步 Actor；下一步实现
-  该 Loop 与结构化多动作Prompt，再以 `OpenAppTaskEval`、`ClockStopWatchRunning`、
-  `SystemWifiTurnOnVerify` 三题作为开发冒烟集。
+- 新增独立的 `mobile_pilot.androidworld.AndroidWorldGuiPlusPolicy`，支持 `CLICK`、`TYPE`、
+  `SWIPE`、`BACK`、`OPEN_APP`、`WAIT` 与 `PROPOSE_COMPLETE`。它与冻结的 ScreenSpot 单点
+  Prompt 完全分离，不能影响已发布的 ScreenSpot 结果。
+- `MobilePilotAndroidWorldAgent` 每一步都输入完整目标、截图、最近动作、Verifier、失败信息与
+  剩余步数；仅 Hybrid 模式传入 UI Tree。它复用 JSONL Trace，并记录原始模型响应、解析、
+  Critic、执行、页面变化 Verifier 与一次通用等待恢复。
+- 当前 Critic 只做坐标边界安全检查；当前 Verifier 只记录页面指纹是否变化；两者都不是成功
+  判定，最终仍必须由 `task.is_successful(env)` 的官方 reward 决定。
+- 下一步先运行 `ClockStopWatchRunning`，随后才以 `OpenAppTaskEval`、
+  `SystemWifiTurnOnVerify` 组成前三题开发冒烟集。
 - 本文件不报告成功率，也不把这一条Adapter smoke描述为AndroidWorld成绩。
+
+## 首条模型驱动任务（开发证据，不是评测结论）
+
+在相同的 `ClockStopWatchRunning`、seed=0、最多 6 步和 GUI-Plus snapshot 配置下：
+
+- `vision_only` 首次运行：模型连续两次上滑后第三次返回空内容；解析器终止运行，官方 reward
+  为 `0.0`。这条失败 Trace 保留在本地，不以成功覆盖。
+- `hybrid` 首次运行：模型在第二步产生 `OPEN_APP: The Clock`。AndroidWorld 只接受官方 app
+  key（`clock`），旧 Adapter 把展示名当 package 执行而触发 ADB 异常。该机械兼容问题保留了
+  Trace 后修复：通用地移除英文冠词并将执行异常转成结构化失败，不引入任何任务动作序列。
+- `hybrid` 修复后重跑：模型输出 `OPEN_APP Clock`、两次 `CLICK`，外层 Runner 在第 3 步检测到
+  官方 reward=`1.0` 并停止（Agent 本身仍不会把页面变化或 `PROPOSE_COMPLETE` 当成功）。三次
+  模型调用合计 11,638 tokens，目录价估算约 ¥0.0183，端到端 43.062 秒。
+
+这些都是开发集单次证据，不是成功率，也不能用于声称纯视觉和混合感知的性能差异。
