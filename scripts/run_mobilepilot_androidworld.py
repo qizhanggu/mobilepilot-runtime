@@ -55,6 +55,16 @@ def main() -> None:
         random.seed(args.seed)
         task = task_type(task_type.generate_random_params())
         task.initialize_task(env)
+        initial_reward = float(task.is_successful(env))
+        if initial_reward > 0:
+            print(json.dumps({
+                "task": args.task, "goal": task.goal, "mode": args.mode, "max_steps": args.max_steps,
+                "agent_done": True, "agent_data": {"reason": "already_satisfied", "steps": 0},
+                "initial_official_reward": initial_reward, "official_reward": initial_reward,
+                "reward_by_step": [], "elapsed_seconds": round(time.monotonic() - started, 3),
+                "trace_path": args.trace_path,
+            }, ensure_ascii=False, sort_keys=True))
+            return
         agent = MobilePilotAndroidWorldAgent(env, mode=args.mode, max_steps=args.max_steps, trace_path=args.trace_path)
         result = None
         rewards: list[float] = []
@@ -67,6 +77,7 @@ def main() -> None:
         print(json.dumps({
             "task": args.task, "goal": task.goal, "mode": args.mode, "max_steps": args.max_steps,
             "agent_done": result.done if result else True, "agent_data": result.data if result else {},
+            "initial_official_reward": initial_reward,
             "official_reward": rewards[-1] if rewards else float(task.is_successful(env)),
             "reward_by_step": rewards, "elapsed_seconds": round(time.monotonic() - started, 3),
             "trace_path": args.trace_path,

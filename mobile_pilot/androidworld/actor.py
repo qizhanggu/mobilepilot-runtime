@@ -129,7 +129,10 @@ class AndroidWorldGuiPlusPolicy:
 def parse_androidworld_actor_output(raw_output: str, image_size: tuple[int, int]) -> ParseResult:
     """Parse one strict JSON action and convert normalized clicks to pixels."""
     try:
-        payload = json.loads(_extract_json(raw_output))
+        try:
+            payload = json.loads(_extract_json(raw_output))
+        except (ValueError, json.JSONDecodeError):
+            payload = _recover_minimal_payload(raw_output)
         kind = str(payload["action"]).upper()
         reason = str(payload.get("reason", ""))
         if kind == "CLICK":
@@ -192,6 +195,33 @@ def _extract_json(raw: str) -> str:
     if start < 0 or end < start:
         raise ValueError("response does not contain a JSON object")
     return candidate[start : end + 1]
+
+
+def _recover_minimal_payload(raw: str) -> dict[str, Any]:
+    """Recover only an unambiguous action from otherwise invalid model JSON.
+
+    Some model responses put an unescaped quote inside an optional ``reason``.
+    We never attempt broad JSON repair: only the required action field and its
+    small, independently validated parameter are accepted.  Text entry stays
+    strict because guessing a malformed string could change user data.
+    """
+    action_match = re.search(r'"action"\s*:\s*"([A-Za-z_]+)"', raw or "")
+    if not action_match:
+        raise ValueError("response does not contain a recoverable action")
+    kind = action_match.group(1).upper()
+    if kind == "CLICK":
+        coordinate = re.search(r'"coordinate"\s*:\s*\[\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\]', raw)
+        if not coordinate:
+            raise ValueError("malformed CLICK coordinate cannot be recovered")
+        return {"action": kind, "coordinate": [float(coordinate.group(1)), float(coordinate.group(2))]}
+    if kind == "SWIPE":
+        direction = re.search(r'"direction"\s*:\s*"(left|right|up|down)"', raw, flags=re.IGNORECASE)
+        if not direction:
+            raise ValueError("malformed SWIPE direction cannot be recovered")
+        return {"action": kind, "direction": direction.group(1).lower()}
+    if kind in {"BACK", "WAIT", "PROPOSE_COMPLETE"}:
+        return {"action": kind}
+    raise ValueError(f"malformed {kind} output cannot be recovered safely")
 
 
 def _image_to_data_url(image: Image.Image) -> str:

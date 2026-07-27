@@ -100,6 +100,8 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
             wait = Action(ActionType.WAIT, source="generic_recovery")
             recovery = self._adapter.execute(wait)
             self._trace.write("recovery", step=self._step_index - 1, strategy="wait_after_unchanged_screen", executed=recovery.executed)
+        if self._step_index >= self._max_steps:
+            return self._finish("step_budget_exhausted")
         return AgentInteractionResult(done=False, data={"step": self._step_index, "verifier": self._last_verifier})
 
     def _finish(self, reason: str) -> AgentInteractionResult:

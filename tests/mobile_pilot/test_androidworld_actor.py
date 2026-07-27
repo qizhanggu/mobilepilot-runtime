@@ -20,3 +20,17 @@ def test_rejects_invalid_actor_json_without_fallback():
     result = parse_androidworld_actor_output('{"action":"CLICK","coordinate":[1001,0]}', (1080, 2400))
     assert not result.is_success
     assert result.error_kind is ErrorKind.PARSE_ERROR
+
+
+def test_recovers_click_when_only_optional_reason_has_unescaped_quotes():
+    raw = '{"action":"CLICK","coordinate":[100,200],"reason":"tap the "1" button"}'
+    result = parse_androidworld_actor_output(raw, (1080, 2400))
+    assert result.is_success
+    assert result.action.type is ActionType.CLICK_POINT
+    assert result.action.parameters["point"] == [108, 480]
+
+
+def test_recovers_truncated_but_complete_click_fields():
+    result = parse_androidworld_actor_output('{"action":"CLICK","coordinate":[500,250]', (1080, 2400))
+    assert result.is_success
+    assert result.action.parameters["point"] == [540, 600]
