@@ -7,6 +7,14 @@ def test_parses_normalized_click_into_screenshot_pixels():
     assert result.is_success
     assert result.action.type is ActionType.CLICK_POINT
     assert result.action.parameters["point"] == [540, 600]
+    assert result.action.parameters["coordinate_space"] == "normalized_1000"
+
+
+def test_parses_main_model_image_pixel_click_and_trims_action_name():
+    result = parse_androidworld_actor_output('{"action":" CLICK","coordinate":[690,2241]}', (1080, 2400))
+    assert result.is_success
+    assert result.action.parameters["point"] == [690, 2241]
+    assert result.action.parameters["coordinate_space"] == "image_pixels"
 
 
 def test_parses_non_click_action():
@@ -17,7 +25,7 @@ def test_parses_non_click_action():
 
 
 def test_rejects_invalid_actor_json_without_fallback():
-    result = parse_androidworld_actor_output('{"action":"CLICK","coordinate":[1001,0]}', (1080, 2400))
+    result = parse_androidworld_actor_output('{"action":"CLICK","coordinate":[1080,2400]}', (1080, 2400))
     assert not result.is_success
     assert result.error_kind is ErrorKind.PARSE_ERROR
 

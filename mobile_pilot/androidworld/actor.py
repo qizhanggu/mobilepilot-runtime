@@ -133,7 +133,7 @@ def parse_androidworld_actor_output(raw_output: str, image_size: tuple[int, int]
             payload = json.loads(_extract_json(raw_output))
         except (ValueError, json.JSONDecodeError):
             payload = _recover_minimal_payload(raw_output)
-        kind = str(payload["action"]).upper()
+        kind = str(payload["action"]).strip().upper()
         reason = str(payload.get("reason", ""))
         if kind == "CLICK":
             coordinate = payload["coordinate"]
@@ -142,10 +142,16 @@ def parse_androidworld_actor_output(raw_output: str, image_size: tuple[int, int]
             x, y = coordinate
             if isinstance(x, bool) or isinstance(y, bool) or not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
                 raise ValueError("CLICK coordinate values must be numeric")
-            if not (0 <= x <= 1000 and 0 <= y <= 1000):
-                raise ValueError("CLICK coordinate must be within [0, 1000]")
             width, height = image_size
-            action = Action(ActionType.CLICK_POINT, {"point": [round(x * (width - 1) / 1000), round(y * (height - 1) / 1000)]}, reason, source="androidworld_gui_plus")
+            if 0 <= x <= 1000 and 0 <= y <= 1000:
+                point = [round(x * (width - 1) / 1000), round(y * (height - 1) / 1000)]
+                coordinate_space = "normalized_1000"
+            elif 0 <= x < width and 0 <= y < height:
+                point = [round(x), round(y)]
+                coordinate_space = "image_pixels"
+            else:
+                raise ValueError("CLICK coordinate is neither normalized [0, 1000] nor inside the image")
+            action = Action(ActionType.CLICK_POINT, {"point": point, "coordinate_space": coordinate_space}, reason, source="androidworld_gui_plus")
         elif kind == "TYPE":
             text = payload.get("text")
             if not isinstance(text, str) or not text:

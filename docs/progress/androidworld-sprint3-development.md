@@ -11,6 +11,9 @@
 | `ClockStopWatchRunning`（seed=0） | hybrid | 1.0 / 3 步 | 模型依次打开 Clock、进入 Stopwatch、点击开始；成功由官方 reward 判定。 |
 | `SystemWifiTurnOnVerify`（seed=0） | vision_only | 初始即 1.0 / 0 步 | 这是预条件验证题，Wi-Fi 已开启；Runner 已修正为零调用退出，不能算 Agent 能力成功。 |
 | `ClockTimerEntry`（seed=0，12:48:56） | hybrid | 0.0 / 8 步 | 已进入 Timer 并进行数字点击，但后续发生重复/回退，耗尽步数失败。 |
+| `SimpleSmsSend`（seed=0） | hybrid | 0.0 / 1 步 | 模型上滑进入抽屉后返回空内容；无执行层异常，保留为输出稳定性失败。 |
+| `ContactsAddContact`（seed=0） | hybrid，snapshot | 0.0 / 0 步 | 首步即空模型响应。 |
+| `ContactsAddContact`（seed=0） | hybrid，主版本 `gui-plus` | 0.0 / 8 步 | 能打开 Contacts 并持续执行，但反复滑动/重开应用，未进入创建表单。 |
 
 ## 开发期间发现并修复的通用问题
 
@@ -18,11 +21,12 @@
 - JSONL 原有脱敏规则误遮蔽 `prompt_tokens` 等核算字段；现仅脱敏真实凭证键名，保持 Token 审计可用。
 - 多步 Actor 对可无歧义的截断/未转义 `reason` 点击输出，有限恢复 `CLICK` 坐标；不恢复损坏的 `TYPE` 文本。
 - Runner 在首步前读取官方 reward，避免把已满足预条件的任务误记为 Agent 成功；刚好达到最大步数时 Agent 也会返回明确终止原因。
+- 主版本 `gui-plus` 与 snapshot 的点击坐标约定不同：前者在本次开发运行中输出截图像素坐标，后者输出 0--1000 归一化坐标。AndroidWorld 专用解析器现在先记录并严格校验两者，ScreenSpot 冻结解析器未改动。
 
 ## 真实性边界
 
 - 上表每个任务均只是一条开发运行，不能写成成功率或纯视觉/混合感知对比结论。
-- `ClockTimerEntry` 的两次协议失败 Trace 与一次真实多步失败 Trace 均保留在本地；未覆盖、未删除。
+- `ClockTimerEntry` 的两次协议失败 Trace 与一次真实多步失败 Trace、短信空输出 Trace 和联系人失败 Trace 均保留在本地；未覆盖、未删除。
 - 目前 Critic 仍只做越界检查，Verifier 仅记录页面变化；两者不替代官方 reward。
 
 ## 下一步
