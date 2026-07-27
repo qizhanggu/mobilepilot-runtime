@@ -36,6 +36,7 @@ class ActionType(str, Enum):
     TYPE_TEXT = "TYPE_TEXT"
     CLEAR_TEXT = "CLEAR_TEXT"
     SCROLL = "SCROLL"
+    SWIPE = "SWIPE"
     PRESS_BACK = "PRESS_BACK"
     PRESS_HOME = "PRESS_HOME"
     OPEN_APP = "OPEN_APP"
