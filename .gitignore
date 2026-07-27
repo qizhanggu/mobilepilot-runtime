@@ -18,6 +18,7 @@ htmlcov/
 .venv/
 venv/
 env/
+.local/
 
 # Android local build configuration
 **/build/
