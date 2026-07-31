@@ -1,0 +1,43 @@
+{
+  "schema_version": "mobilepilot.androidworld.held-out.v1",
+  "androidworld_commit": "3e50888527ef9f29b9157ecd537e408008bb1c85",
+  "model": "gui-plus-2026-02-26",
+  "seed": 0,
+  "max_action_steps": 12,
+  "task_id_sha256": "6971ef742428b670bff560648dd4502d5f59a368b96d7402a0a4fdddad3d0fa8",
+  "development_task_exclusions": [
+    "OpenAppTaskEval",
+    "ClockStopWatchRunning",
+    "SystemWifiTurnOnVerify",
+    "ContactsAddContact",
+    "ClockTimerEntry",
+    "SimpleSmsSend",
+    "SimpleCalendarAddOneEventTomorrow",
+    "MarkorCreateNote",
+    "ExpenseAddSingle",
+    "MarkorCreateNoteAndSms"
+  ],
+  "selection_rule": "Frozen before held-out model calls. Select only task IDs absent from the development list, whose required Apps were already installed and initialized through AndroidWorld official setup. Cover system and third-party Apps, text/form, date/time, icon/scroll, and one cross-App flow; do not select from task outcomes.",
+  "tasks": [
+    {"id": "SystemBluetoothTurnOn", "tier": "simple", "surface": "system_setting"},
+    {"id": "SystemBrightnessMax", "tier": "simple", "surface": "system_setting"},
+    {"id": "SystemCopyToClipboard", "tier": "simple", "surface": "system_text"},
+    {"id": "SystemWifiTurnOff", "tier": "simple", "surface": "system_setting"},
+    {"id": "TurnOnWifiAndOpenApp", "tier": "medium", "surface": "cross_app_system"},
+    {"id": "ClockStopWatchPausedVerify", "tier": "simple", "surface": "clock_icon"},
+    {"id": "ContactsNewContactDraft", "tier": "medium", "surface": "contact_form"},
+    {"id": "MarkorAddNoteHeader", "tier": "medium", "surface": "text_editor"},
+    {"id": "MarkorChangeNoteContent", "tier": "medium", "surface": "text_editor"},
+    {"id": "MarkorCreateFolder", "tier": "medium", "surface": "text_form"},
+    {"id": "MarkorEditNote", "tier": "medium", "surface": "text_editor"},
+    {"id": "MarkorMoveNote", "tier": "complex", "surface": "file_navigation"},
+    {"id": "SimpleCalendarAddOneEvent", "tier": "medium", "surface": "date_time_form"},
+    {"id": "SimpleCalendarAddRepeatingEvent", "tier": "complex", "surface": "date_time_form"},
+    {"id": "SimpleCalendarEventOnDateAtTime", "tier": "medium", "surface": "calendar_query"},
+    {"id": "SimpleCalendarNextEvent", "tier": "medium", "surface": "calendar_query"},
+    {"id": "SimpleSmsReply", "tier": "medium", "surface": "message_text"},
+    {"id": "SimpleSmsResend", "tier": "medium", "surface": "message_list"},
+    {"id": "SimpleSmsSendClipboardContent", "tier": "medium", "surface": "message_text"},
+    {"id": "ExpenseDeleteSingle", "tier": "complex", "surface": "list_edit"}
+  ]
+}
