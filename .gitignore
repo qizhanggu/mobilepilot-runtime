@@ -35,6 +35,7 @@ data/
 # Private device traces and disposable API smoke runs
 artifacts/traces/
 artifacts/evaluation/visual-pilot*/
+artifacts/evaluation/androidworld-held-out-*/
 
 # Editors and OS
 .idea/
