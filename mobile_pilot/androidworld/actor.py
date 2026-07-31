@@ -30,6 +30,9 @@ optional accessibility elements only as supporting evidence; they are absent
 in vision_only mode. Do not invent completion: choose PROPOSE_COMPLETE only
 when the task goal is visibly complete.
 
+When the task explicitly names an installed app, prefer OPEN_APP with its
+short canonical name instead of navigating the app drawer.
+
 Return exactly one JSON object, with no Markdown and no extra text:
 {"action":"CLICK","coordinate":[0-1000,0-1000],"reason":"short reason"}
 {"action":"TYPE","text":"text to enter","reason":"short reason"}
@@ -158,7 +161,7 @@ def parse_androidworld_actor_output(raw_output: str, image_size: tuple[int, int]
                 raise ValueError("TYPE requires non-empty text")
             action = Action(ActionType.TYPE_TEXT, {"text": text}, reason, source="androidworld_gui_plus")
         elif kind == "SWIPE":
-            direction = payload.get("direction")
+            direction = payload.get("direction") or _explicit_swipe_direction(reason)
             if direction not in {"left", "right", "up", "down"}:
                 raise ValueError("SWIPE direction is invalid")
             action = Action(ActionType.SWIPE, {"direction": direction}, reason, source="androidworld_gui_plus")
@@ -222,9 +225,12 @@ def _recover_minimal_payload(raw: str) -> dict[str, Any]:
         return {"action": kind, "coordinate": [float(coordinate.group(1)), float(coordinate.group(2))]}
     if kind == "SWIPE":
         direction = re.search(r'"direction"\s*:\s*"(left|right|up|down)"', raw, flags=re.IGNORECASE)
-        if not direction:
-            raise ValueError("malformed SWIPE direction cannot be recovered")
-        return {"action": kind, "direction": direction.group(1).lower()}
+        if direction:
+            return {"action": kind, "direction": direction.group(1).lower()}
+        inferred = _explicit_swipe_direction(raw)
+        if inferred:
+            return {"action": kind, "direction": inferred}
+        raise ValueError("malformed SWIPE direction cannot be recovered")
     if kind in {"BACK", "WAIT", "PROPOSE_COMPLETE"}:
         return {"action": kind}
     raise ValueError(f"malformed {kind} output cannot be recovered safely")
@@ -241,3 +247,9 @@ def _usage_int(usage: Any, name: str) -> int | None:
     if value is None and isinstance(usage, dict):
         value = usage.get(name)
     return int(value) if value is not None else None
+
+
+def _explicit_swipe_direction(text: str) -> str | None:
+    """Return a direction only for an explicit natural-language swipe phrase."""
+    match = re.search(r"\bswipe\s+(up|down|left|right)\b", text or "", flags=re.IGNORECASE)
+    return match.group(1).lower() if match else None

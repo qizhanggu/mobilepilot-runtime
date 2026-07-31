@@ -1,4 +1,5 @@
 from mobile_pilot.androidworld import parse_androidworld_actor_output
+from mobile_pilot.androidworld.download_cache import _safe_name
 from mobile_pilot.core import ActionType, ErrorKind
 
 
@@ -42,3 +43,20 @@ def test_recovers_truncated_but_complete_click_fields():
     result = parse_androidworld_actor_output('{"action":"CLICK","coordinate":[500,250]', (1080, 2400))
     assert result.is_success
     assert result.action.parameters["point"] == [540, 600]
+
+
+def test_download_cache_rejects_paths_outside_cache_directory():
+    import pytest
+
+    with pytest.raises(ValueError):
+        _safe_name("../not-an-apk")
+
+
+def test_uses_explicit_swipe_reason_only_when_direction_field_is_missing():
+    result = parse_androidworld_actor_output(
+        '{"action":"SWIPE","coordinate":[500,700],"reason":"Swipe up to access the drawer"}',
+        (1080, 2400),
+    )
+    assert result.is_success
+    assert result.action.type is ActionType.SWIPE
+    assert result.action.parameters["direction"] == "up"

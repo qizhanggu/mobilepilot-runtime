@@ -21,6 +21,7 @@ from android_world import registry
 from android_world.env import env_launcher
 
 from mobile_pilot.androidworld import MobilePilotAndroidWorldAgent
+from mobile_pilot.androidworld.download_cache import configure_from_environment
 
 
 def parse_args() -> argparse.Namespace:
@@ -39,6 +40,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    configure_from_environment()
     if args.max_steps < 1:
         raise ValueError("--max-steps must be positive")
     started = time.monotonic()

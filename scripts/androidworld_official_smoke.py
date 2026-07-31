@@ -9,12 +9,20 @@ from __future__ import annotations
 
 import argparse
 import json
+from pathlib import Path
 import random
+import sys
 import time
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from android_world import registry
 from android_world.agents import random_agent
 from android_world.env import env_launcher
+
+from mobile_pilot.androidworld.download_cache import configure_from_environment
 
 
 def parse_args() -> argparse.Namespace:
@@ -30,6 +38,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    configure_from_environment()
     started = time.monotonic()
     env = None
     task = None

@@ -79,3 +79,10 @@ HAXM，让 Android Emulator 使用 WHPX；然后重新执行本记录中的启�
 
 环境验收已完成，进入 Sprint 2：实现 MobilePilot AndroidWorld Adapter，并以
 `ClockStopWatchRunning` 跑通第一条 MobilePilot Agent 任务。无需连接真机。
+
+## 2026-07-31 环境恢复记录
+
+- Windows 重启后，Emulator 一度无法启动，`-accel-check` 显示缺少可用的 hypervisor；用户重新启用并重启后，复核为 `WHPX(10.0.19045) is installed and usable`。
+- Windows Python 对 Google Cloud Storage 出现间歇性 TLS EOF。新增可选的本地下载缓存：仅在设置 `MOBILEPILOT_ANDROIDWORLD_DOWNLOAD_CACHE` 时，由系统 `curl` 从 AndroidWorld 原始官方 URL 下载 APK 并缓存；任务、官方 reward 和 Agent 均不改变。
+- 全量官方 `setup_apps` 已下载、安装多批应用，但在不属于本开发集的 Joplin 初始化上因 Windows SQLite 缺少 `fts4` 扩展失败。改用 AndroidWorld 官方 `setup.setup_apps(env, app_list)` 初始化当前开发集的 `pro expense`、`markor`、`simple calendar pro` 与 `simple sms messenger`，该选择性 setup 已完成。
+- 环境日志、缓存 APK 和模拟器状态均留在 `.local`，不进入 Git；Joplin 相关任务暂不纳入本轮开发集或后续 held-out 候选。
