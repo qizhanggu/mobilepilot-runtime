@@ -19,6 +19,19 @@
 | `ExpenseAddSingle`（seed=0） | hybrid，snapshot | 0.0 / 8 步 | 修复多 JSON 输出解析后，已填写名称、金额、备注并尝试切换分类；未选定 Transportation 或保存，耗尽步数。 |
 | `MarkorCreateNote`（seed=0） | hybrid，snapshot，完成官方 App setup 后 | 0.0 / 8 步 | 环境启动问题消除，模型打开 Markor 并进入新建文件入口，但未输入目标文件名/正文即耗尽步数。 |
 | `SimpleSmsSend`（seed=0） | hybrid，snapshot，完成官方 App setup 后 | 0.0 / 6 步 | 模型最终成功打开 Simple SMS Messenger，下一步返回空内容；不是应用缺失。 |
+| `MarkorCreateNoteAndSms`（seed=0） | hybrid，snapshot | 0.0 / 6 个真实动作 | 首次因 `swipe_up` 方向别名在 0 步被解析器拦截；机械修复后可执行 6 个动作，但持续在桌面/通知面板导航，未进入 Markor；第 7 次输出 `PRESS_BACK` 别名后停止。该题不再重试。 |
+
+## 模型选择开发检查
+
+只改变模型名，保持 Prompt、解析器、任务 seed、动作上限和运行参数不变。以下仍是单次开发证据，不能视为模型排行榜或泛化结论。
+
+| 任务 | 主版本 `gui-plus` | 对照 snapshot `gui-plus-2026-02-26` | 决策信息 |
+| --- | --- | --- | --- |
+| `OpenAppTaskEval` | 0.0 / 3 步耗尽 | 1.0 / 1 步 | 主版本在此简单任务中未体现优势。 |
+| `ClockStopWatchRunning` | 1.0 / 3 步 | 1.0 / 3 步 | 两者在该任务都完成，未构成主版本优势。 |
+| `MarkorCreateNote` | 0.0 / 7 个真实动作，错误自报完成 | 0.0 / 8 步 | 主版本能直接 `OPEN_APP Markor`，但随后误滑动并未完成便签。 |
+
+**冻结决策：**AndroidWorld 后续开发和正式对比继续使用 snapshot `gui-plus-2026-02-26`。理由是它与已完成 ScreenSpot 运行保持一致，且上述小规模开发检查没有显示主版本在成功率、稳定性或成本上的明确收益。此决定不是两模型性能比较结论；若以后更换模型，必须新建独立版本并重跑相应评测。
 
 ## 开发期间发现并修复的通用问题
 
@@ -29,7 +42,7 @@
 - 主版本 `gui-plus` 与 snapshot 的点击坐标约定不同：前者在本次开发运行中输出截图像素坐标，后者输出 0--1000 归一化坐标。AndroidWorld 专用解析器现在先记录并严格校验两者，ScreenSpot 冻结解析器未改动。
 - snapshot 曾在 Calendar 中以坐标加 `reason: swipe up` 的形式遗漏 `direction`。只在理由明确写出 `swipe up/down/left/right` 时，解析器才恢复该方向；其他模糊 SWIPE 输出仍失败。
 - 模型偶尔在一个响应中连续输出多个 JSON。Actor 现在严格选择第一个完整 JSON 对象，保证每个 Agent step 最多执行一个动作；例如 Expense 的首个 `TYPE 179.68` 可被保留，后续多余输出不执行。
-- 若模型提议 `PROPOSE_COMPLETE`，Runner 会立即查询 AndroidWorld 官方 reward。reward 仍为 0 时，该提议会被记录为 `official_completion_rejected`，作为下一步的失败上下文并在剩余预算内继续；模型自报完成不再能提前结束任务。
+- 若模型提议 `PROPOSE_COMPLETE`，Runner 会立即查询 AndroidWorld 官方 reward。开发中发现旧 Runner 错把“循环次数”当作“已执行动作数”，在最后一轮提议完成时可能漏掉剩余动作预算；现已改为按已执行动作步数判断，并且每个任务最多一次官方拒绝后的继续，防止重复自报完成形成死循环。该修复有单元测试保护，正式运行前还需通过端到端 Trace 验收。
 
 ## 真实性边界
 
@@ -39,4 +52,4 @@
 
 ## 下一步
 
-继续扩展到剩余开发任务，优先覆盖中文/文本输入、联系人、日历、笔记、记账和跨 App 流程；每题保持固定 seed、步数上限、官方 reward 与 JSONL Trace。
+开发集十类任务已至少覆盖一次（其中 Wi-Fi 为初始状态满足，不能算能力成功）。下一步是先对“官方拒绝 completion 后仍可在剩余动作预算内继续”做一次端到端验证；验证通过后，冻结 20 条未参与开发的任务 manifest，并开始两种配置的正式 held-out 对比。若该端到端验证或冻结前环境检查失败，应暂停而非继续扩大评测。

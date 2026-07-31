@@ -12,13 +12,11 @@ from pathlib import Path
 import random
 import sys
 import time
+from typing import Any, Callable
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
-
-from android_world import registry
-from android_world.env import env_launcher
 
 from mobile_pilot.androidworld import MobilePilotAndroidWorldAgent
 from mobile_pilot.androidworld.download_cache import configure_from_environment
@@ -39,6 +37,11 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> None:
+    # Delayed imports keep the control-flow helper unit-testable from the base
+    # MobilePilot environment, which intentionally does not install AndroidWorld.
+    from android_world import registry
+    from android_world.env import env_launcher
+
     args = parse_args()
     configure_from_environment()
     if args.max_steps < 1:
@@ -68,22 +71,12 @@ def main() -> None:
             }, ensure_ascii=False, sort_keys=True))
             return
         agent = MobilePilotAndroidWorldAgent(env, mode=args.mode, max_steps=args.max_steps, trace_path=args.trace_path)
-        result = None
-        rewards: list[float] = []
-        for _ in range(args.max_steps):
-            result = agent.step(task.goal)
-            reward = float(task.is_successful(env))
-            rewards.append(reward)
-            if reward > 0:
-                break
-            if result.done:
-                if (
-                    result.data.get("reason") == "actor_proposed_complete"
-                    and len(rewards) < args.max_steps
-                ):
-                    agent.reject_completion_proposal("AndroidWorld official reward remained zero.")
-                    continue
-                break
+        result, rewards = _run_agent_loop(
+            agent,
+            task.goal,
+            lambda: float(task.is_successful(env)),
+            max_steps=args.max_steps,
+        )
         print(json.dumps({
             "task": args.task, "goal": task.goal, "mode": args.mode, "max_steps": args.max_steps,
             "agent_done": result.done if result else True, "agent_data": result.data if result else {},
@@ -97,6 +90,56 @@ def main() -> None:
             task.tear_down(env)
         if env is not None:
             env.close()
+
+
+def _should_retry_rejected_completion(
+    data: dict[str, object], *, max_steps: int, already_rejected: bool
+) -> bool:
+    """Allow one official rejection when at least one action step remains.
+
+    A completion proposal is not an executed UI action, therefore it must not
+    consume an action-step slot.  Limiting the continuation to one proposal
+    prevents a model that repeatedly self-completes from creating an unbounded
+    runner loop.
+    """
+    if already_rejected or data.get("reason") != "actor_proposed_complete":
+        return False
+    steps = data.get("steps")
+    return isinstance(steps, int) and steps < max_steps
+
+
+def _run_agent_loop(
+    agent: Any,
+    goal: str,
+    official_reward: Callable[[], float],
+    *,
+    max_steps: int,
+) -> tuple[Any, list[float]]:
+    """Run until official success or a bounded terminal Agent result.
+
+    Completion proposals do not execute an Android action, so the single
+    allowed rejection continues the same action budget rather than consuming a
+    synthetic extra step.
+    """
+    completion_rejection_used = False
+    rewards: list[float] = []
+    while True:
+        result = agent.step(goal)
+        reward = official_reward()
+        rewards.append(reward)
+        if reward > 0:
+            return result, rewards
+        if not result.done:
+            continue
+        if _should_retry_rejected_completion(
+            result.data,
+            max_steps=max_steps,
+            already_rejected=completion_rejection_used,
+        ):
+            agent.reject_completion_proposal("AndroidWorld official reward remained zero.")
+            completion_rejection_used = True
+            continue
+        return result, rewards
 
 
 if __name__ == "__main__":

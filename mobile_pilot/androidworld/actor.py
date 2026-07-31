@@ -161,12 +161,16 @@ def parse_androidworld_actor_output(raw_output: str, image_size: tuple[int, int]
                 raise ValueError("TYPE requires non-empty text")
             action = Action(ActionType.TYPE_TEXT, {"text": text}, reason, source="androidworld_gui_plus")
         elif kind == "SWIPE":
-            direction = payload.get("direction") or _explicit_swipe_direction(reason)
+            direction = _normalize_swipe_direction(payload.get("direction")) or _explicit_swipe_direction(reason)
             if direction not in {"left", "right", "up", "down"}:
                 raise ValueError("SWIPE direction is invalid")
             action = Action(ActionType.SWIPE, {"direction": direction}, reason, source="androidworld_gui_plus")
-        elif kind in {"BACK", "WAIT", "PROPOSE_COMPLETE"}:
-            action = Action(ActionType(kind if kind != "BACK" else "PRESS_BACK"), reason=reason, source="androidworld_gui_plus")
+        elif kind in {"BACK", "PRESS_BACK", "WAIT", "PROPOSE_COMPLETE"}:
+            action = Action(
+                ActionType("PRESS_BACK" if kind in {"BACK", "PRESS_BACK"} else kind),
+                reason=reason,
+                source="androidworld_gui_plus",
+            )
         elif kind == "OPEN_APP":
             app_name = payload.get("app_name")
             if not isinstance(app_name, str) or not app_name:
@@ -228,14 +232,14 @@ def _recover_minimal_payload(raw: str) -> dict[str, Any]:
             raise ValueError("malformed CLICK coordinate cannot be recovered")
         return {"action": kind, "coordinate": [float(coordinate.group(1)), float(coordinate.group(2))]}
     if kind == "SWIPE":
-        direction = re.search(r'"direction"\s*:\s*"(left|right|up|down)"', raw, flags=re.IGNORECASE)
+        direction = re.search(r'"direction"\s*:\s*"((?:swipe[_ -]?)?(?:left|right|up|down))"', raw, flags=re.IGNORECASE)
         if direction:
-            return {"action": kind, "direction": direction.group(1).lower()}
+            return {"action": kind, "direction": _normalize_swipe_direction(direction.group(1))}
         inferred = _explicit_swipe_direction(raw)
         if inferred:
             return {"action": kind, "direction": inferred}
         raise ValueError("malformed SWIPE direction cannot be recovered")
-    if kind in {"BACK", "WAIT", "PROPOSE_COMPLETE"}:
+    if kind in {"BACK", "PRESS_BACK", "WAIT", "PROPOSE_COMPLETE"}:
         return {"action": kind}
     raise ValueError(f"malformed {kind} output cannot be recovered safely")
 
@@ -257,3 +261,18 @@ def _explicit_swipe_direction(text: str) -> str | None:
     """Return a direction only for an explicit natural-language swipe phrase."""
     match = re.search(r"\bswipe\s+(up|down|left|right)\b", text or "", flags=re.IGNORECASE)
     return match.group(1).lower() if match else None
+
+
+def _normalize_swipe_direction(value: object) -> str | None:
+    """Accept the model's unambiguous ``swipe_up`` spelling as ``up``.
+
+    The action protocol continues to expose only AndroidWorld's four canonical
+    directions.  This is parser interoperability, not a policy fallback:
+    unrecognized direction values still fail closed.
+    """
+    if not isinstance(value, str):
+        return None
+    normalized = value.strip().lower().replace("-", "_").replace(" ", "_")
+    if normalized.startswith("swipe_"):
+        normalized = normalized.removeprefix("swipe_")
+    return normalized if normalized in {"left", "right", "up", "down"} else None

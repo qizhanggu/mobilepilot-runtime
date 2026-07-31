@@ -62,6 +62,25 @@ def test_uses_explicit_swipe_reason_only_when_direction_field_is_missing():
     assert result.action.parameters["direction"] == "up"
 
 
+def test_normalizes_unambiguous_swipe_direction_alias():
+    result = parse_androidworld_actor_output(
+        '{"action":"SWIPE","direction":"swipe_up","reason":"open drawer"}',
+        (1080, 2400),
+    )
+    assert result.is_success
+    assert result.action.type is ActionType.SWIPE
+    assert result.action.parameters["direction"] == "up"
+
+
+def test_accepts_press_back_alias():
+    result = parse_androidworld_actor_output(
+        '{"action":"PRESS_BACK","reason":"dismiss the panel"}',
+        (1080, 2400),
+    )
+    assert result.is_success
+    assert result.action.type is ActionType.PRESS_BACK
+
+
 def test_uses_first_complete_json_action_when_model_emits_a_second_one():
     result = parse_androidworld_actor_output(
         '{"action":"TYPE","text":"179.68"}\n{"action":"PROPOSE_COMPLETE"}',
