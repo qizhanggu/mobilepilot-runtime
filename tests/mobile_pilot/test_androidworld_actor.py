@@ -60,3 +60,13 @@ def test_uses_explicit_swipe_reason_only_when_direction_field_is_missing():
     assert result.is_success
     assert result.action.type is ActionType.SWIPE
     assert result.action.parameters["direction"] == "up"
+
+
+def test_uses_first_complete_json_action_when_model_emits_a_second_one():
+    result = parse_androidworld_actor_output(
+        '{"action":"TYPE","text":"179.68"}\n{"action":"PROPOSE_COMPLETE"}',
+        (1080, 2400),
+    )
+    assert result.is_success
+    assert result.action.type is ActionType.TYPE_TEXT
+    assert result.action.parameters["text"] == "179.68"

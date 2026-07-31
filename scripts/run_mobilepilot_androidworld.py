@@ -74,7 +74,15 @@ def main() -> None:
             result = agent.step(task.goal)
             reward = float(task.is_successful(env))
             rewards.append(reward)
-            if result.done or reward > 0:
+            if reward > 0:
+                break
+            if result.done:
+                if (
+                    result.data.get("reason") == "actor_proposed_complete"
+                    and len(rewards) < args.max_steps
+                ):
+                    agent.reject_completion_proposal("AndroidWorld official reward remained zero.")
+                    continue
                 break
         print(json.dumps({
             "task": args.task, "goal": task.goal, "mode": args.mode, "max_steps": args.max_steps,

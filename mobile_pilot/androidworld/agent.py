@@ -108,6 +108,17 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
         self._trace.write("agent_finished", step=self._step_index, reason=reason, mode=self._mode)
         return AgentInteractionResult(done=True, data={"reason": reason, "steps": self._step_index, "mode": self._mode})
 
+    def reject_completion_proposal(self, reason: str) -> None:
+        """Let the authoritative benchmark reject a premature model completion."""
+        self._recent_failure = reason
+        self._last_verifier = "official_completion_rejected"
+        self._trace.write(
+            "official_completion_rejected",
+            step=self._step_index,
+            reason=reason,
+            mode=self._mode,
+        )
+
 
 def _bounds_block(action: Action, image_size: tuple[int, int]) -> str:
     if action.type is not ActionType.CLICK_POINT:

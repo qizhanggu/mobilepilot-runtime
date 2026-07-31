@@ -200,10 +200,14 @@ def _context_text(request: AndroidWorldActorRequest) -> str:
 def _extract_json(raw: str) -> str:
     candidate = (raw or "").strip()
     candidate = re.sub(r"^```(?:json)?\s*|\s*```$", "", candidate, flags=re.IGNORECASE)
-    start, end = candidate.find("{"), candidate.rfind("}")
-    if start < 0 or end < start:
+    start = candidate.find("{")
+    if start < 0:
         raise ValueError("response does not contain a JSON object")
-    return candidate[start : end + 1]
+    try:
+        _, end = json.JSONDecoder().raw_decode(candidate[start:])
+    except json.JSONDecodeError as exc:
+        raise ValueError("response does not contain a complete JSON object") from exc
+    return candidate[start : start + end]
 
 
 def _recover_minimal_payload(raw: str) -> dict[str, Any]:
