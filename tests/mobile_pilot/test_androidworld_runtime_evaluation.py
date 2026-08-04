@@ -23,6 +23,22 @@ def test_legacy_20_task_manifest_is_explicitly_development_evidence():
     assert manifest.variants == ()
 
 
+def test_frozen_12_task_manifest_keeps_development_sets_disjoint():
+    manifest = load_runtime_eval_manifest(
+        "configs/androidworld/runtime_eval_12_v2.json"
+    )
+
+    assert manifest.evaluation_role == "frozen_evaluation"
+    assert len(manifest.tasks) == 12
+    assert manifest.variants == ("v1", "v2")
+    assert manifest.mode == "hybrid"
+    assert manifest.model == "gui-plus-2026-02-26"
+    assert manifest.androidworld_commit == (
+        "3e50888527ef9f29b9157ecd537e408008bb1c85"
+    )
+    assert not set(manifest.task_ids) & set(manifest.development_task_exclusions)
+
+
 def test_loads_frozen_runtime_manifest_and_rejects_development_overlap(tmp_path):
     task_ids = [f"UnusedTask{index:02d}" for index in range(12)]
     data = {
