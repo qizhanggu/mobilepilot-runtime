@@ -176,6 +176,7 @@ def parse_androidworld_actor_output(
             payload = _recover_minimal_payload(raw_output, allow_v2_repairs=allow_v2_repairs)
         kind = str(payload["action"]).strip().upper()
         reason = str(payload.get("reason", ""))
+        subgoal = str(payload.get("subgoal", "")).strip()
         expected_outcome = str(payload.get("expected_outcome", ""))
         if kind == "CLICK":
             coordinate = payload["coordinate"]
@@ -195,7 +196,10 @@ def parse_androidworld_actor_output(
                 raise ValueError("CLICK coordinate is neither normalized [0, 1000] nor inside the image")
             action = Action(
                 ActionType.CLICK_POINT,
-                {"point": point, "coordinate_space": coordinate_space},
+                _with_subgoal(
+                    {"point": point, "coordinate_space": coordinate_space},
+                    subgoal,
+                ),
                 reason,
                 expected_outcome,
                 source="androidworld_gui_plus",
@@ -206,7 +210,7 @@ def parse_androidworld_actor_output(
                 raise ValueError("TYPE requires non-empty text")
             action = Action(
                 ActionType.TYPE_TEXT,
-                {"text": text},
+                _with_subgoal({"text": text}, subgoal),
                 reason,
                 expected_outcome,
                 source="androidworld_gui_plus",
@@ -217,7 +221,7 @@ def parse_androidworld_actor_output(
                 raise ValueError("SWIPE direction is invalid")
             action = Action(
                 ActionType.SWIPE,
-                {"direction": direction},
+                _with_subgoal({"direction": direction}, subgoal),
                 reason,
                 expected_outcome,
                 source="androidworld_gui_plus",
@@ -225,6 +229,7 @@ def parse_androidworld_actor_output(
         elif kind in {"BACK", "PRESS_BACK", "WAIT", "PROPOSE_COMPLETE"}:
             action = Action(
                 ActionType("PRESS_BACK" if kind in {"BACK", "PRESS_BACK"} else kind),
+                _with_subgoal({}, subgoal),
                 reason=reason,
                 expected_outcome=expected_outcome,
                 source="androidworld_gui_plus",
@@ -235,7 +240,7 @@ def parse_androidworld_actor_output(
                 raise ValueError("OPEN_APP requires app_name")
             action = Action(
                 ActionType.OPEN_APP,
-                {"app_name": app_name},
+                _with_subgoal({"app_name": app_name}, subgoal),
                 reason,
                 expected_outcome,
                 source="androidworld_gui_plus",
@@ -243,7 +248,7 @@ def parse_androidworld_actor_output(
         elif kind == "REQUEST_UI_TREE":
             action = Action(
                 ActionType.CALL_TOOL,
-                {"tool": "ui_tree"},
+                _with_subgoal({"tool": "ui_tree"}, subgoal),
                 reason,
                 expected_outcome,
                 source="androidworld_gui_plus",
@@ -355,6 +360,12 @@ def _image_to_data_url(image: Image.Image) -> str:
     buffer = io.BytesIO()
     image.save(buffer, format="PNG")
     return "data:image/png;base64," + base64.b64encode(buffer.getvalue()).decode("ascii")
+
+
+def _with_subgoal(parameters: dict[str, Any], subgoal: str) -> dict[str, Any]:
+    if subgoal:
+        parameters["subgoal"] = subgoal
+    return parameters
 
 
 def _usage_int(usage: Any, name: str) -> int | None:

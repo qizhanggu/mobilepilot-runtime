@@ -54,3 +54,30 @@ def test_runner_loop_continues_after_one_rejected_completion_with_action_budget_
     assert agent.rejections == 1
     assert result.data["reason"] == "step_budget_exhausted"
     assert rewards == [0.0, 0.0]
+
+
+def test_runner_records_official_reward_for_nonterminal_and_terminal_steps():
+    class FakeAgent:
+        def __init__(self):
+            self.calls = 0
+            self.recorded = []
+
+        def step(self, _goal):
+            self.calls += 1
+            return SimpleNamespace(
+                done=self.calls == 2,
+                data={
+                    "reason": "step_budget_exhausted" if self.calls == 2 else "",
+                    "steps": self.calls,
+                },
+            )
+
+        def record_official_reward(self, reward, *, terminal):
+            self.recorded.append((reward, terminal))
+
+    agent = FakeAgent()
+    rewards = iter([0.0, 0.0])
+
+    _run_agent_loop(agent, "goal", lambda: next(rewards), max_steps=2)
+
+    assert agent.recorded == [(0.0, False), (0.0, True)]

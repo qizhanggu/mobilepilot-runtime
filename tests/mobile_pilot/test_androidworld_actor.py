@@ -155,3 +155,17 @@ def test_classifies_empty_and_unknown_outputs_for_failure_taxonomy():
 
     assert empty.error_kind is ErrorKind.EMPTY_OUTPUT
     assert unknown.error_kind is ErrorKind.UNKNOWN_ACTION
+
+
+def test_v2_preserves_actor_subgoal_and_expected_outcome_for_runtime_state():
+    result = parse_androidworld_actor_output(
+        '{"action":"CLICK","coordinate":[500,500],'
+        '"subgoal":"open the contact editor",'
+        '"expected_outcome":"the edit form becomes visible"}',
+        (1080, 2400),
+        allow_v2_repairs=True,
+    )
+
+    assert result.is_success
+    assert result.action.parameters["subgoal"] == "open the contact editor"
+    assert result.action.expected_outcome == "the edit form becomes visible"

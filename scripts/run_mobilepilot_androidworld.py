@@ -26,6 +26,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--task", default="ClockStopWatchRunning")
     parser.add_argument("--mode", choices=("vision_only", "hybrid"), default="vision_only")
+    parser.add_argument("--runtime-version", choices=("v1", "v2"), default="v2")
     parser.add_argument("--max-steps", type=int, default=6)
     parser.add_argument("--adb-path", required=True)
     parser.add_argument("--trace-path", required=True)
@@ -64,13 +65,20 @@ def main() -> None:
         if initial_reward > 0:
             print(json.dumps({
                 "task": args.task, "goal": task.goal, "mode": args.mode, "max_steps": args.max_steps,
+                "runtime_version": args.runtime_version,
                 "agent_done": True, "agent_data": {"reason": "already_satisfied", "steps": 0},
                 "initial_official_reward": initial_reward, "official_reward": initial_reward,
                 "reward_by_step": [], "elapsed_seconds": round(time.monotonic() - started, 3),
                 "trace_path": args.trace_path,
             }, ensure_ascii=False, sort_keys=True))
             return
-        agent = MobilePilotAndroidWorldAgent(env, mode=args.mode, max_steps=args.max_steps, trace_path=args.trace_path)
+        agent = MobilePilotAndroidWorldAgent(
+            env,
+            mode=args.mode,
+            max_steps=args.max_steps,
+            trace_path=args.trace_path,
+            runtime_version=args.runtime_version,
+        )
         result, rewards = _run_agent_loop(
             agent,
             task.goal,
@@ -79,6 +87,7 @@ def main() -> None:
         )
         print(json.dumps({
             "task": args.task, "goal": task.goal, "mode": args.mode, "max_steps": args.max_steps,
+            "runtime_version": args.runtime_version,
             "agent_done": result.done if result else True, "agent_data": result.data if result else {},
             "initial_official_reward": initial_reward,
             "official_reward": rewards[-1] if rewards else float(task.is_successful(env)),
@@ -128,18 +137,28 @@ def _run_agent_loop(
         reward = official_reward()
         rewards.append(reward)
         if reward > 0:
+            _record_official_reward(agent, reward, terminal=True)
             return result, rewards
         if not result.done:
+            _record_official_reward(agent, reward, terminal=False)
             continue
         if _should_retry_rejected_completion(
             result.data,
             max_steps=max_steps,
             already_rejected=completion_rejection_used,
         ):
+            _record_official_reward(agent, reward, terminal=False)
             agent.reject_completion_proposal("AndroidWorld official reward remained zero.")
             completion_rejection_used = True
             continue
+        _record_official_reward(agent, reward, terminal=True)
         return result, rewards
+
+
+def _record_official_reward(agent: Any, reward: float, *, terminal: bool) -> None:
+    callback = getattr(agent, "record_official_reward", None)
+    if callable(callback):
+        callback(reward, terminal=terminal)
 
 
 if __name__ == "__main__":
