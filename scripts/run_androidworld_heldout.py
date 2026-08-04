@@ -121,6 +121,7 @@ def _run_one(
         str(PROJECT_ROOT / "scripts" / "run_mobilepilot_androidworld.py"),
         "--task", task_id,
         "--mode", mode,
+        "--runtime-version", "v1",
         "--max-steps", str(manifest.max_action_steps),
         "--adb-path", args.adb_path,
         "--trace-path", str(trace_path),

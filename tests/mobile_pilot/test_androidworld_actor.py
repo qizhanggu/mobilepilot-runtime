@@ -169,3 +169,28 @@ def test_v2_preserves_actor_subgoal_and_expected_outcome_for_runtime_state():
     assert result.is_success
     assert result.action.parameters["subgoal"] == "open the contact editor"
     assert result.action.expected_outcome == "the edit form becomes visible"
+
+
+def test_v2_normalizes_explicit_gui_plus_open_app_system_function_only():
+    raw = (
+        '{"action":"SYSTEM_FUNCTION","function_name":"open_app",'
+        '"app_name":"clock","reason":"open the named app"}'
+    )
+
+    v1 = parse_androidworld_actor_output(raw, (1080, 2400))
+    v2 = parse_androidworld_actor_output(
+        raw,
+        (1080, 2400),
+        allow_v2_repairs=True,
+    )
+    unsupported = parse_androidworld_actor_output(
+        '{"action":"SYSTEM_FUNCTION","function_name":"unknown_tool"}',
+        (1080, 2400),
+        allow_v2_repairs=True,
+    )
+
+    assert not v1.is_success
+    assert v2.is_success
+    assert v2.action.type is ActionType.OPEN_APP
+    assert v2.action.parameters["app_name"] == "clock"
+    assert not unsupported.is_success

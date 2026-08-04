@@ -36,6 +36,7 @@ data/
 artifacts/traces/
 artifacts/evaluation/visual-pilot*/
 artifacts/evaluation/androidworld-held-out-*/
+artifacts/evaluation/androidworld-v2-*/
 
 # Editors and OS
 .idea/

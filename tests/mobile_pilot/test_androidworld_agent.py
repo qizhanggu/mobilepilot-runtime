@@ -240,6 +240,36 @@ def test_v2_repeated_action_triggers_one_replan_and_records_official_rescue(tmp_
     assert not outcome["misfire"]
 
 
+def test_v2_recovery_rejects_the_same_looping_action_before_second_trigger(tmp_path):
+    swipe = Action(ActionType.SWIPE, {"direction": "up"}, reason="find app")
+    policy = _QueuedPolicy(
+        [_parsed(swipe, '{"action":"SWIPE","direction":"up"}')] * 4
+    )
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=5,
+        policy=policy,
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2",
+    )
+    adapter = _FakeAdapter(["s0", "s1", "s2", "s3", "s4", "replan"])
+    agent._adapter = adapter
+
+    assert not agent.step("open clock").done
+    assert not agent.step("open clock").done
+    assert not agent.step("open clock").done
+    repeated = agent.step("open clock")
+
+    assert repeated.done
+    assert repeated.data["reason"] == "unsafe_repeated_action_after_recovery"
+    rows = _trace_rows(tmp_path / "trace.jsonl")
+    replans = [row for row in rows if row["event"] == "agent_recovery_replan"]
+    triggers = [row for row in rows if row["event"] == "agent_recovery_triggered"]
+    assert len(triggers) == 1
+    assert replans[0]["changed_action"] is False
+
+
 def test_v2_action_failure_reobserves_with_tree_and_uses_different_action(tmp_path):
     failed_open = Action(ActionType.OPEN_APP, {"app_name": "Note"})
     alternative = Action(ActionType.PRESS_BACK, reason="return to a known state")

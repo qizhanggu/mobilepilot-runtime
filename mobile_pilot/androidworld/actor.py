@@ -175,6 +175,15 @@ def parse_androidworld_actor_output(
         except (ValueError, json.JSONDecodeError):
             payload = _recover_minimal_payload(raw_output, allow_v2_repairs=allow_v2_repairs)
         kind = str(payload["action"]).strip().upper()
+        if (
+            allow_v2_repairs
+            and kind == "SYSTEM_FUNCTION"
+            and str(payload.get("function_name", "")).strip().lower() == "open_app"
+        ):
+            # GUI-Plus sometimes emits its native tool spelling even when the
+            # prompt asks for OPEN_APP.  The explicit function and app_name
+            # make this a protocol alias, not a guessed Agent action.
+            kind = "OPEN_APP"
         reason = str(payload.get("reason", ""))
         subgoal = str(payload.get("subgoal", "")).strip()
         expected_outcome = str(payload.get("expected_outcome", ""))

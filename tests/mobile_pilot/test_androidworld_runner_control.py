@@ -1,6 +1,7 @@
 from types import SimpleNamespace
 
 from scripts.run_mobilepilot_androidworld import _run_agent_loop, _should_retry_rejected_completion
+from scripts.run_androidworld_heldout import _run_one
 
 
 def test_retries_premature_completion_when_an_action_step_remains():
@@ -81,3 +82,38 @@ def test_runner_records_official_reward_for_nonterminal_and_terminal_steps():
     _run_agent_loop(agent, "goal", lambda: next(rewards), max_steps=2)
 
     assert agent.recorded == [(0.0, False), (0.0, True)]
+
+
+def test_historical_heldout_runner_pins_v1_runtime(monkeypatch, tmp_path):
+    captured = {}
+
+    def fake_run(command, **kwargs):
+        captured["command"] = command
+        return SimpleNamespace(
+            returncode=0,
+            stdout='{"official_reward": 0.0, "agent_data": {}}\n',
+            stderr="",
+        )
+
+    monkeypatch.setattr("scripts.run_androidworld_heldout.subprocess.run", fake_run)
+    monkeypatch.setattr(
+        "scripts.run_androidworld_heldout._trace_metrics",
+        lambda _path: {},
+    )
+    manifest = SimpleNamespace(max_action_steps=12, seed=0, model="model")
+    args = SimpleNamespace(
+        adb_path="adb.exe",
+        task_timeout_seconds=10,
+    )
+
+    _run_one(
+        manifest,
+        "ClockStopWatchRunning",
+        "hybrid",
+        args,
+        tmp_path / "trace.jsonl",
+        {},
+    )
+
+    index = captured["command"].index("--runtime-version")
+    assert captured["command"][index + 1] == "v1"

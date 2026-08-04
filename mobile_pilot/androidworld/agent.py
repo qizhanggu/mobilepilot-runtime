@@ -125,27 +125,6 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
             self._record_tree_decision(tree_use, action)
 
         if self._runtime_version == "v2":
-            repeated = self._progress.candidate_loop_signal(action)
-            if repeated:
-                self._trace.write(
-                    "loop_detected",
-                    step=self._step_index,
-                    signal=repeated,
-                    candidate_action=action_signature(action),
-                    recent_actions=self._progress.action_signatures[-4:],
-                )
-                if self._begin_recovery(repeated, blocked_action=action):
-                    return AgentInteractionResult(
-                        done=False,
-                        data={
-                            "reason": "agent_replan_requested",
-                            "steps": self._step_index,
-                            "trigger": repeated,
-                            "runtime_version": self._runtime_version,
-                        },
-                    )
-                return self._finish("recovery_exhausted")
-
             recovery_change = self._recovery.review_replan(action)
             if recovery_change is not None:
                 episode = self._recovery.active
@@ -168,6 +147,27 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
                     candidate_action=action_signature(action),
                     reason="replan selected a different action",
                 )
+            else:
+                repeated = self._progress.candidate_loop_signal(action)
+                if repeated:
+                    self._trace.write(
+                        "loop_detected",
+                        step=self._step_index,
+                        signal=repeated,
+                        candidate_action=action_signature(action),
+                        recent_actions=self._progress.action_signatures[-4:],
+                    )
+                    if self._begin_recovery(repeated, blocked_action=action):
+                        return AgentInteractionResult(
+                            done=False,
+                            data={
+                                "reason": "agent_replan_requested",
+                                "steps": self._step_index,
+                                "trigger": repeated,
+                                "runtime_version": self._runtime_version,
+                            },
+                        )
+                    return self._finish("recovery_exhausted")
 
         blocked = _bounds_block(action, screen.image_size)
         self._trace.write(
@@ -623,9 +623,17 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
             )
             return False
         self._progress.current_blocker = trigger
+        blocked_signature = action_signature(blocked_action)
+        navigation_hint = (
+            " Navigation is looping: choose a different action family; when the "
+            "goal depends on an installed app, consider direct OPEN_APP."
+            if trigger in {"repeated_similar_action", "alternating_action_loop"}
+            else ""
+        )
         self._progress.recent_failure = (
-            f"{trigger}; re-observe and choose a different safe action. "
-            "Do not repeat an uncertain side-effecting action."
+            f"{trigger}; blocked action: {blocked_signature}. Re-observe and choose "
+            "a meaningfully different safe action. Do not repeat an uncertain "
+            f"side-effecting action.{navigation_hint}"
         )
         self._pending_tree_reason = trigger if self._mode == "hybrid" else ""
         self._trace.write(
