@@ -43,6 +43,28 @@ Return exactly one JSON object, with no Markdown and no extra text:
 {"action":"PROPOSE_COMPLETE","reason":"short reason"}
 """
 
+ANDROIDWORLD_ACTOR_V2_PROMPT = """You are the action planner inside an auditable Android GUI Agent Runtime.
+Choose exactly one next action from the current screenshot and short-term
+progress state. Accessibility elements are an on-demand tool, not guaranteed
+context. If visual evidence is genuinely insufficient and no accessibility
+elements are present, choose REQUEST_UI_TREE instead of guessing.
+
+Use recovery feedback to replan. Do not repeat an action whose execution result
+is uncertain, and do not guessingly repeat text entry, send, delete, confirm, or
+other actions that may have side effects. PROPOSE_COMPLETE is only a proposal;
+the AndroidWorld official reward is the final success decision.
+
+Return exactly one JSON object, with no Markdown and no extra text. Use one of:
+{"action":"CLICK","coordinate":[0-1000,0-1000],"reason":"short reason","subgoal":"current subgoal","expected_outcome":"what should visibly change"}
+{"action":"TYPE","text":"text to enter","reason":"short reason","subgoal":"current subgoal","expected_outcome":"what should visibly change"}
+{"action":"SWIPE","direction":"up|down|left|right","reason":"short reason","subgoal":"current subgoal","expected_outcome":"what should visibly change"}
+{"action":"BACK","reason":"short reason","subgoal":"current subgoal","expected_outcome":"what should visibly change"}
+{"action":"OPEN_APP","app_name":"canonical installed app key (for example clock, not The Clock)","reason":"short reason","subgoal":"current subgoal","expected_outcome":"what should visibly change"}
+{"action":"WAIT","reason":"short reason","subgoal":"current subgoal","expected_outcome":"what should visibly change"}
+{"action":"REQUEST_UI_TREE","reason":"specific visual uncertainty"}
+{"action":"PROPOSE_COMPLETE","reason":"visible evidence that the goal is complete"}
+"""
+
 
 @dataclass(frozen=True)
 class AndroidWorldActorRequest:
@@ -87,7 +109,14 @@ class AndroidWorldGuiPlusPolicy:
             completion = self._make_client().chat.completions.create(
                 model=self._model,
                 messages=[
-                    {"role": "system", "content": ANDROIDWORLD_ACTOR_PROMPT},
+                    {
+                        "role": "system",
+                        "content": (
+                            ANDROIDWORLD_ACTOR_V2_PROMPT
+                            if request.task.runtime_version == "v2"
+                            else ANDROIDWORLD_ACTOR_PROMPT
+                        ),
+                    },
                     {
                         "role": "user",
                         "content": [
@@ -105,7 +134,11 @@ class AndroidWorldGuiPlusPolicy:
                 self._metrics(time.perf_counter() - started),
             )
         return AndroidWorldActorDecision(
-            parse_androidworld_actor_output(raw, request.image.size),
+            parse_androidworld_actor_output(
+                raw,
+                request.image.size,
+                allow_v2_repairs=request.task.runtime_version == "v2",
+            ),
             self._metrics(time.perf_counter() - started, getattr(completion, "usage", None)),
         )
 
@@ -129,15 +162,21 @@ class AndroidWorldGuiPlusPolicy:
         return VisionCallMetrics(self._model, latency, prompt, completion, total, cost)
 
 
-def parse_androidworld_actor_output(raw_output: str, image_size: tuple[int, int]) -> ParseResult:
+def parse_androidworld_actor_output(
+    raw_output: str,
+    image_size: tuple[int, int],
+    *,
+    allow_v2_repairs: bool = False,
+) -> ParseResult:
     """Parse one strict JSON action and convert normalized clicks to pixels."""
     try:
         try:
             payload = json.loads(_extract_json(raw_output))
         except (ValueError, json.JSONDecodeError):
-            payload = _recover_minimal_payload(raw_output)
+            payload = _recover_minimal_payload(raw_output, allow_v2_repairs=allow_v2_repairs)
         kind = str(payload["action"]).strip().upper()
         reason = str(payload.get("reason", ""))
+        expected_outcome = str(payload.get("expected_outcome", ""))
         if kind == "CLICK":
             coordinate = payload["coordinate"]
             if not isinstance(coordinate, list) or len(coordinate) != 2:
@@ -154,32 +193,75 @@ def parse_androidworld_actor_output(raw_output: str, image_size: tuple[int, int]
                 coordinate_space = "image_pixels"
             else:
                 raise ValueError("CLICK coordinate is neither normalized [0, 1000] nor inside the image")
-            action = Action(ActionType.CLICK_POINT, {"point": point, "coordinate_space": coordinate_space}, reason, source="androidworld_gui_plus")
+            action = Action(
+                ActionType.CLICK_POINT,
+                {"point": point, "coordinate_space": coordinate_space},
+                reason,
+                expected_outcome,
+                source="androidworld_gui_plus",
+            )
         elif kind == "TYPE":
             text = payload.get("text")
             if not isinstance(text, str) or not text:
                 raise ValueError("TYPE requires non-empty text")
-            action = Action(ActionType.TYPE_TEXT, {"text": text}, reason, source="androidworld_gui_plus")
+            action = Action(
+                ActionType.TYPE_TEXT,
+                {"text": text},
+                reason,
+                expected_outcome,
+                source="androidworld_gui_plus",
+            )
         elif kind == "SWIPE":
             direction = _normalize_swipe_direction(payload.get("direction")) or _explicit_swipe_direction(reason)
             if direction not in {"left", "right", "up", "down"}:
                 raise ValueError("SWIPE direction is invalid")
-            action = Action(ActionType.SWIPE, {"direction": direction}, reason, source="androidworld_gui_plus")
+            action = Action(
+                ActionType.SWIPE,
+                {"direction": direction},
+                reason,
+                expected_outcome,
+                source="androidworld_gui_plus",
+            )
         elif kind in {"BACK", "PRESS_BACK", "WAIT", "PROPOSE_COMPLETE"}:
             action = Action(
                 ActionType("PRESS_BACK" if kind in {"BACK", "PRESS_BACK"} else kind),
                 reason=reason,
+                expected_outcome=expected_outcome,
                 source="androidworld_gui_plus",
             )
         elif kind == "OPEN_APP":
             app_name = payload.get("app_name")
             if not isinstance(app_name, str) or not app_name:
                 raise ValueError("OPEN_APP requires app_name")
-            action = Action(ActionType.OPEN_APP, {"app_name": app_name}, reason, source="androidworld_gui_plus")
+            action = Action(
+                ActionType.OPEN_APP,
+                {"app_name": app_name},
+                reason,
+                expected_outcome,
+                source="androidworld_gui_plus",
+            )
+        elif kind == "REQUEST_UI_TREE":
+            action = Action(
+                ActionType.CALL_TOOL,
+                {"tool": "ui_tree"},
+                reason,
+                expected_outcome,
+                source="androidworld_gui_plus",
+            )
         else:
             raise ValueError(f"unknown action {kind}")
     except (KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
-        return ParseResult(error_kind=ErrorKind.PARSE_ERROR, message=f"Invalid AndroidWorld Actor output: {exc}", raw_output=raw_output)
+        if not (raw_output or "").strip():
+            error_kind = ErrorKind.EMPTY_OUTPUT
+        elif "unknown action" in str(exc):
+            error_kind = ErrorKind.UNKNOWN_ACTION
+        else:
+            error_kind = ErrorKind.PARSE_ERROR
+        return ParseResult(
+            error_kind=error_kind,
+            message=f"Invalid AndroidWorld Actor output: {exc}",
+            raw_output=raw_output,
+        )
     return ParseResult(action=action, raw_output=raw_output)
 
 
@@ -192,6 +274,16 @@ def _context_text(request: AndroidWorldActorRequest) -> str:
         f"Last verifier result: {task.last_verifier_result or 'none'}",
         f"Recent failure: {task.recent_failure or 'none'}",
     ]
+    if task.runtime_version == "v2":
+        lines.extend(
+            [
+                f"Current subgoal: {task.current_subgoal or 'choose the next safe subgoal'}",
+                f"Current blocker: {task.current_blocker or 'none'}",
+                f"Next verification: {task.next_verification or 'verify the visible result of the next action'}",
+                f"Recovery instruction: {task.recovery_reason or 'none'}",
+                f"Protocol correction: {task.protocol_feedback or 'none'}",
+            ]
+        )
     if request.include_ui_tree:
         elements = [
             {"text": item.text, "description": item.content_description, "resource_id": item.resource_id, "bounds": item.bounds, "clickable": item.clickable, "editable": item.editable}
@@ -214,7 +306,11 @@ def _extract_json(raw: str) -> str:
     return candidate[start : start + end]
 
 
-def _recover_minimal_payload(raw: str) -> dict[str, Any]:
+def _recover_minimal_payload(
+    raw: str,
+    *,
+    allow_v2_repairs: bool,
+) -> dict[str, Any]:
     """Recover only an unambiguous action from otherwise invalid model JSON.
 
     Some model responses put an unescaped quote inside an optional ``reason``.
@@ -227,7 +323,13 @@ def _recover_minimal_payload(raw: str) -> dict[str, Any]:
         raise ValueError("response does not contain a recoverable action")
     kind = action_match.group(1).upper()
     if kind == "CLICK":
-        coordinate = re.search(r'"coordinate"\s*:\s*\[\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\]', raw)
+        coordinate_pattern = (
+            r'"coordinate"\s*:\s*\[?\s*(-?\d+(?:\.\d+)?)\s*,\s*'
+            r'(-?\d+(?:\.\d+)?)\s*\]?(?=\s*(?:,\s*"|}|$))'
+            if allow_v2_repairs
+            else r'"coordinate"\s*:\s*\[\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\]'
+        )
+        coordinate = re.search(coordinate_pattern, raw)
         if not coordinate:
             raise ValueError("malformed CLICK coordinate cannot be recovered")
         return {"action": kind, "coordinate": [float(coordinate.group(1)), float(coordinate.group(2))]}
@@ -241,6 +343,11 @@ def _recover_minimal_payload(raw: str) -> dict[str, Any]:
         raise ValueError("malformed SWIPE direction cannot be recovered")
     if kind in {"BACK", "PRESS_BACK", "WAIT", "PROPOSE_COMPLETE"}:
         return {"action": kind}
+    if allow_v2_repairs and kind == "OPEN_APP":
+        app_name = re.search(r'"app_name"\s*:\s*"([^"\r\n]+)"', raw)
+        if not app_name or not app_name.group(1).strip():
+            raise ValueError("malformed OPEN_APP output cannot be recovered safely")
+        return {"action": kind, "app_name": app_name.group(1).strip()}
     raise ValueError(f"malformed {kind} output cannot be recovered safely")
 
 

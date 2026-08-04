@@ -28,6 +28,12 @@ class AndroidWorldTaskState:
     completed_action_summaries: tuple[str, ...] = ()
     last_verifier_result: str = ""
     recent_failure: str = ""
+    current_subgoal: str = ""
+    current_blocker: str = ""
+    next_verification: str = ""
+    recovery_reason: str = ""
+    protocol_feedback: str = ""
+    runtime_version: str = "v1"
 
 
 @dataclass(frozen=True)

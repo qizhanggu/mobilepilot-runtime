@@ -89,3 +89,69 @@ def test_uses_first_complete_json_action_when_model_emits_a_second_one():
     assert result.is_success
     assert result.action.type is ActionType.TYPE_TEXT
     assert result.action.parameters["text"] == "179.68"
+
+
+def test_v2_repairs_unambiguous_click_with_one_missing_bracket_only_when_enabled():
+    raw = '{"action":"CLICK","coordinate":937,606,"reason":"tap send"}'
+
+    v1 = parse_androidworld_actor_output(raw, (1080, 2400))
+    v2 = parse_androidworld_actor_output(
+        raw,
+        (1080, 2400),
+        allow_v2_repairs=True,
+    )
+
+    assert not v1.is_success
+    assert v2.is_success
+    assert v2.action.type is ActionType.CLICK_POINT
+    assert v2.action.parameters["point"] == [1011, 1454]
+
+
+def test_v2_repairs_open_app_when_only_optional_reason_breaks_json():
+    raw = (
+        '{"action":"OPEN_APP","app_name":"markor",'
+        '"reason":"open "markor" directly"}'
+    )
+
+    result = parse_androidworld_actor_output(
+        raw,
+        (1080, 2400),
+        allow_v2_repairs=True,
+    )
+
+    assert result.is_success
+    assert result.action.type is ActionType.OPEN_APP
+    assert result.action.parameters["app_name"] == "markor"
+
+
+def test_v2_does_not_guess_malformed_type_text():
+    result = parse_androidworld_actor_output(
+        '{"action":"TYPE","text":"unsafe',
+        (1080, 2400),
+        allow_v2_repairs=True,
+    )
+
+    assert not result.is_success
+
+
+def test_v2_parses_explicit_ui_tree_tool_request():
+    result = parse_androidworld_actor_output(
+        '{"action":"REQUEST_UI_TREE","reason":"labels are unreadable"}',
+        (1080, 2400),
+        allow_v2_repairs=True,
+    )
+
+    assert result.is_success
+    assert result.action.type is ActionType.CALL_TOOL
+    assert result.action.parameters == {"tool": "ui_tree"}
+
+
+def test_classifies_empty_and_unknown_outputs_for_failure_taxonomy():
+    empty = parse_androidworld_actor_output("", (1080, 2400))
+    unknown = parse_androidworld_actor_output(
+        '{"action":"SAVE","reason":"unsupported direct save"}',
+        (1080, 2400),
+    )
+
+    assert empty.error_kind is ErrorKind.EMPTY_OUTPUT
+    assert unknown.error_kind is ErrorKind.UNKNOWN_ACTION
