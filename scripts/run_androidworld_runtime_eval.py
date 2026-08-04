@@ -34,6 +34,8 @@ FROZEN_SOURCE_FILES = (
     "scripts/run_androidworld_runtime_eval.py",
 )
 MAX_COST_PER_LOGICAL_CALL_CNY = 0.02
+DOWNLOAD_CACHE_ENV = "MOBILEPILOT_ANDROIDWORLD_DOWNLOAD_CACHE"
+REQUIRED_A11Y_CACHE_FILE = "2024.05.13-accessibility_forwarder.apk"
 
 
 def parse_args() -> argparse.Namespace:
@@ -131,6 +133,7 @@ def _load_or_create_preflight(
         "frozen_source_sha256",
         "evaluation_role",
         "task_count",
+        "androidworld_download_cache",
     )
     if any(existing.get(key) != current.get(key) for key in stable_keys):
         raise RuntimeError("existing preflight differs from the current frozen protocol")
@@ -160,6 +163,7 @@ def _preflight(
             + repr(serials)
         )
     source_hash = _frozen_source_hash()
+    download_cache = _validated_download_cache(manifest.evaluation_role)
     if manifest.evaluation_role == "frozen_evaluation":
         if source_hash != manifest.frozen_source_sha256:
             raise ValueError("Agent source differs from the frozen evaluation manifest")
@@ -182,6 +186,7 @@ def _preflight(
         "device_serials": serials,
         "max_logical_calls": _max_calls(manifest, args),
         "cost_cap_cny": _cost_cap(manifest, args),
+        "androidworld_download_cache": download_cache,
     }
 
 
@@ -425,6 +430,26 @@ def _frozen_source_hash() -> str:
         digest.update(relative.encode("utf-8"))
         digest.update((PROJECT_ROOT / relative).read_bytes())
     return digest.hexdigest()
+
+
+def _validated_download_cache(evaluation_role: str) -> str:
+    configured = os.getenv(DOWNLOAD_CACHE_ENV)
+    if not configured:
+        if evaluation_role == "frozen_evaluation":
+            raise ValueError(
+                f"{DOWNLOAD_CACHE_ENV} is required for frozen evaluation"
+            )
+        return ""
+    cache = Path(configured).resolve()
+    required = cache / REQUIRED_A11Y_CACHE_FILE
+    if evaluation_role == "frozen_evaluation" and (
+        not required.is_file() or required.stat().st_size == 0
+    ):
+        raise ValueError(
+            "frozen evaluation requires the cached official Accessibility "
+            f"Forwarder APK: {required}"
+        )
+    return str(cache)
 
 
 def _last_json_line(text: str) -> dict[str, Any] | None:

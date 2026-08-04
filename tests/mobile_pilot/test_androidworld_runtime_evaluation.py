@@ -11,6 +11,7 @@ from scripts.run_androidworld_runtime_eval import (
     _existing_records,
     _summary,
     _trace_metrics,
+    _validated_download_cache,
     _validate_protocol,
 )
 
@@ -87,6 +88,26 @@ def test_development_runner_requires_explicit_variant():
 
     with pytest.raises(ValueError, match="explicitly select"):
         _validate_protocol(manifest, ("v2",), args)
+
+
+def test_frozen_runner_requires_existing_official_download_cache(
+    tmp_path, monkeypatch
+):
+    monkeypatch.delenv("MOBILEPILOT_ANDROIDWORLD_DOWNLOAD_CACHE", raising=False)
+    with pytest.raises(ValueError, match="is required"):
+        _validated_download_cache("frozen_evaluation")
+
+    monkeypatch.setenv(
+        "MOBILEPILOT_ANDROIDWORLD_DOWNLOAD_CACHE", str(tmp_path)
+    )
+    with pytest.raises(ValueError, match="Accessibility Forwarder"):
+        _validated_download_cache("frozen_evaluation")
+
+    apk = tmp_path / "2024.05.13-accessibility_forwarder.apk"
+    apk.write_bytes(b"official-cache-fixture")
+    assert _validated_download_cache("frozen_evaluation") == str(
+        tmp_path.resolve()
+    )
 
 
 def test_trace_metrics_keep_protocol_recovery_tree_and_cost_separate(tmp_path):
