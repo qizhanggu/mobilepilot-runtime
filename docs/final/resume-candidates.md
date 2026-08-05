@@ -13,6 +13,9 @@ Accessibility UI Tree、OpenAI-compatible VLM API、JSONL Trace、pytest、Git/G
 - 审计 40 条基线 Trace 并建立 failure taxonomy，定位非法输出、无进展循环、状态丢失
   和误报完成；将 Protocol Guard 与 Agent Recovery 分层，引入 schema 校验、一次安全
   结构化重试及失败后有限 replan。
+- 构建冻结式 V1/V2 配对评测与安全门禁，校验任务清单、源码 hash、模型、模拟器和
+  成本预算，禁止单题重试及 Trace 覆盖；统计官方 reward、失败类型、Token、延迟和
+  目录价，并以 126 项 pytest 回归保护关键路径。
 - 在已暴露的 20 题开发回归集上，hybrid reward-positive 从 4/20 提升至 9/20，非法
   输出终止率由 65% 降至 35%；Recovery 触发 10 次、真实救回 3 次，并审计 Token、
   延迟、成本和失败原因。
