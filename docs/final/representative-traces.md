@@ -6,7 +6,7 @@
 ## 真实 Recovery 救回
 
 开发回归中有 3 条 Trace 同时满足：存在失败信号、触发一次 Recovery、后续动作改变、
-最终 AndroidWorld 官方 reward > 0。
+最终 AndroidWorld 官方完整 reward=1.0。
 
 | 任务 | 失败信号 | Recovery 行为 | 最终证据 |
 | --- | --- | --- | --- |
@@ -25,6 +25,31 @@ artifacts/evaluation/androidworld-v2-development-20260804/regression-20/traces/
 
 这里的“救回”不是因为模型说完成，而是 Trace 最终出现官方 reward，并由 Runtime 将
 对应 Recovery 标记为 `rescued=true`。
+
+### V2.2 的 action-only 真实救回
+
+`ExpenseDeleteSingle` 是 V2.2 最佳开发回归中唯一严格救回：
+
+```text
+两次点击后页面视觉近似
+→ two_consecutive_unchanged_screens
+→ 按需 UI Tree 暴露 Expense Detail / Taxi Fare / btn_delete
+→ Actor 改变点击位置，changed_action=true
+→ 后续确认删除
+→ official_reward=1.0
+→ agent_recovery_outcome.rescued=true
+```
+
+路径：
+
+```text
+artifacts/evaluation/androidworld-v22-action-only-development-20260810/
+  regression-20-step12-fix2-reward-and-evidence/traces/
+  ExpenseDeleteSingle--v2.2--hybrid.jsonl
+```
+
+该轮 Recovery 触发 20 次、只救回 1 次，因此只能证明链路真实存在，不能说 Recovery
+已经稳定有效。
 
 ## Recovery 触发但没有救回
 

@@ -18,15 +18,22 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from mobile_pilot.androidworld import MobilePilotAndroidWorldAgent
+from mobile_pilot.androidworld import MobilePilotAndroidWorldAgent, QwenSubgoalManager
 from mobile_pilot.androidworld.download_cache import configure_from_environment
+from mobile_pilot.androidworld.evaluation import is_official_success
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--task", default="ClockStopWatchRunning")
     parser.add_argument("--mode", choices=("vision_only", "hybrid"), default="vision_only")
-    parser.add_argument("--runtime-version", choices=("v1", "v2"), default="v2")
+    parser.add_argument("--runtime-version", choices=("v1", "v2", "v2.1", "v2.2"), default="v2")
+    parser.add_argument(
+        "--progress-verifier-mode",
+        choices=("off", "hybrid"),
+        default="hybrid",
+        help="V2.2 ablation: deterministic-only or event-triggered VLM Verifier.",
+    )
     parser.add_argument("--max-steps", type=int, default=6)
     parser.add_argument("--adb-path", required=True)
     parser.add_argument("--trace-path", required=True)
@@ -62,10 +69,11 @@ def main() -> None:
         task = task_type(task_type.generate_random_params())
         task.initialize_task(env)
         initial_reward = float(task.is_successful(env))
-        if initial_reward > 0:
+        if is_official_success(initial_reward):
             print(json.dumps({
                 "task": args.task, "goal": task.goal, "mode": args.mode, "max_steps": args.max_steps,
                 "runtime_version": args.runtime_version,
+                "progress_verifier_mode": args.progress_verifier_mode,
                 "agent_done": True, "agent_data": {"reason": "already_satisfied", "steps": 0},
                 "initial_official_reward": initial_reward, "official_reward": initial_reward,
                 "reward_by_step": [], "elapsed_seconds": round(time.monotonic() - started, 3),
@@ -78,6 +86,10 @@ def main() -> None:
             max_steps=args.max_steps,
             trace_path=args.trace_path,
             runtime_version=args.runtime_version,
+            progress_verifier_mode=args.progress_verifier_mode,
+            subgoal_manager=(
+                QwenSubgoalManager() if args.runtime_version == "v2.2" else None
+            ),
         )
         result, rewards = _run_agent_loop(
             agent,
@@ -88,6 +100,7 @@ def main() -> None:
         print(json.dumps({
             "task": args.task, "goal": task.goal, "mode": args.mode, "max_steps": args.max_steps,
             "runtime_version": args.runtime_version,
+            "progress_verifier_mode": args.progress_verifier_mode,
             "agent_done": result.done if result else True, "agent_data": result.data if result else {},
             "initial_official_reward": initial_reward,
             "official_reward": rewards[-1] if rewards else float(task.is_successful(env)),
@@ -136,7 +149,7 @@ def _run_agent_loop(
         result = agent.step(goal)
         reward = official_reward()
         rewards.append(reward)
-        if reward > 0:
+        if is_official_success(reward):
             _record_official_reward(agent, reward, terminal=True)
             return result, rewards
         if not result.done:
@@ -148,7 +161,9 @@ def _run_agent_loop(
             already_rejected=completion_rejection_used,
         ):
             _record_official_reward(agent, reward, terminal=False)
-            agent.reject_completion_proposal("AndroidWorld official reward remained zero.")
+            agent.reject_completion_proposal(
+                "AndroidWorld official reward remained below full success (1.0)."
+            )
             completion_rejection_used = True
             continue
         _record_official_reward(agent, reward, terminal=True)

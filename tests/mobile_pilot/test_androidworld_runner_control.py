@@ -84,6 +84,32 @@ def test_runner_records_official_reward_for_nonterminal_and_terminal_steps():
     assert agent.recorded == [(0.0, False), (0.0, True)]
 
 
+def test_runner_does_not_stop_on_partial_composite_reward():
+    class FakeAgent:
+        def __init__(self):
+            self.calls = 0
+            self.recorded = []
+
+        def step(self, _goal):
+            self.calls += 1
+            return SimpleNamespace(done=False, data={"steps": self.calls})
+
+        def record_official_reward(self, reward, *, terminal):
+            self.recorded.append((reward, terminal))
+
+    agent = FakeAgent()
+    rewards = iter([0.5, 1.0])
+
+    result, observed = _run_agent_loop(
+        agent, "composite goal", lambda: next(rewards), max_steps=2
+    )
+
+    assert agent.calls == 2
+    assert result.done is False
+    assert observed == [0.5, 1.0]
+    assert agent.recorded == [(0.5, False), (1.0, True)]
+
+
 def test_historical_heldout_runner_pins_v1_runtime(monkeypatch, tmp_path):
     captured = {}
 

@@ -25,6 +25,8 @@ Start-Process -FilePath $emulator -ArgumentList @(
 
 ```powershell
 $env:MOBILEPILOT_ACTOR_MODEL='gui-plus-2026-02-26'
+$env:MOBILEPILOT_VERIFIER_MODEL='qwen3.7-flash-2026-07-15'
+$env:MOBILEPILOT_SUBGOAL_MODEL='qwen3.7-flash-2026-07-15'
 $env:MOBILEPILOT_ANDROIDWORLD_DOWNLOAD_CACHE=(Resolve-Path '.local\androidworld-download-cache').Path
 
 # 离线测试
@@ -34,7 +36,8 @@ $env:MOBILEPILOT_ANDROIDWORLD_DOWNLOAD_CACHE=(Resolve-Path '.local\androidworld-
 .\.local\conda\androidworld-py312\python.exe scripts\run_mobilepilot_androidworld.py `
   --task ClockStopWatchRunning `
   --mode hybrid `
-  --runtime-version v2 `
+  --runtime-version v2.2 `
+  --progress-verifier-mode hybrid `
   --max-steps 6 `
   --adb-path C:\Users\Admin\AppData\Local\Android\Sdk\platform-tools\adb.exe `
   --trace-path artifacts\traces\demo-clock-v2.jsonl `
@@ -50,10 +53,10 @@ $env:MOBILEPILOT_ANDROIDWORLD_DOWNLOAD_CACHE=(Resolve-Path '.local\androidworld-
    循环、状态丢失和模型误报完成。
 2. **方法（70 秒）**：指 README 架构图，区分 Protocol Guard 与 Agent Recovery；
    解释短期状态、循环检测、按需 Tree、一次有限 replan 和官方 reward。
-3. **证据（45 秒）**：展示 `SystemWifiTurnOff` 的 Recovery 救回 Trace，再展示
-   `SystemBrightnessMax` 或新子集绘图任务的未救回 Trace。
-4. **结果与边界（30 秒）**：开发回归 4/20→9/20、非法终止 65%→35%；但新冻结
-   子集 V1 2/6、V2 1/6，未证明泛化。说明为什么仍保留这个结果。
+3. **证据（45 秒）**：展示 V2.2 `ExpenseDeleteSingle` 的“连续无进展→按需 Tree→
+   改变动作→official reward=1.0”，再展示 Manager 边界消融从 7/20 回落到 5/20。
+4. **结果与边界（30 秒）**：V1→V2 开发回归 4/20→9/20；V2.2 最佳 7/20、1 次新
+   救回，仍未超过 V2。新冻结子集 V1 2/6、V2 1/6，未证明泛化。
 
 ## 面试追问准备
 

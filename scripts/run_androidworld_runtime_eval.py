@@ -1,4 +1,4 @@
-"""Run auditable V1/V2 AndroidWorld Runtime comparisons without task retries."""
+"""Run auditable paired AndroidWorld Runtime comparisons without task retries."""
 
 from __future__ import annotations
 
@@ -21,21 +21,29 @@ if str(PROJECT_ROOT) not in sys.path:
 from mobile_pilot.androidworld.evaluation import (
     RuntimeEvalManifest,
     assert_registry_contains,
+    official_reward_status,
     load_runtime_eval_manifest,
 )
 
 
 FROZEN_SOURCE_FILES = (
+    "mobile_pilot/core/models.py",
+    "mobile_pilot/perception/screen_state.py",
     "mobile_pilot/androidworld/actor.py",
     "mobile_pilot/androidworld/agent.py",
     "mobile_pilot/androidworld/adapter.py",
     "mobile_pilot/androidworld/runtime_state.py",
+    "mobile_pilot/androidworld/progress_verifier.py",
+    "mobile_pilot/androidworld/subgoal_manager.py",
+    "mobile_pilot/androidworld/evaluation.py",
     "scripts/run_mobilepilot_androidworld.py",
     "scripts/run_androidworld_runtime_eval.py",
 )
 MAX_COST_PER_LOGICAL_CALL_CNY = 0.02
 DOWNLOAD_CACHE_ENV = "MOBILEPILOT_ANDROIDWORLD_DOWNLOAD_CACHE"
 REQUIRED_A11Y_CACHE_FILE = "2024.05.13-accessibility_forwarder.apk"
+DEFAULT_PROGRESS_VERIFIER_MODEL = "qwen3.7-flash-2026-07-15"
+DEFAULT_SUBGOAL_MANAGER_MODEL = "qwen3.7-flash-2026-07-15"
 
 
 def parse_args() -> argparse.Namespace:
@@ -43,8 +51,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--manifest", required=True)
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--adb-path", required=True)
-    parser.add_argument("--variant", action="append", choices=("v1", "v2"))
+    parser.add_argument("--variant", action="append", choices=("v1", "v2", "v2.1", "v2.2"))
     parser.add_argument("--mode", choices=("vision_only", "hybrid"), default="hybrid")
+    parser.add_argument(
+        "--progress-verifier-mode",
+        choices=("off", "hybrid"),
+        default="hybrid",
+    )
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--max-logical-calls", type=int, default=400)
     parser.add_argument("--cost-cap-cny", type=float, default=15.0)
@@ -74,7 +87,7 @@ def main() -> None:
                 continue
             _assert_budget(
                 totals,
-                manifest.max_action_steps + 2,
+                manifest.max_action_steps * (3 if variant == "v2.2" else 2) + 4,
                 _max_calls(manifest, args),
                 _cost_cap(manifest, args),
             )
@@ -129,6 +142,9 @@ def _load_or_create_preflight(
         "seed",
         "max_action_steps",
         "mode",
+        "progress_verifier_mode",
+        "progress_verifier_model",
+        "subgoal_manager_model",
         "variants",
         "frozen_source_sha256",
         "evaluation_role",
@@ -149,6 +165,26 @@ def _preflight(
 
     if os.getenv("MOBILEPILOT_ACTOR_MODEL") != manifest.model:
         raise ValueError("MOBILEPILOT_ACTOR_MODEL differs from the evaluation manifest")
+    verifier_model = None
+    subgoal_manager_model = None
+    if "v2.2" in variants:
+        subgoal_manager_model = os.getenv(
+            "MOBILEPILOT_SUBGOAL_MODEL",
+            DEFAULT_SUBGOAL_MANAGER_MODEL,
+        )
+        if subgoal_manager_model != DEFAULT_SUBGOAL_MANAGER_MODEL:
+            raise ValueError(
+                "MOBILEPILOT_SUBGOAL_MODEL differs from the V2.2 frozen subgoal model"
+            )
+    if "v2.2" in variants and args.progress_verifier_mode == "hybrid":
+        verifier_model = os.getenv(
+            "MOBILEPILOT_VERIFIER_MODEL",
+            DEFAULT_PROGRESS_VERIFIER_MODEL,
+        )
+        if verifier_model != DEFAULT_PROGRESS_VERIFIER_MODEL:
+            raise ValueError(
+                "MOBILEPILOT_VERIFIER_MODEL differs from the V2.2 frozen verifier model"
+            )
     assert_registry_contains(
         manifest,
         registry.TaskRegistry().get_registry(registry.TaskRegistry.ANDROID_WORLD_FAMILY),
@@ -179,6 +215,9 @@ def _preflight(
         "seed": manifest.seed,
         "max_action_steps": manifest.max_action_steps,
         "mode": args.mode,
+        "progress_verifier_mode": args.progress_verifier_mode,
+        "progress_verifier_model": verifier_model,
+        "subgoal_manager_model": subgoal_manager_model,
         "variants": list(variants),
         "frozen_source_sha256": source_hash,
         "evaluation_role": manifest.evaluation_role,
@@ -205,6 +244,7 @@ def _run_one(
         "--task", task_id,
         "--mode", args.mode,
         "--runtime-version", variant,
+        "--progress-verifier-mode", args.progress_verifier_mode,
         "--max-steps", str(manifest.max_action_steps),
         "--adb-path", args.adb_path,
         "--trace-path", str(trace_path),
@@ -243,7 +283,8 @@ def _run_one(
         "task_id": task_id,
         "variant": variant,
         "mode": args.mode,
-        "status": "success" if reward > 0 else "failure",
+        "progress_verifier_mode": args.progress_verifier_mode,
+        "status": official_reward_status(reward),
         "official_reward": reward,
         "initial_official_reward": payload.get("initial_official_reward"),
         "agent_data": payload.get("agent_data", {}),
@@ -263,20 +304,74 @@ def _trace_metrics(trace_path: Path) -> dict[str, Any]:
         for line in trace_path.read_text(encoding="utf-8").splitlines()
     ] if trace_path.exists() else []
     decisions = [row for row in rows if row.get("event") == "actor_decision"]
+    model_events = {
+        "actor_decision",
+        "planner_decision",
+        "plan_recovery",
+        "checkpoint_verifier",
+        "vlm_progress_verifier",
+        "subgoal_manager",
+    }
     observations = [row for row in rows if row.get("event") == "observation"]
     executions = [row for row in rows if row.get("event") == "execution"]
     finish = next((row for row in reversed(rows) if row.get("event") == "agent_finished"), {})
     recovery_outcomes = [row for row in rows if row.get("event") == "agent_recovery_outcome"]
     guard_rows = [row for row in rows if row.get("event") == "protocol_guard"]
-    usage = [row.get("metrics", {}) for row in decisions]
+    usage = [
+        row["metrics"]
+        for row in rows
+        if row.get("event") in model_events and isinstance(row.get("metrics"), dict)
+    ]
     tree_reasons = Counter(
         str(row.get("ui_tree_trigger_reason"))
         for row in observations
         if row.get("ui_tree_requested")
     )
+    verifier_signals = Counter(
+        str(row.get("result"))
+        for row in rows
+        if row.get("event") == "verifier" and row.get("result")
+    )
     return {
         "terminal_reason": finish.get("reason", "official_success_without_agent_finish"),
-        "vlm_call_count": len(decisions),
+        "vlm_call_count": len(usage),
+        "actor_call_count": len(decisions),
+        "planner_call_count": sum(row.get("event") in {"planner_decision", "plan_recovery"} and isinstance(row.get("metrics"), dict) for row in rows),
+        "checkpoint_verifier_call_count": sum(row.get("event") == "checkpoint_verifier" and isinstance(row.get("metrics"), dict) for row in rows),
+        "checkpoint_confirmed_count": sum(row.get("event") == "checkpoint_advanced" for row in rows),
+        "checkpoint_not_confirmed_count": sum(
+            row.get("event") == "checkpoint_verifier"
+            and row.get("decision") not in {"confirmed", "deterministic_confirmed"}
+            for row in rows
+        ),
+        "progress_verifier_call_count": sum(
+            row.get("event") == "vlm_progress_verifier"
+            and isinstance(row.get("metrics"), dict)
+            for row in rows
+        ),
+        "subgoal_manager_call_count": sum(
+            row.get("event") == "subgoal_manager"
+            and isinstance(row.get("metrics"), dict)
+            for row in rows
+        ),
+        "subgoal_manager_failure_count": sum(
+            row.get("event") == "subgoal_manager"
+            and row.get("outcome") not in {"accepted", "revised", "unchanged"}
+            for row in rows
+        ),
+        "subgoal_proposal_count": sum(
+            row.get("event") in {"subgoal_proposal", "subgoal_manager"}
+            and row.get("outcome") in {"accepted", "revised"}
+            for row in rows
+        ),
+        "subgoal_completed_count": sum(
+            row.get("event") == "subgoal_completed" for row in rows
+        ),
+        "subgoal_revision_count": sum(
+            row.get("event") in {"subgoal_proposal", "subgoal_manager"}
+            and row.get("outcome") == "revised"
+            for row in rows
+        ),
         "invalid_decision_count": sum(not row.get("parsed") for row in decisions),
         "protocol_normalization_count": sum(bool(row.get("protocol_normalized")) for row in decisions),
         "protocol_retry_trigger_count": sum(row.get("outcome") == "triggered" for row in guard_rows),
@@ -288,10 +383,30 @@ def _trace_metrics(trace_path: Path) -> dict[str, Any]:
         "execution_failure_count": sum(not row.get("executed") for row in executions),
         "loop_detection_count": sum(row.get("event") == "loop_detected" for row in rows),
         "recovery_trigger_count": sum(row.get("event") == "agent_recovery_triggered" for row in rows),
+        "action_recovery_trigger_count": sum(
+            row.get("event") == "agent_recovery_triggered"
+            and row.get("recovery_level") == "action"
+            for row in rows
+        ),
+        "plan_recovery_trigger_count": sum(
+            row.get("event") == "agent_recovery_triggered"
+            and row.get("recovery_level") == "plan"
+            for row in rows
+        ),
+        "subgoal_recovery_trigger_count": sum(
+            row.get("event") == "agent_recovery_triggered"
+            and row.get("recovery_level") == "subgoal"
+            for row in rows
+        ),
+        "plan_revision_count": sum(
+            row.get("event") == "plan_recovery" and row.get("revised") is True
+            for row in rows
+        ),
         "recovery_rescue_count": sum(bool(row.get("rescued")) for row in recovery_outcomes),
         "recovery_misfire_count": sum(bool(row.get("misfire")) for row in recovery_outcomes),
         "ui_tree_request_count": sum(bool(row.get("ui_tree_requested")) for row in observations),
         "ui_tree_trigger_reasons": dict(sorted(tree_reasons.items())),
+        "screen_progress_signals": dict(sorted(verifier_signals.items())),
         "ui_tree_changed_action_count": sum(
             row.get("event") == "ui_tree_decision" and row.get("changed_action") is True
             for row in rows
@@ -315,27 +430,53 @@ def _summary(
     by_variant: dict[str, dict[str, Any]] = {}
     for variant in variants:
         subset = [row for row in rows if row.get("variant") == variant]
-        success = sum(float(row.get("official_reward", 0.0)) > 0 for row in subset)
+        statuses = [
+            official_reward_status(float(row.get("official_reward", 0.0)))
+            for row in subset
+            if row.get("status") != "infrastructure_error"
+        ]
+        success = statuses.count("success")
+        partial = statuses.count("partial")
+        evaluated = len(statuses)
         actions = sum(int(row.get("executed_action_count", 0)) for row in subset)
         reasons = Counter(
             str(row.get("terminal_reason", "unknown"))
             for row in subset
-            if float(row.get("official_reward", 0.0)) <= 0
+            if row.get("status") != "infrastructure_error"
+            and official_reward_status(float(row.get("official_reward", 0.0))) == "failure"
         )
         by_variant[variant] = {
             "task_count": len(subset),
+            "evaluated_task_count": evaluated,
+            "infrastructure_error_count": len(subset) - evaluated,
             "success_count": success,
-            "official_success_rate": success / len(subset) if subset else 0.0,
+            "partial_count": partial,
+            "official_success_rate": success / evaluated if evaluated else 0.0,
             "invalid_output_terminal_count": reasons.get("invalid_actor_output", 0),
             "step_budget_exhausted_count": reasons.get("step_budget_exhausted", 0),
             "loop_detection_count": sum(int(row.get("loop_detection_count", 0)) for row in subset),
             "recovery_trigger_count": sum(int(row.get("recovery_trigger_count", 0)) for row in subset),
+            "action_recovery_trigger_count": sum(int(row.get("action_recovery_trigger_count", 0)) for row in subset),
+            "plan_recovery_trigger_count": sum(int(row.get("plan_recovery_trigger_count", 0)) for row in subset),
+            "subgoal_recovery_trigger_count": sum(int(row.get("subgoal_recovery_trigger_count", 0)) for row in subset),
+            "plan_revision_count": sum(int(row.get("plan_revision_count", 0)) for row in subset),
             "recovery_rescue_count": sum(int(row.get("recovery_rescue_count", 0)) for row in subset),
             "recovery_misfire_count": sum(int(row.get("recovery_misfire_count", 0)) for row in subset),
             "ui_tree_request_count": sum(int(row.get("ui_tree_request_count", 0)) for row in subset),
             "executed_action_count": actions,
             "average_executed_actions": actions / len(subset) if subset else 0.0,
             "vlm_call_count": sum(int(row.get("vlm_call_count", 0)) for row in subset),
+            "actor_call_count": sum(int(row.get("actor_call_count", 0)) for row in subset),
+            "planner_call_count": sum(int(row.get("planner_call_count", 0)) for row in subset),
+            "checkpoint_verifier_call_count": sum(int(row.get("checkpoint_verifier_call_count", 0)) for row in subset),
+            "checkpoint_confirmed_count": sum(int(row.get("checkpoint_confirmed_count", 0)) for row in subset),
+            "checkpoint_not_confirmed_count": sum(int(row.get("checkpoint_not_confirmed_count", 0)) for row in subset),
+            "progress_verifier_call_count": sum(int(row.get("progress_verifier_call_count", 0)) for row in subset),
+            "subgoal_manager_call_count": sum(int(row.get("subgoal_manager_call_count", 0)) for row in subset),
+            "subgoal_manager_failure_count": sum(int(row.get("subgoal_manager_failure_count", 0)) for row in subset),
+            "subgoal_proposal_count": sum(int(row.get("subgoal_proposal_count", 0)) for row in subset),
+            "subgoal_completed_count": sum(int(row.get("subgoal_completed_count", 0)) for row in subset),
+            "subgoal_revision_count": sum(int(row.get("subgoal_revision_count", 0)) for row in subset),
             "total_tokens": sum(int(row.get("total_tokens", 0)) for row in subset),
             "model_latency_seconds": sum(float(row.get("model_latency_seconds", 0.0)) for row in subset),
             "estimated_list_cost_cny": sum(float(row.get("estimated_list_cost_cny", 0.0)) for row in subset),
@@ -366,13 +507,19 @@ def _summary(
 
 def _paired_outcomes(rows: list[dict[str, Any]], variants: tuple[str, ...]) -> dict[str, int]:
     first, second = variants
-    table = {(row["task_id"], row["variant"]): float(row.get("official_reward", 0)) > 0 for row in rows}
+    table = {
+        (row["task_id"], row["variant"]): official_reward_status(
+            float(row.get("official_reward", 0))
+        )
+        for row in rows
+        if row.get("status") != "infrastructure_error"
+    }
     outcomes = Counter()
     for task_id in sorted({row["task_id"] for row in rows}):
         key1, key2 = (task_id, first), (task_id, second)
         if key1 not in table or key2 not in table:
             continue
-        outcomes[f"{first}_{'success' if table[key1] else 'failure'}__{second}_{'success' if table[key2] else 'failure'}"] += 1
+        outcomes[f"{first}_{table[key1]}__{second}_{table[key2]}"] += 1
     return dict(sorted(outcomes.items()))
 
 

@@ -1,0 +1,88 @@
+{
+  "audit": {
+    "androidworld_commit": "3e50888527ef9f29b9157ecd537e408008bb1c85",
+    "androidworld_download_cache": "D:\\Users\\Admin\\Desktop\\mobile-gui-agent\\.local\\androidworld-download-cache",
+    "cost_cap_cny": 15.0,
+    "created_at": "2026-08-10T07:30:40.211562+00:00",
+    "device_serials": [
+      "emulator-5554"
+    ],
+    "evaluation_role": "development",
+    "frozen_source_sha256": "680cc4c54a535dd876151bb700f6edf0af648ff6e5285c322aba285892e7c09e",
+    "git_commit": "1949017f9a2722429d32bfe3c39bfd6c754ce422",
+    "manifest_path": "D:\\Users\\Admin\\Desktop\\mobile-gui-agent\\configs\\androidworld\\held_out_20.json",
+    "manifest_task_hash": "6971ef742428b670bff560648dd4502d5f59a368b96d7402a0a4fdddad3d0fa8",
+    "max_action_steps": 12,
+    "max_logical_calls": 800,
+    "mode": "hybrid",
+    "model": "gui-plus-2026-02-26",
+    "progress_verifier_mode": "hybrid",
+    "progress_verifier_model": "qwen3.7-flash-2026-07-15",
+    "seed": 0,
+    "subgoal_manager_model": "qwen3.7-flash-2026-07-15",
+    "task_count": 20,
+    "variants": [
+      "v2.2"
+    ]
+  },
+  "by_variant": {
+    "v2.2": {
+      "action_recovery_trigger_count": 12,
+      "actor_call_count": 141,
+      "average_executed_actions": 6.15,
+      "checkpoint_confirmed_count": 0,
+      "checkpoint_not_confirmed_count": 0,
+      "checkpoint_verifier_call_count": 0,
+      "estimated_list_cost_cny": 0.8654115,
+      "evaluated_task_count": 20,
+      "executed_action_count": 123,
+      "failure_taxonomy": {
+        "invalid_actor_output": 1,
+        "recovery_exhausted": 5,
+        "step_budget_exhausted": 4,
+        "unsafe_repeated_action_after_recovery": 3
+      },
+      "infrastructure_error_count": 0,
+      "invalid_output_terminal_count": 1,
+      "loop_detection_count": 16,
+      "model_latency_seconds": 710.7866570998303,
+      "official_success_rate": 0.35,
+      "partial_count": 0,
+      "plan_recovery_trigger_count": 0,
+      "plan_revision_count": 0,
+      "planner_call_count": 0,
+      "progress_verifier_call_count": 26,
+      "recovery_misfire_count": 0,
+      "recovery_rescue_count": 1,
+      "recovery_trigger_count": 20,
+      "step_budget_exhausted_count": 4,
+      "subgoal_completed_count": 22,
+      "subgoal_manager_call_count": 50,
+      "subgoal_manager_failure_count": 15,
+      "subgoal_proposal_count": 35,
+      "subgoal_recovery_trigger_count": 8,
+      "subgoal_revision_count": 2,
+      "success_count": 7,
+      "task_count": 20,
+      "total_tokens": 828938,
+      "ui_tree_request_count": 26,
+      "vlm_call_count": 217
+    }
+  },
+  "manifest": {
+    "androidworld_commit": "3e50888527ef9f29b9157ecd537e408008bb1c85",
+    "evaluation_role": "development",
+    "max_action_steps": 12,
+    "mode": "hybrid",
+    "model": "gui-plus-2026-02-26",
+    "path": "D:\\Users\\Admin\\Desktop\\mobile-gui-agent\\configs\\androidworld\\held_out_20.json",
+    "seed": 0,
+    "task_id_sha256": "6971ef742428b670bff560648dd4502d5f59a368b96d7402a0a4fdddad3d0fa8",
+    "variants": [
+      "v2.2"
+    ]
+  },
+  "paired_outcomes": {},
+  "run_count": 20,
+  "total_estimated_list_cost_cny": 0.8654115
+}

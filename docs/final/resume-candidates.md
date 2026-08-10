@@ -15,15 +15,18 @@ Accessibility UI Tree、OpenAI-compatible VLM API、JSONL Trace、pytest、Git/G
   结构化重试及失败后有限 replan。
 - 构建冻结式 V1/V2 配对评测与安全门禁，校验任务清单、源码 hash、模型、模拟器和
   成本预算，禁止单题重试及 Trace 覆盖；统计官方 reward、失败类型、Token、延迟和
-  目录价，并以 126 项 pytest 回归保护关键路径。
-- 在已暴露的 20 题开发回归集上，hybrid reward-positive 从 4/20 提升至 9/20，非法
+  目录价，并以 170 项 pytest 回归保护关键路径。
+- 在已暴露的 20 题开发回归集上，hybrid 完整成功从 4/20 提升至 9/20，非法
   输出终止率由 65% 降至 35%；Recovery 触发 10 次、真实救回 3 次，并审计 Token、
   延迟、成本和失败原因。
+- 进一步拆分 action-only GUI Actor、低频 Qwen Subgoal Manager 与事件触发 Progress
+  Verifier，修复组合任务 partial reward 提前终止，并记录 1 条“无进展→按需 Tree→
+  改变动作→官方成功”的 V2.2 Trace；开发集最佳 7/20，未超过 V2，负结果完整保留。
 
 ## 简短版本
 
 - 构建可审计 Android GUI Agent Runtime，通过短期状态、循环检测、按需 UI Tree 与
-  有限 Recovery 改进失败处理；在 20 题开发回归集将 reward-positive 从 4/20 提升至
+  有限 Recovery 改进失败处理；在 20 题开发回归集将完整成功从 4/20 提升至
   9/20，记录 3 次“失败信号→replan→官方成功”救回链路。
 
 ## 面试时必须主动补充

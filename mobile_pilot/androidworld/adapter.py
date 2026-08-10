@@ -34,6 +34,17 @@ class AndroidWorldTaskState:
     recovery_reason: str = ""
     protocol_feedback: str = ""
     runtime_version: str = "v1"
+    plan_mode: str = "direct"
+    completed_checkpoints: tuple[str, ...] = ()
+    active_checkpoint: str = ""
+    active_checkpoint_evidence: str = ""
+    remaining_checkpoints: tuple[str, ...] = ()
+    recovery_level: str = ""
+    active_subgoal: str = ""
+    active_subgoal_evidence: str = ""
+    completed_subgoals: tuple[str, ...] = ()
+    subgoal_revision_allowed: bool = False
+    progress_verifier_mode: str = "off"
 
 
 @dataclass(frozen=True)
@@ -54,13 +65,33 @@ class AndroidWorldAdapter:
     def __init__(self, env: Any):
         self._env = env
 
-    def observe(self, *, include_ui_tree: bool) -> tuple[Image.Image, ScreenState]:
+    def observe(
+        self,
+        *,
+        include_ui_tree: bool,
+        include_context_signals: bool = False,
+    ) -> tuple[Image.Image, ScreenState]:
         state = self._env.get_state(wait_to_stabilize=True)
         image = Image.fromarray(state.pixels)
-        raw_elements = tuple(getattr(state, "ui_elements", ()) or ()) if include_ui_tree else ()
-        elements = tuple(_to_mobilepilot_element(item, index) for index, item in enumerate(raw_elements))
-        package = next((item.package_name or "" for item in raw_elements if getattr(item, "package_name", "")), "")
-        return image, _screen_state(image, package, elements)
+        # AndroidWorld already returns accessibility metadata with the state.
+        # Package is retained as a cheap context signal, but element content is
+        # exposed to the Actor only after an explicit on-demand Tree request.
+        raw_elements = tuple(getattr(state, "ui_elements", ()) or ())
+        mapped_elements = tuple(
+            _to_mobilepilot_element(item, index)
+            for index, item in enumerate(raw_elements)
+        ) if include_ui_tree or include_context_signals else ()
+        elements = mapped_elements if include_ui_tree else ()
+        package = ""
+        if include_ui_tree or include_context_signals:
+            package = next((item.package_name or "" for item in raw_elements if getattr(item, "package_name", "")), "")
+        context_elements = mapped_elements if include_context_signals else elements
+        return image, _screen_state(
+            image,
+            package,
+            elements,
+            context_elements=context_elements,
+        )
 
     def execute(self, action: Action) -> ActionResult:
         mapped = self.map_action(action)
@@ -120,16 +151,80 @@ class AndroidWorldAdapter:
         raise ValueError(f"Action type is not supported by AndroidWorld: {action.type.value}")
 
 
-def _screen_state(image: Image.Image, package: str, elements: tuple[UiElement, ...]) -> ScreenState:
+def _screen_state(
+    image: Image.Image,
+    package: str,
+    elements: tuple[UiElement, ...],
+    *,
+    context_elements: tuple[UiElement, ...] | None = None,
+) -> ScreenState:
     buffer = io.BytesIO()
     image.save(buffer, format="PNG")
-    signature = "|".join([package, str(image.size), str(elements), hashlib.sha256(buffer.getvalue()).hexdigest()])
+    screenshot_hash = hashlib.sha256(buffer.getvalue()).hexdigest()
+    signature = "|".join([package, str(image.size), str(elements), screenshot_hash])
+    exact = hashlib.sha256(signature.encode("utf-8")).hexdigest()[:24]
+    visual = _visual_fingerprint(image)
+    signal_elements = context_elements if context_elements is not None else elements
+    semantic = _semantic_fingerprint(signal_elements)
+    verification_texts = tuple(
+        " | ".join(
+            [item.text, item.content_description, item.resource_id, item.class_name]
+        ).strip()
+        for item in signal_elements
+        if any(
+            value.strip()
+            for value in (
+                item.text,
+                item.content_description,
+                item.resource_id,
+                item.class_name,
+            )
+        )
+    )
     return ScreenState(
         image_size=image.size,
         package_activity=package,
         elements=elements,
-        fingerprint=hashlib.sha256(signature.encode("utf-8")).hexdigest()[:24],
+        fingerprint=exact,
+        exact_fingerprint=screenshot_hash,
+        visual_fingerprint=visual,
+        semantic_fingerprint=semantic,
+        verification_texts=verification_texts,
     )
+
+
+def _visual_fingerprint(image: Image.Image) -> str:
+    """Return a compact page-similarity signal, not a grounding feature."""
+    gray = image.convert("L")
+    width, height = gray.size
+    # Status/navigation bars contain clocks and animations that should not turn
+    # a stable app page into apparent progress.
+    top = min(max(round(height * 0.04), 0), max(height - 1, 0))
+    bottom = max(top + 1, height - round(height * 0.04))
+    content = gray.crop((0, top, width, bottom)).resize((16, 16))
+    pixels = list(content.getdata())
+    mean = sum(pixels) / len(pixels)
+    bits = "".join("1" if value >= mean else "0" for value in pixels)
+    return f"{int(bits, 2):064x}"
+
+
+def _semantic_fingerprint(elements: tuple[UiElement, ...]) -> str:
+    if not elements:
+        return ""
+    rows = sorted(
+        "|".join(
+            [
+                item.resource_id.strip().lower(),
+                item.text.strip().lower(),
+                item.content_description.strip().lower(),
+                item.class_name.strip().lower(),
+                str(item.clickable),
+                str(item.editable),
+            ]
+        )
+        for item in elements
+    )
+    return hashlib.sha256("\n".join(rows).encode("utf-8")).hexdigest()[:24]
 
 
 def _to_mobilepilot_element(raw: Any, index: int) -> UiElement:

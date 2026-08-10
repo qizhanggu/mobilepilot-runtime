@@ -1,11 +1,23 @@
 import json
+from pathlib import Path
 from types import SimpleNamespace
 
 from PIL import Image
 
-from mobile_pilot.androidworld.actor import AndroidWorldActorDecision
+from mobile_pilot.androidworld.actor import (
+    AndroidWorldActorDecision,
+    AndroidWorldPlanDecision,
+)
 from mobile_pilot.androidworld.agent import MobilePilotAndroidWorldAgent
-from mobile_pilot.androidworld.runtime_state import RuntimeProgress
+from mobile_pilot.androidworld.progress_verifier import ProgressVerifierDecision
+from mobile_pilot.androidworld.subgoal_manager import SubgoalManagerDecision
+from mobile_pilot.androidworld.runtime_state import (
+    Checkpoint,
+    CheckpointEvidence,
+    CompletionEvidence,
+    PlanState,
+    RuntimeProgress,
+)
 from mobile_pilot.core import Action, ActionResult, ActionType, ErrorKind, ParseResult
 from mobile_pilot.perception import ScreenState, UiElement
 from mobile_pilot.policy.gui_plus import VisionCallMetrics
@@ -68,16 +80,46 @@ class _QueuedPolicy:
         )
 
 
+class _V21Policy(_QueuedPolicy):
+    def __init__(self, results, plan):
+        super().__init__(results)
+        self.plan = plan
+        self.plan_requests = []
+
+    def plan_with_metrics(self, **request):
+        self.plan_requests.append(request)
+        return AndroidWorldPlanDecision(
+            self.plan,
+            VisionCallMetrics("test-model", 0.01, 10, 2, 12, 0.001),
+            raw_output='{"mode":"checklist"}',
+        )
+
+
 class _FakeAdapter:
-    def __init__(self, fingerprints, *, execution_results=None):
+    def __init__(
+        self,
+        fingerprints,
+        *,
+        execution_results=None,
+        verification_texts=None,
+        packages=None,
+    ):
         self.fingerprints = list(fingerprints)
         self.execution_results = list(execution_results or [])
+        self.verification_texts = list(verification_texts or [])
+        self.packages = list(packages or [])
         self.include_tree_calls = []
         self.executed_actions = []
 
-    def observe(self, *, include_ui_tree):
+    def observe(self, *, include_ui_tree, include_context_signals=False):
         self.include_tree_calls.append(include_ui_tree)
         fingerprint = self.fingerprints.pop(0)
+        verification_texts = (
+            tuple(self.verification_texts.pop(0))
+            if self.verification_texts
+            else ()
+        )
+        package = self.packages.pop(0) if self.packages else "test"
         elements = ()
         if include_ui_tree:
             elements = (
@@ -95,9 +137,11 @@ class _FakeAdapter:
             )
         return Image.new("RGB", (100, 200), "white"), ScreenState(
             image_size=(100, 200),
-            package_activity="test",
+            package_activity=package,
             elements=elements,
             fingerprint=fingerprint,
+            exact_fingerprint=fingerprint,
+            verification_texts=verification_texts,
         )
 
     def execute(self, action):
@@ -113,6 +157,47 @@ def _parsed(action, raw='{"action":"WAIT"}'):
 
 def _trace_rows(path):
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+
+
+class _FakeProgressVerifier:
+    def __init__(self, verdict, *, evidence="visible evidence", disposition=None):
+        self.verdict = verdict
+        self.evidence = evidence
+        self.disposition = disposition or {
+            "completed": "confirm_subgoal",
+            "progress": "continue",
+            "stalled": "change_action",
+            "regressed": "recover",
+            "uncertain": "reobserve",
+        }[verdict]
+        self.requests = []
+
+    def verify_with_metrics(self, **request):
+        self.requests.append(request)
+        return ProgressVerifierDecision(
+            self.verdict,
+            self.evidence,
+            self.disposition,
+            VisionCallMetrics("qwen-test", 0.01, 20, 4, 24, 0.0001),
+            raw_output='{"verdict":"test"}',
+        )
+
+
+class _FakeSubgoalManager:
+    def __init__(self, decisions):
+        self.decisions = list(decisions)
+        self.requests = []
+
+    def propose_with_metrics(self, **request):
+        self.requests.append(request)
+        subgoal, evidence = self.decisions.pop(0)
+        return SubgoalManagerDecision(
+            subgoal,
+            evidence,
+            "bounded next objective",
+            VisionCallMetrics("qwen-test", 0.01, 20, 4, 24, 0.0001),
+            raw_output='{"subgoal":"test"}',
+        )
 
 
 def test_v2_protocol_guard_retries_once_before_any_action(tmp_path):
@@ -351,3 +436,541 @@ def test_v2_actor_can_request_ui_tree_as_an_on_demand_tool(tmp_path):
     assert tool_request["action_executed_before_request"] is False
     assert tree_observation["ui_tree_summary"]["sample_labels"] == ["Next"]
     assert tree_outcome["official_success_after_use"] is False
+
+
+def test_v21_actor_can_only_propose_checkpoint_and_runtime_confirms_tree_evidence(tmp_path):
+    plan = PlanState(
+        mode="checklist",
+        reason="the task has a verifiable editor page",
+        checkpoints=[
+            Checkpoint(
+                "open the next page",
+                CheckpointEvidence("ui_text", "Next"),
+                "active",
+            )
+        ],
+    )
+    proposal = Action(
+        ActionType.PROPOSE_CHECKPOINT_COMPLETE,
+        {"observed_evidence": "I think the page is open"},
+        reason="Next is visible",
+    )
+    policy = _V21Policy(
+        [_parsed(proposal, '{"action":"PROPOSE_CHECKPOINT_COMPLETE"}')],
+        plan,
+    )
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=3,
+        policy=policy,
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.1",
+    )
+    adapter = _FakeAdapter(["before", "tree-evidence"])
+    agent._adapter = adapter
+
+    result = agent.step("open the next page")
+
+    assert not result.done
+    assert result.data["reason"] == "checkpoint_confirmed"
+    assert agent._plan.is_complete
+    assert adapter.executed_actions == []
+    assert adapter.include_tree_calls == [False, True]
+    rows = _trace_rows(tmp_path / "trace.jsonl")
+    verifier = next(row for row in rows if row["event"] == "checkpoint_verifier")
+    assert verifier["decision"] == "deterministic_confirmed"
+    assert verifier["actor_self_certified"] is False
+
+
+def test_v21_direct_plan_does_not_force_checkpoints_on_short_task(tmp_path):
+    policy = _V21Policy(
+        [_parsed(Action(ActionType.WAIT), '{"action":"WAIT"}')],
+        PlanState.direct("single visible action"),
+    )
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="vision_only",
+        max_steps=2,
+        policy=policy,
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.1",
+    )
+    adapter = _FakeAdapter(["before", "after"])
+    agent._adapter = adapter
+
+    result = agent.step("wait for the page")
+
+    assert not result.done
+    assert len(adapter.executed_actions) == 1
+    assert policy.requests[0].task.plan_mode == "direct"
+    assert policy.requests[0].task.active_checkpoint == ""
+
+
+def test_v21_direct_plan_safely_corrects_one_checkpoint_proposal(tmp_path):
+    proposal = Action(
+        ActionType.PROPOSE_CHECKPOINT_COMPLETE,
+        {"observed_evidence": "the page looks ready"},
+    )
+    wait = Action(ActionType.WAIT, reason="continue normal execution")
+    policy = _V21Policy(
+        [
+            _parsed(proposal, '{"action":"PROPOSE_CHECKPOINT_COMPLETE"}'),
+            _parsed(wait, '{"action":"WAIT"}'),
+        ],
+        PlanState.direct("single visible action"),
+    )
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="vision_only",
+        max_steps=2,
+        policy=policy,
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.1",
+    )
+    adapter = _FakeAdapter(["before", "again", "after"])
+    agent._adapter = adapter
+
+    corrected = agent.step("wait for the page")
+    resumed = agent.step("wait for the page")
+
+    assert not corrected.done
+    assert corrected.data["reason"] == "checkpoint_proposal_corrected"
+    assert not resumed.done
+    assert len(adapter.executed_actions) == 1
+    rows = _trace_rows(tmp_path / "trace.jsonl")
+    assert any(row["event"] == "checkpoint_proposal_corrected" for row in rows)
+
+
+def test_v21_protocol_guard_allows_one_safe_retry_per_decision_point(tmp_path):
+    invalid = ParseResult(
+        error_kind=ErrorKind.EMPTY_OUTPUT,
+        message="empty model output",
+        raw_output="",
+    )
+    wait = _parsed(Action(ActionType.WAIT), '{"action":"WAIT"}')
+    policy = _V21Policy([invalid, wait, invalid, wait], PlanState.direct("reactive"))
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="vision_only",
+        max_steps=3,
+        policy=policy,
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.1",
+    )
+    adapter = _FakeAdapter(["s0", "retry0", "s1", "s2", "retry1", "s3"])
+    agent._adapter = adapter
+
+    first = agent.step("wait")
+    second = agent.step("wait")
+
+    assert not first.done and not second.done
+    assert len(adapter.executed_actions) == 2
+    rows = _trace_rows(tmp_path / "trace.jsonl")
+    guards = [row for row in rows if row["event"] == "protocol_guard"]
+    assert [row["outcome"] for row in guards] == [
+        "triggered",
+        "action_obtained",
+        "triggered",
+        "action_obtained",
+    ]
+
+
+def test_v22_deterministic_verifier_completes_subgoal_without_vlm(tmp_path):
+    action = Action(
+        ActionType.WAIT,
+        {
+            "subgoal": "show the ready page",
+            "completion_evidence_kind": "ui_text",
+            "completion_evidence_value": "Ready",
+        },
+        expected_outcome="Ready becomes visible",
+    )
+    policy = _QueuedPolicy([_parsed(action)])
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=3,
+        policy=policy,
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(
+        ["before", "after"],
+        verification_texts=[(), ("Ready | app:id/status",)],
+    )
+
+    result = agent.step("show the ready page")
+
+    assert not result.done
+    assert not agent._subgoals.active
+    assert agent._subgoals.completed_goals == ["show the ready page"]
+    rows = _trace_rows(tmp_path / "trace.jsonl")
+    assert any(row["event"] == "deterministic_progress_verifier" for row in rows)
+    completed = next(row for row in rows if row["event"] == "subgoal_completed")
+    assert completed["source"] == "deterministic"
+    assert not any(row["event"] == "vlm_progress_verifier" for row in rows)
+
+
+def test_v22_visual_state_uses_event_triggered_verifier_and_keeps_images(tmp_path):
+    action = Action(
+        ActionType.WAIT,
+        {
+            "subgoal": "open the editor",
+            "completion_evidence_kind": "visual_state",
+            "completion_evidence_value": "the contact editor is visible",
+        },
+        expected_outcome="editor opens",
+    )
+    verifier = _FakeProgressVerifier("completed", evidence="editor fields are visible")
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="vision_only",
+        max_steps=3,
+        policy=_QueuedPolicy([_parsed(action)]),
+        progress_verifier=verifier,
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(["before", "after"])
+
+    result = agent.step("open the editor")
+
+    assert not result.done
+    assert len(verifier.requests) == 1
+    assert agent._subgoals.completed_goals == ["open the editor"]
+    row = next(
+        row for row in _trace_rows(tmp_path / "trace.jsonl")
+        if row["event"] == "vlm_progress_verifier"
+    )
+    assert row["verdict"] == "completed"
+    assert Path(row["before_image"]).exists()
+    assert Path(row["after_image"]).exists()
+
+
+def test_v22_vlm_regression_triggers_bounded_recovery(tmp_path):
+    action = Action(
+        ActionType.CLICK_POINT,
+        {
+            "point": [20, 30],
+            "subgoal": "open the target conversation",
+            "completion_evidence_kind": "visual_state",
+            "completion_evidence_value": "target conversation is visible",
+        },
+    )
+    verifier = _FakeProgressVerifier("regressed", evidence="a different app opened")
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=3,
+        policy=_QueuedPolicy([_parsed(action)]),
+        progress_verifier=verifier,
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    adapter = _FakeAdapter(["before", "after"])
+    agent._adapter = adapter
+
+    result = agent.step("reply to the target message")
+
+    assert not result.done
+    assert result.data["reason"] == "agent_replan_requested"
+    assert result.data["trigger"] == "progress_verifier_regressed"
+    assert len(adapter.executed_actions) == 1
+    assert agent._recovery.active.level == "action"
+    assert agent._pending_tree_reason == "progress_verifier_regressed"
+
+
+def test_v22_manager_freezes_subgoal_before_action_only_actor_decision(tmp_path):
+    manager = _FakeSubgoalManager(
+        [("open Messages", CompletionEvidence("package_activity", "messaging"))]
+    )
+    action = Action(ActionType.WAIT, reason="let the app settle")
+    policy = _QueuedPolicy([_parsed(action)])
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=3,
+        policy=policy,
+        subgoal_manager=manager,
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(
+        ["before", "after"],
+        packages=["launcher", "com.google.android.apps.messaging"],
+    )
+
+    result = agent.step("reply to Alice in Messages")
+
+    assert not result.done
+    assert len(manager.requests) == 1
+    assert policy.requests[0].task.active_subgoal == "open Messages"
+    assert "subgoal" not in action.parameters
+    assert agent._subgoals.completed_goals == ["open Messages"]
+    rows = _trace_rows(tmp_path / "trace.jsonl")
+    manager_row = next(row for row in rows if row["event"] == "subgoal_manager")
+    assert manager_row["outcome"] == "accepted"
+    assert manager_row["action_executed"] is False
+
+
+def test_v22_manager_is_not_called_on_every_actor_step(tmp_path):
+    manager = _FakeSubgoalManager(
+        [("open the editor", CompletionEvidence("ui_text", "Save"))]
+    )
+    policy = _QueuedPolicy(
+        [_parsed(Action(ActionType.WAIT)), _parsed(Action(ActionType.PRESS_BACK))]
+    )
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="vision_only",
+        max_steps=4,
+        policy=policy,
+        subgoal_manager=manager,
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(
+        ["s0", "s1", "s2", "s3"],
+        verification_texts=[("Home",), ("Home",), ("Home",), ("Home",)],
+    )
+
+    first = agent.step("create a note")
+    second = agent.step("create a note")
+
+    assert not first.done and not second.done
+    assert len(manager.requests) == 1
+    assert agent._subgoals.active_goal == "open the editor"
+    assert agent._progress.current_subgoal == "open the editor"
+
+
+def test_v22_manager_rejects_hard_evidence_already_true_before_action(tmp_path):
+    manager = _FakeSubgoalManager(
+        [("return home", CompletionEvidence("ui_text", "Home"))]
+    )
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=3,
+        policy=_QueuedPolicy([_parsed(Action(ActionType.WAIT))]),
+        subgoal_manager=manager,
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(
+        ["s0", "s1"],
+        verification_texts=[("Home",), ("Home",)],
+    )
+
+    result = agent.step("open Messages")
+
+    assert not result.done
+    assert not agent._subgoals.active
+    row = next(
+        row for row in _trace_rows(tmp_path / "trace.jsonl")
+        if row["event"] == "subgoal_manager"
+    )
+    assert row["outcome"] == "invalid_already_satisfied"
+    assert row["action_executed"] is False
+
+
+def test_v22_redundant_tree_request_gets_one_safe_action_retry(tmp_path):
+    request_tree = Action(ActionType.CALL_TOOL, {"tool": "ui_tree"})
+    wait = Action(ActionType.WAIT, reason="use the supplied context")
+    policy = _QueuedPolicy([_parsed(request_tree), _parsed(wait)])
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=3,
+        policy=policy,
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._pending_tree_reason = "progress_verifier_uncertain"
+    agent._adapter = _FakeAdapter(["s0", "s1"])
+
+    result = agent.step("open settings")
+
+    assert not result.done
+    assert len(policy.requests) == 2
+    assert all(request.include_ui_tree for request in policy.requests)
+    assert [action.type for action in agent._adapter.executed_actions] == [
+        ActionType.WAIT
+    ]
+    guards = [
+        row for row in _trace_rows(tmp_path / "trace.jsonl")
+        if row["event"] == "protocol_guard"
+        and row["strategy"] == "redundant_ui_tree_request"
+    ]
+    assert [row["outcome"] for row in guards] == [
+        "triggered",
+        "action_obtained",
+    ]
+
+
+def test_v22_manager_proposes_again_after_confirmed_subgoal_boundary(tmp_path):
+    manager = _FakeSubgoalManager(
+        [
+            ("open Messages", CompletionEvidence("package_activity", "messaging")),
+            ("open Alice conversation", CompletionEvidence("ui_text", "Alice")),
+        ]
+    )
+    policy = _QueuedPolicy(
+        [_parsed(Action(ActionType.WAIT)), _parsed(Action(ActionType.WAIT))]
+    )
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=4,
+        policy=policy,
+        subgoal_manager=manager,
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(
+        ["s0", "s1", "s2", "s3"],
+        packages=[
+            "launcher",
+            "com.google.android.apps.messaging",
+            "com.google.android.apps.messaging",
+            "com.google.android.apps.messaging",
+        ],
+        verification_texts=[(), (), ("Conversations",), ("Conversations",)],
+    )
+
+    agent.step("reply to Alice in Messages")
+    agent.step("reply to Alice in Messages")
+
+    assert len(manager.requests) == 2
+    assert [request["trigger"] for request in manager.requests] == [
+        "initial",
+        "previous_completed",
+    ]
+    assert agent._subgoals.active_goal == "open Alice conversation"
+
+
+def test_v22_second_recovery_can_request_one_subgoal_revision(tmp_path):
+    manager = _FakeSubgoalManager(
+        [("return to Messages", CompletionEvidence("package_activity", "messages"))]
+    )
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=4,
+        policy=_QueuedPolicy([]),
+        subgoal_manager=manager,
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._goal = "reply to Alice in Messages"
+    agent._subgoals.accept_proposal(
+        "open Alice conversation",
+        CompletionEvidence("ui_text", "Alice"),
+    )
+    blocked = Action(ActionType.WAIT)
+
+    assert agent._begin_recovery("screen_stalled", blocked_action=blocked)
+    assert agent._begin_recovery("wrong_context", blocked_action=blocked)
+    agent._ensure_managed_subgoal(
+        Image.new("RGB", (100, 200), "white"),
+        ScreenState(
+            image_size=(100, 200),
+            package_activity="settings",
+            elements=(),
+            fingerprint="screen",
+            exact_fingerprint="screen",
+        ),
+    )
+
+    assert len(manager.requests) == 1
+    assert manager.requests[0]["trigger"] == "recovery_revision"
+    assert manager.requests[0]["current_subgoal"] == "open Alice conversation"
+    assert agent._subgoals.active_goal == "return to Messages"
+    assert agent._subgoals.revision_count == 1
+
+
+def test_v22_hard_evidence_cannot_be_overruled_by_vlm_completed_claim(tmp_path):
+    first_action = Action(
+        ActionType.WAIT,
+        {
+            "subgoal": "show the Done label",
+            "completion_evidence_kind": "ui_text",
+            "completion_evidence_value": "Done",
+        },
+    )
+    proposal = Action(
+        ActionType.PROPOSE_SUBGOAL_COMPLETE,
+        {"observed_evidence": "I think it is done"},
+    )
+    verifier = _FakeProgressVerifier("completed", evidence="page looks finished")
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=3,
+        policy=_QueuedPolicy([_parsed(first_action), _parsed(proposal)]),
+        progress_verifier=verifier,
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(
+        ["s0", "s1", "s2"],
+        verification_texts=[("Loading",), ("Still loading",), ("Still loading",)],
+    )
+
+    first = agent.step("finish loading")
+    second = agent.step("finish loading")
+
+    assert not first.done and not second.done
+    assert agent._subgoals.active
+    assert agent._subgoals.completed_goals == []
+    assert second.data["reason"] == "agent_replan_requested"
+    assert len(verifier.requests) == 1
+
+
+def test_v22_actor_cannot_mutate_frozen_subgoal_without_recovery(tmp_path):
+    first = Action(
+        ActionType.WAIT,
+        {
+            "subgoal": "open conversation A",
+            "completion_evidence_kind": "ui_text",
+            "completion_evidence_value": "Conversation A",
+        },
+    )
+    second = Action(
+        ActionType.WAIT,
+        {
+            "subgoal": "open settings",
+            "completion_evidence_kind": "ui_text",
+            "completion_evidence_value": "Settings",
+        },
+    )
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="vision_only",
+        max_steps=4,
+        policy=_QueuedPolicy([_parsed(first), _parsed(second)]),
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(
+        ["s0", "s1", "s2", "s3"],
+        verification_texts=[("Home",), ("Home",), ("Home",), ("Home",)],
+    )
+
+    agent.step("open conversation A")
+    agent.step("open conversation A")
+
+    assert agent._subgoals.active_goal == "open conversation A"
+    rows = [
+        row for row in _trace_rows(tmp_path / "trace.jsonl")
+        if row["event"] == "subgoal_proposal"
+    ]
+    assert [row["outcome"] for row in rows] == ["accepted", "mutation_blocked"]

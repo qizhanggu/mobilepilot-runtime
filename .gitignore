@@ -37,6 +37,8 @@ artifacts/traces/
 artifacts/evaluation/visual-pilot*/
 artifacts/evaluation/androidworld-held-out-*/
 artifacts/evaluation/androidworld-v2-*/
+artifacts/evaluation/androidworld-v21-*/
+artifacts/evaluation/androidworld-v22-*/
 
 # Editors and OS
 .idea/

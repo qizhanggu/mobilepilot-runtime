@@ -4,6 +4,7 @@ from types import SimpleNamespace
 import pytest
 
 from mobile_pilot.androidworld.evaluation import (
+    official_reward_status,
     load_runtime_eval_manifest,
     task_id_hash,
 )
@@ -33,6 +34,19 @@ def test_frozen_12_task_manifest_keeps_development_sets_disjoint():
     assert len(manifest.tasks) == 12
     assert manifest.variants == ("v1", "v2")
     assert manifest.mode == "hybrid"
+
+
+def test_frozen_36_task_v22_manifest_keeps_all_prior_tasks_disjoint():
+    manifest = load_runtime_eval_manifest(
+        "configs/androidworld/runtime_eval_36_v22.json"
+    )
+
+    assert manifest.evaluation_role == "frozen_evaluation"
+    assert len(manifest.tasks) == 36
+    assert manifest.variants == ("v1", "v2.2")
+    assert manifest.max_action_steps == 16
+    assert manifest.mode == "hybrid"
+    assert not set(manifest.task_ids) & set(manifest.development_task_exclusions)
     assert manifest.model == "gui-plus-2026-02-26"
     assert manifest.androidworld_commit == (
         "3e50888527ef9f29b9157ecd537e408008bb1c85"
@@ -75,6 +89,17 @@ def test_loads_frozen_runtime_manifest_and_rejects_development_overlap(tmp_path)
     path.write_text(json.dumps(data), encoding="utf-8")
     with pytest.raises(ValueError, match="overlaps"):
         load_runtime_eval_manifest(path)
+
+
+def test_v21_manifest_freezes_v2_then_v21_on_unexposed_tasks():
+    manifest = load_runtime_eval_manifest(
+        "configs/androidworld/runtime_eval_12_v21.json"
+    )
+
+    assert manifest.source_schema == "mobilepilot.androidworld.runtime-eval.v2"
+    assert manifest.variants == ("v2", "v2.1")
+    assert len(manifest.tasks) == 12
+    assert not set(manifest.task_ids) & set(manifest.development_task_exclusions)
 
 
 def test_development_runner_requires_explicit_variant():
@@ -159,6 +184,60 @@ def test_trace_metrics_keep_protocol_recovery_tree_and_cost_separate(tmp_path):
     assert metrics["estimated_list_cost_cny"] == pytest.approx(0.03)
 
 
+def test_trace_metrics_count_planner_and_checkpoint_verifier_calls(tmp_path):
+    call = {
+        "prompt_tokens": 10,
+        "completion_tokens": 2,
+        "total_tokens": 12,
+        "estimated_list_cost_cny": 0.001,
+        "latency_seconds": 0.1,
+    }
+    rows = [
+        {"event": "planner_decision", "metrics": call},
+        {"event": "actor_decision", "parsed": True, "metrics": call},
+        {"event": "checkpoint_verifier", "metrics": call},
+        {"event": "checkpoint_advanced"},
+    ]
+    path = tmp_path / "trace.jsonl"
+    path.write_text("\n".join(json.dumps(row) for row in rows) + "\n", encoding="utf-8")
+
+    metrics = _trace_metrics(path)
+
+    assert metrics["vlm_call_count"] == 3
+    assert metrics["actor_call_count"] == 1
+    assert metrics["planner_call_count"] == 1
+    assert metrics["checkpoint_verifier_call_count"] == 1
+    assert metrics["checkpoint_confirmed_count"] == 1
+
+
+def test_trace_metrics_count_v22_progress_verifier_and_subgoal_events(tmp_path):
+    call = {
+        "prompt_tokens": 20,
+        "completion_tokens": 4,
+        "total_tokens": 24,
+        "estimated_list_cost_cny": 0.0001,
+        "latency_seconds": 0.2,
+    }
+    rows = [
+        {"event": "subgoal_manager", "outcome": "accepted", "metrics": call},
+        {"event": "subgoal_manager", "outcome": "revised", "metrics": call},
+        {"event": "vlm_progress_verifier", "metrics": call},
+        {"event": "subgoal_completed"},
+    ]
+    path = tmp_path / "trace.jsonl"
+    path.write_text("\n".join(json.dumps(row) for row in rows) + "\n", encoding="utf-8")
+
+    metrics = _trace_metrics(path)
+
+    assert metrics["vlm_call_count"] == 3
+    assert metrics["progress_verifier_call_count"] == 1
+    assert metrics["subgoal_manager_call_count"] == 2
+    assert metrics["subgoal_manager_failure_count"] == 0
+    assert metrics["subgoal_proposal_count"] == 2
+    assert metrics["subgoal_revision_count"] == 1
+    assert metrics["subgoal_completed_count"] == 1
+
+
 def test_existing_infrastructure_error_forbids_automatic_task_retry(tmp_path):
     path = tmp_path / "runs.jsonl"
     path.write_text(
@@ -201,3 +280,49 @@ def test_summary_reports_paired_outcomes_and_failure_taxonomy():
     assert result["by_variant"]["v1"]["failure_taxonomy"] == {
         "invalid_actor_output": 1
     }
+
+
+def test_official_reward_status_keeps_partial_credit_separate():
+    assert official_reward_status(0.0) == "failure"
+    assert official_reward_status(0.5) == "partial"
+    assert official_reward_status(1.0) == "success"
+
+
+def test_summary_does_not_count_partial_reward_as_success():
+    manifest = load_runtime_eval_manifest("configs/androidworld/held_out_20.json")
+    rows = [
+        {
+            "task_id": "TaskA",
+            "variant": "v2.2",
+            "status": "partial",
+            "official_reward": 0.5,
+            "terminal_reason": "step_budget_exhausted",
+        },
+        {
+            "task_id": "TaskB",
+            "variant": "v2.2",
+            "status": "infrastructure_error",
+        },
+    ]
+
+    result = _summary(rows, manifest, ("v2.2",), "hybrid", {})["by_variant"]["v2.2"]
+
+    assert result["task_count"] == 2
+    assert result["evaluated_task_count"] == 1
+    assert result["infrastructure_error_count"] == 1
+    assert result["success_count"] == 0
+    assert result["partial_count"] == 1
+    assert result["official_success_rate"] == 0.0
+    assert result["failure_taxonomy"] == {}
+
+
+def test_paired_summary_preserves_partial_outcome():
+    manifest = load_runtime_eval_manifest("configs/androidworld/held_out_20.json")
+    rows = [
+        {"task_id": "TaskA", "variant": "v1", "official_reward": 0.0},
+        {"task_id": "TaskA", "variant": "v2", "official_reward": 0.5},
+    ]
+
+    result = _summary(rows, manifest, ("v1", "v2"), "hybrid", {})
+
+    assert result["paired_outcomes"] == {"v1_failure__v2_partial": 1}

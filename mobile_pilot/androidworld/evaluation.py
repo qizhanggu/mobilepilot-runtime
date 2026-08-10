@@ -12,6 +12,24 @@ from mobile_pilot.androidworld.held_out import load_held_out_manifest
 
 
 RUNTIME_EVAL_SCHEMA_VERSION = "mobilepilot.androidworld.runtime-eval.v1"
+RUNTIME_EVAL_SCHEMA_V2 = "mobilepilot.androidworld.runtime-eval.v2"
+RUNTIME_EVAL_SCHEMA_V3 = "mobilepilot.androidworld.runtime-eval.v3"
+OFFICIAL_SUCCESS_REWARD = 1.0
+
+
+def official_reward_status(reward: float) -> str:
+    """Classify AndroidWorld reward without promoting partial credit to success."""
+    value = float(reward)
+    if value >= OFFICIAL_SUCCESS_REWARD:
+        return "success"
+    if value > 0:
+        return "partial"
+    return "failure"
+
+
+def is_official_success(reward: float) -> bool:
+    """Return whether AndroidWorld awarded full task success."""
+    return official_reward_status(reward) == "success"
 
 
 @dataclass(frozen=True)
@@ -70,9 +88,13 @@ def load_runtime_eval_manifest(path: str | Path) -> RuntimeEvalManifest:
             variants=(),
             mode="hybrid",
         )
-    if schema != RUNTIME_EVAL_SCHEMA_VERSION:
+    if schema not in {
+        RUNTIME_EVAL_SCHEMA_VERSION,
+        RUNTIME_EVAL_SCHEMA_V2,
+        RUNTIME_EVAL_SCHEMA_V3,
+    }:
         raise ValueError("unsupported AndroidWorld Runtime evaluation manifest schema")
-    return _parse_runtime_manifest(manifest_path, data)
+    return _parse_runtime_manifest(manifest_path, data, schema)
 
 
 def assert_registry_contains(
@@ -87,7 +109,7 @@ def assert_registry_contains(
         )
 
 
-def _parse_runtime_manifest(path: Path, data: dict[str, Any]) -> RuntimeEvalManifest:
+def _parse_runtime_manifest(path: Path, data: dict[str, Any], schema: str) -> RuntimeEvalManifest:
     role = data.get("evaluation_role")
     task_rows = data.get("tasks")
     exclusions = data.get("development_task_exclusions")
@@ -99,8 +121,13 @@ def _parse_runtime_manifest(path: Path, data: dict[str, Any]) -> RuntimeEvalMani
     expected_count = data.get("task_count")
     if not isinstance(expected_count, int) or expected_count != len(tasks):
         raise ValueError("manifest task_count does not match tasks")
-    if role == "frozen_evaluation" and len(tasks) != 12:
-        raise ValueError("frozen Runtime evaluation manifest must contain exactly 12 tasks")
+    if role == "frozen_evaluation":
+        expected_frozen_count = 36 if schema == RUNTIME_EVAL_SCHEMA_V3 else 12
+        if len(tasks) != expected_frozen_count:
+            raise ValueError(
+                "frozen Runtime evaluation manifest must contain exactly "
+                f"{expected_frozen_count} tasks"
+            )
     ids = tuple(task.task_id for task in tasks)
     if len(ids) != len(set(ids)):
         raise ValueError("Runtime evaluation manifest contains duplicate task IDs")
@@ -130,8 +157,16 @@ def _parse_runtime_manifest(path: Path, data: dict[str, Any]) -> RuntimeEvalMani
         raise ValueError("Runtime evaluation seed or max_action_steps is invalid")
     if not isinstance(selection_rule, str) or not selection_rule:
         raise ValueError("Runtime evaluation selection_rule is required")
-    if variants != ["v1", "v2"]:
-        raise ValueError("Runtime evaluation variants must be frozen as v1 then v2")
+    expected_variants = {
+        RUNTIME_EVAL_SCHEMA_VERSION: ["v1", "v2"],
+        RUNTIME_EVAL_SCHEMA_V2: ["v2", "v2.1"],
+        RUNTIME_EVAL_SCHEMA_V3: ["v1", "v2.2"],
+    }[schema]
+    if variants != expected_variants:
+        raise ValueError(
+            "Runtime evaluation variants do not match the manifest schema: "
+            + repr(expected_variants)
+        )
     if mode != "hybrid":
         raise ValueError("Runtime evaluation mode must be hybrid")
     if not isinstance(source_hash, str) or len(source_hash) != 64:
@@ -146,7 +181,7 @@ def _parse_runtime_manifest(path: Path, data: dict[str, Any]) -> RuntimeEvalMani
         raise ValueError("Runtime evaluation cost_cap_cny must be within (0, 15]")
     return RuntimeEvalManifest(
         path=path,
-        source_schema=RUNTIME_EVAL_SCHEMA_VERSION,
+        source_schema=schema,
         evaluation_role=role,
         androidworld_commit=commit,
         model=model,

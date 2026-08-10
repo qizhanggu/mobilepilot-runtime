@@ -55,7 +55,16 @@ def test_observe_uses_or_omits_accessibility_elements_by_mode():
     )
     adapter = AndroidWorldAdapter(env)
     _, vision_only = adapter.observe(include_ui_tree=False)
+    _, v21_context = adapter.observe(
+        include_ui_tree=False,
+        include_context_signals=True,
+    )
     _, hybrid = adapter.observe(include_ui_tree=True)
     assert vision_only.elements == ()
+    assert vision_only.package_activity == ""
+    assert v21_context.elements == ()
+    assert v21_context.package_activity == "com.android.deskclock"
+    assert any("Start" in row for row in v21_context.verification_texts)
+    assert v21_context.semantic_fingerprint
     assert hybrid.elements[0].text == "Start"
     assert hybrid.elements[0].bounds == (1, 2, 30, 40)

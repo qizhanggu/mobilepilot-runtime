@@ -23,6 +23,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from mobile_pilot.androidworld.held_out import HeldOutManifest, assert_registry_contains, load_held_out_manifest
+from mobile_pilot.androidworld.evaluation import official_reward_status
 
 
 FROZEN_SOURCE_FILES = (
@@ -152,7 +153,7 @@ def _run_one(
         "recorded_at": datetime.now(timezone.utc).isoformat(),
         "task_id": task_id,
         "mode": mode,
-        "status": "success" if reward > 0 else "failure",
+        "status": official_reward_status(reward),
         "official_reward": reward,
         "initial_official_reward": payload.get("initial_official_reward"),
         "agent_data": payload.get("agent_data", {}),
@@ -172,7 +173,7 @@ def _existing_terminal_runs(path: Path) -> dict[tuple[str, str], dict[str, Any]]
     records: dict[tuple[str, str], dict[str, Any]] = {}
     for line in path.read_text(encoding="utf-8").splitlines():
         row = json.loads(line)
-        if row.get("status") not in {"success", "failure"}:
+        if row.get("status") not in {"success", "partial", "failure"}:
             continue
         key = (row["task_id"], row["mode"])
         if key in records:
@@ -226,11 +227,16 @@ def _summary(records: Any, manifest: HeldOutManifest, modes: tuple[str, ...], au
     by_mode: dict[str, dict[str, Any]] = {}
     for mode in modes:
         subset = [row for row in rows if row.get("mode") == mode]
+        statuses = [
+            official_reward_status(float(row.get("official_reward", 0)))
+            for row in subset
+        ]
         by_mode[mode] = {
             "task_count": len(subset),
-            "success_count": sum(row.get("official_reward", 0) > 0 for row in subset),
+            "success_count": statuses.count("success"),
+            "partial_count": statuses.count("partial"),
             "official_success_rate": (
-                sum(row.get("official_reward", 0) > 0 for row in subset) / len(subset) if subset else 0.0
+                statuses.count("success") / len(subset) if subset else 0.0
             ),
             **_totals(subset),
             "invalid_output_count": sum(row.get("invalid_output_count", 0) for row in subset),

@@ -15,7 +15,7 @@ Accessibility UI Tree · OpenAI-compatible VLM API · JSONL Trace · pytest · G
 ## 从哪里遇到困难
 
 V1 在已冻结的 AndroidWorld 20 题上只完成 `vision_only 5/20`、`hybrid 4/20`。
-40 条 Trace 中只有 9 条 reward-positive；31 条失败的终止原因是：
+40 条 Trace 中只有 9 条完整成功；31 条失败的终止原因是：
 
 | 失败终止 | 次数 | 暴露的问题 |
 | --- | ---: | --- |
@@ -32,18 +32,24 @@ V1 在已冻结的 AndroidWorld 20 题上只完成 `vision_only 5/20`、`hybrid 
 ```mermaid
 flowchart LR
   G["自然语言目标"] --> O["观察截图"]
-  O --> A["Actor：提出下一动作"]
+  O --> M["低频 Subgoal Manager：下一可验证状态"]
+  M --> S
+  O --> A["GUI Actor：只提出下一动作"]
   S["短期状态：已完成 / 阻塞 / 下一验证"] --> A
   A --> P["Protocol Guard"]
   P -->|合法动作| E["AndroidWorld / ADB 执行"]
   P -->|未执行动作且格式非法| R1["至多一次结构化重试"]
   R1 --> P
-  E --> V["Verifier + 官方 reward"]
+  E --> V["确定性 Verifier"]
+  V -->|事件触发| Q["Qwen Progress Verifier"]
+  Q --> V
+  V --> W["AndroidWorld official reward"]
   V -->|有进展| S
   V -->|循环 / 无变化 / 执行失败| R2["有限 Recovery：重新观察与 replan"]
   R2 -->|按需| T["UI Tree 工具"]
   T --> A
-  V -->|官方成功| D["结束"]
+  W -->|完整 reward=1.0| D["结束"]
+  W -->|部分 reward| S
   P -.-> J["JSONL Trace"]
   E -.-> J
   V -.-> J
@@ -73,7 +79,8 @@ V1 hybrid 每一步都附带 Tree。V2 只有在非法输出、动作失败、�
 ### 4. 官方 reward 控制最终完成
 
 `PROPOSE_COMPLETE` 只是模型提议。Runtime 每步查询 AndroidWorld 官方 reward；模型漏报
-时仍可判成功，模型误报时仍记失败。
+时仍可判成功，模型误报时仍记失败。组合任务的 `0.5` 只记为部分完成并继续执行，只有
+`reward >= 1.0` 才是完整成功。
 
 ## 结果：开发集提升，但未证明未见泛化
 
@@ -83,7 +90,7 @@ V1 hybrid 每一步都附带 Tree。V2 只有在非法输出、动作失败、�
 
 | 指标 | V1 | V2 | 变化 |
 | --- | ---: | ---: | ---: |
-| 官方 reward-positive | 4/20 | 9/20 | +5 题 |
+| 官方完整成功 | 4/20 | 9/20 | +5 题 |
 | 非法输出终止 | 13/20 | 7/20 | -6 题 |
 | 步数耗尽终止 | 2/20 | 1/20 | -1 题 |
 | 平均动作数 | 4.05 | 5.60 | +1.55 |
@@ -93,6 +100,27 @@ V1 hybrid 每一步都附带 Tree。V2 只有在非法输出、动作失败、�
 逐题配对为 6 题改善、1 题退化、3 题都成功、10 题都失败。Recovery 触发 10 次，
 其中 3 次形成了“失败信号 → Tree/重新规划 → 改变动作 → 官方 reward”的真实救回：
 `SystemBluetoothTurnOn`、`SystemWifiTurnOff`、`MarkorCreateFolder`。
+
+### V2.2：职责拆分改善协议，但没有超过 V2
+
+V2.2 将高频 GUI-Plus Actor 收窄为 action-only 工具调用；Qwen 只在边界生成一个冻结
+子目标，并在确定性证据不足或疑似停滞时充当 Progress Verifier。原 20 题仍只作开发集：
+
+| 指标 | V2.2 最佳开发回归 | Manager 边界消融 |
+| --- | ---: | ---: |
+| 完整成功 | 7/20 | 5/20 |
+| 部分完成 | 0 | 1 |
+| 非法输出终止 | 1 | 1 |
+| Recovery 触发 / 救回 | 20 / 1 | 27 / 1 |
+| 平均动作数 | 6.15 | 6.85 |
+| VLM 调用 | 217 | 274 |
+| 估算目录价 | ¥0.8654 | ¥1.1257 |
+
+最佳开发回归中，`ExpenseDeleteSingle` 首次形成了可审计的“连续无进展 → 按需 Tree →
+改变动作 → 官方 reward=1.0”救回；组合任务 `TurnOnWifiAndOpenApp` 也从上一轮错误提前停在
+`0.5`，修正为继续执行并获得 `1.0`。但 V2.2 的 7/20 仍低于 V2 的 9/20，因此不能写成
+成功率升级。更严格拒绝操作型子目标的消融回落到 5/20+1 partial，代码已回退，Trace
+保留为负结果。
 
 ### 新冻结任务：评测未完整，已完成子集没有收益
 
@@ -104,7 +132,7 @@ Windows TLS、模拟器缺少 `-grpc 8554`、Joplin SQLite 缺少 `fts4` 等基�
 
 | 已完成的冻结子集 | V1 | V2 |
 | --- | ---: | ---: |
-| reward-positive | 2/6 | 1/6 |
+| 完整成功 | 2/6 | 1/6 |
 | 非法输出终止 | 1 | 2 |
 | 步数耗尽 | 3 | 0 |
 | 执行动作 | 49 | 22 |
@@ -134,7 +162,10 @@ Windows TLS、模拟器缺少 `-grpc 8554`、Joplin SQLite 缺少 `fts4` 等基�
 | ScreenSpot-v2 Mobile | 471 条公开 held-out | Raw 332/471，Grid 314/471；网格无泛化收益 |
 | AndroidWorld V1 | 暴露 20 题 × 2 模式 = 40 runs | 历史冻结结果，现仅作开发基线 |
 | AndroidWorld V2 开发回归 | 同一暴露 20 题，hybrid 配对 | 4/20 → 9/20，仅说明定向改进有效 |
+| AndroidWorld V2.1 Planner 消融 | 同一暴露 20 题 | 5/20，低于 V2；Planner 未带来收益 |
+| AndroidWorld V2.2 分层执行 | 同一暴露 20 题 | 最佳 7/20、1 次真实救回；协议更稳但未超过 V2 |
 | AndroidWorld 新冻结任务 | 6 个完整配对后基础设施中断 | V1 2/6、V2 1/6；不包装成完整 held-out 成绩 |
+| AndroidWorld 新冻结 36 题 | 36 题、计划 72 个配对运行 | 协议已冻结、尚未运行；不得提前写结果 |
 
 详细数字见 [实验总表](docs/final/evaluation-summary.md)，Recovery 成功与失败链路见
 [代表性 Trace](docs/final/representative-traces.md)，三分钟讲解见
@@ -156,7 +187,7 @@ $env:MOBILEPILOT_ANDROIDWORLD_DOWNLOAD_CACHE=(Resolve-Path '.local\androidworld-
 
 冻结评测 Runner 会在模型调用前检查：唯一设备必须是 `emulator-5554`、AndroidWorld
 commit、模型、任务 hash、Agent 源码 hash、tracked workspace、本地官方缓存、调用预算
-和成本上限。当前完整离线回归为 `126 passed`。完整命令见
+和成本上限。当前完整离线回归为 `170 passed`。完整命令见
 [Demo 指南](docs/final/demo-script.md)。
 
 ## 项目结构
@@ -176,9 +207,16 @@ docs/final/          # 实验总表、代表 Trace、Demo 与简历描述
 
 ## 当前局限
 
+> 2026-08-10 结果：V2.2 使用 action-only GUI Actor、低频 Qwen Subgoal Manager、
+> 确定性优先的两层 Verifier 和最多两级 Recovery。在暴露开发集最佳为 7/20，并出现
+> 1 次真实救回，但仍低于 V2 的 9/20。更严格的 Manager 边界消融回落到 5/20+1 partial，
+> 已保留证据并回退代码。详见
+> [Sprint 16 结果](docs/progress/androidworld-v22-sprint16-development-result.md)。
+
 - 新冻结评测没有完整跑满 12 题，不能声称 V2 已获得 held-out 泛化提升；
-- 一次轻量 replan 仍不足以稳定处理多字段表单和长程任务；
-- Recovery 在开发集救回 3 次，但新子集触发 2 次、救回 0 次；
+- 新的 36 题 V1/V2.2 配对协议已冻结但尚未运行，当前没有新泛化数字；
+- 两级 Recovery 仍不足以稳定处理多字段表单、Markor 对话框和日历长任务；
+- V2.2 最佳开发回归 Recovery 触发 20 次仅救回 1 次，纠偏质量仍是主瓶颈；
 - AndroidWorld 部分 App 在 Windows 上存在 snapshot、Activity 或 SQLite 兼容问题；
 - 目录价是基于记录 Token 的估算值，不等同于账单实扣。
 
