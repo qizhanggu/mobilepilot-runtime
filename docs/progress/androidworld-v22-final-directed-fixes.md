@@ -32,4 +32,16 @@
 - 20-step diagnostic：`SimpleCalendarAddRepeatingEvent` 仍为 0.0，20 actions、0 loop、0 recovery。更多步数没有在本次诊断中带来成功，因此不能简单宣称“只差步数”。
 - 模型/协议负结果：定向任务仍出现 GUI Plus timeout、空输出和缺失终点的 swipe；Protocol Guard 只做一次未执行动作前的安全重试，不把语义不完整动作猜成点击。
 
-下一步是在相同 12-step exposed 20 上执行一次完整 development regression；结果确认后锁定代码，再生成新的 frozen 36 protocol。
+## 完整 exposed 20 development regression
+
+固定提交 `2fe4102`、源码哈希 `246cce8...74cb`、12 steps、seed 0、hybrid，在原 20 题上只运行 V2.2：
+
+- official full success：**9/20（45%）**；无 partial；与历史 V2 的 9/20 持平，高于修复前 V2.2 的 7/20；这不是 held-out 泛化结论。
+- termination：`step_budget_exhausted` 6、`insufficient_new_evidence` 3、`recovery_exhausted` 1、`unsafe_repeated_action_after_recovery` 1；`invalid_actor_output` 终止为 0。
+- 137 executed actions，平均 6.85；8 次 loop；14 次 Recovery trigger，1 次 official rescue。
+- Manager 62 calls，Progress Verifier 23 calls，总 VLM calls 241；947,909 tokens，模型累计延迟 1,303.72 秒，目录估算成本 ¥1.010619。
+- `SimpleCalendarEventOnDateAtTime` 与 `SimpleCalendarNextEvent` 由旧失败转为 official success，Trace 明确使用 `ANSWER`；`ContactsNewContactDraft` 也转为成功。
+- `MarkorAddNoteHeader`、`MarkorEditNote` 不再出现 completed 与 loop 同 step 冲突，但仍因 12 步内未完成后续编辑/保存而失败。
+- 三次 `insufficient_new_evidence` 经逐 Trace 复核：SystemCopy 的无 Tree 命中点击、Wifi 的同向重复 swipe、SmsClipboard 的 wait 都没有形成新的可验证策略；保留为显式安全停止，不为提高分数放松成随机尝试。
+
+结论：本轮修复带来了确定的动作可表达性、两道官方答案任务成功和状态机误杀消除，但 exposed success 仅恢复到 V2 的 9/20，不能宣称总体能力显著提升。代码在此锁定；下一步使用相同 36 题清单创建新 frozen protocol，旧未运行协议继续保留。
