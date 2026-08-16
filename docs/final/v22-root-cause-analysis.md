@@ -1,6 +1,6 @@
 # MobilePilot V2.2 开发回归 Root Cause Analysis
 
-更新时间：2026-08-10
+更新时间：2026-08-17（含最终定向修复与冻结验证附录）
 
 ## 审计范围与结论边界
 
@@ -267,3 +267,80 @@ Secondary factors：
 7. UI Tree 只有在问题很局部、按钮很明确时才真正救回了任务。
 8. 12 步只明显限制了少数长任务，不是 7/20 的主要原因。
 9. 普通非法 JSON 已不是最大问题，但“模型想做的动作不在协议里”仍是大问题。
+
+## 最终定向修复与冻结验证附录（2026-08-17）
+
+本附录记录上述 RCA 假设施工后的真实结果。冻结任务第一次产生结果后，没有再修改 Agent 代码、Prompt、Evidence 或 Recovery 策略。
+
+### 1. Action Contract：部分验证成立
+
+- 已实现并测试 `LONG_PRESS`、定点 `DRAG(start,end,duration)`、`ANSWER(text)`；
+- Protocol Guard 不再把不支持的语义动作偷偷降级为 CLICK；
+- 真实模拟器 smoke 证明 LONG_PRESS、DRAG 和 ANSWER 均进入预期通道；
+- `MarkorDeleteNewestNote` 在冻结任务中通过 LONG_PRESS + Tree Recovery 成功；
+- 多条 Calendar/Tasks 信息检索任务通过 ANSWER 获得官方成功；
+- `SystemBrightnessMin` 仍失败，说明 DRAG 能力可用不等于 Actor 一定会正确调用。
+
+结论：动作契约补齐消除了系统性不可表达问题，但只是一部分任务能力，不是通用推理提升。
+
+### 2. Runtime event ordering：确定性 bug 已修
+
+- confirmed subgoal progress/completed 先更新状态，再判断 loop/recovery；
+- subgoal 完成或切换时清理旧 unchanged streak、blocker 和页面历史；
+- `MarkorAddNoteHeader`、`MarkorEditNote` 的 `completed + loop_detected` 同步冲突在定向回归中降为 0；
+- 对真正无进展任务的 loop detection 测试仍通过。
+
+结论：误杀路径被修复，但这两道开发题没有因此自动变成成功，说明它是必要 bug fix，不是充分能力提升。
+
+### 3. Completion Evidence：机制改善，语义问题仍在
+
+- Manager prompt 改为 postcondition；
+- UI text 增加 NFKC、大小写、空格、连字符和电话号码格式归一化；
+- evidence 在动作前已满足时允许一次受限再生成；
+- 最终冻结有效 30 对中，Manager 90 次调用仍有 21 次进入再生成、17 次再生成后继续失败。
+
+结论：受限再生成阻止了一批坏 evidence 被直接冻结，但 Manager 的 postcondition 生成仍是明显瓶颈，假设只得到部分支持。
+
+### 4. Tree-grounded Recovery：出现 3 次严格救回
+
+最终冻结有效配对中，V2.2 Recovery 触发 25 次、严格救回 3 次：
+
+1. `MarkorDeleteNewestNote`：Tree `Delete`/`OK`；
+2. `SimpleCalendarDeleteEvents`：Tree `Yes`；
+3. `TasksHighPriorityTasks`：stalled 后回到冻结任务明确要求的 Tasks App，再修正 ANSWER。
+
+其余 22 次没有救回。`insufficient_new_evidence` 出现 6 次，说明 Runtime 会在没有新证据时停止，而不是随机改变动作。Recovery 的可审计性明显增强，但总体纠偏成功率仍低。
+
+### 5. 20 步诊断：假设被否定
+
+`SimpleCalendarAddRepeatingEvent` 单独放宽到 20 步后仍失败，执行 20 个动作，没有形成可验证完成链路。它不是“只差 8 步”；全局扩展步数不会解决主要根因。
+
+### 6. 最终开发回归
+
+原暴露 20 题保持 12 步，V2.2 最终为 9/20、0 partial、0 次非法输出终止；追平 V2 的 9/20，高于修复前 V2.2 的 7/20。Recovery 触发 14 次、严格救回 1 次。
+
+这仍是 development/regression 结果，不能称为 held-out 泛化。
+
+### 7. 最终冻结清单
+
+原 36 题清单中 30 题形成公平配对，6 题因 OsmAnd 目录和 Windows SQLite FTS4 无法形成有效对照：
+
+| 指标 | V1 | V2.2 |
+| --- | ---: | ---: |
+| official success | 0/30 | 9/30 |
+| invalid_actor_output | 21 | 4 |
+| average actions | 6.03 | 7.13 |
+| UI Tree requests | 209 | 49 |
+| Recovery trigger / rescue | 0 / 0 | 25 / 3 |
+| VLM calls | 209 | 386 |
+| estimated list cost | ¥1.4425 | ¥1.6521 |
+
+配对为 9 improved、0 regressed、21 both fail。结果说明定向修复在固定未见任务有效子集上复现了收益；但 21/30 失败和 6 个基础设施无效任务必须同时披露。
+
+### 8. 修复后，V2.2 主要还死在哪里
+
+1. 多字段表单、跨 App 和地图任务需要持续正确的页面理解与动作选择，Actor 仍不稳定；
+2. Recovery 能检测异常，但只有 3/25 次找到真正解决根因的新动作；
+3. Manager 仍经常给出动作前已经满足的 evidence；
+4. 增加步数无法修复已经走错的路线；
+5. Runtime 补齐答案/动作通道后，模型能力而不是协议已经成为更多任务的上限。

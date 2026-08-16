@@ -15,8 +15,11 @@
 | [evaluation/grid-development-b1-2026-07-23.md](evaluation/grid-development-b1-2026-07-23.md) | 10×10、8×16、10×20私有开发集对照及唯一网格冻结。 |
 | [evaluation/screenspot-v2-b3-integration-audit.md](evaluation/screenspot-v2-b3-integration-audit.md) | 30条 integration/audit subset 上 Raw 与冻结10×10的60次调用结果。 |
 | [evaluation/screenspot-v2-b4-held-out.md](evaluation/screenspot-v2-b4-held-out.md) | 471条 held-out 的942次正式调用、配对检验、501条补充汇总与失败审计。 |
-| [evaluation/androidworld-integration-plan.md](evaluation/androidworld-integration-plan.md) | AndroidWorld官方Agent接口映射、首批10任务、环境成本与验收节点；尚未部署。 |
+| [evaluation/androidworld-integration-plan.md](evaluation/androidworld-integration-plan.md) | AndroidWorld 接入前的历史计划；当前结果以 `final/` 文档为准。 |
 | [progress/public-benchmark-b4.md](progress/public-benchmark-b4.md) | 公共Benchmark阶段B4的简短工作进展。 |
+| [final/frozen-evaluation-report.md](final/frozen-evaluation-report.md) | 最终36题冻结清单中的30个有效V1/V2.2配对、逐题结果、Recovery与基础设施边界。 |
+| [final/interview-handbook.md](final/interview-handbook.md) | 当前架构、技术细节、三种讲法和面试追问。 |
+| [final/resume-candidates.md](final/resume-candidates.md) | 与最终证据一致的简历候选描述。 |
 | 后续 `architecture/`、`evaluation/` | 仅在对应能力真正实现后添加的当前设计与评测文档。 |
 
 原离线竞赛原型的架构、实验和失败复盘已保存在 [archive/legacy-prototype/docs/](../archive/legacy-prototype/docs/)，用于追溯基线，不作为当前架构说明。

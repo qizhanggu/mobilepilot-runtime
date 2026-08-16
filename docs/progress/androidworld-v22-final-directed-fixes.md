@@ -19,7 +19,7 @@
 
 ## 本地与真实环境验证
 
-- 全量 pytest（本轮中间检查）：184 passed；后续以最终锁定提交的实际计数为准。
+- 全量 pytest（最终锁定代码）：186 passed。
 - AndroidWorld checkout：`3e50888527ef9f29b9157ecd537e408008bb1c85`；ADB 唯一设备为 `emulator-5554`。
 - `ANSWER` smoke：Adapter 执行成功，AndroidWorld `interaction_cache` 收到原始文本。
 - `DRAG` smoke：在 Launcher 上按像素起点 `(540,1900)` 到终点 `(540,500)`、600ms 执行，截图发生变化，Trace/结果保留完整 payload。
@@ -45,3 +45,16 @@
 - 三次 `insufficient_new_evidence` 经逐 Trace 复核：SystemCopy 的无 Tree 命中点击、Wifi 的同向重复 swipe、SmsClipboard 的 wait 都没有形成新的可验证策略；保留为显式安全停止，不为提高分数放松成随机尝试。
 
 结论：本轮修复带来了确定的动作可表达性、两道官方答案任务成功和状态机误杀消除，但 exposed success 仅恢复到 V2 的 9/20，不能宣称总体能力显著提升。代码在此锁定；下一步使用相同 36 题清单创建新 frozen protocol，旧未运行协议继续保留。
+
+## 锁定后的 frozen evaluation
+
+冻结 commit `487f2abe7382d11a5cc15572c4902265547d42dd`，原 36 题清单 hash `cc408d71...e8b2`。30 题形成有效 V1/V2.2 配对，6 题因 OsmAnd 目录或 Windows SQLite FTS4 无法公平运行：
+
+- V1 official success：0/30；V2.2：9/30；
+- paired：9 improved、0 regressed、21 both fail；
+- invalid output：21 → 4；
+- UI Tree：209 → 49；
+- V2.2 Recovery：25 triggers、3 strict rescues；
+- VLM calls：209 → 386；目录价：¥1.4425 → ¥1.6521。
+
+首条 frozen 结果后没有修改 Agent/Prompt/Recovery/Evidence。一次后缀运行因受限网络产生 28 条 0-action Connection error，原目录保留并判为基础设施无效；恢复网络后只对完整固定后缀整体启动，没有挑题。完整逐题证据见 `docs/final/frozen-evaluation-report.md`。

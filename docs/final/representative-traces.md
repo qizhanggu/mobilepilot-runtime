@@ -1,79 +1,125 @@
 # 代表性成功与失败 Trace
 
-所有 JSONL 原始产物保存在本地 `artifacts/`。以下案例按官方 reward 和 Trace 事件链
-选择，不根据 Git 历史推断运行过程。
+本文只选可回到 JSONL 逐事件核对的案例。最终完成统一以 AndroidWorld `official_reward >= 1.0` 为准。
 
-## 真实 Recovery 救回
+## 1. 最完整的 Recovery 救回：MarkorDeleteNewestNote
 
-开发回归中有 3 条 Trace 同时满足：存在失败信号、触发一次 Recovery、后续动作改变、
-最终 AndroidWorld 官方完整 reward=1.0。
+Trace：
 
-| 任务 | 失败信号 | Recovery 行为 | 最终证据 |
-| --- | --- | --- | --- |
-| `SystemBluetoothTurnOn` | 重复相似动作 | 请求 Tree 并改变动作路线 | `agent_recovery_outcome.rescued=true`，reward=1 |
-| `SystemWifiTurnOff` | 重复 `SWIPE down` | 按需 Tree，停止重复滚动并改路 | `rescued=true`，reward=1 |
-| `MarkorCreateFolder` | 重复 `SWIPE up` | 按需 Tree，离开无进展路线 | `rescued=true`，reward=1 |
+`artifacts/evaluation/androidworld-v22-final-frozen36-20260817/traces/MarkorDeleteNewestNote--v2.2--hybrid.jsonl`
 
-路径：
+关键链路：
 
-```text
-artifacts/evaluation/androidworld-v2-development-20260804/regression-20/traces/
-  SystemBluetoothTurnOn--v2--hybrid.jsonl
-  SystemWifiTurnOff--v2--hybrid.jsonl
-  MarkorCreateFolder--v2--hybrid.jsonl
-```
+1. step 3：Actor 输出 `LONG_PRESS`，Adapter 通过 AndroidWorld 执行；
+2. step 4：页面重访触发动作级 Recovery，blocked action 为 `LONG_PRESS:6:15`；
+3. UI Tree 给出 `Delete`，Runtime 记录 chosen element 和 changed action；
+4. step 5：确认框出现，第二级 Recovery 从 Tree 找到 `OK`；
+5. step 6：点击 `OK` 后 official reward=1；
+6. `agent_recovery_outcome.rescued=true`。
 
-这里的“救回”不是因为模型说完成，而是 Trace 最终出现官方 reward，并由 Runtime 将
-对应 Recovery 标记为 `rescued=true`。
+这条 Trace 同时证明：
 
-### V2.2 的 action-only 真实救回
+- LONG_PRESS 不是被 Protocol Guard 偷偷改成 CLICK；
+- UI Tree 是事件触发工具，不是每步上下文；
+- Recovery 不是“换个随机动作”，而是引用了 `Delete`/`OK` 两个可见元素；
+- 最终成功来自官方 reward，不是模型口头宣布。
 
-`ExpenseDeleteSingle` 是 V2.2 最佳开发回归中唯一严格救回：
+## 2. 对话框级 Recovery：SimpleCalendarDeleteEvents
 
-```text
-两次点击后页面视觉近似
-→ two_consecutive_unchanged_screens
-→ 按需 UI Tree 暴露 Expense Detail / Taxi Fare / btn_delete
-→ Actor 改变点击位置，changed_action=true
-→ 后续确认删除
-→ official_reward=1.0
-→ agent_recovery_outcome.rescued=true
-```
+Trace：
 
-路径：
+`artifacts/evaluation/androidworld-v22-final-frozen36-continuation5-network-restored-20260817/traces/SimpleCalendarDeleteEvents--v2.2--hybrid.jsonl`
 
-```text
-artifacts/evaluation/androidworld-v22-action-only-development-20260810/
-  regression-20-step12-fix2-reward-and-evidence/traces/
-  ExpenseDeleteSingle--v2.2--hybrid.jsonl
-```
+关键链路：
 
-该轮 Recovery 触发 20 次、只救回 1 次，因此只能证明链路真实存在，不能说 Recovery
-已经稳定有效。
+- 前 9 步完成定位和删除动作；
+- 连续无变化触发 Recovery；
+- UI Tree 在确认框中定位 `Yes`；
+- 动作改为点击 `Yes`；
+- 下一步 official reward=1，Recovery 标记 rescued。
 
-## Recovery 触发但没有救回
+这不是“重新规划整个日历任务”，而是一次范围清楚的局部恢复。它体现了有限 Recovery 比无限重试更可审计。
 
-| 任务 | Trace 结果 | 说明 |
-| --- | --- | --- |
-| 开发集 `MarkorEditNote` | Recovery 后改变动作，reward 仍为 0 | 有 replan 行为，不等于救回 |
-| 开发集 `SystemBrightnessMax` | Recovery 后仍重复原动作 | 执行前以 `unsafe_repeated_action_after_recovery` 停止 |
-| 新子集 `SimpleSmsReplyMostRecent` | Recovery 触发 1 次，最终非法输出 | 新任务未复现开发收益 |
-| 新子集 `SimpleDrawProCreateDrawing` | 两次页面无变化后 Recovery，仍重复 | 5 个动作后止损；V1 则耗尽 12 步 |
+## 3. 错误上下文恢复：TasksHighPriorityTasks
 
-## 官方判定覆盖模型自报
+Trace：
 
-- `SimpleCalendarLocationOfEvent--v2--hybrid.jsonl`：模型提议完成，但官方 reward=0，
-  最终记失败。
-- `SimpleSmsSendReceivedAddress--v2--hybrid.jsonl`：同样为错误 completion 提议，记失败。
-- 开发集 `SimpleSmsReply`、`SimpleSmsResend`、`SimpleSmsSendClipboardContent`：模型未先
-  自报完成，但逐步检查得到官方 reward，记成功。
+`artifacts/evaluation/androidworld-v22-final-frozen36-continuation5-network-restored-20260817/traces/TasksHighPriorityTasks--v2.2--hybrid.jsonl`
 
-## 基础设施失败不是 Agent 失败
+关键链路：
 
-`artifacts/evaluation/androidworld-v2-frozen-final2-20260805/runs.jsonl` 中
-`NotesTodoItemCount--v1` 为 `infrastructure_error`：Joplin SQLite 初始化缺少 `fts4`，
-发生在模型调用前。它不进入 6 对有效任务的成功率，也没有被重试。
+1. Agent 起初处于错误页面并尝试 DRAG；
+2. Progress Verifier 判定 stalled；
+3. Tree 没给出足够元素，Runtime 没有伪造 Tree grounding；
+4. 冻结任务/子目标明确指向 Tasks，受限 fallback 选择 `OPEN_APP[tasks]`；
+5. Actor 连续提交候选 ANSWER，官方 reward 直到正确答案才从 0 变为 1；
+6. Recovery outcome 记录 rescued=true。
 
-ScreenSpot-v2 的 Raw/Grid 成功与失败可视化仍保存在
-`artifacts/evaluation/screenspot-v2-20260723/held-out/visualizations/`，只用于单步
-grounding 结论，不与多步 Agent 成功率混合。
+这条案例展示了：Verifier 只给处置分类，真正动作仍由 Actor/Runtime 产生；官方 reward 能拒绝错误答案并接受后续修正。
+
+## 4. Action Contract 直接带来成功：SimpleCalendarAnyEventsOnDate
+
+Trace：
+
+`artifacts/evaluation/androidworld-v22-final-frozen36-continuation5-network-restored-20260817/traces/SimpleCalendarAnyEventsOnDate--v2.2--hybrid.jsonl`
+
+执行链路是：
+
+`OPEN_APP → CLICK_POINT → ANSWER("Board meeting, Weekend trip, Birthday party") → official reward=1`
+
+这个案例应归因于 **ANSWER/interaction_cache 契约补齐 + Actor 正确读取页面**，不能包装成 Recovery 推理提升。
+
+同类成功还有：
+
+- `SimpleCalendarEventsInTimeRange`：ANSWER `Cooking Class`；
+- `SimpleCalendarFirstEventAfterStartTime`：导航后 ANSWER `Haircut`；
+- `TasksIncompleteTasksOnDate`：官方 reward 拒绝前两个候选答案，接受第三个答案。
+
+## 5. 能表达动作，但仍不会完成：MarkorDeleteAllNotes
+
+Trace：
+
+`artifacts/evaluation/androidworld-v22-final-frozen36-20260817/traces/MarkorDeleteAllNotes--v2.2--hybrid.jsonl`
+
+V1 因 `unsupported_action_capability` 早停；V2.2 已能执行 LONG_PRESS 并继续 12 个动作，但最终 Recovery 耗尽。
+
+它说明 Action Contract 把任务从“系统性不可表达”推进到“可以尝试”，却没有自动增强复杂列表操作规划。这个负例用于约束简历表述。
+
+## 6. Recovery 正确拒绝随机动作：BrowserMultiply
+
+Trace：
+
+`artifacts/evaluation/androidworld-v22-final-frozen36-20260817/traces/BrowserMultiply--v2.2--hybrid.jsonl`
+
+V2.2 触发 Recovery 后，Tree 没有提供能支持新路线的语义元素。Runtime 以 `insufficient_new_evidence` 停止，没有为了 changed_action=true 去随机点击。
+
+这不是成功，但属于安全改进：失败原因从“动作重复到步数耗尽”变成“缺少可验证新证据”。
+
+## 7. 模型误报完成仍被官方 reward 拒绝
+
+`SportsTrackerActivityDuration` 的 V1 以 `actor_proposed_complete` 结束，但 official reward=0。V2.2 没有采信口头完成，而是继续验证，最终因缺少新证据失败。
+
+两版都没完成任务，但 V2.2 保持了正确的成功判定边界。
+
+## 8. 基础设施错误不是 Agent 失败
+
+以下记录发生在 Agent 接管前，不进入 30 个有效配对：
+
+- `OsmAndMarker`：databases 目录不存在；
+- `OsmAndTrack`：tracks 目录不存在；
+- Recipe 任务：Windows SQLite 缺少 FTS4。
+
+另一个固定后缀批次因受限网络环境产生 28 条 `Connection error`，全部是 0 动作、0 成本。原目录保留，网络恢复后的整批结果单独存储，不能用坏批次填入 Agent failure taxonomy。
+
+## 9. Trace 阅读顺序
+
+面试展示一条 Trace 时，建议只看这些事件：
+
+1. `observation`：当时页面、package、Tree 是否被请求；
+2. `actor_decision`：模型原始输出与解析结果；
+3. `critic` / `protocol_guard`：动作是否安全、有没有结构化重试；
+4. `execution`：真正执行了什么；
+5. `deterministic_progress_verifier` / `vlm_progress_verifier`：进展证据；
+6. `agent_recovery_triggered` / `ui_tree_decision` / `agent_recovery_replan`：为什么恢复、依据什么换动作；
+7. `official_reward`：最终环境判定；
+8. `agent_recovery_outcome`：是否形成严格救回。

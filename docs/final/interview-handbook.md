@@ -1,679 +1,294 @@
 # MobilePilot 面试讲解手册
 
-> 用途：面试前复习、面试中共享屏幕时对照讲解。正文中的“推荐说法”可以直接使用；
-> “深入追问”用于面试官继续追问时展开，不需要一开始全部讲完。
+这份文件不是背诵稿。面试共享屏幕时，按“问题 → 证据 → 改法 → 结果 → 边界”讲，听起来会更像你真的做过项目。
 
-## 0. 先记住这张项目事实卡
+## 0. 项目事实卡
 
-| 项目事实 | 面试时怎么说 |
+| 项目 | 事实 |
 | --- | --- |
-| 项目定位 | MobilePilot 是可审计的 Android GUI Agent Runtime，不是训练 GUI 模型 |
-| 核心闭环 | 观察截图 → Actor 决策 → 协议校验 → 执行动作 → 验证进展 → 有限恢复 |
-| 主模型 | `gui-plus-2026-02-26`，评测期间固定模型以隔离 Runtime 变量 |
-| 技术栈 | Python、AndroidWorld、ADB、Android Emulator、uiautomator2、Accessibility UI Tree、OpenAI-compatible VLM API、JSONL、pytest、Git/GitHub |
-| 最适合写简历的结果 | 已暴露 20 题开发回归：V1 hybrid 4/20 → V2 9/20；非法输出终止 13 → 7；Recovery 10 次触发、3 次真实救回 |
-| 必须说明的边界 | 20 题参与过开发，不是 held-out；新冻结子集 V1 2/6、V2 1/6，没有证明泛化提升 |
-| V2.1 最新实验 | 加入 Planner、检查点、多信号 Verifier、两层 Recovery；修复后 5/20，仍低于 V2，因此是负结果，不作为简历正向成绩 |
-| V2.2 最新实验 | action-only Actor + 低频 Qwen Subgoal Manager + 事件触发 Progress Verifier；最佳 7/20、1 次真实救回，仍未超过 V2 |
-| 项目最有价值的点 | 从 Trace 找失败原因，把协议、状态、循环、恢复、工具调用和官方验证做成可运行、可统计的工程闭环 |
+| 定位 | 可审计 Android GUI Agent Runtime，不训练 GUI 模型 |
+| 技术栈 | Python、AndroidWorld、ADB、Android Emulator、uiautomator2、UI Tree、GUI-Plus/Qwen API、JSONL、pytest |
+| Actor | `gui-plus-2026-02-26`，高频 action-only |
+| Manager / Verifier | `qwen3.7-flash-2026-07-15`，低频事件触发 |
+| 历史开发基线 | 同一暴露 20 题：V1 hybrid 4/20 |
+| V2 开发 | 9/20；只证明定向开发收益 |
+| Planner V2.1 | 5/20；负结果 |
+| V2.2 最终开发 | 9/20；追平 V2，不是 held-out |
+| 最终冻结清单 | 36 题中 30 个有效配对：V1 0/30，V2.2 9/30；9 改善、0 退化 |
+| Recovery | 冻结有效配对中触发 25 次，严格救回 3 次 |
+| 基础设施边界 | 6 题因 OsmAnd/Windows SQLite FTS4 无法形成有效配对 |
+| 测试 | 186 passed |
 
-面试时优先讲稳定的 **V1 → V2** 主线。只有面试官追问“后来还做了什么”时，再讲
-**V2.1 是一次没有成功超过 V2、但暴露了 Planner 成本和错误传播问题的实验**。
+## 1. 三种开场说法
 
----
+### 30 秒
 
-## 1. 三种时长的开场话术
+> MobilePilot 是一个可审计的 Android GUI Agent Runtime。我没有训练模型，而是把 GUI-Plus、AndroidWorld、ADB、按需 UI Tree、进度验证、有限 Recovery 和官方 reward 串成多步闭环。项目最早大量任务会因为坏输出、动作能力缺口或循环直接失败；我先审计 Trace 找到根因，再补齐 LONG_PRESS、DRAG、ANSWER，修正状态顺序和 evidence，最后在冻结清单 30 个有效配对上做到 V1 0/30、V2.2 9/30，其中 3 次是可追溯的真实 Recovery 救回。
 
-### 30 秒版本
+### 1 分钟
 
-> 我做了一个 Android GUI Agent Runtime。它不是训练视觉模型，而是让现有 VLM 在手机
-> 环境里能够连续观察、决策、执行和验证。我先审计了 40 条 AndroidWorld Trace，发现
-> 主要失败不是单纯点不准，而是模型输出不合法、任务中途丢状态、重复动作以及误报完成。
-> 所以后来我把 Protocol Guard、短期状态、循环检测、按需 UI Tree、有限 Recovery 和
-> 官方 reward 验证放进 Runtime。在同一组开发回归题上，hybrid 从 4/20 提升到 9/20，
-> 并记录了 3 条失败后真实救回的链路。
-
-### 1 分钟版本
-
-> MobilePilot 的目标是解决 GUI Agent 在多步执行中的工程可靠性问题。初版虽然能调用
-> GUI-Plus 操作 AndroidWorld，但遇到一次空输出或 JSON 错误就会退出，也不知道自己是否
-> 在重复动作，模型说完成时还可能误判。
+> 我最开始以为手机 GUI Agent 的核心是坐标和视觉，所以做过网格、纯视觉和每步 UI Tree。但公开 ScreenSpot 上 Grid 反而从 70.49% 降到 66.67%，AndroidWorld hybrid 也只有 4/20。我回到 40 条多步 Trace，发现更大的问题是 Runtime：Actor 输出不稳定、动作契约缺 long press/drag/answer、模型自报完成、旧状态污染以及 Recovery 没有新证据。
 >
-> 我先把失败按 Trace 做了 taxonomy，然后将 Runtime 拆成 Actor、Protocol Guard、
-> Runtime State、Verifier、Recovery、按需 UI Tree 和 AndroidWorld Adapter。Protocol
-> Guard 只处理无歧义格式问题；Recovery 只在执行失败、连续无进展或动作循环后触发，
-> 并限制恢复次数，防止在手机上乱点。最终成功必须由 AndroidWorld official reward
-> 决定，模型只能提出完成建议。
->
-> 在已暴露的 20 题开发回归集上，V1 hybrid 4/20 提升到 V2 9/20，非法输出终止从
-> 13 次降到 7 次，10 次 Recovery 中有 3 次最终获得官方成功。新冻结子集没有复现成功率
-> 提升，所以我没有把开发结果包装成泛化成绩。
+> 后来我把 Actor 收窄成只输出下一动作，让 Runtime 管 subgoal 生命周期；确定性 Verifier 每步跑，视觉语义不确定时才让 Qwen 比较前后截图；UI Tree 只在失败或循环时按需调用；Recovery 最多两级，而且新动作必须有 Tree 或冻结任务证据。最终冻结 36 题中有 30 题形成有效配对，V2.2 完成 9 题、V1 完成 0 题，非法输出终止 21 降到 4，UI Tree 209 次降到 49 次。剩下 21 题仍失败，所以我不会说它解决了复杂长任务。
 
-### 3 分钟版本
+### 3 分钟
 
-> 这个项目最开始其实更偏手机 UI，比如坐标、网格和 UI Tree。我做完受控实验和公开
-> ScreenSpot-v2 后发现，网格在自建 App 上有效，但公开数据反而从 Raw 70.49% 降到
-> Grid 66.67%；AndroidWorld 里每步都塞 UI Tree，hybrid 4/20 也没有超过纯视觉 5/20。
-> 这让我把重点从“再加一种视觉技巧”转向“Agent 为什么失败以后不会处理”。
->
-> 我审计了 AndroidWorld 固定 20 题的 40 条运行。31 条失败里，21 条最终死于非法 Actor
-> 输出，7 条耗尽步数，2 条是模型误报完成，1 条是执行失败。于是我做了三层改造：
->
-> 第一层是 Protocol Guard。它负责动作 schema、坐标和无歧义别名归一化；只有动作尚未
-> 执行时才允许一次结构化重试。它提升的是接口可靠性，不把它吹成推理能力。
->
-> 第二层是 Agent Runtime State 和 Recovery。Runtime 保存最近完成的动作、当前子目标、
-> 阻塞原因和下一步要验证什么；通过动作签名和页面指纹检测 AAA、ABAB、连续页面无变化
-> 等循环。触发后重新观察，并在 hybrid 模式下按需读取 UI Tree，要求新动作与受阻动作
-> 不同；预算用完就止损。
->
-> 第三层是验证与审计。截图变化只代表“发生变化”，不能代表任务成功；最终成功只认
-> AndroidWorld official reward。每次观察、模型输出、执行、Verifier、Recovery、Token、
-> 延迟和成本都写入 JSONL Trace。
->
-> V2 在同一开发集上从 4/20 提升到 9/20，并出现 3 条真实 Recovery 救回。但后来我在新
-> 冻结子集上只得到 V1 2/6、V2 1/6，说明开发提升没有证明泛化。我又尝试了 V2.1 的
-> Planner 和检查点，修复后也只有 5/20。这些负结果让我认识到：Planner 不是加上就会变
-> 强，它可能增加 Prompt、调用和错误传播；下一步应该只在真正多约束、跨页面任务中启用。
+按下面六步展开：
 
----
+1. **困难**：40 条 V1 Trace 有 31 条失败，其中 21 条非法输出；
+2. **根因**：协议缺口、状态顺序、坏 postcondition、Recovery 无新证据；
+3. **方案**：action-only Actor + Runtime State + 两层 Verifier + 按需 Tree + 两级 Recovery；
+4. **关键实现**：LONG_PRESS/DRAG/ANSWER、官方 reward、JSONL Trace、冻结 Runner；
+5. **结果**：开发 9/20；冻结有效 30 对为 0/30→9/30，3 次严格救回；
+6. **边界**：6 题基础设施无效、21/30 仍失败、成本和延迟上升。
 
-## 2. 项目的主要架构
+## 2. 一次动作怎样走完
 
-```mermaid
-flowchart TD
-  Goal["自然语言任务"] --> Runner["AndroidWorld Runner"]
-  Runner --> Observe["Adapter 获取截图与页面信号"]
-  Observe --> State["Runtime State"]
-  State --> Actor["Actor / GUI-Plus"]
-  Actor --> Guard["Protocol Guard"]
-  Guard -->|"合法动作"| Critic["Critic：执行前安全检查"]
-  Guard -->|"非法且尚未执行"| Retry["一次结构化重试"]
-  Retry --> Guard
-  Critic --> Executor["AndroidWorld / ADB 执行"]
-  Executor --> Verify["Progress Verifier"]
-  Verify --> Reward["AndroidWorld official reward"]
-  Verify -->|"无变化、循环、执行失败"| Recovery["有限 Recovery / replan"]
-  Recovery -->|"需要结构信息"| Tree["按需 UI Tree"]
-  Tree --> Actor
-  Reward -->|"完整 reward >= 1.0"| Success["官方成功"]
-  Reward -->|"0 < reward < 1"| Partial["部分完成，继续执行"]
-  Reward -->|"未成功"| State
-  Observe -.-> Trace["JSONL Trace"]
-  Actor -.-> Trace
-  Guard -.-> Trace
-  Executor -.-> Trace
-  Verify -.-> Trace
-  Recovery -.-> Trace
-```
+1. Runtime 获取当前截图、package/activity 和便宜的 UI text；
+2. 没有 active subgoal 时，低频 Manager 提出局部目标和 postcondition evidence；
+3. GUI-Plus Actor 只看总目标、当前 subgoal、状态和截图，输出一个工具调用；
+4. Protocol Guard 校验 schema；动作没执行时最多安全重试一次；
+5. Critic 做坐标、文本和动作安全检查；
+6. Adapter 映射成 AndroidWorld/ADB 动作；
+7. 确定性 Verifier 比较 package、UI text、exact/visual/semantic fingerprint；
+8. 证据不足或疑似异常时，Qwen 对比前后图输出五分类；
+9. Runtime 先消费 confirmed progress/completed，再检查 loop，防止旧状态误杀；
+10. 无进展时触发有限 Recovery，必要时读取 UI Tree；
+11. 每步查询 official reward，只有 reward>=1.0 才结束为成功；
+12. 所有事件进入 JSONL Trace。
 
-### 一次动作是怎么走完的
+## 3. 模块介绍
 
-1. Runner 取得任务目标，并查询当前官方 reward。
-2. Adapter 从 AndroidWorld 获取截图；只有需要时才把 UI Tree 元素暴露给 Actor。
-3. Runtime 把总目标、剩余步数、最近动作、当前阻塞和验证目标交给 Actor。
-4. Actor 返回一个结构化动作，例如 `CLICK`、`TYPE`、`SWIPE`、`OPEN_APP` 或
-   `PROPOSE_COMPLETE`。
-5. Protocol Guard 解析 JSON、校验字段并做有限的无歧义归一化。
-6. Critic 在执行前检查坐标越界等确定性错误。
-7. Adapter 将内部 `Action` 映射为 AndroidWorld `JSONAction` 并执行。
-8. Runtime 再次观察页面，记录页面变化、动作历史和可能的循环信号。
-9. Runner 查询 official reward：`>=1.0` 才是完整成功；组合任务的 partial reward 继续执行。
-10. 全过程写入 append-only JSONL Trace，之后由评测 Runner 汇总指标。
+| 模块 | 解决的问题 | 关键边界 |
+| --- | --- | --- |
+| Actor | 当前页面下一步做什么 | action-only，不承担长计划和状态所有权 |
+| Protocol Guard | JSON/schema/别名等接口不稳定 | 仅未执行动作时重试；不改变动作语义 |
+| Action Contract | Runtime 能否表达模型意图 | LONG_PRESS/DRAG/ANSWER 有独立 schema 和 Adapter |
+| Subgoal Manager | 当前局部要达到什么状态 | 低频调用；evidence 必须是 postcondition |
+| Runtime State | 已完成什么、卡在哪里、验证什么 | subgoal 生命周期由 Runtime 冻结 |
+| Deterministic Verifier | 便宜、确定的变化/完成证据 | 每步运行，不额外调用模型 |
+| VLM Progress Verifier | 页面变了但方向是否正确 | 只分类/建议处置，不直接输出动作 |
+| Loop Detector | 重复页面、重复动作、ABAB 循环 | confirmed progress 先 reset 旧 streak |
+| Recovery | 失败后有限改路 | 最多动作级+子目标级；没有新证据就停 |
+| UI Tree Tool | 失败时补结构信息 | 按需调用，不假设 Tree 等于任务理解 |
+| Official Reward | 最终任务是否真的完成 | 唯一成功判据 |
+| Trace / Runner | 审计、配对和成本统计 | 固定任务/model/seed/hash，保留负结果 |
 
----
+## 4. 五个最重要的技术设计
 
-## 3. 模块介绍：面试时按这张表讲
+### 4.1 Protocol Guard 不等于 Recovery
 
-| 模块 | 文件 | 它解决什么问题 | 关键输入 / 输出 |
-| --- | --- | --- | --- |
-| 核心动作协议 | `mobile_pilot/core/models.py` | 隔离模型输出、Runtime 和具体环境，避免各层直接传松散字典 | `Action`、`ParseResult`、`ActionResult`、`ErrorKind` |
-| Actor / Planner | `mobile_pilot/androidworld/actor.py` | 调用 GUI-Plus，把截图和状态转为结构化动作；V2.1 额外生成检查点计划 | 截图、任务状态 → 动作或计划及 Token/延迟 |
-| Agent 主循环 | `mobile_pilot/androidworld/agent.py` | 串起观察、协议校验、Critic、执行、验证、循环检测和 Recovery | goal → `AgentInteractionResult` |
-| Runtime State | `mobile_pilot/androidworld/runtime_state.py` | 保存有限短期状态、计算动作签名、检测循环、控制恢复预算 | 动作/页面信号 → 进度与恢复状态 |
-| Subgoal Manager | `mobile_pilot/androidworld/subgoal_manager.py` | 在生命周期边界提出一个可验证子目标，不输出手机动作 | 总目标、截图、历史 → subgoal + evidence |
-| Progress Verifier | `mobile_pilot/androidworld/progress_verifier.py` | 事件触发比较前后截图，输出进展分类与处置建议 | 前后图、动作、目标、证据 → 五分类 |
-| AndroidWorld Adapter | `mobile_pilot/androidworld/adapter.py` | 将内部动作映射为官方 `JSONAction`，屏蔽环境实现差异 | `Action` ↔ AndroidWorld state/action |
-| Screen State | `mobile_pilot/perception/screen_state.py` | 统一截图尺寸、Tree 元素、package 和多种 fingerprint | 原始观察 → `ScreenState` |
-| 单任务 Runner | `scripts/run_mobilepilot_androidworld.py` | 驱动单题闭环，每步查询官方 reward，限制一次错误完成提议重试 | 任务 ID、版本、步数 → 单题结果 |
-| 批量评测 Runner | `scripts/run_androidworld_runtime_eval.py` | 固定任务、模型、seed、源码 hash、设备和预算，汇总配对指标 | manifest → runs、summary、Trace |
-| 测试 | `tests/mobile_pilot/` | 用 Fake Adapter/Policy 验证协议、循环、恢复和官方判定，不消耗 API | pytest 回归 |
+Protocol Guard 修“还没执行”的接口错误，例如：
 
-推荐说法：
+- 多余自然语言包裹 JSON；
+- 动作别名；
+- 字段格式错误；
+- 一次安全结构化重试。
 
-> 我没有让模型输出直接进入 ADB，而是在中间定义了稳定的 Action 协议和 Adapter。
-> 这样模型协议兼容、Agent 状态机和 AndroidWorld 执行可以分别测试，也方便以后替换模型
-> 或接入别的设备环境。
+Recovery 修“执行之后没有进展”的策略问题，例如：
 
----
+- 点了没反应；
+- 回到同一页面；
+- 动作开始重复；
+- 当前 subgoal 不成立。
 
-## 4. 关键技术设计
+如果面试官问亮点，别把 Protocol Guard 说成模型推理增强。它的价值是工程可靠性。
 
-### 4.1 为什么要把 Protocol Guard 和 Agent Recovery 分开
+### 4.2 子目标内容软，生命周期硬
 
-Protocol Guard 解决的是“模型想做什么基本明确，但格式不符合接口”；例如：
-
-- JSON 少一个无歧义括号；
-- `swipe_up` 需要归一化为 `direction=up`；
-- `PRESS_BACK` 需要映射为统一动作；
-- 多输出了第二个 JSON 时，只取第一个完整动作。
-
-它不能做的事情：
-
-- 猜测被截断的输入文本；
-- 猜一个可能改变任务语义的动作；
-- 在动作已经执行后再次执行危险动作。
-
-Agent Recovery 解决的是“动作虽然合法，但执行失败或没有带来进展”。它会重新观察、按需请求
-Tree、把失败原因放回状态，并要求新动作与受阻动作不同。
-
-面试官如果问两者区别，可以直接回答：
-
-> Guard 修的是协议，Recovery 修的是策略。前者必须发生在动作执行前，后者必须由环境失败
-> 信号触发。把两者混在一起，会把 JSON 兼容错误夸大成推理能力，也可能重复执行副作用动作。
-
-### 4.2 短期状态保存了什么
-
-`RuntimeProgress` 只保存有限窗口：
-
-- 最近 5 个完成动作摘要；
-- 最近 8 个动作签名；
-- 最近 8 个不同页面指纹；
-- 当前子目标；
-- 当前阻塞原因；
-- 下一步应该验证什么；
-- 连续无变化次数。
-
-这是有界短期状态，不是长期记忆或向量数据库。`TYPE_TEXT` 的原文不会写入进度摘要，动作签名
-只保留文本 SHA-256 的短摘要，避免把用户输入直接复制到短期状态和日志里。
-
-### 4.3 循环检测是怎么做的
-
-当前使用简单、可解释的规则：
-
-- 最近已执行两次相同动作，第三次候选动作仍相同：`repeated_similar_action`；
-- 动作呈 A-B-A，下一候选为 B：`alternating_action_loop`；
-- 连续两次页面没有有效变化：`two_consecutive_unchanged_screens`；
-- 最近页面窗口中再次返回相同页面：`revisited_same_screen`。
-
-动作签名会做适度抽象：文本输入用哈希、点击坐标按约 80 像素分桶、滑动按方向记录。这样可避免
-因为坐标相差几像素就看不出重复，同时仍保持规则可审计。
-
-局限：规则可能把“必须重复点击两次”的合法动作误判为循环，所以 Recovery 不是直接宣告失败，
-而是给一次重新观察和改路机会。
-
-### 4.4 Fingerprint 和 Verifier
-
-V2 主要比较前后页面 fingerprint 是否变化。它能回答“页面有没有变”，不能回答“是不是朝正确
-方向变化”。V2.1 为了降低状态栏时间、动画和光标带来的误报，保留了多层信号：
-
-- `exact_fingerprint`：完整 PNG 的 SHA-256，适合审计和精确重复判断；
-- `visual_fingerprint`：裁掉上下状态区域，缩放到 16×16 后形成感知位图；
-- `semantic_fingerprint`：对 UI Tree 的资源 ID、文本、控件类型和可编辑状态做归一化哈希；
-- `package_activity`：判断是否跨 App 或上下文。
-
-V2.1 将变化分成：完全不变、视觉近似、有效 UI 变化、页面/上下文切换。视觉哈明距离阈值目前为
-`0.035`。但这些仍只是“进展信号”，不能代替任务成功验证。
-
-### 4.5 为什么最终成功只认 official reward
-
-`PROPOSE_COMPLETE` 的语义是“Actor 认为可能完成”，不是 `SUCCEEDED`。Runner 会查询任务的
-`is_successful(env)`：
-
-- reward >= 1.0：即使 Actor 没说完成，也记完整成功；
-- 0 < reward < 1.0：只记部分完成，继续执行剩余条件；
-- Actor 说完成但 reward<1.0：拒绝这次提议，最多给一次继续机会；
-- 再次误报或预算耗尽：按失败记录。
-
-推荐说法：
-
-> 页面变化是过程信号，模型自报是候选结论，官方 reward 才是最终标签。三者不能混用。
-
-### 4.6 UI Tree 为什么是按需工具
-
-V1 hybrid 每步都把 Tree 塞进上下文，结果是 4/20，没有超过 vision-only 的 5/20。Tree 提供结构
-不等于提供正确规划，还会增加文本上下文和噪声。因此 V2 只在以下情况请求：
-
-- Actor 输出非法，需要结构化重试；
-- 动作执行失败；
-- 连续页面无变化或检测到循环；
-- Actor 明确请求 `REQUEST_UI_TREE`；
-- V2.1 检查点需要 `ui_text` 证据。
-
-Trace 会记录触发原因、Tree 元素摘要、是否改变动作、最终是否获得官方成功。
-
-### 4.7 Recovery 为什么必须有限
-
-GUI 操作可能有副作用，例如发送短信、删除文件、保存表单。无限重试不只是浪费 Token，还可能重复
-执行危险动作。
-
-- V2：每题最多 1 次 Recovery；
-- V2.1：最多 2 次，第一次是动作级改路，第二次允许计划级修正；
-- Recovery 后若候选动作仍与受阻动作相似，Runtime 在执行前停止；
-- 是否“救回”必须满足 Recovery 动作实际执行，并在后续获得 official reward。
-
-### 4.8 V2.1 的 Planner / Checklist 是怎么设计的
-
-V2.1 的目标是给长任务增加显式 `PlanState`：
+Manager 可以提出：
 
 ```text
-✓ 打开目标 App
-→ 进入编辑页
-○ 填写字段
-○ 保存并验证
+goal: 进入目标短信会话
+evidence: ui_text = 138xxxx1234
+status: active
 ```
 
-每个检查点包含 `goal + frozen evidence + status`。Actor 只能提出
-`PROPOSE_CHECKPOINT_COMPLETE`，不能自己把状态改成 done；Runtime 先用 UI Tree、package 等确定性
-证据判断，无法确定时才允许受约束 Verifier 判断。
+但一旦 Runtime 接受，Actor 不能下一步随意更换。只有三种出口：completed、Recovery 明确修订、整个任务结束。
 
-这套设计在代码上跑通了，但开发回归修复后只有 5/20，低于 V2 的 9/20。原因包括 Planner 输出
-不稳定、简单任务被额外计划干扰、Prompt 变长、计划错误会传播到 Actor，以及检查点完成证据不够
-强。因此面试时应说“我验证了这个方向当前不划算”，不能说 V2.1 已经提升任务能力。
+这比每步把一大段 Planner 建议塞给 Actor 更稳：它不强迫模型照死计划走，但给 Verifier 和 Recovery 一个稳定抓手。
 
-### 4.9 Trace 和评测如何做到可审计
+### 4.3 Completion Evidence 为什么只有三种
 
-每题产生 JSONL，主要事件包括：
+- `package_activity`：硬证据，适合“打开目标 App”；
+- `ui_text`：次硬证据，适合标题、联系人、确认文字；
+- `visual_state`：软证据，适合编辑页/详情页等语义状态。
 
-- `observation`
-- `planner_decision` / `actor_decision`
-- `protocol_guard`
-- `critic`
-- `execution`
-- `verifier`
-- `progress_state`
-- `loop_detected`
-- `agent_recovery_triggered`
-- `agent_recovery_replan`
-- `agent_recovery_outcome`
-- `official_reward`
-- `agent_finished`
+能用确定性规则就不问 VLM。Evidence 描述“完成后新出现什么”，不是“下一步点什么”。电话号码会做空格、连字符等归一化。
 
-批量 Runner 会汇总成功率、失败原因、动作数、循环数、Recovery 触发/救回、UI Tree 请求、VLM
-调用、Token、模型延迟和估算目录价。
+冻结运行中 Manager 90 次调用仍有 38 次 already-satisfied failure，说明这个问题没有完全解决，正好可以作为局限讲。
 
-冻结评测前还会检查：
+### 4.4 Fingerprint 为什么保留两层
 
-- 任务清单及 task hash；
-- AndroidWorld commit；
-- 模型、seed、步数上限和运行模式；
-- Agent 源码 hash；
-- 唯一设备必须是 `emulator-5554`；
-- tracked workspace 必须干净；
-- 调用和成本预算；
-- 不覆盖已有结果，不为单题重试。
+- exact SHA-256：判断字节级相同、审计复现；
+- visual similarity：过滤状态栏时间、动画等轻微变化；
+- semantic/UI Tree fingerprint：结构或可见文本是否变化；
+- package/activity：是否发生上下文切换。
 
-### 4.10 V2.2 为什么把 GUI Actor 收窄成 action-only
+只用 SHA-256 太敏感；只用感知哈希又会丢失确定性。多信号组合更合理。
 
-真实冒烟中，GUI Plus 被要求同时输出动作、子目标和完成证据时，4 次调用有 3 次空输出。
-这说明高频 Actor 协议承担了它不擅长的管理职责。V2.2 因此拆成：
+### 4.5 Recovery 为什么只有两级
 
-- GUI Plus 每步只输出一个 `mobile_action`；
-- Qwen Subgoal Manager 只在任务开始、子目标完成或第二级 Recovery 时调用；
-- Runtime 冻结 subgoal 和 completion evidence；
-- package/UI 文本先走确定性验证，不足时再事件触发 Qwen Progress Verifier；
-- Verifier 只返回 `progress / completed / stalled / regressed / uncertain` 和处置建议，不选动作。
+第一次保持 subgoal 不变，换动作；第二次才允许修当前 subgoal。继续无限恢复会带来：
 
-开发结果最佳 7/20，低于 V2 的 9/20，但非法输出终止降到 1 次，并出现 1 次新的真实
-Recovery 救回。正确说法是“职责和审计更完整，但任务成功率没有超过 V2”。
+- 危险副作用重复；
+- 成本不可控；
+- Trace 难解释；
+- 模型在错误上下文里越走越远。
 
----
+冻结配对触发 25 次，只严格救回 3 次。这个数字不高，但比“触发了很多次”更有可信度。
 
-## 5. V1、V2、V2.1 到底有什么区别
+## 5. 三条必须会讲的成功 Trace
 
-| 能力 | V1 | V2 | V2.1 实验版 |
-| --- | --- | --- | --- |
-| 主模型 | GUI-Plus 固定版本 | 相同 | 相同 |
-| 状态 | 简单动作历史 | 有界进度、阻塞、验证目标 | V2 状态 + 显式 PlanState |
-| 非法输出 | 基本直接失败 | 无动作前一次安全重试 | 每个未执行决策点最多一次安全重试 |
-| UI Tree | hybrid 每步输入 | 按需工具 | 按需工具 + 检查点证据 |
-| Verifier | 页面是否变化 | 页面是否变化 + 官方 reward | exact/visual/semantic/package 多信号 + 官方 reward |
-| 循环检测 | 无 | 动作重复、ABAB、页面无变化/重访 | 相同，并可进入两层恢复 |
-| Recovery | 基本 wait | 最多一次动作改路 | 动作级一次 + 计划级一次 |
-| Planner | 无 | 无显式整体 Planner | 结构化 Checklist |
-| 开发集结果 | hybrid 4/20 | 9/20 | 修复后 5/20 |
+### MarkorDeleteNewestNote
 
-一句话概括：
+`LONG_PRESS → 页面重访 → Tree 找到 Delete → 确认框 → Tree 找到 OK → reward=1`
 
-> V2 是当前实验上最可靠的 Runtime；V2.1 的架构概念更多，但效果更差，说明模块数量不等于
-> Agent 能力，关键是触发条件、证据质量和额外调用是否真正转化为官方成功。
+说明：动作契约、按需 Tree、两级 Recovery 和官方 reward 同时生效。
 
-V2.2 不是在 V2.1 上继续堆 Planner，而是撤掉开场 Checklist，把高频 Actor 收窄为
-action-only，并用低频 Manager + 事件触发 Verifier 管理子目标。最佳开发结果为 7/20；
-更严格的 Manager 边界消融回落到 5/20+1 partial，因此该实验改动未进入最终主线。
+### SimpleCalendarDeleteEvents
 
----
+连续无变化后，Tree 找到确认框 `Yes`，更换动作后 reward=1。
 
-## 6. 实验结果应该怎么讲
+说明：Recovery 是局部对话框恢复，不必吹成全局规划。
 
-### 6.1 基线失败审计
+### TasksHighPriorityTasks
 
-V1 固定 20 题、vision-only 与 hybrid 共 40 条运行：
+错误页面 DRAG → Verifier stalled → Recovery 打开 Tasks → 多次 ANSWER 被 reward 校验 → 正确答案成功。
 
-| 结果 | 数量 |
+说明：Verifier 给处置，Runtime 换上下文，官方 reward 拒绝错误答案。
+
+## 6. 实验结果怎么讲
+
+### 开发集
+
+同一暴露 20 题：
+
+| 版本 | 成功 |
 | --- | ---: |
-| 成功 | 9 |
-| 失败 | 31 |
-| 非法输出终止 | 21 |
-| 步数耗尽 | 7 |
-| 模型误报完成 | 2 |
-| 执行失败 | 1 |
+| V1 hybrid | 4/20 |
+| V2 | 9/20 |
+| V2.1 Planner | 5/20 |
+| V2.2 RCA 前 | 7/20 |
+| V2.2 最终 | 9/20 |
 
-这组审计直接决定了后续优先级：先修输出可靠性和失败恢复，而不是继续研究网格、坐标或新视觉方案。
+这里能讲“定向修复有效”，不能讲泛化。
 
-### 6.2 V1 → V2 开发回归
+### 冻结任务
 
-固定同一模型、seed、hybrid 和 12 步上限：
+36 题清单在运行前固定，30 题形成有效配对：
 
-| 指标 | V1 | V2 |
+| 指标 | V1 | V2.2 |
 | --- | ---: | ---: |
-| 官方成功 | 4/20 | 9/20 |
-| 非法输出终止 | 13 | 7 |
-| 步数耗尽 | 2 | 1 |
-| Recovery 触发 / 救回 | 0 / 0 | 10 / 3 |
-| 平均动作数 | 4.05 | 5.60 |
-| VLM 调用 | 94 | 144 |
-| Token | 421,748 | 493,719 |
-| 估算目录价 | ¥0.6596 | ¥0.7969 |
+| 官方成功 | 0/30 | 9/30 |
+| invalid output | 21 | 4 |
+| 平均动作 | 6.03 | 7.13 |
+| UI Tree | 209 | 49 |
+| VLM 调用 | 209 | 386 |
+| 成本 | ¥1.4425 | ¥1.6521 |
 
-正确结论：开发回归提升，说明针对这些已知失败的 Runtime 改造有效。
+配对为 9 改善、0 退化、21 双败。6 题因 OsmAnd 目录与 Windows SQLite FTS4 无法形成公平配对。
 
-错误结论：不能说“AndroidWorld 整体准确率 45%”，也不能说“held-out 泛化提升 25 个百分点”。
+### 最诚实的解释
 
-### 6.3 新冻结子集
+V2.2 的收益来自两部分：
 
-冻结任务、源码、模型、seed、步数和预算后，因 Joplin SQLite `fts4` 基础设施错误在第 7 题暂停，
-只完成 6 个有效配对：
+1. **工程能力补齐**：long press、drag、answer、协议重试、官方判定；
+2. **Agent Runtime 改进**：状态 reset、事件触发 Verifier、按需 Tree、有限 Recovery，形成 3 次严格救回。
 
-| 指标 | V1 | V2 |
-| --- | ---: | ---: |
-| 官方成功 | 2/6 | 1/6 |
-| 执行动作 | 49 | 22 |
-| VLM 调用 | 51 | 32 |
-| Recovery 触发 / 救回 | 0 / 0 | 2 / 0 |
+不能把 9 个成功全算成“智能恢复”。21 个双败说明 Actor 页面理解和复杂任务规划仍是主要上限。
 
-正确结论：V2 在这个小子集里更早止损、成本更低，但成功数没有提升。6 题也不足以代表 AndroidWorld。
+## 7. 高频面试问题
 
-### 6.4 V2.1 负结果
+### Q1：这和 Appium 脚本有什么区别？
 
-| 指标 | V2 | V2.1 首轮 | V2.1 修复后 |
-| --- | ---: | ---: | ---: |
-| 官方成功 | 9/20 | 2/20 | 5/20 |
-| 非法输出终止 | 7 | 11 | 6 |
-| Recovery 触发 / 救回 | 10 / 3 | 12 / 0 | 16 / 1 |
-| VLM 调用 | 144 | 116 | 182 |
-| 目录价成本 | ¥0.7969 | ¥0.6059 | ¥1.0298 |
+> 脚本预先知道控件和流程；MobilePilot 面对自然语言目标和动态截图，每步由模型决策。我的工作重点不是自动化 API，而是 Runtime 如何管理不稳定模型、验证进展和控制恢复风险。
 
-修复把非法输出终止从 11 次降到 6 次，说明 Protocol Guard 有效；但 5 个成功任务全部也是 V2
-已经成功的任务，没有新增能力，且调用和成本更高。
+### Q2：为什么不直接用 LangGraph？
 
-### 6.5 网格与 UI Tree 的负结果
+> 当前核心难点是 AndroidWorld 动作语义、页面状态和 Trace 审计，不是图编排。自研轻量 loop 更容易控制每一步 official reward、动作是否执行和 Recovery 预算。未来流程更复杂时可以迁移，但现在上框架收益不高。
 
-- 自建受控 App：10×10 网格纯视觉 24/24；
-- ScreenSpot-v2 Mobile 471 条：Raw 332/471（70.49%），Grid 314/471（66.67%）；
-- AndroidWorld V1：vision-only 5/20，hybrid 4/20。
+### Q3：为什么不用 Planner？
 
-面试价值在于：用公开评测推翻了“网格一定更好”“Tree 越多越好”的直觉，并据此停止低收益投入。
+> 我做过 V2.1 Checklist 消融，只有 5/20，低于无 Planner 的 V2 9/20。原因是底层 Actor/evidence 不稳时，Planner 会把错误计划冻结得更久。所以先把 subgoal 生命周期、Verifier 和 Recovery 做扎实。
 
----
+### Q4：V2.2 为什么调用更多？
 
-## 7. 可以重点展示的 Trace
+> 它增加了低频 Manager 和事件触发 Verifier，并让更多任务不再因首个坏输出早死，所以执行更久。冻结成本从 ¥1.44 到 ¥1.65，约多 ¥0.21；这是可靠性换调用量的代价。
 
-### V2 的三条真实救回
+### Q5：9/30 仍然不高，价值在哪里？
 
-- `SystemBluetoothTurnOn`：重复相似动作 → Recovery + Tree → 改路 → reward=1；
-- `SystemWifiTurnOff`：重复向下滑动 → 停止循环 → reward=1；
-- `MarkorCreateFolder`：重复向上滑动 → 离开无进展路线 → reward=1。
+> 第一，它是固定未见任务有效子集上的配对提升，不是只挑成功 Demo；第二，非法输出 21 降到 4，并出现 3 条可审计救回；第三，21 个失败也留下模块归因和负结果。项目价值是能定位、修复和验证 Agent 失败，不是声称达到 SOTA。
 
-目录：
+### Q6：为什么 V1 是 0/30？是不是故意做弱？
 
-```text
-artifacts/evaluation/androidworld-v2-development-20260804/regression-20/traces/
-```
+> V1 是冻结前已有的历史 Runtime，不支持 LONG_PRESS/ANSWER 等动作，且未知动作/坏输出会直接终止；模型、任务、seed 和步数都保持相同。我没有为了冻结集改 V1，也没有隐藏它的协议短板。对比证明的是 Runtime 工程补齐，不等于基础模型能力提升。
 
-### V2.1 的真实救回
+### Q7：Recovery 25 次为什么只救 3 次？
 
-`SimpleSmsReply`：第 2 步检测连续无进展，触发 action-level Recovery，Actor 改变动作，最终第 9 步
-official reward=1。它证明 V2.1 Recovery 确实执行并可审计，但该题在 V2 中也成功，不能证明 V2.1
-更强。
+> 发现异常比找到正确替代策略容易。Tree 只能提供控件结构，不能理解完整任务；复杂表单和跨 App 错误往往不是换一个点击能修好。我保留 3/25，是为了区分“检测到了”与“真的救回了”。
 
-### Recovery 失败也要展示
+### Q8：Verifier 准确率是多少？
 
-- `MarkorEditNote`：Recovery 后改了动作，但 reward 仍为 0；
-- `SystemBrightnessMax`：Recovery 后仍想重复受阻动作，Runtime 在执行前停止；
-- 新冻结子集的 `SimpleDrawProCreateDrawing`：触发 Recovery 后仍失败。
+> 冻结运行有 37 次调用，行为分布是 23 completed、8 stalled、4 progress、2 regressed。但没有对这 37 条逐条人工标注，所以我不报 accuracy。RCA 阶段人工审计表明它不是首要瓶颈，但这不等于正式准确率。
 
-推荐说法：
+### Q9：为什么 UI Tree 调用少了还更好？
 
-> 我把 Recovery 的“触发”“动作是否改变”和“最终是否被官方 reward 救回”分开统计。触发不等于
-> 有效，replan 也不等于成功。
+> V1 每步 Tree 共 209 次，但 Tree 不会自动规划。V2.2 只在非法输出、失败、循环或不确定时调用 49 次，其中 19 次改变动作，并直接支撑两条救回。减少的是无差别上下文，不是删除结构工具。
 
----
+### Q10：12 步是不是太少？
 
-## 8. 面试官高频问题与推荐回答
+> 开发回归为了历史可比保持 12 步；我只对 RCA 高度怀疑的重复日历任务做一次 20 步诊断，它仍失败。冻结任务在运行前统一固定 16 步。结果说明很多步数耗尽其实来自路线错误，不是简单加预算就能解决。
 
-### Q1：这个项目和普通的手机自动化脚本有什么区别？
+### Q11：怎么保证没在冻结集上调参？
 
-> 自动化脚本通常预先写死操作序列；MobilePilot 的下一步动作由 VLM 根据当前截图和运行状态动态
-> 决定。我的重点也不在 ADB 封装本身，而在不确定模型输出下的协议校验、状态维护、循环检测、有限
-> 恢复和环境验证。
+> 先固定清单、顺序、任务 hash、Agent source hash、commit、模型、seed、步数和预算。首条结果后不改 Prompt/Runtime/Recovery。基础设施坏批次原样保留；网络恢复只重启完整固定后缀，不按成败挑题。
 
-### Q2：为什么不直接用 Appium、LangChain 或 LangGraph？
+### Q12：6 个无效任务为什么不算失败？
 
-> AndroidWorld 已经提供任务环境和官方动作接口，我需要控制的是每一步观察、动作预算、reward
-> 查询和 Trace 事件。自定义轻量 Runtime 更容易固定实验变量和审计。LangGraph 可以表达状态图，
-> 但不会自动解决页面证据、动作安全和官方 reward；当前规模引入它反而增加抽象层。未来流程更复杂
-> 或存在多 Agent 分支时才值得考虑。
+> 它们在 Agent 接管前就因 App 目录或 SQLite FTS4 初始化失败，两个版本无法公平运行。把基础设施失败记成 Agent 失败会污染结论，所以单独披露，不进入 30 对分母。
 
-### Q3：为什么选择 GUI-Plus？有没有比较模型？
+### Q13：如果继续做，最优先改什么？
 
-> 当前目标是验证 Runtime，而不是做模型排行榜，所以正式对照固定
-> `gui-plus-2026-02-26`。历史上试过 GUI-Plus 主版本，但没有稳定优势且坐标约定不同。后续模型层
-> 对照可以选择手机专用 AutoGLM-Phone 和一个通用 VLM 基线，但必须与 Runtime 消融分开做。
+> 不再加模块。第一，降低 Manager already-satisfied evidence；第二，用失败 Trace 提升 Actor 对复杂表单/跨 App 页面的动作选择；第三，让 Recovery 在有新证据时形成更少但更有效的策略。重新开发后需要再冻结新任务，不能继续吃这 36 题。
 
-### Q4：你说成功率从 4/20 到 9/20，能证明方法有效吗？
+## 8. 面试时不要说错
 
-> 只能证明对这组已经用于失败分析的开发题有效，不能证明泛化。逐题配对是 6 题改善、1 题退化、
-> 3 题都成功、10 题都失败。新冻结 6 对任务里 V2 反而是 1/6，因此我没有把开发收益说成
-> held-out 结论。
-
-### Q5：9/20 看起来还是很低，项目价值在哪里？
-
-> AndroidWorld 是真实多步任务，当前模型还会空输出、看错页面和误报完成。我不把项目定位成刷榜，
-> 而是把这些失败变成可检测、可恢复、可统计的 Runtime 行为。价值包括 failure taxonomy、真实
-> Recovery 链路、官方验证、冻结评测和完整负结果。低分也说明模型能力仍是上限，不能只靠 Runtime
-> 包装解决。
-
-### Q6：为什么非法输出这么多？
-
-> GUI 模型接口偶尔返回空内容、截断 JSON、字段不完整或不支持的动作名。复杂 Prompt 和长上下文
-> 也可能让输出稳定性下降。V2 的 Guard 降低了部分协议终止，但连续两次空输出仍会失败；我选择
-> 保留这个边界，而不是无上限重试。
-
-### Q7：一次安全结构化重试为什么是安全的？
-
-> 因为第一次输出没有通过 schema，所以没有任何设备动作被执行。重试只要求模型返回合法的单一
-> JSON 动作。一旦动作执行过，就不走协议重试，而是根据环境结果决定是否 Recovery，避免重复发送、
-> 删除或输入。
-
-### Q8：Recovery 具体做了什么？
-
-> Runtime 保存触发原因和受阻动作，下一轮重新观察；hybrid 模式按需读取 Tree，并把阻塞原因加入
-> Actor 上下文。新动作生成后先与受阻动作签名比较，如果仍相似就不执行。只有改变动作并最终得到
-> official reward，才统计为救回。
-
-### Q9：为什么 V2 Recovery 只允许一次，V2.1 才允许两次？
-
-> 一次是为了控制副作用和成本。V2.1 想验证两层恢复：第一次保持目标不变只换动作，第二次允许修改
-> 当前计划。但实测 16 次触发只有 1 次救回，说明简单增加预算会增加调用，不一定增加成功，所以没有
-> 把两次恢复直接推广到稳定版。
-
-### Q10：怎么判断两个动作相似？
-
-> 先转为动作签名。OPEN_APP 看归一化 App 名，SWIPE/SCROLL 看方向，TYPE_TEXT 用文本哈希，点击
-> 坐标按区域分桶。签名完全相同则视为相似。它简单可解释，但不能表达语义相似，是后续可以改进的点。
-
-### Q11：Fingerprint 为什么不能只用截图 SHA-256？
-
-> SHA-256 对状态栏时间、动画、光标都非常敏感，任何一个像素变化都会变。它适合审计和精确重复，
-> 不适合判断语义进展。因此 V2.1 保留 exact hash，同时增加裁剪后的视觉感知指纹、Tree 语义指纹和
-> package 信号。
-
-### Q12：多信号 Verifier 能判断“方向正确”吗？
-
-> 目前不能完全判断。它能更稳地判断无变化、轻微变化、结构性变化和上下文切换，但“是否朝任务目标
-> 前进”需要任务相关证据或受约束 VLM Verifier。最终成功仍由 official reward 决定。这是当前项目
-> 很明确的局限。
-
-### Q13：UI Tree 为什么不每步都用？
-
-> Tree 能提供控件文本和结构，但会增加上下文，动态页面里还可能过时或缺失。V1 每步使用 Tree 的
-> hybrid 只有 4/20，没超过 vision-only 5/20。因此 V2 把它改成失败后或模型不确定时的按需工具。
-
-### Q14：Planner Checklist 为什么反而让 V2.1 变差？
-
-> Planner 自己也会空输出或生成不一致的 mode/evidence；错误检查点会约束 Actor 走错方向；简单任务
-> 被额外计划干扰；同时多一次 Planner 调用和更长 Prompt 增加 Token 与延迟。说明 Planner 应按任务
-> 结构触发，而不是默认每题都调用。
-
-### Q15：如果 Planner 给错计划怎么办？
-
-> Actor 只能提出检查点完成，Runtime 根据冻结证据确认；已经确认的检查点不能被恢复阶段修改。
-> 第二层 Recovery 只替换未完成部分。若 Planner 解析失败则回退 direct 执行。但实测表明“能安全
-> 回退”不等于“没有性能影响”，所以仍需要更严格的 Planner gating。
-
-### Q16：为什么不用 Actor 自己判断检查点完成？
-
-> Actor 既执行又给自己判分会放大误报。项目已经观察到模型错误自报完成，所以 Actor 只能 propose；
-> Runtime 优先检查 Tree 文本、package/activity 等确定性证据，模糊情况才交给受约束 Verifier。
-
-### Q17：为什么只跑 20 题或 6 题？样本够吗？
-
-> 不够代表 AndroidWorld 总体。20 题最初用于固定基线，后来参与开发，所以只作为回归集。新冻结集
-> 原计划 12 题，但第 7 题在模型调用前遇到 Joplin `fts4` 环境错误，因此只报告 6 个完整配对，绝不
-> 用它推断总体。更可信的下一轮应冻结 36～48 题并只运行一次配对对照。
-
-### Q18：12 步上限合理吗？
-
-> 它保证 V1/V2 开发对比公平，但两道日历题的官方参考路径约 14 和 17 步，12 步确实偏紧。下一次新
-> 冻结评测应让两版统一使用 18 步，而不是只给新版本加预算。
-
-### Q19：成本是怎么统计的？
-
-> 每次 Actor、Planner 和 Verifier 调用都记录 prompt/completion Token、延迟和按目录价估算的成本，
-> Runner 再按任务和版本汇总。它是估算值，不等于账单实扣；同时有逻辑调用和总成本硬上限。
-
-### Q20：怎么保证评测没有数据泄漏或针对单题调参？
-
-> 任务清单先冻结并记录 hash，同时固定代码 hash、模型、seed、步数、模式和预算；运行中不查看结果
-> 调 Prompt，不为单题重试，不覆盖已有产物。已经看过 Trace 的任务自动降级为开发集，不能继续称
-> held-out。
-
-### Q21：基础设施错误为什么不算 Agent 失败？
-
-> 例如 Joplin SQLite 缺少 `fts4`，发生在任务初始化和模型调用前，Agent 根本没有机会行动。Runner
-> 会记录 `infrastructure_error` 并停止整个批次，不重试该题，也不把它混入成功率分母。
-
-### Q22：测试怎么做？
-
-> 单元测试使用 Fake Policy 和 Fake Adapter，不依赖模拟器或 API，覆盖动作解析、协议重试、循环
-> 检测、Recovery 预算、按需 Tree、检查点证据、official reward 覆盖模型自报和评测汇总。最新
-> AndroidWorld 相关完整回归是 131/131 通过。端到端结果则只认模拟器中的 official reward。
-
-### Q23：为什么不用并行跑多个模拟器？
-
-> 当前实验协议明确只允许 `emulator-5554`，以减少设备状态和快照差异。GUI 任务还具有共享模拟器
-> 状态，并行会破坏隔离。未来如果需要扩容，应为每个 worker 使用独立 AVD、端口、快照和结果目录。
-
-### Q24：如果让你继续优化，优先做什么？
-
-> 第一，Planner 只在多字段、多约束、跨页面和不可重复副作用任务中启用，简单任务走 V2 direct；
-> 第二，使用任务证据而不是页面变化判断检查点；第三，在新的 36～48 题冻结集上做 V2 与改进版一次
-> 性配对；第四，Runtime 稳定后再单独比较手机专用模型和通用 VLM，避免变量混杂。
-
-### Q25：你个人完成了哪些工作？
-
-> 这是个人项目。我完成了 AndroidWorld/ADB 执行闭环、动作协议和 Adapter、Actor 接口、Trace
-> 审计、failure taxonomy、状态与循环检测、按需 UI Tree、Recovery、官方 reward 接入、冻结评测
-> Runner、单元测试和实验文档。模型本身是外部 API，我没有训练或微调 GUI 模型。
-
----
-
-## 9. 面试时不要说错的内容
-
-| 不要这样说 | 应该这样说 |
+| 不要说 | 应该说 |
 | --- | --- |
-| “AndroidWorld 准确率提升到 45%” | “在已暴露 20 题开发回归集上，hybrid 从 20% 提升到 45%” |
-| “V2 提升了 held-out 泛化” | “新冻结 6 对任务没有复现成功率收益” |
-| “加了 Planner，所以推理更强” | “V2.1 验证了 Planner 方案，但结果低于 V2，当前触发和证据设计仍需改进” |
-| “Recovery 触发了 10 次”当成成果 | “10 次触发中 3 次最终由 official reward 确认救回” |
-| “模型说完成，所以任务成功” | “模型只能提议，官方 reward 是唯一最终判定” |
-| “UI Tree 能让模型理解页面” | “Tree 提供结构证据，但不会自动带来正确规划” |
-| “网格让定位更准” | “网格只在受控 App 有效，公开 ScreenSpot-v2 上反而下降” |
-| “我训练了 GUI Agent” | “我构建和评测 GUI Agent Runtime，模型来自外部 API” |
+| AndroidWorld 成功率 30% | 冻结 36 题清单中 30 个有效配对，V2.2 9/30 |
+| 36 题全部跑完 | 30 对有效，6 题基础设施无效/排除 |
+| Recovery 成功 25 次 | 触发 25 次，严格救回 3 次 |
+| 9 个成功都是 Agent 推理提升 | 部分来自 Action Contract/ANSWER，3 个来自严格 Recovery |
+| UI Tree 让模型理解任务 | Tree 提供结构证据，但不提供完整任务语义 |
+| Verifier 准确率很高 | 统计了 37 次行为，没有冻结集人工 accuracy |
+| V2.2 提升了模型能力 | 模型固定，改进来自 Runtime 和动作契约 |
+| 开发 20 题是 held-out | 已参与 RCA，只是 development/regression set |
 
----
+## 9. 共享屏幕展示顺序
 
-## 10. 面试共享屏幕时的展示顺序
+1. README 架构图：30 秒讲清闭环；
+2. `docs/final/frozen-evaluation-report.md`：展示 0/30→9/30 和边界；
+3. MarkorDeleteNewestNote Trace：搜索 `LONG_PRESS`、`ui_tree_decision`、`recovery_outcome`、`official_reward`；
+4. `mobile_pilot/androidworld/agent.py`：展示 official reward、completed-before-loop、Recovery；
+5. `mobile_pilot/androidworld/actor.py`：展示 action-only schema；
+6. `mobile_pilot/androidworld/adapter.py`：展示 LONG_PRESS/DRAG/ANSWER；
+7. `docs/final/v22-root-cause-analysis.md`：展示如何从 termination reason 追到 root cause；
+8. pytest 结果：186 passed。
 
-建议只展示 5～8 分钟，不要从目录开始漫无目的地翻：
+## 10. 面试前至少理解的 10 个词
 
-1. 打开 `README.md` 顶部：用一句话说明定位和整体闭环。
-2. 展示 README 架构图：按 Actor → Guard → Execute → Verify → Recovery 顺序讲。
-3. 打开 `mobile_pilot/androidworld/agent.py` 的 `step()`：说明 Runtime 主循环是真实代码，不只是架构图。
-4. 打开 `mobile_pilot/androidworld/runtime_state.py`：展示循环规则和 Recovery 预算。
-5. 打开一条成功 Trace：搜索 `loop_detected`、`agent_recovery_triggered`、
-   `agent_recovery_outcome` 和 `official_reward`。
-6. 打开 `docs/final/evaluation-summary.md`：讲开发集提升和冻结子集边界。
-7. 如果面试官追问失败实验，再打开 V2.1 Sprint 13 文档。
+1. Protocol Guard
+2. Action Contract
+3. Runtime State
+4. Subgoal lifecycle
+5. Completion Evidence / postcondition
+6. Deterministic Verifier
+7. VLM Progress Verifier
+8. Loop Detection
+9. Recovery budget
+10. Official reward
 
-推荐展示的文件：
+## 11. 收尾话术
 
-- `README.md`
-- `mobile_pilot/androidworld/agent.py`
-- `mobile_pilot/androidworld/runtime_state.py`
-- `mobile_pilot/androidworld/adapter.py`
-- `docs/final/evaluation-summary.md`
-- `docs/final/representative-traces.md`
-- `docs/progress/androidworld-v21-sprint13-development-fix1.md`
-
----
-
-## 11. 面试前至少要理解的 12 个词
-
-| 词 | 你需要理解到的程度 |
-| --- | --- |
-| Agent Runtime | 管理模型观察、动作、状态、工具、验证和终止的运行框架 |
-| Actor | 根据目标和当前页面提出下一动作的模型角色 |
-| Protocol Guard | 在执行前解析和校验模型输出，有限修复格式问题 |
-| Critic | 对候选动作做执行前规则检查；当前主要是确定性边界检查 |
-| Verifier | 判断页面是否发生有效变化；最终成功仍由官方 reward 决定 |
-| Recovery | 环境失败后重新观察和有限改路，不是无上限重试 |
-| Replan | 根据失败证据更换动作路线或修改未完成计划 |
-| UI Tree | Accessibility 提供的控件文本、类型、层级和边界信息 |
-| Fingerprint | 用于比较页面是否重复或变化的摘要信号 |
-| Official reward | AndroidWorld 对任务是否真正完成的权威判断 |
-| Trace | 按时间记录每次观察、决策、执行、验证和恢复的 JSONL 证据 |
-| Paired evaluation | 同一任务、模型、预算下比较两个 Runtime 版本，减少任务差异 |
-
----
-
-## 12. 最后收尾话术
-
-> 这个项目让我真正学到的不是“怎么让模型在手机上点一下”，而是如何面对一个不稳定、不可完全
-> 信任的模型输出：先定义协议，再维护状态，用环境信号发现失败，给有限恢复机会，最后用外部真实
-> reward 判定结果。我也保留了 V2.1 和新冻结子集没有提升的证据，因为 Agent 工程不应该只展示
-> 成功案例，还要能说明方法在什么条件下失效。
-
-## 13. 面试前检查清单
-
-- 能在 30 秒、1 分钟和 3 分钟内分别讲完项目；
-- 能解释 Protocol Guard 与 Recovery 的区别；
-- 能画出观察—决策—执行—验证—恢复闭环；
-- 能说出 V1 4/20、V2 9/20，以及为什么不是 held-out；
-- 能解释 3 条 V2 Recovery 救回的判定标准；
-- 能坦诚解释新冻结子集 V1 2/6、V2 1/6；
-- 能解释 V2.1 为什么模块更多但只有 5/20；
-- 能说明 UI Tree、fingerprint、official reward 分别解决什么问题；
-- 能打开一条 JSONL Trace 找到失败信号和最终 reward；
-- 遇到不会的问题时，先说明当前实现和证据，再给出下一步验证方法，不猜结果。
+> 这个项目让我真正学到的不是怎么让模型多点几下，而是怎么把一个不稳定模型放进可控 Runtime：什么时候相信它，什么时候验证，什么时候给工具，什么时候恢复，什么时候必须停。最终 9/30 不算高，但它来自冻结配对，并且我能把 3 次救回和 21 次失败都回到 Trace 解释清楚。我觉得这比只展示几个成功 Demo 更接近 Agent 工程。

@@ -1,67 +1,84 @@
-# 可复现 Demo 与三分钟讲解脚本
+# MobilePilot Demo 与三分钟讲解脚本
 
 ## 运行边界
 
-本轮 Demo 只允许 `emulator-5554`，不连接或操作真实手机。AndroidWorld 固定 commit
-`3e50888527ef9f29b9157ecd537e408008bb1c85`，模型固定
-`gui-plus-2026-02-26`。
+- 只连接 AndroidWorld `emulator-5554`；
+- 不连接真实手机，不操作 VMware；
+- AndroidWorld commit 固定 `3e50888527ef9f29b9157ecd537e408008bb1c85`；
+- Actor 固定 `gui-plus-2026-02-26`；
+- 冻结 36 题已经产生结果，**不要在面试 Demo 中重跑或挑题重试**。
 
-## 启动模拟器
+## 推荐 Demo：离线 Trace 回放
 
-AndroidWorld 除 ADB 端口外还需要 gRPC 端口。遗漏 `-grpc 8554` 会出现“ADB 在线但
-环境初始化一直不返回”的假象。
+这是面试最稳的方式：不依赖 API、网络和模拟器状态，也不会污染冻结证据。
+
+```powershell
+# 1. 看最终结果和结论边界
+Get-Content docs/final/frozen-evaluation-report.md
+
+# 2. 看真实 Recovery 救回
+$trace='artifacts/evaluation/androidworld-v22-final-frozen36-20260817/traces/MarkorDeleteNewestNote--v2.2--hybrid.jsonl'
+rg -n 'LONG_PRESS|agent_recovery_triggered|ui_tree_decision|agent_recovery_replan|official_reward|agent_recovery_outcome' $trace
+
+# 3. 看 ANSWER 官方通道
+$answerTrace='artifacts/evaluation/androidworld-v22-final-frozen36-continuation5-network-restored-20260817/traces/SimpleCalendarAnyEventsOnDate--v2.2--hybrid.jsonl'
+rg -n 'ANSWER|official_reward' $answerTrace
+
+# 4. 离线测试
+python -m pytest -q
+```
+
+预期测试结果：`186 passed`。
+
+## 可选：启动 AndroidWorld 模拟器
+
+只有需要展示页面时再启动。不要改 Hyper-V/VMware 配置；当前命令只启动 Android Emulator。
 
 ```powershell
 $emulator='C:\Users\Admin\AppData\Local\Android\Sdk\emulator\emulator.exe'
 Start-Process -FilePath $emulator -ArgumentList @(
-  '-avd','AndroidWorldAvd',
-  '-port','5554',
-  '-grpc','8554',
-  '-no-snapshot-save'
+  '-avd','AndroidWorldAvd','-port','5554','-grpc','8554','-no-snapshot-save'
 )
+
+$adb='C:\Users\Admin\AppData\Local\Android\Sdk\platform-tools\adb.exe'
+& $adb devices
 ```
 
-确认 `adb devices -l` 中只有 `emulator-5554` 后再运行：
+必须只看到：
 
-```powershell
-$env:MOBILEPILOT_ACTOR_MODEL='gui-plus-2026-02-26'
-$env:MOBILEPILOT_VERIFIER_MODEL='qwen3.7-flash-2026-07-15'
-$env:MOBILEPILOT_SUBGOAL_MODEL='qwen3.7-flash-2026-07-15'
-$env:MOBILEPILOT_ANDROIDWORLD_DOWNLOAD_CACHE=(Resolve-Path '.local\androidworld-download-cache').Path
-
-# 离线测试
-.\.local\conda\androidworld-py312\python.exe -m pytest
-
-# 已暴露开发任务 Demo；不要把结果写成新评测
-.\.local\conda\androidworld-py312\python.exe scripts\run_mobilepilot_androidworld.py `
-  --task ClockStopWatchRunning `
-  --mode hybrid `
-  --runtime-version v2.2 `
-  --progress-verifier-mode hybrid `
-  --max-steps 6 `
-  --adb-path C:\Users\Admin\AppData\Local\Android\Sdk\platform-tools\adb.exe `
-  --trace-path artifacts\traces\demo-clock-v2.jsonl `
-  --seed 0
+```text
+emulator-5554    device
 ```
-
-不要重新运行 `runtime_eval_12_v2*.json` 中已经产生结果或 infrastructure error 的
-任务；冻结 Runner 会拒绝覆盖 Trace 和自动重试。
 
 ## 三分钟讲解
 
-1. **问题（35 秒）**：多步 GUI Agent 不只是识别坐标。V1 的主要失败是非法输出、
-   循环、状态丢失和模型误报完成。
-2. **方法（70 秒）**：指 README 架构图，区分 Protocol Guard 与 Agent Recovery；
-   解释短期状态、循环检测、按需 Tree、一次有限 replan 和官方 reward。
-3. **证据（45 秒）**：展示 V2.2 `ExpenseDeleteSingle` 的“连续无进展→按需 Tree→
-   改变动作→official reward=1.0”，再展示 Manager 边界消融从 7/20 回落到 5/20。
-4. **结果与边界（30 秒）**：V1→V2 开发回归 4/20→9/20；V2.2 最佳 7/20、1 次新
-   救回，仍未超过 V2。新冻结子集 V1 2/6、V2 1/6，未证明泛化。
+### 0:00—0:30：问题
 
-## 面试追问准备
+> V1 的 40 条运行只有 9 条成功，31 条失败里 21 条是非法 Actor 输出。但我继续看 Trace 后发现，真正问题不只是 JSON：Runtime 还缺 long press、drag、answer，旧状态会污染新 subgoal，Recovery 经常没有新证据。
 
-- **为什么不继续换模型？** 当前目标是隔离 Runtime 改动；换模型会混入新的变量。
-- **UI Tree 有用吗？** 每步附带没有证明收益；作为失败时的按需工具更节省上下文，
-  但新子集也没有产生救回。
-- **为什么可信？** 任务、源码、模型、seed、步数和预算先冻结；官方 reward 唯一判定；
-  Trace 和基础设施错误均保留，不为单题重试。
+### 0:30—1:20：架构
+
+> 我把 GUI-Plus 收窄成 action-only；Runtime 维护 subgoal 和 completion evidence；确定性 Verifier 每步跑，只有语义不确定时才调用 Qwen；UI Tree 从每步输入改成失败事件触发；Recovery 最多两级，而且必须基于新证据换动作。最终成功只认 AndroidWorld official reward。
+
+### 1:20—2:10：Trace
+
+打开 `MarkorDeleteNewestNote`：
+
+> Actor 先执行新增 LONG_PRESS；页面重访后，Recovery 从 Tree 找到 Delete；确认框出现后第二级 Recovery 找到 OK；执行后 reward 从 0 变 1。这里每一步的 blocked action、chosen element、changed action 和 rescue 都在 JSONL 中。
+
+再打开 Calendar ANSWER：
+
+> 这条成功不是 Recovery，而是补齐 AndroidWorld information retrieval 的正式答案通道。协议能力和 Agent 恢复要分开归因。
+
+### 2:10—3:00：结果与边界
+
+> 36 题冻结清单中，30 题形成有效配对：V1 0/30，V2.2 9/30，9 改善 0 退化；非法输出 21 降到 4；Recovery 25 次只救回 3 次；UI Tree 209 降到 49。6 题因为 OsmAnd 目录或 Windows SQLite FTS4 不进入分母。21/30 仍失败，所以我不会说 Runtime 已解决复杂长任务。
+
+## 面试前检查
+
+- README、冻结报告、面试手册数字均为 30 个有效配对；
+- 不把开发 20 题称 held-out；
+- 不把 9 个成功都归因于 Recovery；
+- 不把 6 个环境无效任务算 Agent failure；
+- 能解释为什么 V2.2 调用/Token/延迟更高；
+- 能在 Trace 中找到 official reward=1 和 rescued=true。
