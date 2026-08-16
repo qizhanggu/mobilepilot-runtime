@@ -146,6 +146,35 @@ def test_multisignal_verifier_keeps_exact_and_tolerates_tiny_visual_change():
     assert details["visual_hamming_distance"] > 0
 
 
+def test_multisignal_verifier_treats_ui_semantic_change_as_progress():
+    before = ScreenState(
+        (100, 200),
+        "calendar",
+        (),
+        "same",
+        exact_fingerprint="same",
+        visual_fingerprint="0" * 64,
+        semantic_fingerprint="text-before",
+    )
+    after = ScreenState(
+        (100, 200),
+        "calendar",
+        (),
+        "same",
+        exact_fingerprint="same",
+        visual_fingerprint="0" * 64,
+        semantic_fingerprint="text-after",
+    )
+    progress = RuntimeProgress(unchanged_streak=2, current_blocker="old stall")
+
+    result, _ = classify_screen_change(before, after)
+    progress.record_verification(result=result, action=Action(ActionType.WAIT))
+
+    assert result == "meaningful_ui_change"
+    assert progress.unchanged_streak == 0
+    assert progress.current_blocker == ""
+
+
 def test_checkpoint_ui_text_requires_tree_and_runtime_matches_it():
     checkpoint = Checkpoint("open editor", CheckpointEvidence("ui_text", "Save"), "active")
     no_tree = ScreenState((100, 200), "calendar", (), "a")
@@ -229,6 +258,43 @@ def test_v22_completion_evidence_uses_hidden_runtime_text_without_actor_tree():
     assert text_match[0] is True
     assert package_match[0] is True
     assert visual_match[0] is None
+
+
+def test_v22_ui_text_evidence_normalizes_phone_formatting_and_case():
+    screen = ScreenState(
+        (100, 200),
+        "contacts",
+        (),
+        "screen",
+        verification_texts=("ALICE | 141-365-9376",),
+    )
+
+    phone = completion_evidence_matches(
+        CompletionEvidence("ui_text", "1413659376"), screen
+    )
+    name = completion_evidence_matches(
+        CompletionEvidence("ui_text", "alice"), screen
+    )
+
+    assert phone[0] is True
+    assert name[0] is True
+
+
+def test_subgoal_progress_resets_old_stall_page_and_blocker_state():
+    progress = RuntimeProgress()
+    wait = Action(ActionType.WAIT)
+    progress.record_verification(changed=False, action=wait)
+    progress.record_verification(changed=False, action=wait)
+    progress.remember_screen("old-page")
+    progress.recent_failure = "old recovery failure"
+
+    progress.mark_subgoal_progress()
+
+    assert progress.unchanged_streak == 0
+    assert progress.current_blocker == ""
+    assert progress.recent_failure == ""
+    assert progress.screen_fingerprints == []
+    assert progress.page_loop_signal("old-page") == ""
 
 
 def test_partial_reward_does_not_close_or_rescue_recovery_episode():

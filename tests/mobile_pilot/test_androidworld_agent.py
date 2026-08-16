@@ -749,7 +749,10 @@ def test_v22_manager_is_not_called_on_every_actor_step(tmp_path):
 
 def test_v22_manager_rejects_hard_evidence_already_true_before_action(tmp_path):
     manager = _FakeSubgoalManager(
-        [("return home", CompletionEvidence("ui_text", "Home"))]
+        [
+            ("return home", CompletionEvidence("ui_text", "Home")),
+            ("return home", CompletionEvidence("ui_text", "Home")),
+        ]
     )
     agent = MobilePilotAndroidWorldAgent(
         object(),
@@ -770,12 +773,51 @@ def test_v22_manager_rejects_hard_evidence_already_true_before_action(tmp_path):
 
     assert not result.done
     assert not agent._subgoals.active
-    row = next(
+    rows = [
         row for row in _trace_rows(tmp_path / "trace.jsonl")
         if row["event"] == "subgoal_manager"
+    ]
+    assert len(manager.requests) == 2
+    assert manager.requests[1]["rejected_evidence_feedback"]
+    assert [row["outcome"] for row in rows] == [
+        "invalid_already_satisfied_regenerating",
+        "invalid_already_satisfied",
+    ]
+    assert rows[-1]["action_executed"] is False
+
+
+def test_v22_manager_accepts_one_regenerated_postcondition(tmp_path):
+    manager = _FakeSubgoalManager(
+        [
+            ("enter Stopwatch", CompletionEvidence("ui_text", "Stopwatch")),
+            (
+                "enter Stopwatch",
+                CompletionEvidence("visual_state", "timer controls are visible"),
+            ),
+        ]
     )
-    assert row["outcome"] == "invalid_already_satisfied"
-    assert row["action_executed"] is False
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=3,
+        policy=_QueuedPolicy([_parsed(Action(ActionType.WAIT))]),
+        subgoal_manager=manager,
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(
+        ["s0", "s1"], verification_texts=[("Stopwatch",), ("Stopwatch",)]
+    )
+
+    result = agent.step("open Stopwatch")
+
+    assert not result.done
+    assert len(manager.requests) == 2
+    assert agent._subgoals.active_goal == "enter Stopwatch"
+    assert agent._subgoals.active_evidence == CompletionEvidence(
+        "visual_state", "timer controls are visible"
+    )
 
 
 def test_v22_redundant_tree_request_gets_one_safe_action_retry(tmp_path):
@@ -974,3 +1016,161 @@ def test_v22_actor_cannot_mutate_frozen_subgoal_without_recovery(tmp_path):
         if row["event"] == "subgoal_proposal"
     ]
     assert [row["outcome"] for row in rows] == ["accepted", "mutation_blocked"]
+
+
+def test_v22_confirmed_subgoal_returns_before_unchanged_page_loop(tmp_path):
+    action = Action(
+        ActionType.WAIT,
+        {
+            "subgoal": "show Done",
+            "completion_evidence_kind": "ui_text",
+            "completion_evidence_value": "Done",
+        },
+    )
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=3,
+        policy=_QueuedPolicy([_parsed(action)]),
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(
+        ["same", "same"],
+        verification_texts=[("Loading",), ("Done",)],
+    )
+
+    result = agent.step("wait until done")
+
+    assert result.data["reason"] == "subgoal_confirmed"
+    assert agent._subgoals.completed_goals == ["show Done"]
+    assert not any(
+        row["event"] == "loop_detected"
+        for row in _trace_rows(tmp_path / "trace.jsonl")
+    )
+
+
+def test_semantic_capability_gap_is_not_retried_as_protocol_formatting(tmp_path):
+    failed = ParseResult(
+        error_kind=ErrorKind.UNSUPPORTED_ACTION_CAPABILITY,
+        message="unsupported action capability ANSWER",
+        raw_output='{"action":"ANSWER","text":"42"}',
+    )
+    policy = _QueuedPolicy([failed])
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=3,
+        policy=policy,
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(["s0"])
+
+    result = agent.step("answer the visible question")
+
+    assert result.done
+    assert result.data["reason"] == "unsupported_action_capability"
+    assert len(policy.requests) == 1
+    protocol_rows = [
+        row for row in _trace_rows(tmp_path / "trace.jsonl")
+        if row["event"] == "protocol_guard"
+    ]
+    assert protocol_rows[-1]["outcome"] == "not_attempted_for_semantic_capability_gap"
+
+
+def test_v22_tree_supported_recovery_records_grounded_changed_action(tmp_path):
+    failed_open = Action(ActionType.OPEN_APP, {"app_name": "missing"})
+    grounded_click = Action(
+        ActionType.CLICK_POINT,
+        {"point": [10, 10], "ui_tree_reference": "Next"},
+    )
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=4,
+        policy=_QueuedPolicy([_parsed(failed_open), _parsed(grounded_click)]),
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(
+        ["home", "replan", "after"],
+        execution_results=[ActionResult(False, failed_open, "not installed")],
+    )
+
+    first = agent.step("open the next available page")
+    second = agent.step("open the next available page")
+
+    assert first.data["reason"] == "agent_replan_requested"
+    assert not second.done
+    tree_row = next(
+        row for row in _trace_rows(tmp_path / "trace.jsonl")
+        if row["event"] == "ui_tree_decision"
+    )
+    assert tree_row["result"] == "grounded"
+    assert tree_row["chosen_ui_element"]["label"] == "Next"
+    assert tree_row["changed_action"] is True
+
+
+def test_v22_tree_supported_recovery_fails_closed_without_new_evidence(tmp_path):
+    failed_open = Action(ActionType.OPEN_APP, {"app_name": "missing"})
+    ungrounded_wait = Action(ActionType.WAIT, reason="try something different")
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=4,
+        policy=_QueuedPolicy([_parsed(failed_open), _parsed(ungrounded_wait)]),
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._adapter = _FakeAdapter(
+        ["home", "replan"],
+        execution_results=[ActionResult(False, failed_open, "not installed")],
+    )
+
+    agent.step("open the next available page")
+    result = agent.step("open the next available page")
+
+    assert result.done
+    assert result.data["reason"] == "insufficient_new_evidence"
+    assert [action.type for action in agent._adapter.executed_actions] == [
+        ActionType.OPEN_APP
+    ]
+    replan = next(
+        row for row in _trace_rows(tmp_path / "trace.jsonl")
+        if row["event"] == "agent_recovery_replan"
+    )
+    assert replan["result"] == "insufficient_new_evidence"
+
+
+def test_v22_recovery_allows_named_app_fallback_grounded_by_runtime_state(tmp_path):
+    failed_swipe = Action(ActionType.SWIPE, {"direction": "up"})
+    reopen = Action(ActionType.OPEN_APP, {"app_name": "Settings"})
+    agent = MobilePilotAndroidWorldAgent(
+        object(),
+        mode="hybrid",
+        max_steps=4,
+        policy=_QueuedPolicy([_parsed(failed_swipe), _parsed(reopen)]),
+        progress_verifier_mode="off",
+        trace_path=tmp_path / "trace.jsonl",
+        runtime_version="v2.2",
+    )
+    agent._subgoals.completed_goals.append("Open Settings")
+    agent._adapter = _FakeAdapter(
+        ["settings", "home", "home-tree", "settings-again"],
+        execution_results=[ActionResult(False, failed_swipe, "left Settings")],
+    )
+
+    agent.step("turn brightness to max")
+    result = agent.step("turn brightness to max")
+
+    assert not result.done
+    assert agent._adapter.executed_actions[-1].type is ActionType.OPEN_APP
+    replan = next(
+        row for row in _trace_rows(tmp_path / "trace.jsonl")
+        if row["event"] == "agent_recovery_replan"
+    )
+    assert replan["result"] == "task_grounded_fallback"

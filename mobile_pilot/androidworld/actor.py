@@ -100,8 +100,16 @@ When the frozen subgoal is to open a named installed app, prefer open_app with
 its short canonical app name instead of searching the launcher or app drawer.
 
 <tools>
-{"type":"function","function":{"name":"mobile_action","description":"Execute exactly one Android GUI action or make one bounded completion proposal.","parameters":{"type":"object","properties":{"action":{"type":"string","enum":["click","type","swipe","back","open_app","wait","request_ui_tree","propose_subgoal_complete","propose_complete"]},"coordinate":{"type":"array","items":{"type":"number"},"minItems":2,"maxItems":2,"description":"Click point in 0-1000 normalized screenshot coordinates."},"text":{"type":"string"},"direction":{"type":"string","enum":["up","down","left","right"]},"app_name":{"type":"string"},"observed_evidence":{"type":"string"},"reason":{"type":"string"}},"required":["action"]}}}
+{"type":"function","function":{"name":"mobile_action","description":"Execute exactly one Android GUI action or make one bounded completion proposal.","parameters":{"type":"object","properties":{"action":{"type":"string","enum":["click","long_press","drag","type","swipe","back","open_app","wait","answer","request_ui_tree","propose_subgoal_complete","propose_complete"]},"coordinate":{"type":"array","items":{"type":"number"},"minItems":2,"maxItems":2,"description":"Click or long-press point in 0-1000 normalized screenshot coordinates."},"start_coordinate":{"type":"array","items":{"type":"number"},"minItems":2,"maxItems":2},"end_coordinate":{"type":"array","items":{"type":"number"},"minItems":2,"maxItems":2},"duration_ms":{"type":"integer","minimum":100,"maximum":3000},"text":{"type":"string"},"direction":{"type":"string","enum":["up","down","left","right"]},"app_name":{"type":"string"},"observed_evidence":{"type":"string"},"ui_tree_reference":{"type":"string","description":"When Recovery supplied a UI Tree, cite the visible label or resource-id supporting this action."},"reason":{"type":"string"}},"required":["action"]}}}
 </tools>
+
+Use long_press only when the UI requires a press-and-hold gesture. Use drag only
+when an item or slider must move between two visible points. Use answer only
+when the task explicitly asks an information question and the answer is already
+supported by visible evidence; answer does not touch the screen.
+When Recovery supplied accessibility elements, ground the new action in one
+visible element and set ui_tree_reference to its label or resource-id. If the
+Tree offers no new evidence, do not invent a random alternative.
 
 Return exactly one tool call and no other text:
 <tool_call>
@@ -426,6 +434,17 @@ def parse_androidworld_actor_output(
             # prompt asks for OPEN_APP.  The explicit function and app_name
             # make this a protocol alias, not a guessed Agent action.
             kind = "OPEN_APP"
+        if (
+            allow_v22_actions
+            and kind == "SWIPE"
+            and payload.get("start_coordinate") is not None
+            and payload.get("end_coordinate") is not None
+            and not _normalize_swipe_direction(payload.get("direction"))
+        ):
+            # GUI-Plus sometimes names an explicit point-to-point gesture
+            # "swipe". Preserve its exact start/end/duration semantics through
+            # the V2.2 DRAG contract instead of guessing a coarse direction.
+            kind = "DRAG"
         reason = str(payload.get("reason", ""))
         subgoal = str(payload.get("subgoal", "")).strip()
         expected_outcome = str(payload.get("expected_outcome", ""))
@@ -434,25 +453,59 @@ def parse_androidworld_actor_output(
             enabled=allow_v22_actions,
         )
         if kind == "CLICK":
-            coordinate = payload["coordinate"]
-            if not isinstance(coordinate, list) or len(coordinate) != 2:
-                raise ValueError("CLICK coordinate must be a two-item list")
-            x, y = coordinate
-            if isinstance(x, bool) or isinstance(y, bool) or not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
-                raise ValueError("CLICK coordinate values must be numeric")
-            width, height = image_size
-            if 0 <= x <= 1000 and 0 <= y <= 1000:
-                point = [round(x * (width - 1) / 1000), round(y * (height - 1) / 1000)]
-                coordinate_space = "normalized_1000"
-            elif 0 <= x < width and 0 <= y < height:
-                point = [round(x), round(y)]
-                coordinate_space = "image_pixels"
-            else:
-                raise ValueError("CLICK coordinate is neither normalized [0, 1000] nor inside the image")
+            point, coordinate_space = _parse_action_point(
+                payload.get("coordinate"), image_size, action_name="CLICK"
+            )
             action = Action(
                 ActionType.CLICK_POINT,
                 _with_subgoal(
                     {"point": point, "coordinate_space": coordinate_space},
+                    subgoal,
+                    completion_evidence,
+                ),
+                reason,
+                expected_outcome,
+                source="androidworld_gui_plus",
+            )
+        elif kind == "LONG_PRESS" and allow_v22_actions:
+            point, coordinate_space = _parse_action_point(
+                payload.get("coordinate"), image_size, action_name="LONG_PRESS"
+            )
+            action = Action(
+                ActionType.LONG_PRESS,
+                _with_subgoal(
+                    {"point": point, "coordinate_space": coordinate_space},
+                    subgoal,
+                    completion_evidence,
+                ),
+                reason,
+                expected_outcome,
+                source="androidworld_gui_plus",
+            )
+        elif kind == "DRAG" and allow_v22_actions:
+            start, start_space = _parse_action_point(
+                payload.get("start_coordinate"), image_size, action_name="DRAG start"
+            )
+            end, end_space = _parse_action_point(
+                payload.get("end_coordinate"), image_size, action_name="DRAG end"
+            )
+            if start == end:
+                raise ValueError("DRAG start and end coordinates must differ")
+            duration_ms = payload.get("duration_ms", 500)
+            if isinstance(duration_ms, bool) or not isinstance(duration_ms, (int, float)):
+                raise ValueError("DRAG duration_ms must be numeric")
+            duration_ms = round(duration_ms)
+            if not 100 <= duration_ms <= 3000:
+                raise ValueError("DRAG duration_ms must be between 100 and 3000")
+            action = Action(
+                ActionType.DRAG,
+                _with_subgoal(
+                    {
+                        "start_point": start,
+                        "end_point": end,
+                        "duration_ms": duration_ms,
+                        "coordinate_space": f"{start_space}->{end_space}",
+                    },
                     subgoal,
                     completion_evidence,
                 ),
@@ -467,6 +520,19 @@ def parse_androidworld_actor_output(
             action = Action(
                 ActionType.TYPE_TEXT,
                 _with_subgoal({"text": text}, subgoal, completion_evidence),
+                reason,
+                expected_outcome,
+                source="androidworld_gui_plus",
+            )
+        elif kind == "ANSWER" and allow_v22_actions:
+            text = payload.get("text")
+            if not isinstance(text, str) or not text.strip():
+                raise ValueError("ANSWER requires non-empty text")
+            action = Action(
+                ActionType.ANSWER,
+                _with_subgoal(
+                    {"text": text.strip()}, subgoal, completion_evidence
+                ),
                 reason,
                 expected_outcome,
                 source="androidworld_gui_plus",
@@ -523,11 +589,15 @@ def parse_androidworld_actor_output(
                 expected_outcome,
                 source="androidworld_gui_plus",
             )
+        elif kind in {"LONG_PRESS", "DRAG", "ANSWER"}:
+            raise ValueError(f"unsupported action capability {kind}")
         else:
             raise ValueError(f"unknown action {kind}")
     except (KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
         if not (raw_output or "").strip():
             error_kind = ErrorKind.EMPTY_OUTPUT
+        elif "unsupported action capability" in str(exc):
+            error_kind = ErrorKind.UNSUPPORTED_ACTION_CAPABILITY
         elif "unknown action" in str(exc):
             error_kind = ErrorKind.UNKNOWN_ACTION
         else:
@@ -537,7 +607,39 @@ def parse_androidworld_actor_output(
             message=f"Invalid AndroidWorld Actor output: {exc}",
             raw_output=raw_output,
         )
+    tree_reference = payload.get("ui_tree_reference")
+    if isinstance(tree_reference, str) and tree_reference.strip():
+        action.parameters["ui_tree_reference"] = tree_reference.strip()
     return ParseResult(action=action, raw_output=raw_output)
+
+
+def _parse_action_point(
+    coordinate: Any,
+    image_size: tuple[int, int],
+    *,
+    action_name: str,
+) -> tuple[list[int], str]:
+    if not isinstance(coordinate, list) or len(coordinate) != 2:
+        raise ValueError(f"{action_name} coordinate must be a two-item list")
+    x, y = coordinate
+    if (
+        isinstance(x, bool)
+        or isinstance(y, bool)
+        or not isinstance(x, (int, float))
+        or not isinstance(y, (int, float))
+    ):
+        raise ValueError(f"{action_name} coordinate values must be numeric")
+    width, height = image_size
+    if 0 <= x <= 1000 and 0 <= y <= 1000:
+        return [
+            round(x * (width - 1) / 1000),
+            round(y * (height - 1) / 1000),
+        ], "normalized_1000"
+    if 0 <= x < width and 0 <= y < height:
+        return [round(x), round(y)], "image_pixels"
+    raise ValueError(
+        f"{action_name} coordinate is neither normalized [0, 1000] nor inside the image"
+    )
 
 
 def _context_text(request: AndroidWorldActorRequest) -> str:

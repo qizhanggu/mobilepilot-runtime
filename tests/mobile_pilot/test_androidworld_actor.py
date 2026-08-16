@@ -229,6 +229,64 @@ def test_classifies_empty_and_unknown_outputs_for_failure_taxonomy():
     assert unknown.error_kind is ErrorKind.UNKNOWN_ACTION
 
 
+def test_v22_parses_bounded_long_press_drag_and_answer_actions():
+    long_press = parse_androidworld_actor_output(
+        '{"action":"LONG_PRESS","coordinate":[500,250]}',
+        (1080, 2400),
+        allow_v22_actions=True,
+    )
+    drag = parse_androidworld_actor_output(
+        '{"action":"DRAG","start_coordinate":[100,200],'
+        '"end_coordinate":[900,800],"duration_ms":750}',
+        (1080, 2400),
+        allow_v22_actions=True,
+    )
+    answer = parse_androidworld_actor_output(
+        '{"action":"ANSWER","text":"42"}',
+        (1080, 2400),
+        allow_v22_actions=True,
+    )
+
+    assert long_press.action.type is ActionType.LONG_PRESS
+    assert long_press.action.parameters["point"] == [540, 600]
+    assert drag.action.type is ActionType.DRAG
+    assert drag.action.parameters["start_point"] == [108, 480]
+    assert drag.action.parameters["end_point"] == [971, 1919]
+    assert drag.action.parameters["duration_ms"] == 750
+    assert answer.action.type is ActionType.ANSWER
+    assert answer.action.parameters["text"] == "42"
+
+
+def test_v22_semantic_actions_are_version_gated_and_not_misclassified_as_json_errors():
+    unsupported = parse_androidworld_actor_output(
+        '{"action":"ANSWER","text":"visible answer"}', (1080, 2400)
+    )
+    invalid_drag = parse_androidworld_actor_output(
+        '{"action":"DRAG","start_coordinate":[100,100],'
+        '"end_coordinate":[100,100]}',
+        (1080, 2400),
+        allow_v22_actions=True,
+    )
+
+    assert unsupported.error_kind is ErrorKind.UNSUPPORTED_ACTION_CAPABILITY
+    assert invalid_drag.error_kind is ErrorKind.PARSE_ERROR
+
+
+def test_v22_normalizes_explicit_point_to_point_swipe_as_drag_without_guessing():
+    result = parse_androidworld_actor_output(
+        '{"action":"SWIPE","start_coordinate":[500,850],'
+        '"end_coordinate":[500,150],"duration_ms":800}',
+        (1080, 2400),
+        allow_v22_actions=True,
+    )
+
+    assert result.is_success
+    assert result.action.type is ActionType.DRAG
+    assert result.action.parameters["start_point"] == [540, 2039]
+    assert result.action.parameters["end_point"] == [540, 360]
+    assert result.action.parameters["duration_ms"] == 800
+
+
 def test_v2_preserves_actor_subgoal_and_expected_outcome_for_runtime_state():
     result = parse_androidworld_actor_output(
         '{"action":"CLICK","coordinate":[500,500],'

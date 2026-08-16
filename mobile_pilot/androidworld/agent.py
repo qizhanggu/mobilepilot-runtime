@@ -169,6 +169,8 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
 
         if not decision.result.is_success:
             self._recent_failure = decision.result.message
+            if decision.result.error_kind is ErrorKind.UNSUPPORTED_ACTION_CAPABILITY:
+                return self._finish("unsupported_action_capability")
             return self._finish("invalid_actor_output")
 
         action = decision.result.action
@@ -179,7 +181,43 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
             )
             return self._finish("invalid_ui_tree_request")
         if tree_use is not None:
-            self._record_tree_decision(tree_use, action)
+            tree_grounded = self._record_tree_decision(tree_use, action, screen)
+            if (
+                self._runtime_version == "v2.2"
+                and self._recovery.active is not None
+                and not tree_grounded
+            ):
+                episode = self._recovery.active
+                task_grounding = _task_grounded_recovery_action(
+                    action,
+                    goal=self._goal,
+                    active_subgoal=self._subgoals.active_goal,
+                    completed_subgoals=self._subgoals.completed_goals,
+                )
+                self._trace.write(
+                    "agent_recovery_replan",
+                    step=self._step_index,
+                    recovery_id=episode.recovery_id,
+                    changed_action=(
+                        not actions_are_similar(action, episode.blocked_action)
+                    ),
+                    candidate_action=action_signature(action),
+                    blocked_action=action_signature(episode.blocked_action),
+                    new_evidence=tree_use.get("new_evidence", ""),
+                    chosen_ui_element=tree_use.get("chosen_ui_element"),
+                    result=(
+                        "task_grounded_fallback"
+                        if task_grounding
+                        else "insufficient_new_evidence"
+                    ),
+                    reason=(
+                        task_grounding
+                        or "Recovery action was not grounded in the supplied UI Tree."
+                    ),
+                )
+                if not task_grounding:
+                    self._progress.recent_failure = "insufficient_new_evidence"
+                    return self._finish("insufficient_new_evidence")
 
         if (
             self._runtime_version == "v2.1"
@@ -366,6 +404,18 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
             )
             if subgoal_result is not None:
                 return subgoal_result
+            if action.type is ActionType.ANSWER:
+                # ANSWER writes AndroidWorld's official interaction cache and
+                # intentionally leaves the screenshot unchanged. Let the
+                # benchmark judge it before visual loop logic can intervene.
+                return AgentInteractionResult(
+                    done=False,
+                    data={
+                        "reason": "answer_submitted_for_official_reward",
+                        "steps": self._step_index,
+                        "runtime_version": self._runtime_version,
+                    },
+                )
 
         if self._runtime_version == "v1" and self._last_verifier == "screen_unchanged" and action.type is not ActionType.WAIT:
             wait = Action(ActionType.WAIT, source="generic_recovery")
@@ -545,7 +595,7 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
             )
             used_tree = True
             if tree_use is not None:
-                self._record_tree_decision(tree_use, action)
+                self._record_tree_decision(tree_use, action, verification_screen)
             matched, evidence = checkpoint_evidence_matches(checkpoint, verification_screen)
 
         verifier_decision = "deterministic_confirmed" if matched else ""
@@ -717,7 +767,7 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
             if self._subgoals.active_evidence
             else ""
         )
-        decision = call(
+        manager_request = dict(
             image=image,
             task_goal=self._goal,
             completed_subgoals=tuple(self._subgoals.completed_goals),
@@ -730,19 +780,73 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
             package_activity=screen.package_activity,
             visible_ui_text=screen.verification_texts,
         )
+        decision = call(**manager_request)
         outcome = "invalid_ignored"
         manager_message = decision.message
+        regeneration_attempt = 0
         if decision.is_success and decision.evidence is not None:
             already_matched, current_evidence = completion_evidence_matches(
                 decision.evidence,
                 screen,
             )
             if already_matched is True:
-                outcome = "invalid_already_satisfied"
-                manager_message = (
+                rejected_message = (
                     "Proposed evidence was already satisfied before any action: "
                     + current_evidence
                 )
+                self._trace.write(
+                    "subgoal_manager",
+                    step=self._step_index,
+                    trigger=trigger,
+                    outcome="invalid_already_satisfied_regenerating",
+                    proposed_subgoal=decision.subgoal,
+                    proposed_evidence={
+                        "kind": decision.evidence.kind,
+                        "value": decision.evidence.value,
+                    },
+                    reason=decision.reason,
+                    message=rejected_message,
+                    raw_response=decision.raw_output,
+                    metrics=asdict(decision.metrics),
+                    frozen_state=self._subgoals.snapshot(),
+                    action_executed=False,
+                    lifecycle_owned_by_runtime=True,
+                    regeneration_attempt=0,
+                )
+                regeneration_attempt = 1
+                decision = call(
+                    **manager_request,
+                    rejected_evidence_feedback=(
+                        rejected_message
+                        + ". Provide one different postcondition that is not "
+                        "already visible; do not repeat the rejected evidence."
+                    ),
+                )
+                manager_message = decision.message
+                if decision.is_success and decision.evidence is not None:
+                    already_matched, current_evidence = completion_evidence_matches(
+                        decision.evidence,
+                        screen,
+                    )
+                    if already_matched is True:
+                        outcome = "invalid_already_satisfied"
+                        manager_message = (
+                            "Regenerated evidence was also already satisfied before "
+                            "any action: " + current_evidence
+                        )
+                    else:
+                        outcome = self._subgoals.accept_proposal(
+                            decision.subgoal,
+                            decision.evidence,
+                            allow_revision=self._subgoal_revision_pending,
+                            revision_reason=(
+                                self._recovery.active.trigger
+                                if self._recovery.active
+                                else ""
+                            ),
+                        )
+                else:
+                    outcome = "invalid_regeneration_failed"
             else:
                 outcome = self._subgoals.accept_proposal(
                     decision.subgoal,
@@ -783,6 +887,7 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
             frozen_state=self._subgoals.snapshot(),
             action_executed=False,
             lifecycle_owned_by_runtime=True,
+            regeneration_attempt=regeneration_attempt,
         )
 
     def _handle_subgoal_completion_proposal(
@@ -915,11 +1020,19 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
             action=action_signature(action),
         )
         if matched is True:
-            self._confirm_active_subgoal(
+            confirmed = self._confirm_active_subgoal(
                 source="deterministic",
                 evidence=deterministic_evidence,
             )
-            return None
+            return AgentInteractionResult(
+                done=False,
+                data={
+                    "reason": "subgoal_confirmed",
+                    "subgoal": confirmed,
+                    "steps": self._step_index,
+                    "runtime_version": self._runtime_version,
+                },
+            )
 
         predicted_unchanged = self._progress.unchanged_streak + (
             1
@@ -953,11 +1066,19 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
         if decision is None:
             return None
         if decision.verdict == "completed" and matched is None:
-            self._confirm_active_subgoal(
+            confirmed = self._confirm_active_subgoal(
                 source="vlm_progress_verifier",
                 evidence=decision.evidence,
             )
-            return None
+            return AgentInteractionResult(
+                done=False,
+                data={
+                    "reason": "subgoal_confirmed",
+                    "subgoal": confirmed,
+                    "steps": self._step_index,
+                    "runtime_version": self._runtime_version,
+                },
+            )
         if decision.verdict in {"stalled", "regressed"}:
             recovery_trigger = f"progress_verifier_{decision.verdict}"
             self._progress.current_blocker = recovery_trigger
@@ -1044,6 +1165,7 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
         self._progress.current_subgoal = ""
         self._progress.current_blocker = ""
         self._progress.next_verification = "propose the next useful subgoal or whole-task completion"
+        self._progress.mark_subgoal_progress()
         self._trace.write(
             "subgoal_completed",
             step=self._step_index,
@@ -1139,6 +1261,8 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
                     tree_use_id=tree_use["tree_use_id"],
                     trigger_reason=tree_use["trigger_reason"],
                     changed_action=tree_use.get("changed_action"),
+                    new_evidence=tree_use.get("new_evidence", ""),
+                    chosen_ui_element=tree_use.get("chosen_ui_element"),
                     official_success_after_use=full_success,
                 )
             self._open_tree_uses.clear()
@@ -1307,6 +1431,17 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
         failed: AndroidWorldActorDecision,
         screen: ScreenState,
     ) -> tuple[Any, ScreenState, AndroidWorldActorDecision, dict[str, Any] | None] | None:
+        if failed.result.error_kind is ErrorKind.UNSUPPORTED_ACTION_CAPABILITY:
+            self._trace.write(
+                "protocol_guard",
+                step=self._step_index,
+                strategy="structured_retry",
+                outcome="not_attempted_for_semantic_capability_gap",
+                original_error_kind=ErrorKind.UNSUPPORTED_ACTION_CAPABILITY.value,
+                original_error=failed.result.message,
+                action_executed_before_retry=False,
+            )
+            return None
         if self._protocol_retry_used:
             self._trace.write(
                 "protocol_guard",
@@ -1473,7 +1608,8 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
         self,
         tree_use: dict[str, Any],
         action: Action,
-    ) -> None:
+        screen: ScreenState,
+    ) -> bool:
         blocked_action = (
             self._recovery.active.blocked_action
             if self._recovery.active
@@ -1484,15 +1620,23 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
             if blocked_action is None
             else not actions_are_similar(action, blocked_action)
         )
+        chosen_element, new_evidence = _tree_grounding(screen, action)
         tree_use["changed_action"] = changed
+        tree_use["new_evidence"] = new_evidence
+        tree_use["chosen_ui_element"] = chosen_element
         self._trace.write(
             "ui_tree_decision",
             step=self._step_index,
             tree_use_id=tree_use["tree_use_id"],
             trigger_reason=tree_use["trigger_reason"],
             action=action.type.value,
+            blocked_action=(action_signature(blocked_action) if blocked_action else ""),
+            new_evidence=new_evidence,
+            chosen_ui_element=chosen_element,
             changed_action=changed,
+            result="grounded" if chosen_element else "insufficient_new_evidence",
         )
+        return chosen_element is not None
 
     def _begin_recovery(self, trigger: str, *, blocked_action: Action) -> bool:
         previous = self._recovery.active
@@ -1553,21 +1697,25 @@ class MobilePilotAndroidWorldAgent(EnvironmentInteractingAgent):
 
 
 def _bounds_block(action: Action, image_size: tuple[int, int]) -> str:
-    if action.type is not ActionType.CLICK_POINT:
+    if action.type not in {ActionType.CLICK_POINT, ActionType.LONG_PRESS, ActionType.DRAG}:
         return ""
-    point = action.parameters.get("point", [])
-    if not isinstance(point, list) or len(point) != 2:
-        return "CLICK_POINT requires a valid point"
-    x, y = point
     width, height = image_size
-    if not isinstance(x, int) or not isinstance(y, int) or not (0 <= x < width and 0 <= y < height):
-        return "candidate point is outside the current screenshot"
+    keys = ("start_point", "end_point") if action.type is ActionType.DRAG else ("point",)
+    for key in keys:
+        point = action.parameters.get(key, [])
+        if not isinstance(point, list) or len(point) != 2:
+            return f"{action.type.value} requires a valid {key}"
+        x, y = point
+        if not isinstance(x, int) or not isinstance(y, int) or not (0 <= x < width and 0 <= y < height):
+            return f"{action.type.value} {key} is outside the current screenshot"
+    if action.type is ActionType.DRAG and action.parameters.get("start_point") == action.parameters.get("end_point"):
+        return "DRAG start_point and end_point must differ"
     return ""
 
 
 def _summary(action: Action) -> str:
-    if action.type is ActionType.TYPE_TEXT:
-        return "TYPE[text omitted]"
+    if action.type in {ActionType.TYPE_TEXT, ActionType.ANSWER}:
+        return f"{action.type.value}[text omitted]"
     return action.type.value
 
 
@@ -1609,3 +1757,88 @@ def _ui_tree_summary(screen: ScreenState) -> dict[str, Any]:
         "editable_count": sum(item.editable for item in screen.elements),
         "sample_labels": labels,
     }
+
+
+def _tree_grounding(
+    screen: ScreenState,
+    action: Action,
+) -> tuple[dict[str, Any] | None, str]:
+    """Find deterministic Tree evidence for one Recovery action."""
+    reference = str(action.parameters.get("ui_tree_reference", "")).strip()
+    normalized_reference = reference.casefold()
+    candidates = list(screen.elements)
+    chosen = None
+    if normalized_reference:
+        for element in candidates:
+            searchable = " | ".join(
+                [
+                    element.text,
+                    element.content_description,
+                    element.resource_id,
+                    element.class_name,
+                ]
+            ).casefold()
+            if normalized_reference in searchable:
+                chosen = element
+                break
+    if chosen is None:
+        point_keys = (
+            ("end_point", "start_point")
+            if action.type is ActionType.DRAG
+            else ("point",)
+            if action.type in {ActionType.CLICK_POINT, ActionType.LONG_PRESS}
+            else ()
+        )
+        for key in point_keys:
+            point = action.parameters.get(key)
+            if not isinstance(point, (list, tuple)) or len(point) != 2:
+                continue
+            x, y = point
+            chosen = next(
+                (
+                    element
+                    for element in candidates
+                    if element.bounds[0] <= x <= element.bounds[2]
+                    and element.bounds[1] <= y <= element.bounds[3]
+                ),
+                None,
+            )
+            if chosen is not None:
+                break
+    if chosen is None and action.type is ActionType.TYPE_TEXT:
+        editable = [element for element in candidates if element.editable]
+        if len(editable) == 1:
+            chosen = editable[0]
+    if chosen is None:
+        return None, reference or "UI Tree supplied no element supporting the candidate action"
+    label = chosen.text or chosen.content_description or chosen.resource_id
+    return {
+        "label": label,
+        "resource_id": chosen.resource_id,
+        "class_name": chosen.class_name,
+        "bounds": list(chosen.bounds),
+    }, reference or f"coordinate/editable match: {label or chosen.class_name}"
+
+
+def _task_grounded_recovery_action(
+    action: Action,
+    *,
+    goal: str,
+    active_subgoal: str,
+    completed_subgoals: list[str],
+) -> str:
+    """Allow only a named-app fallback when Tree evidence is genuinely absent."""
+    if action.type is not ActionType.OPEN_APP:
+        return ""
+    app_name = str(action.parameters.get("app_name", "")).strip().casefold()
+    if len(app_name) < 3:
+        return ""
+    runtime_text = " | ".join(
+        [goal, active_subgoal, *completed_subgoals]
+    ).casefold()
+    if app_name not in runtime_text:
+        return ""
+    return (
+        f"UI Tree supplied insufficient new evidence; OPEN_APP[{app_name}] is "
+        "instead grounded by the frozen task/subgoal state."
+    )

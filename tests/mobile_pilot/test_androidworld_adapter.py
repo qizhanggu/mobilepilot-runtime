@@ -16,6 +16,8 @@ from mobile_pilot.core import Action, ActionType
         (Action(ActionType.PRESS_BACK), {"action_type": "navigate_back"}),
         (Action(ActionType.OPEN_APP, {"app_name": "Clock"}), {"action_type": "open_app", "app_name": "Clock"}),
         (Action(ActionType.WAIT), {"action_type": "wait"}),
+        (Action(ActionType.LONG_PRESS, {"point": [10, 20]}), {"action_type": "long_press", "x": 10, "y": 20}),
+        (Action(ActionType.ANSWER, {"text": "42"}), {"action_type": "answer", "text": "42"}),
     ],
 )
 def test_maps_generic_actions_without_importing_androidworld(action, expected):
@@ -33,6 +35,28 @@ def test_propose_complete_is_not_local_success():
 def test_open_app_normalizes_display_name_before_androidworld_mapping():
     mapped = AndroidWorldAdapter.map_action(Action(ActionType.OPEN_APP, {"app_name": "The Clock"}))
     assert mapped.payload == {"action_type": "open_app", "app_name": "Clock"}
+
+
+def test_maps_point_drag_to_auditable_androidworld_adb_payload():
+    mapped = AndroidWorldAdapter.map_action(
+        Action(
+            ActionType.DRAG,
+            {
+                "start_point": [10, 20],
+                "end_point": [30, 40],
+                "duration_ms": 600,
+            },
+        )
+    )
+
+    assert mapped.payload == {
+        "action_type": "mobilepilot_drag",
+        "start_x": 10,
+        "start_y": 20,
+        "end_x": 30,
+        "end_y": 40,
+        "duration_ms": 600,
+    }
 
 
 def test_observe_uses_or_omits_accessibility_elements_by_mode():

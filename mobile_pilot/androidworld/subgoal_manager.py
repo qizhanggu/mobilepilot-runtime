@@ -34,8 +34,13 @@ Choose one completion evidence kind:
 Prefer deterministic evidence when it is reliable. Do not guess an Android
 package name from a human app label; use ui_text or visual_state instead.
 Evidence describes the state after the subgoal is complete, never the action
-used to reach it. Propose useful new progress, not a state already satisfied in
-the current screenshot. Do not claim that the whole task is complete. During
+used to reach it. It must be a postcondition newly observable after progress,
+not the label of the control to press. For example, if "Stopwatch" is already
+visible as a tab, do not use that same text as evidence for entering the
+Stopwatch page; use a page-specific timer control or a precise visual state.
+Propose useful new progress, not a state already satisfied in the current
+screenshot. If Runtime supplies rejected_evidence_feedback, replace that
+evidence with a genuinely new postcondition. Do not claim that the whole task is complete. During
 recovery, revise the current subgoal only when the supplied failure makes it
 unsuitable.
 
@@ -118,6 +123,7 @@ class QwenSubgoalManager:
         recovery_reason: str = "",
         package_activity: str = "",
         visible_ui_text: Iterable[str] = (),
+        rejected_evidence_feedback: str = "",
     ) -> SubgoalManagerDecision:
         if not self._api_key or not self._base_url:
             return self._failed("Subgoal Manager API credentials are not configured.")
@@ -130,6 +136,7 @@ class QwenSubgoalManager:
             "recovery_reason": recovery_reason,
             "package_activity": package_activity,
             "visible_ui_text": list(visible_ui_text)[:40],
+            "rejected_evidence_feedback": rejected_evidence_feedback,
         }
         started = time.perf_counter()
         try:

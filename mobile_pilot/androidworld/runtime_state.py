@@ -9,7 +9,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 import hashlib
+import re
 from typing import Any, Iterable
+import unicodedata
 
 from mobile_pilot.core import Action, ActionType
 from mobile_pilot.perception import ScreenState
@@ -276,6 +278,13 @@ class RuntimeProgress:
             return "revisited_same_screen"
         return ""
 
+    def mark_subgoal_progress(self) -> None:
+        """Start the next subgoal without leaking the old stall/loop state."""
+        self.unchanged_streak = 0
+        self.current_blocker = ""
+        self.recent_failure = ""
+        self.screen_fingerprints.clear()
+
 
 @dataclass
 class RecoveryEpisode:
@@ -363,7 +372,12 @@ def classify_screen_change(before: ScreenState, after: ScreenState) -> tuple[str
             else None
         ),
     }
-    if before_exact == after_exact:
+    semantic_changed = bool(
+        before.semantic_fingerprint
+        and after.semantic_fingerprint
+        and before.semantic_fingerprint != after.semantic_fingerprint
+    )
+    if before_exact == after_exact and not semantic_changed:
         return SCREEN_EXACTLY_UNCHANGED, details
     if (
         before.package_activity
@@ -371,6 +385,8 @@ def classify_screen_change(before: ScreenState, after: ScreenState) -> tuple[str
         and before.package_activity != after.package_activity
     ):
         return SCREEN_CONTEXT_CHANGE, details
+    if semantic_changed:
+        return SCREEN_MEANINGFUL_CHANGE, details
     if distance is not None and distance <= 0.035:
         return SCREEN_VISUALLY_SIMILAR, details
     return SCREEN_MEANINGFUL_CHANGE, details
@@ -439,29 +455,55 @@ def completion_evidence_matches(
             ]
         if not haystacks:
             return None, "no deterministic UI text signal is available"
-        matched = any(needle in value.casefold() for value in haystacks)
+        normalized_needle = _normalize_ui_text(evidence.value)
+        compact_needle = _compact_ui_text(evidence.value)
+        matched = any(
+            normalized_needle in _normalize_ui_text(value)
+            or (
+                len(compact_needle) >= 6
+                and compact_needle in _compact_ui_text(value)
+            )
+            for value in haystacks
+        )
         return matched, f"searched {len(haystacks)} visible UI text records"
     if evidence.kind == "visual_state":
         return None, "visual_state requires the event-triggered VLM Verifier"
     return False, f"unsupported completion evidence kind: {evidence.kind}"
 
 
+def _normalize_ui_text(value: str) -> str:
+    normalized = unicodedata.normalize("NFKC", value).casefold()
+    return " ".join(normalized.split())
+
+
+def _compact_ui_text(value: str) -> str:
+    """Ignore presentation punctuation for stable values such as phone numbers."""
+    return re.sub(r"[^\w]", "", _normalize_ui_text(value), flags=re.UNICODE)
+
+
 def progress_summary(action: Action) -> str:
     """Describe progress without copying typed user data into short-term memory."""
     if action.type is ActionType.TYPE_TEXT:
         return "TYPE_TEXT[text omitted]"
+    if action.type is ActionType.ANSWER:
+        return "ANSWER[text omitted]"
     if action.type is ActionType.OPEN_APP:
         return f"OPEN_APP[{action.parameters.get('app_name', '')}]"
     if action.type in {ActionType.SWIPE, ActionType.SCROLL}:
         return f"{action.type.value}[{action.parameters.get('direction', '')}]"
-    if action.type is ActionType.CLICK_POINT:
-        return f"CLICK_POINT[{_point_bucket(action)}]"
+    if action.type in {ActionType.CLICK_POINT, ActionType.LONG_PRESS}:
+        return f"{action.type.value}[{_point_bucket(action)}]"
+    if action.type is ActionType.DRAG:
+        return f"DRAG[{_drag_bucket(action)}]"
     return action.type.value
 
 
 def default_expected_outcome(action: Action) -> str:
     expectations = {
         ActionType.CLICK_POINT: "the tapped control should visibly respond",
+        ActionType.LONG_PRESS: "the pressed item should expose its hold interaction",
+        ActionType.DRAG: "the item or slider should move to the intended position",
+        ActionType.ANSWER: "AndroidWorld should receive the answer for official judging",
         ActionType.TYPE_TEXT: "the intended field should show the entered text",
         ActionType.SWIPE: "the visible page region should move",
         ActionType.SCROLL: "the visible page region should move",
@@ -473,16 +515,18 @@ def default_expected_outcome(action: Action) -> str:
 
 
 def action_signature(action: Action) -> str:
-    if action.type is ActionType.TYPE_TEXT:
+    if action.type in {ActionType.TYPE_TEXT, ActionType.ANSWER}:
         text = str(action.parameters.get("text", ""))
         digest = hashlib.sha256(text.encode("utf-8")).hexdigest()[:10]
-        return f"TYPE_TEXT:{digest}"
+        return f"{action.type.value}:{digest}"
     if action.type is ActionType.OPEN_APP:
         return f"OPEN_APP:{str(action.parameters.get('app_name', '')).strip().lower()}"
     if action.type in {ActionType.SWIPE, ActionType.SCROLL}:
         return f"{action.type.value}:{action.parameters.get('direction', '')}"
-    if action.type is ActionType.CLICK_POINT:
-        return f"CLICK_POINT:{_point_bucket(action)}"
+    if action.type in {ActionType.CLICK_POINT, ActionType.LONG_PRESS}:
+        return f"{action.type.value}:{_point_bucket(action)}"
+    if action.type is ActionType.DRAG:
+        return f"DRAG:{_drag_bucket(action)}"
     return action.type.value
 
 
@@ -498,3 +542,9 @@ def _point_bucket(action: Action) -> str:
     if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
         return "invalid"
     return f"{round(x / 80)}:{round(y / 80)}"
+
+
+def _drag_bucket(action: Action) -> str:
+    start = Action(ActionType.CLICK_POINT, {"point": action.parameters.get("start_point")})
+    end = Action(ActionType.CLICK_POINT, {"point": action.parameters.get("end_point")})
+    return f"{_point_bucket(start)}->{_point_bucket(end)}"

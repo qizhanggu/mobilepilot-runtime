@@ -106,7 +106,22 @@ class AndroidWorldAdapter:
         from android_world.env import json_action
 
         try:
-            self._env.execute_action(json_action.JSONAction(**mapped.payload))
+            if mapped.payload.get("action_type") == "mobilepilot_drag":
+                from android_world.env import adb_utils
+
+                command = adb_utils.generate_swipe_command(
+                    mapped.payload["start_x"],
+                    mapped.payload["start_y"],
+                    mapped.payload["end_x"],
+                    mapped.payload["end_y"],
+                    mapped.payload["duration_ms"],
+                )
+                response = adb_utils.issue_generic_request(command, self._env.controller)
+                status = getattr(response, "status", None)
+                if status is not None and getattr(status, "name", "OK") != "OK":
+                    raise RuntimeError(f"AndroidWorld drag ADB status was {status}")
+            else:
+                self._env.execute_action(json_action.JSONAction(**mapped.payload))
         except Exception as exc:
             return ActionResult(
                 executed=False,
@@ -129,9 +144,44 @@ class AndroidWorldAdapter:
         if action.type is ActionType.CLICK_POINT:
             x, y = _point(params)
             return MappedAndroidWorldAction({"action_type": "click", "x": x, "y": y}, False)
+        if action.type is ActionType.LONG_PRESS:
+            x, y = _point(params, action_name="LONG_PRESS")
+            return MappedAndroidWorldAction(
+                {"action_type": "long_press", "x": x, "y": y}, False
+            )
+        if action.type is ActionType.DRAG:
+            start_x, start_y = _point(
+                {"point": params.get("start_point")}, action_name="DRAG start"
+            )
+            end_x, end_y = _point(
+                {"point": params.get("end_point")}, action_name="DRAG end"
+            )
+            if (start_x, start_y) == (end_x, end_y):
+                raise ValueError("DRAG start and end points must differ")
+            duration_ms = params.get("duration_ms", 500)
+            if isinstance(duration_ms, bool) or not isinstance(duration_ms, int):
+                raise ValueError("DRAG duration_ms must be an integer")
+            if not 100 <= duration_ms <= 3000:
+                raise ValueError("DRAG duration_ms must be between 100 and 3000")
+            return MappedAndroidWorldAction(
+                {
+                    "action_type": "mobilepilot_drag",
+                    "start_x": start_x,
+                    "start_y": start_y,
+                    "end_x": end_x,
+                    "end_y": end_y,
+                    "duration_ms": duration_ms,
+                },
+                False,
+            )
         if action.type is ActionType.TYPE_TEXT:
             text = _required_string(params, "text")
             return MappedAndroidWorldAction({"action_type": "input_text", "text": text}, False)
+        if action.type is ActionType.ANSWER:
+            text = _required_string(params, "text")
+            return MappedAndroidWorldAction(
+                {"action_type": "answer", "text": text}, False
+            )
         if action.type is ActionType.SWIPE:
             return MappedAndroidWorldAction(
                 {"action_type": "swipe", "direction": _direction(params)}, False
@@ -250,13 +300,15 @@ def _to_mobilepilot_element(raw: Any, index: int) -> UiElement:
     )
 
 
-def _point(params: dict[str, Any]) -> tuple[int, int]:
+def _point(
+    params: dict[str, Any], *, action_name: str = "CLICK_POINT"
+) -> tuple[int, int]:
     point = params.get("point")
     if not isinstance(point, (tuple, list)) or len(point) != 2:
-        raise ValueError("CLICK_POINT requires a two-item point parameter")
+        raise ValueError(f"{action_name} requires a two-item point parameter")
     x, y = point
     if isinstance(x, bool) or isinstance(y, bool) or not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
-        raise ValueError("CLICK_POINT coordinates must be numeric")
+        raise ValueError(f"{action_name} coordinates must be numeric")
     return int(x), int(y)
 
 
