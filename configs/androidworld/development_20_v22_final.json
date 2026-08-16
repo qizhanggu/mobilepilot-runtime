@@ -1,5 +1,5 @@
 {
-  "schema_version": "mobilepilot.androidworld.runtime-eval.v4",
+  "schema_version": "mobilepilot.androidworld.runtime-eval.v3",
   "evaluation_role": "development",
   "task_count": 20,
   "androidworld_commit": "3e50888527ef9f29b9157ecd537e408008bb1c85",
@@ -7,8 +7,20 @@
   "seed": 0,
   "max_action_steps": 12,
   "task_id_sha256": "6971ef742428b670bff560648dd4502d5f59a368b96d7402a0a4fdddad3d0fa8",
+  "development_task_exclusions": [
+    "OpenAppTaskEval",
+    "ClockStopWatchRunning",
+    "SystemWifiTurnOnVerify",
+    "ContactsAddContact",
+    "ClockTimerEntry",
+    "SimpleSmsSend",
+    "SimpleCalendarAddOneEventTomorrow",
+    "MarkorCreateNote",
+    "ExpenseAddSingle",
+    "MarkorCreateNoteAndSms"
+  ],
   "selection_rule": "Exposed AndroidWorld 20-task development/regression set only. Preserve the historical order and 12-step limit; results may drive final development analysis but must never be described as held-out.",
-  "variants": ["v2.2"],
+  "variants": ["v1", "v2.2"],
   "mode": "hybrid",
   "frozen_source_sha256": "246cce8ea4a7c7edac304cac267f41e9fe59945e6de3332c284db2fe650e74cb",
   "metrics": [
