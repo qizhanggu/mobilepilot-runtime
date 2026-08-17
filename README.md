@@ -14,7 +14,7 @@ An auditable runtime for multi-step Android GUI agents: structured actions, prog
 
 > **Evidence scope:** the 30 valid pairs come from a pre-frozen 36-task list. This is **not** an “AndroidWorld accuracy: 30%” claim. Four tasks had observed pre-action infrastructure failures; two Recipe tasks were not run after the shared Broccoli/FTS4 validator defect was confirmed.
 
-> **Experiment freeze:** [`mobilepilot-v2.2-final`](https://github.com/qizhanggu/mobile-gui-agent/tree/mobilepilot-v2.2-final). Current showcase work only changes presentation and documentation on top of the frozen implementation.
+> **Experiment freeze:** [`mobilepilot-v2.2-final`](https://github.com/qizhanggu/mobilepilot-runtime/tree/mobilepilot-v2.2-final). Current showcase work only changes presentation and documentation on top of the frozen implementation.
 
 ## Start here
 

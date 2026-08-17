@@ -1,14 +1,16 @@
 # GitHub Showcase 设置清单
 
-这份清单记录展示层完成后需要执行的远端元数据操作。它不属于冻结实验，也不改变 `mobilepilot-v2.2-final`。
+这份清单记录展示层完成后的远端元数据操作。它不属于冻结实验，也不改变 `mobilepilot-v2.2-final`。
+
+执行状态（2026-08-17）：仓库已改名为 `qizhanggu/mobilepilot-runtime`，默认分支已设为 `main`，About 与 Topics 已设置，本地 origin 已更新。Social Preview 等待浏览器扩展的本地文件访问权限。
 
 ## About
 
-建议 Description：
+已设置 Description：
 
 > Auditable Android GUI Agent Runtime with structured actions, progress verification, on-demand UI Tree, bounded recovery, and frozen AndroidWorld evaluation.
 
-建议 Topics：
+已设置 Topics：
 
 ```text
 androidworld
@@ -31,7 +33,7 @@ Social Preview 文件：[`docs/assets/social-preview.png`](../assets/social-prev
 2. 打开 **Settings → General → Social preview**。
 3. 上传 `docs/assets/social-preview.png`，保存后检查桌面与移动端裁剪效果。
 
-当前 `gh auth status` 显示账号 `qizhanggu` 的本地 token 已失效。因此本轮没有通过 CLI 修改任何 GitHub 元数据；执行远端步骤前需要重新登录，或直接使用已登录的 GitHub 网页。
+`gh auth status` 中的 CLI token 已失效；仓库元数据最终通过 Git Credential Manager 中已可用于 `git push` 的凭证调用 GitHub 官方 API 设置，凭证没有输出或写入文件。Social Preview 只能通过网页上传。
 
 ## Repository Rename
 
@@ -44,7 +46,7 @@ qizhanggu/mobile-gui-agent
 
 2026-08-17 的只读检查结果：目标 GitHub URL 返回 `404 Not Found`，搜索也没有发现该账号下的同名公开仓库，因此当前看起来可用。404 不能排除同名私有仓库；真正改名前仍应在已登录的 Repository name 输入框中做最后确认。
 
-当前旧 URL 搜索只命中两类预期位置：README 的冻结 tag 链接，以及本清单中的改名前后对照。Rename 完成后应把 README tag 链接改为新 slug；清单中的历史对照可以保留。
+改名后的旧 URL 搜索只保留本清单和 packaging report 中的改名前后文字对照；README 的冻结 tag 链接已更新为新 slug。
 
 执行前检查：
 
@@ -63,7 +65,7 @@ GitHub 会保留 branches、tags 和 commit history，并通常为旧仓库 URL 
 
 ## Main 与默认分支
 
-当前审计结果：`main` 没有 `rebuild/after-first-meeting` 之外的独立提交，后者相对 `main` 单向前进。Showcase packaging 在临时分支完成后，计划只做 fast-forward：
+审计确认 `main` 没有 `rebuild/after-first-meeting` 之外的独立提交，后者相对 `main` 单向前进。Showcase packaging 已按以下方式完成 fast-forward：
 
 ```bash
 git switch main
@@ -71,16 +73,17 @@ git merge --ff-only codex/showcase-packaging
 git push origin main
 ```
 
-随后在 GitHub **Settings → Branches → Default branch** 中确认 `main` 为默认分支。
+GitHub 默认分支已经设为 `main`。
 
 `rebuild/after-first-meeting` 暂时保留。未经单独确认，不删除历史分支，也不移动 `mobilepilot-v2.2-final` tag。
 
-## 推荐远端执行顺序
+## 实际远端执行顺序
 
 1. 审阅本地 packaging diff、测试与 commit graph。
 2. 提交并推送 showcase 分支，保留可回退点。
 3. Fast-forward `main` 并推送。
 4. 确认默认分支为 `main`。
 5. 将仓库改名为 `mobilepilot-runtime`，更新 origin 与 README 中的冻结 tag URL。
-6. 设置 About、Topics 与 Social Preview。
-7. 最后从未登录浏览器打开仓库，验证首页、图片、链接、tag 与 clone 命令。
+6. 设置 About 与 Topics。
+7. Social Preview 等待 Edge 扩展“允许访问文件网址”权限后上传。
+8. 最后从未登录浏览器打开仓库，验证首页、图片、链接、tag 与 clone 命令。

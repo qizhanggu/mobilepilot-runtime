@@ -1,7 +1,7 @@
 # MobilePilot Repository Showcase Packaging Report
 
 日期：2026-08-17
-状态：本地 packaging 完成；远端元数据操作待确认。
+状态：Showcase commit、`main`、仓库改名、About 与 Topics 已完成；Social Preview 等待浏览器文件权限。
 
 本轮只修改展示层、文档和 legacy 说明，没有修改 Agent 行为，没有运行 frozen benchmark，也没有移动 `mobilepilot-v2.2-final`。
 
@@ -50,26 +50,26 @@ LONG_PRESS → stuck → Tree 找到 Delete → CLICK Delete
 
 ## 7. About Description
 
-建议：
+GitHub 已设置为：
 
 > Auditable Android GUI Agent Runtime with structured actions, progress verification, on-demand UI Tree, bounded recovery, and frozen AndroidWorld evaluation.
 
 ## 8. Topics
 
-建议：`androidworld`、`android`、`gui-agent`、`mobile-agent`、`ai-agent`、`agent-runtime`、`computer-use`、`vision-language-model`、`adb`、`python`。
+GitHub 已设置：`androidworld`、`android`、`gui-agent`、`mobile-agent`、`ai-agent`、`agent-runtime`、`computer-use`、`vision-language-model`、`adb`、`python`。
 
-## 9. Repository Rename 检查
+## 9. Repository Rename 结果
 
-计划：`qizhanggu/mobile-gui-agent` → `qizhanggu/mobilepilot-runtime`。
+已完成：`qizhanggu/mobile-gui-agent` → `qizhanggu/mobilepilot-runtime`。
 
-- 2026-08-17 只读访问目标 URL 返回 `404 Not Found`，搜索未发现同名公开仓库；仍需在已登录 GitHub 中排除同名私有仓库。
-- 旧 URL 搜索只命中 README 的冻结 tag 链接和 rename 清单中的历史对照。
-- Rename 后需更新本地 origin 和 README 的 tag URL，并重新检查全部链接。
-- GitHub rename 会保留 branches、tags 与 commit history；执行后仍要显式验证冻结 tag 的 commit target。
+- 改名前通过已认证 API 确认目标 slug 不存在，包括当前账号可见的私有仓库。
+- 本地 origin 和 README 的冻结 tag URL 已更新为新 slug。
+- `main`、`rebuild/after-first-meeting`、`codex/showcase-packaging` 和冻结 tag 均保留。
+- 旧 slug 只在改名前后对照记录中保留。
 
 完整步骤见 [`github-showcase-settings.md`](github-showcase-settings.md)。
 
-## 10. Main Fast-forward 计划
+## 10. Main Fast-forward 结果
 
 审计结果：
 
@@ -78,29 +78,28 @@ merge-base: bb1a45d616e809387d62d4491deb84304bbcbd45
 main...rebuild/after-first-meeting: 0 41
 ```
 
-`main` 没有独立提交，最终开发分支单向领先 41 个提交。Packaging 提交完成后，计划让 `main` 以 `--ff-only` 前进到 showcase HEAD，不制造 merge commit。`rebuild/after-first-meeting` 暂时保留。
+`main` 没有独立提交，最终开发分支单向领先 41 个提交。Packaging commit `3d157e3` 创建后，`main` 已通过 `--ff-only` 前进并推送，没有产生 merge commit。`rebuild/after-first-meeting` 继续保留。
 
 ## 11. 验证结果
 
 - Full pytest：`186 passed, 3 warnings`；
-- Markdown link checker：仓库 58 个 Markdown 文件的本地目标全部存在；
+- Markdown link checker：仓库 59 个 Markdown 文件的本地目标全部存在；
 - 5 个 SVG 均通过 XML 解析并完成 PNG 渲染检查；
 - `social-preview.png` 为 `1280×640`；
 - stale number 搜索：`170 passed` 和 `7/20` 只出现在明确标注阶段的历史/RCA 文档；最终 README 使用当前 `186 passed` 和冻结结论；
 - `mobilepilot-v2.2-final` 仍指向 commit `c48c5fa4682fc2645315998fe169bde45e73eeef`。
 
-## 12. 仍需 GitHub UI / 远端操作
+## 12. GitHub 远端执行状态
 
-以下均未执行，等待确认：
+已完成：
 
-1. 提交并推送 showcase packaging；
+1. 提交并推送 showcase packaging commit `3d157e3`；
 2. fast-forward 并推送 `main`；
-3. 将默认分支确认/设置为 `main`；
+3. 将默认分支设置为 `main`；
 4. repository rename；
-5. 设置 About、Topics；
-6. 上传 [`social-preview.png`](../assets/social-preview.png)；
-7. 从未登录浏览器验证首页、图片、内部链接、tag 和 clone URL。
+5. 设置 About 与 Topics；
+6. 更新本地 origin。
 
-当前 `gh` 的本地 token 已失效，所以 About、Topics、Social Preview、默认分支和 rename 需要先重新认证，或在已登录的 GitHub UI 中完成；本报告没有假装这些设置已经生效。
+待完成：上传 [`social-preview.png`](../assets/social-preview.png)，以及从未登录视角核对最终首页。Edge 中的 ChatGPT 浏览器扩展需要先启用“允许访问文件网址”，否则扩展不能把本地 PNG 交给 GitHub 文件选择器。
 
 不会删除历史分支，也不会移动或重建 `mobilepilot-v2.2-final`。
