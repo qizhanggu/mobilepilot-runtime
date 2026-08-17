@@ -7,6 +7,7 @@
 | 你想了解什么 | 推荐入口 |
 | --- | --- |
 | 两分钟看懂项目 | [项目首页](../README.md) |
+| English overview | [README_EN.md](../README_EN.md) |
 | 面试时怎么讲 | [面试手册](final/interview-handbook.md) |
 | 如何演示与复现 | [Demo 与复现指南](final/demo-script.md) |
 | 代码从哪里读 | [首页 Code Map](../README.md#code-map) |

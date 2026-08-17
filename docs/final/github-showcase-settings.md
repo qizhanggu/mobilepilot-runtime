@@ -2,7 +2,7 @@
 
 这份清单记录展示层完成后的远端元数据操作。它不属于冻结实验，也不改变 `mobilepilot-v2.2-final`。
 
-执行状态（2026-08-17）：仓库已改名为 `qizhanggu/mobilepilot-runtime`，默认分支已设为 `main`，About 与 Topics 已设置，本地 origin 已更新。Social Preview 等待浏览器扩展的本地文件访问权限。
+执行状态（2026-08-17）：仓库已改名为 `qizhanggu/mobilepilot-runtime`，默认分支已设为 `main`，About、Topics 与双语 Social Preview 已设置，本地 origin 已更新。
 
 ## About
 
@@ -33,7 +33,7 @@ Social Preview 文件：[`docs/assets/social-preview.png`](../assets/social-prev
 2. 打开 **Settings → General → Social preview**。
 3. 上传 `docs/assets/social-preview.png`，保存后检查桌面与移动端裁剪效果。
 
-`gh auth status` 中的 CLI token 已失效；仓库元数据最终通过 Git Credential Manager 中已可用于 `git push` 的凭证调用 GitHub 官方 API 设置，凭证没有输出或写入文件。Social Preview 只能通过网页上传。
+`gh auth status` 中的 CLI token 已失效；仓库元数据最终通过 Git Credential Manager 中已可用于 `git push` 的凭证调用 GitHub 官方 API 设置，凭证没有输出或写入文件。Social Preview 通过已登录的 GitHub 网页上传。
 
 ## Repository Rename
 
@@ -85,5 +85,5 @@ GitHub 默认分支已经设为 `main`。
 4. 确认默认分支为 `main`。
 5. 将仓库改名为 `mobilepilot-runtime`，更新 origin 与 README 中的冻结 tag URL。
 6. 设置 About 与 Topics。
-7. Social Preview 等待 Edge 扩展“允许访问文件网址”权限后上传。
-8. 最后从未登录浏览器打开仓库，验证首页、图片、链接、tag 与 clone 命令。
+7. 开启 Edge 扩展“允许访问文件网址”权限，上传双语 Social Preview 并检查裁剪。
+8. 核对首页、图片、链接、tag 与 clone URL。

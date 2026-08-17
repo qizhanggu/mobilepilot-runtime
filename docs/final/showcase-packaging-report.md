@@ -1,13 +1,13 @@
 # MobilePilot Repository Showcase Packaging Report
 
 日期：2026-08-17
-状态：Showcase commit、`main`、仓库改名、About 与 Topics 已完成；Social Preview 等待浏览器文件权限。
+状态：Showcase、双语 README、`main`、仓库改名、About、Topics 与 Social Preview 均已完成。
 
 本轮只修改展示层、文档和 legacy 说明，没有修改 Agent 行为，没有运行 frozen benchmark，也没有移动 `mobilepilot-v2.2-final`。
 
 ## 1. README 第一屏
 
-首页现在以 **MobilePilot — Auditable Android GUI Agent Runtime** 开场，紧接英文/中文定位、核心导航、冻结结果图和可见的 scope disclosure。
+`README.md` 现在是面向国内面试场景的中文主版本，以 **MobilePilot — 可审计的 Android GUI Agent Runtime** 开场；`README_EN.md` 完整保留英文版。两边顶部可以直接切换语言，共用同一套架构与证据资产。
 
 第一屏直接展示：
 
@@ -100,6 +100,8 @@ main...rebuild/after-first-meeting: 0 41
 5. 设置 About 与 Topics；
 6. 更新本地 origin。
 
-待完成：上传 [`social-preview.png`](../assets/social-preview.png)，以及从未登录视角核对最终首页。Edge 中的 ChatGPT 浏览器扩展需要先启用“允许访问文件网址”，否则扩展不能把本地 PNG 交给 GitHub 文件选择器。
+7. 上传双语 [`social-preview.png`](../assets/social-preview.png)，并在 GitHub 设置页确认最终裁剪效果。
+
+最终封面保留英文项目名与技术定位，增加“可审计 · 可恢复 · 可冻结评测”中文价值说明；分母边界也直接写在图中。
 
 不会删除历史分支，也不会移动或重建 `mobilepilot-v2.2-final`。
