@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="520" viewBox="0 0 1600 520" role="img" aria-labelledby="title desc">
+  <title id="title">MobilePilot project journey</title>
+  <desc id="desc">A timeline from V1 protocol failures through V2 runtime controls, the negative V2.1 planner result, V2.2 verification, root cause analysis, and frozen paired evaluation.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0B1220"/><stop offset="1" stop-color="#172554"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-opacity=".25"/></filter>
+    <style>.title{font:700 34px Inter,Segoe UI,sans-serif;fill:#F8FAFC}.sub{font:400 17px Inter,Segoe UI,sans-serif;fill:#94A3B8}.h{font:700 21px Inter,Segoe UI,sans-serif;fill:#F8FAFC}.t{font:400 14px Inter,Segoe UI,sans-serif;fill:#CBD5E1}.tag{font:700 12px Inter,Segoe UI,sans-serif}</style>
+  </defs>
+  <rect width="1600" height="520" rx="28" fill="url(#bg)"/>
+  <text x="70" y="68" class="title">From “why did it stop?” to auditable recovery</text>
+  <text x="70" y="100" class="sub">The project improved by narrowing responsibility and testing hypotheses — not by stacking more modules.</text>
+  <line x1="125" y1="236" x2="1475" y2="236" stroke="#475569" stroke-width="4"/>
+  <g filter="url(#shadow)">
+    <rect x="55" y="150" width="210" height="235" rx="20" fill="#1E293B" stroke="#64748B"/>
+    <rect x="310" y="150" width="210" height="235" rx="20" fill="#1E3A5F" stroke="#60A5FA"/>
+    <rect x="565" y="150" width="210" height="235" rx="20" fill="#422006" stroke="#F59E0B"/>
+    <rect x="820" y="150" width="210" height="235" rx="20" fill="#312E81" stroke="#818CF8"/>
+    <rect x="1075" y="150" width="210" height="235" rx="20" fill="#3B0764" stroke="#C084FC"/>
+    <rect x="1330" y="150" width="215" height="235" rx="20" fill="#052E2B" stroke="#2DD4BF"/>
+  </g>
+  <g fill="#E2E8F0"><circle cx="160" cy="236" r="10"/><circle cx="415" cy="236" r="10"/><circle cx="670" cy="236" r="10"/><circle cx="925" cy="236" r="10"/><circle cx="1180" cy="236" r="10"/><circle cx="1438" cy="236" r="10"/></g>
+  <text x="80" y="190" class="h">V1</text><text x="80" y="275" class="t">Protocol failures</text><text x="80" y="299" class="t">Every-step UI Tree</text><text x="80" y="323" class="t">Model completion claims</text><rect x="80" y="344" width="135" height="24" rx="12" fill="#334155"/><text x="147" y="361" text-anchor="middle" class="tag" fill="#CBD5E1">reactive baseline</text>
+  <text x="335" y="190" class="h">V2</text><text x="335" y="275" class="t">Protocol Guard</text><text x="335" y="299" class="t">Runtime State + loops</text><text x="335" y="323" class="t">Bounded Recovery</text><rect x="335" y="344" width="132" height="24" rx="12" fill="#1D4ED8"/><text x="401" y="361" text-anchor="middle" class="tag" fill="#DBEAFE">9/20 dev</text>
+  <text x="590" y="190" class="h">V2.1</text><text x="590" y="275" class="t">Planner Checklist</text><text x="590" y="299" class="t">More frozen state</text><text x="590" y="323" class="t">No measured gain</text><rect x="590" y="344" width="142" height="24" rx="12" fill="#B45309"/><text x="661" y="361" text-anchor="middle" class="tag" fill="#FEF3C7">5/20 · negative</text>
+  <text x="845" y="190" class="h">V2.2</text><text x="845" y="275" class="t">Action-only Actor</text><text x="845" y="299" class="t">Frozen subgoals</text><text x="845" y="323" class="t">Two-layer Verifier</text><rect x="845" y="344" width="145" height="24" rx="12" fill="#4F46E5"/><text x="917" y="361" text-anchor="middle" class="tag" fill="#E0E7FF">narrower roles</text>
+  <text x="1100" y="190" class="h">Trace RCA</text><text x="1100" y="275" class="t">Action Contract gaps</text><text x="1100" y="299" class="t">State ordering</text><text x="1100" y="323" class="t">Bad postconditions</text><rect x="1100" y="344" width="135" height="24" rx="12" fill="#7E22CE"/><text x="1167" y="361" text-anchor="middle" class="tag" fill="#F3E8FF">root cause first</text>
+  <text x="1355" y="190" class="h">Frozen Eval</text><text x="1355" y="275" class="t">Pre-frozen list</text><text x="1355" y="299" class="t">30 valid pairs</text><text x="1355" y="323" class="t">Full evidence audit</text><rect x="1355" y="344" width="150" height="24" rx="12" fill="#0F766E"/><text x="1430" y="361" text-anchor="middle" class="tag" fill="#CCFBF1">0/30 → 9/30</text>
+  <text x="70" y="455" class="sub">Key lesson</text><text x="190" y="455" class="h">More modules did not automatically mean a stronger agent.</text>
+</svg>

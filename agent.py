@@ -1,4 +1,9 @@
 """
+LEGACY COMPETITION COMPATIBILITY ENTRYPOINT.
+
+The final MobilePilot runtime lives under ``mobile_pilot/``. This file remains
+at the repository root because legacy regression tests import ``agent.Agent``.
+
 GUI Agent 实现
 
 继承 BaseAgent，实现 act() 方法。

@@ -1,4 +1,10 @@
 """
+LEGACY COMPETITION COMPATIBILITY ENTRYPOINT.
+
+The final MobilePilot runtime lives under ``mobile_pilot/``. This competition
+interface is kept in place for compatibility and may be replaced by the legacy
+evaluation environment.
+
 Agent 基类和接口定义
 
 选手通过继承 BaseAgent 类来实现自己的 Agent。

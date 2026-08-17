@@ -1,4 +1,9 @@
 """
+LEGACY COMPETITION COMPATIBILITY ENTRYPOINT.
+
+The final MobilePilot runtime lives under ``mobile_pilot/``. This offline test
+runner is retained for legacy regression coverage; it is not AndroidWorld.
+
 此文件提供测试评测功能。TestRunner 负责调用 Agent 进行测试并验证结果。
 
 【重要提示】

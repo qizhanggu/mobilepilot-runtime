@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="650" viewBox="0 0 1600 650" role="img" aria-labelledby="title desc">
+  <title id="title">MobilePilot frozen paired evaluation results</title>
+  <desc id="desc">V1 versus V2.2 on 30 valid pairs from a pre-frozen 36-task list: success 0 to 9, invalid-output exits 21 to 4, UI Tree calls 209 to 49, 3 strict recovery rescues out of 25 triggers, and 186 local tests passed.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F8FAFC"/><stop offset="1" stop-color="#E0F2FE"/></linearGradient><filter id="shadow"><feDropShadow dx="0" dy="7" stdDeviation="10" flood-color="#0F172A" flood-opacity=".10"/></filter><style>.title{font:700 34px Inter,Segoe UI,sans-serif;fill:#0F172A}.sub{font:400 16px Inter,Segoe UI,sans-serif;fill:#64748B}.metric{font:700 25px Inter,Segoe UI,sans-serif;fill:#0F172A}.num{font:800 52px Inter,Segoe UI,sans-serif}.label{font:600 14px Inter,Segoe UI,sans-serif}.note{font:400 14px Inter,Segoe UI,sans-serif;fill:#475569}</style></defs>
+  <rect width="1600" height="650" rx="28" fill="url(#bg)"/>
+  <text x="70" y="70" class="title">Frozen paired evaluation</text>
+  <text x="70" y="102" class="sub">30 valid V1/V2.2 pairs from a pre-frozen 36-task list · same Actor model, seed, mode, and 16-step budget</text>
+  <g filter="url(#shadow)">
+    <rect x="70" y="145" width="340" height="355" rx="24" fill="#FFFFFF"/>
+    <rect x="440" y="145" width="340" height="355" rx="24" fill="#FFFFFF"/>
+    <rect x="810" y="145" width="340" height="355" rx="24" fill="#FFFFFF"/>
+    <rect x="1180" y="145" width="350" height="355" rx="24" fill="#FFFFFF"/>
+  </g>
+  <text x="100" y="190" class="metric">Official success</text>
+  <text x="100" y="260" class="num" fill="#94A3B8">0</text><text x="164" y="257" class="label" fill="#64748B">V1</text>
+  <text x="255" y="260" class="num" fill="#2563EB">9</text><text x="320" y="257" class="label" fill="#1D4ED8">V2.2</text>
+  <rect x="100" y="300" width="270" height="22" rx="11" fill="#E2E8F0"/><rect x="100" y="300" width="81" height="22" rx="11" fill="#3B82F6"/>
+  <text x="100" y="354" class="note">9 improved · 0 regressed</text><text x="100" y="381" class="note">21 tasks still failed in both</text>
+
+  <text x="470" y="190" class="metric">Invalid-output exits</text>
+  <text x="470" y="260" class="num" fill="#DC2626">21</text><text x="548" y="257" class="label" fill="#991B1B">V1</text>
+  <text x="628" y="260" class="num" fill="#16A34A">4</text><text x="670" y="257" class="label" fill="#15803D">V2.2</text>
+  <rect x="470" y="300" width="270" height="22" rx="11" fill="#FEE2E2"/><rect x="470" y="300" width="51" height="22" rx="11" fill="#22C55E"/>
+  <text x="470" y="354" class="note">Guard + action contract reduced</text><text x="470" y="381" class="note">mechanical early termination</text>
+
+  <text x="840" y="190" class="metric">UI Tree requests</text>
+  <text x="840" y="260" class="num" fill="#64748B">209</text><text x="946" y="257" class="label" fill="#64748B">V1</text>
+  <text x="996" y="260" class="num" fill="#7C3AED">49</text><text x="1068" y="257" class="label" fill="#6D28D9">V2.2</text>
+  <rect x="840" y="300" width="270" height="22" rx="11" fill="#E2E8F0"/><rect x="840" y="300" width="63" height="22" rx="11" fill="#8B5CF6"/>
+  <text x="840" y="354" class="note">On-demand instead of every step</text><text x="840" y="381" class="note">19 decisions changed action</text>
+
+  <text x="1210" y="190" class="metric">Bounded Recovery</text>
+  <text x="1210" y="260" class="num" fill="#EA580C">3</text><text x="1253" y="257" class="label" fill="#C2410C">strict rescues</text>
+  <text x="1210" y="315" class="num" fill="#64748B">25</text><text x="1284" y="312" class="label" fill="#64748B">triggers</text>
+  <text x="1210" y="354" class="note">Detection was easier than correction</text><text x="1210" y="381" class="note">Only trace-to-reward chains count</text>
+
+  <rect x="70" y="535" width="1460" height="74" rx="18" fill="#0F172A"/>
+  <text x="105" y="566" class="label" fill="#F8FAFC">Scope disclosure</text>
+  <text x="105" y="591" class="note" style="fill:#CBD5E1">Not “AndroidWorld accuracy: 30%”. Four tasks had observed pre-action infrastructure failures; two Recipe tasks were not run after the shared FTS4 validator defect was confirmed.</text>
+  <rect x="1372" y="552" width="130" height="38" rx="19" fill="#1E293B" stroke="#475569"/>
+  <text x="1437" y="576" text-anchor="middle" class="label" fill="#E2E8F0">186 tests</text>
+</svg>

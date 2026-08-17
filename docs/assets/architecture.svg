@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" role="img" aria-labelledby="title desc">
+  <title id="title">MobilePilot runtime architecture</title>
+  <desc id="desc">The auditable Android GUI agent loop from goal and observation through runtime state, actor, protocol guard, action execution, verification, official reward, bounded recovery, on-demand UI Tree, and JSONL trace.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#EEF2FF"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#64748B"/>
+    </marker>
+    <style>
+      .title{font:700 34px Inter,Segoe UI,sans-serif;fill:#0F172A}.subtitle{font:400 18px Inter,Segoe UI,sans-serif;fill:#64748B}
+      .box-title{font:700 20px Inter,Segoe UI,sans-serif;fill:#0F172A}.box-text{font:400 14px Inter,Segoe UI,sans-serif;fill:#475569}
+      .pill{font:600 13px Inter,Segoe UI,sans-serif}.arrow{stroke:#64748B;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1600" height="760" rx="28" fill="url(#bg)"/>
+  <text x="80" y="72" class="title">MobilePilot Runtime</text>
+  <text x="80" y="104" class="subtitle">A small control loop around an imperfect GUI model — every decision remains inspectable.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="160" width="170" height="120" rx="20" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <rect x="270" y="160" width="190" height="120" rx="20" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <rect x="490" y="160" width="200" height="120" rx="20" fill="#EEF2FF" stroke="#818CF8"/>
+    <rect x="720" y="160" width="180" height="120" rx="20" fill="#EFF6FF" stroke="#60A5FA"/>
+    <rect x="930" y="160" width="190" height="120" rx="20" fill="#ECFEFF" stroke="#22D3EE"/>
+    <rect x="1150" y="160" width="200" height="120" rx="20" fill="#F0FDFA" stroke="#2DD4BF"/>
+    <rect x="1380" y="160" width="150" height="120" rx="20" fill="#F0FDF4" stroke="#4ADE80"/>
+  </g>
+
+  <text x="155" y="205" text-anchor="middle" class="box-title">Goal</text>
+  <text x="155" y="235" text-anchor="middle" class="box-text">Whole task</text>
+  <text x="155" y="257" text-anchor="middle" class="box-text">never hidden</text>
+
+  <text x="365" y="200" text-anchor="middle" class="box-title">Observation</text>
+  <text x="365" y="230" text-anchor="middle" class="box-text">Screenshot · package</text>
+  <text x="365" y="252" text-anchor="middle" class="box-text">UI text · fingerprints</text>
+
+  <text x="590" y="198" text-anchor="middle" class="box-title">Runtime State</text>
+  <text x="590" y="228" text-anchor="middle" class="box-text">Frozen subgoal</text>
+  <text x="590" y="250" text-anchor="middle" class="box-text">progress · blocker · budget</text>
+
+  <text x="810" y="200" text-anchor="middle" class="box-title">GUI Actor</text>
+  <text x="810" y="230" text-anchor="middle" class="box-text">One next action</text>
+  <text x="810" y="252" text-anchor="middle" class="box-text">GUI-Plus</text>
+
+  <text x="1025" y="200" text-anchor="middle" class="box-title">Protocol Guard</text>
+  <text x="1025" y="230" text-anchor="middle" class="box-text">Normalize · validate</text>
+  <text x="1025" y="252" text-anchor="middle" class="box-text">one no-action retry</text>
+
+  <text x="1250" y="198" text-anchor="middle" class="box-title">Action Contract</text>
+  <text x="1250" y="228" text-anchor="middle" class="box-text">Click · Type · Long Press</text>
+  <text x="1250" y="250" text-anchor="middle" class="box-text">Drag · Answer</text>
+
+  <text x="1455" y="198" text-anchor="middle" class="box-title">Android</text>
+  <text x="1455" y="228" text-anchor="middle" class="box-text">AndroidWorld</text>
+  <text x="1455" y="250" text-anchor="middle" class="box-text">ADB</text>
+
+  <path class="arrow" d="M240 220 H262"/><path class="arrow" d="M460 220 H482"/><path class="arrow" d="M690 220 H712"/>
+  <path class="arrow" d="M900 220 H922"/><path class="arrow" d="M1120 220 H1142"/><path class="arrow" d="M1350 220 H1372"/>
+
+  <g filter="url(#shadow)">
+    <rect x="1050" y="370" width="250" height="130" rx="22" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="2"/>
+    <rect x="1340" y="370" width="190" height="130" rx="22" fill="#F0FDF4" stroke="#22C55E" stroke-width="2"/>
+    <rect x="650" y="370" width="330" height="130" rx="22" fill="#FFF7ED" stroke="#FB923C" stroke-width="2"/>
+    <rect x="300" y="370" width="280" height="130" rx="22" fill="#F5F3FF" stroke="#A78BFA" stroke-width="2"/>
+  </g>
+
+  <text x="1175" y="412" text-anchor="middle" class="box-title">Progress Verifier</text>
+  <text x="1175" y="443" text-anchor="middle" class="box-text">Deterministic signals first</text>
+  <text x="1175" y="465" text-anchor="middle" class="box-text">VLM only when uncertain</text>
+
+  <text x="1435" y="412" text-anchor="middle" class="box-title">Official Reward</text>
+  <text x="1435" y="443" text-anchor="middle" class="box-text">Only final success</text>
+  <rect x="1378" y="460" width="114" height="24" rx="12" fill="#DCFCE7"/><text x="1435" y="477" text-anchor="middle" class="pill" fill="#15803D">reward = 1</text>
+
+  <text x="815" y="410" text-anchor="middle" class="box-title">Bounded Recovery</text>
+  <text x="815" y="441" text-anchor="middle" class="box-text">Action-level → subgoal-level</text>
+  <text x="815" y="463" text-anchor="middle" class="box-text">Stop without new evidence</text>
+
+  <text x="440" y="410" text-anchor="middle" class="box-title">On-demand UI Tree</text>
+  <text x="440" y="441" text-anchor="middle" class="box-text">Only after failure, stall</text>
+  <text x="440" y="463" text-anchor="middle" class="box-text">loop, or uncertainty</text>
+
+  <path class="arrow" d="M1455 280 V362"/>
+  <path class="arrow" d="M1340 435 H1308"/>
+  <path class="arrow" d="M1050 435 H988"/>
+  <path class="arrow" d="M650 435 H588"/>
+  <path class="arrow" d="M440 370 V325 H810 V288"/>
+  <path class="arrow" d="M815 370 V325 H590 V288"/>
+
+  <rect x="70" y="590" width="1460" height="92" rx="20" fill="#0F172A"/>
+  <text x="110" y="630" class="box-title" fill="#FFFFFF">JSONL Trace</text>
+  <text x="110" y="658" class="box-text" style="fill:#CBD5E1">Actor output · protocol repair · execution · verifier evidence · Tree reason · Recovery outcome · official reward</text>
+  <rect x="1300" y="619" width="180" height="34" rx="17" fill="#1E293B" stroke="#475569"/>
+  <text x="1390" y="641" text-anchor="middle" class="pill" fill="#E2E8F0">Replayable evidence</text>
+
+  <rect x="70" y="704" width="300" height="30" rx="15" fill="#E0E7FF"/><text x="220" y="724" text-anchor="middle" class="pill" fill="#4338CA">Actor proposes · Runtime decides</text>
+  <rect x="390" y="704" width="300" height="30" rx="15" fill="#DCFCE7"/><text x="540" y="724" text-anchor="middle" class="pill" fill="#15803D">Official reward is authoritative</text>
+  <rect x="710" y="704" width="330" height="30" rx="15" fill="#FFEDD5"/><text x="875" y="724" text-anchor="middle" class="pill" fill="#C2410C">Recovery is limited and evidence-bound</text>
+</svg>
