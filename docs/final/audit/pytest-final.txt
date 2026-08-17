@@ -1,0 +1,60 @@
+git_head: 9b643077e7ce999589f44413403513bf2ce67a09
+python: 3.12.13
+pytest: 9.1.1
+command: D:\Users\Admin\Desktop\mobile-gui-agent\.local\conda\androidworld-py312\python.exe -m pytest
+elapsed_seconds: 9.678
+exit_code: 0
+workspace_before: dirty
+workspace_after: dirty
+
+--- stdout/stderr ---
+============================= test session starts =============================
+platform win32 -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0
+rootdir: D:\Users\Admin\Desktop\mobile-gui-agent
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.14.2
+collected 186 items
+
+tests\legacy\test_agent_image.py .                                       [  0%]
+tests\legacy\test_coordinate_postprocess.py ....                         [  2%]
+tests\legacy\test_output_parser.py ......                                [  5%]
+tests\mobile_pilot\evaluation\test_grid_development.py .                 [  6%]
+tests\mobile_pilot\evaluation\test_screenspot_dataset.py ..              [  7%]
+tests\mobile_pilot\evaluation\test_screenspot_evaluator.py ....          [  9%]
+tests\mobile_pilot\evaluation\test_screenspot_held_out_runner.py ..      [ 10%]
+tests\mobile_pilot\evaluation\test_screenspot_runner.py .                [ 11%]
+tests\mobile_pilot\test_androidworld_actor.py .......................... [ 25%]
+....                                                                     [ 27%]
+tests\mobile_pilot\test_androidworld_adapter.py ............             [ 33%]
+tests\mobile_pilot\test_androidworld_agent.py .......................... [ 47%]
+...                                                                      [ 49%]
+tests\mobile_pilot\test_androidworld_held_out_manifest.py ...            [ 51%]
+tests\mobile_pilot\test_androidworld_progress_verifier.py ..             [ 52%]
+tests\mobile_pilot\test_androidworld_runner_control.py .......           [ 55%]
+tests\mobile_pilot\test_androidworld_runtime_evaluation.py ............. [ 62%]
+..                                                                       [ 63%]
+tests\mobile_pilot\test_androidworld_runtime_state.py .................  [ 73%]
+tests\mobile_pilot\test_androidworld_subgoal_manager.py ...              [ 74%]
+tests\mobile_pilot\test_device_adapter.py .....                          [ 77%]
+tests\mobile_pilot\test_focused_vision_recovery.py ...                   [ 79%]
+tests\mobile_pilot\test_gui_plus_policy.py .........                     [ 83%]
+tests\mobile_pilot\test_hybrid_grounding.py ......                       [ 87%]
+tests\mobile_pilot\test_lab_task_and_trace.py ....                       [ 89%]
+tests\mobile_pilot\test_legacy_vision_policy.py ..                       [ 90%]
+tests\mobile_pilot\test_perception_and_grounding.py ....                 [ 92%]
+tests\mobile_pilot\test_phase0_legacy_compat.py ....                     [ 94%]
+tests\mobile_pilot\test_pre_action_critic.py ..                          [ 95%]
+tests\mobile_pilot\test_screen_verifier.py ..                            [ 96%]
+tests\mobile_pilot\test_uiautomator2_adapter.py ..                       [ 97%]
+tests\mobile_pilot\test_visual_matrix.py ....                            [100%]
+
+============================== warnings summary ===============================
+tests/mobile_pilot/test_androidworld_adapter.py::test_observe_uses_or_omits_accessibility_elements_by_mode
+tests/mobile_pilot/test_androidworld_adapter.py::test_observe_uses_or_omits_accessibility_elements_by_mode
+tests/mobile_pilot/test_androidworld_adapter.py::test_observe_uses_or_omits_accessibility_elements_by_mode
+  D:\Users\Admin\Desktop\mobile-gui-agent\mobile_pilot\androidworld\adapter.py:255: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+    pixels = list(content.getdata())
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 186 passed, 3 warnings in 7.16s =======================

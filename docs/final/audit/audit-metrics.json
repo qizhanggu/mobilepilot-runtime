@@ -1,0 +1,28 @@
+{
+  "paired": {
+    "both_failed": 21,
+    "both_success": 0,
+    "improved": 9,
+    "regressed": 0,
+    "v1_invalid_output": 21,
+    "v1_success": 0,
+    "v22_invalid_output": 4,
+    "v22_success": 9,
+    "valid_pairs": 30
+  },
+  "recovery": {
+    "changed_actions": 15,
+    "executed_replans": 12,
+    "insufficient_new_evidence": 11,
+    "misfires": 0,
+    "same_blocked_action": 8,
+    "strict_rescues": 3,
+    "total_recovery_episodes": 25
+  },
+  "ui_tree": {
+    "changed_action_definition": "Count ui_tree_decision events with changed_action=true. Runtime sets this by comparing normalized action similarity against the active Recovery blocked action; ui_tree_outcome duplicates are excluded.",
+    "v1_requests": 209,
+    "v22_changed_action": 19,
+    "v22_requests": 49
+  }
+}

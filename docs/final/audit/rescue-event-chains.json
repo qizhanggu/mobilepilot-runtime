@@ -1,0 +1,383 @@
+{
+  "MarkorDeleteNewestNote": {
+    "episodes": [
+      {
+        "agent_recovery_outcome": {
+          "changed_action": true,
+          "event": "agent_recovery_outcome",
+          "level": "action",
+          "misfire": false,
+          "outcome": "no_progress_before_next_recovery",
+          "recovery_id": 1,
+          "rescued": false,
+          "run_id": "ba0c3ff2a04c4f0084b06b687e8f1227",
+          "step": 5,
+          "timestamp": "2026-08-16T18:44:56.325754+00:00",
+          "trigger": "revisited_same_screen"
+        },
+        "blocked_action": "LONG_PRESS:6:15",
+        "changed_action": true,
+        "chosen_ui_element": {
+          "bounds": [
+            870,
+            138,
+            975,
+            264
+          ],
+          "class_name": "android.widget.TextView",
+          "label": "Delete",
+          "resource_id": "net.gsantner.markor:id/action_delete_selected_items"
+        },
+        "execution": {
+          "action": "CLICK_POINT",
+          "details": {
+            "androidworld_action": {
+              "action_type": "click",
+              "x": 920,
+              "y": 202
+            }
+          },
+          "event": "execution",
+          "executed": true,
+          "message": "Executed through AndroidWorld.",
+          "run_id": "ba0c3ff2a04c4f0084b06b687e8f1227",
+          "runtime_version": "v2.2",
+          "step": 4,
+          "timestamp": "2026-08-16T18:44:55.459302+00:00"
+        },
+        "fallback_reason": "",
+        "new_evidence": "coordinate/editable match: Delete",
+        "preceding_execution": {
+          "action": "LONG_PRESS",
+          "details": {
+            "androidworld_action": {
+              "action_type": "long_press",
+              "x": 460,
+              "y": 1168
+            }
+          },
+          "event": "execution",
+          "executed": true,
+          "message": "Executed through AndroidWorld.",
+          "run_id": "ba0c3ff2a04c4f0084b06b687e8f1227",
+          "runtime_version": "v2.2",
+          "step": 3,
+          "timestamp": "2026-08-16T18:44:49.180518+00:00"
+        },
+        "recovery_id": 1,
+        "recovery_trigger": "agent_recovery_triggered",
+        "replanned_action": "CLICK_POINT:12:3",
+        "rescued": false,
+        "step": 4,
+        "strict_rescue": false,
+        "subsequent_official_rewards": [
+          {
+            "event": "official_reward",
+            "reward": 0.0,
+            "run_id": "ba0c3ff2a04c4f0084b06b687e8f1227",
+            "runtime_version": "v2.2",
+            "step": 5,
+            "terminal": false,
+            "timestamp": "2026-08-16T18:44:56.598335+00:00"
+          },
+          {
+            "event": "official_reward",
+            "reward": 1.0,
+            "run_id": "ba0c3ff2a04c4f0084b06b687e8f1227",
+            "runtime_version": "v2.2",
+            "step": 6,
+            "terminal": true,
+            "timestamp": "2026-08-16T18:45:10.252969+00:00"
+          }
+        ],
+        "trigger_reason": "revisited_same_screen",
+        "ui_tree_request": true
+      },
+      {
+        "agent_recovery_outcome": {
+          "changed_action": true,
+          "event": "agent_recovery_outcome",
+          "level": "subgoal",
+          "misfire": false,
+          "official_reward": 1.0,
+          "recovery_id": 2,
+          "rescued": true,
+          "run_id": "ba0c3ff2a04c4f0084b06b687e8f1227",
+          "step": 6,
+          "timestamp": "2026-08-16T18:45:10.253974+00:00",
+          "trigger": "revisited_same_screen"
+        },
+        "blocked_action": "CLICK_POINT:12:3",
+        "changed_action": true,
+        "chosen_ui_element": {
+          "bounds": [
+            718,
+            1406,
+            886,
+            1548
+          ],
+          "class_name": "android.widget.Button",
+          "label": "OK",
+          "resource_id": "android:id/button1"
+        },
+        "execution": {
+          "action": "CLICK_POINT",
+          "details": {
+            "androidworld_action": {
+              "action_type": "click",
+              "x": 805,
+              "y": 1475
+            }
+          },
+          "event": "execution",
+          "executed": true,
+          "message": "Executed through AndroidWorld.",
+          "run_id": "ba0c3ff2a04c4f0084b06b687e8f1227",
+          "runtime_version": "v2.2",
+          "step": 5,
+          "timestamp": "2026-08-16T18:45:07.749105+00:00"
+        },
+        "fallback_reason": "",
+        "new_evidence": "coordinate/editable match: OK",
+        "preceding_execution": {
+          "action": "CLICK_POINT",
+          "details": {
+            "androidworld_action": {
+              "action_type": "click",
+              "x": 920,
+              "y": 202
+            }
+          },
+          "event": "execution",
+          "executed": true,
+          "message": "Executed through AndroidWorld.",
+          "run_id": "ba0c3ff2a04c4f0084b06b687e8f1227",
+          "runtime_version": "v2.2",
+          "step": 4,
+          "timestamp": "2026-08-16T18:44:55.459302+00:00"
+        },
+        "recovery_id": 2,
+        "recovery_trigger": "agent_recovery_triggered",
+        "replanned_action": "CLICK_POINT:10:18",
+        "rescued": true,
+        "step": 5,
+        "strict_rescue": true,
+        "subsequent_official_rewards": [
+          {
+            "event": "official_reward",
+            "reward": 1.0,
+            "run_id": "ba0c3ff2a04c4f0084b06b687e8f1227",
+            "runtime_version": "v2.2",
+            "step": 6,
+            "terminal": true,
+            "timestamp": "2026-08-16T18:45:10.252969+00:00"
+          }
+        ],
+        "trigger_reason": "revisited_same_screen",
+        "ui_tree_request": true
+      }
+    ],
+    "final_reward": 1.0,
+    "task": "MarkorDeleteNewestNote",
+    "trace_path": "artifacts/evaluation/androidworld-v22-final-frozen36-20260817/traces/MarkorDeleteNewestNote--v2.2--hybrid.jsonl"
+  },
+  "SimpleCalendarDeleteEvents": {
+    "episodes": [
+      {
+        "agent_recovery_outcome": {
+          "changed_action": true,
+          "event": "agent_recovery_outcome",
+          "level": "action",
+          "misfire": false,
+          "official_reward": 1.0,
+          "recovery_id": 1,
+          "rescued": true,
+          "run_id": "5a929e8de88440de92fb14ee62b7d41f",
+          "step": 11,
+          "timestamp": "2026-08-16T19:55:32.642745+00:00",
+          "trigger": "two_consecutive_unchanged_screens"
+        },
+        "blocked_action": "CLICK_POINT:10:3",
+        "changed_action": true,
+        "chosen_ui_element": {
+          "bounds": [
+            758,
+            1254,
+            926,
+            1380
+          ],
+          "class_name": "android.widget.Button",
+          "label": "Yes",
+          "resource_id": "android:id/button1"
+        },
+        "execution": {
+          "action": "CLICK_POINT",
+          "details": {
+            "androidworld_action": {
+              "action_type": "click",
+              "x": 843,
+              "y": 1322
+            }
+          },
+          "event": "execution",
+          "executed": true,
+          "message": "Executed through AndroidWorld.",
+          "run_id": "5a929e8de88440de92fb14ee62b7d41f",
+          "runtime_version": "v2.2",
+          "step": 10,
+          "timestamp": "2026-08-16T19:55:29.986100+00:00"
+        },
+        "fallback_reason": "",
+        "new_evidence": "coordinate/editable match: Yes",
+        "preceding_execution": {
+          "action": "CLICK_POINT",
+          "details": {
+            "androidworld_action": {
+              "action_type": "click",
+              "x": 789,
+              "y": 209
+            }
+          },
+          "event": "execution",
+          "executed": true,
+          "message": "Executed through AndroidWorld.",
+          "run_id": "5a929e8de88440de92fb14ee62b7d41f",
+          "runtime_version": "v2.2",
+          "step": 9,
+          "timestamp": "2026-08-16T19:55:22.933767+00:00"
+        },
+        "recovery_id": 1,
+        "recovery_trigger": "agent_recovery_triggered",
+        "replanned_action": "CLICK_POINT:11:17",
+        "rescued": true,
+        "step": 10,
+        "strict_rescue": true,
+        "subsequent_official_rewards": [
+          {
+            "event": "official_reward",
+            "reward": 1.0,
+            "run_id": "5a929e8de88440de92fb14ee62b7d41f",
+            "runtime_version": "v2.2",
+            "step": 11,
+            "terminal": true,
+            "timestamp": "2026-08-16T19:55:32.641754+00:00"
+          }
+        ],
+        "trigger_reason": "two_consecutive_unchanged_screens",
+        "ui_tree_request": true
+      }
+    ],
+    "final_reward": 1.0,
+    "task": "SimpleCalendarDeleteEvents",
+    "trace_path": "artifacts/evaluation/androidworld-v22-final-frozen36-continuation5-network-restored-20260817/traces/SimpleCalendarDeleteEvents--v2.2--hybrid.jsonl"
+  },
+  "TasksHighPriorityTasks": {
+    "episodes": [
+      {
+        "agent_recovery_outcome": {
+          "changed_action": true,
+          "event": "agent_recovery_outcome",
+          "level": "action",
+          "misfire": false,
+          "official_reward": 1.0,
+          "recovery_id": 1,
+          "rescued": true,
+          "run_id": "e0b7e418afbf408cac94828a3f9f5aa2",
+          "step": 5,
+          "timestamp": "2026-08-16T20:30:30.554295+00:00",
+          "trigger": "progress_verifier_stalled"
+        },
+        "blocked_action": "DRAG:7:15->7:10",
+        "changed_action": true,
+        "chosen_ui_element": null,
+        "execution": {
+          "action": "OPEN_APP",
+          "details": {
+            "androidworld_action": {
+              "action_type": "open_app",
+              "app_name": "Tasks"
+            }
+          },
+          "event": "execution",
+          "executed": true,
+          "message": "Executed through AndroidWorld.",
+          "run_id": "e0b7e418afbf408cac94828a3f9f5aa2",
+          "runtime_version": "v2.2",
+          "step": 1,
+          "timestamp": "2026-08-16T20:29:59.471656+00:00"
+        },
+        "fallback_reason": "UI Tree supplied insufficient new evidence; OPEN_APP[tasks] is instead grounded by the frozen task/subgoal state.",
+        "new_evidence": "UI Tree supplied no element supporting the candidate action",
+        "preceding_execution": {
+          "action": "DRAG",
+          "details": {
+            "androidworld_action": {
+              "action_type": "mobilepilot_drag",
+              "duration_ms": 750,
+              "end_x": 540,
+              "end_y": 787,
+              "start_x": 540,
+              "start_y": 1200
+            }
+          },
+          "event": "execution",
+          "executed": true,
+          "message": "Executed through AndroidWorld.",
+          "run_id": "e0b7e418afbf408cac94828a3f9f5aa2",
+          "runtime_version": "v2.2",
+          "step": 0,
+          "timestamp": "2026-08-16T20:29:37.524696+00:00"
+        },
+        "recovery_id": 1,
+        "recovery_trigger": "agent_recovery_triggered",
+        "replanned_action": "OPEN_APP:tasks",
+        "rescued": true,
+        "step": 1,
+        "strict_rescue": true,
+        "subsequent_official_rewards": [
+          {
+            "event": "official_reward",
+            "reward": 0.0,
+            "run_id": "e0b7e418afbf408cac94828a3f9f5aa2",
+            "runtime_version": "v2.2",
+            "step": 2,
+            "terminal": false,
+            "timestamp": "2026-08-16T20:30:10.692068+00:00"
+          },
+          {
+            "event": "official_reward",
+            "reward": 0.0,
+            "run_id": "e0b7e418afbf408cac94828a3f9f5aa2",
+            "runtime_version": "v2.2",
+            "step": 3,
+            "terminal": false,
+            "timestamp": "2026-08-16T20:30:19.057008+00:00"
+          },
+          {
+            "event": "official_reward",
+            "reward": 0.0,
+            "run_id": "e0b7e418afbf408cac94828a3f9f5aa2",
+            "runtime_version": "v2.2",
+            "step": 4,
+            "terminal": false,
+            "timestamp": "2026-08-16T20:30:24.311856+00:00"
+          },
+          {
+            "event": "official_reward",
+            "reward": 1.0,
+            "run_id": "e0b7e418afbf408cac94828a3f9f5aa2",
+            "runtime_version": "v2.2",
+            "step": 5,
+            "terminal": true,
+            "timestamp": "2026-08-16T20:30:30.554295+00:00"
+          }
+        ],
+        "trigger_reason": "progress_verifier_stalled",
+        "ui_tree_request": true
+      }
+    ],
+    "final_reward": 1.0,
+    "task": "TasksHighPriorityTasks",
+    "trace_path": "artifacts/evaluation/androidworld-v22-final-frozen36-continuation5-network-restored-20260817/traces/TasksHighPriorityTasks--v2.2--hybrid.jsonl"
+  }
+}

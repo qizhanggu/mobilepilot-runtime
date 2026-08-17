@@ -24,12 +24,12 @@ Python、AndroidWorld、ADB、Android Emulator、uiautomator2、Accessibility UI
 
 开发 Android GUI Agent Runtime，围绕协议校验、短期状态、进度验证、按需 UI Tree、有限 Recovery 和官方 reward 建立可审计闭环；通过 Trace RCA 定位 Action Contract 与状态流转缺陷，并完成 186 项自动化测试。
 
-在未参与开发的固定任务清单中获得 30 个有效配对，V2.2 完成 9 题、V1 完成 0 题；同时披露 21 个双方失败和 6 个基础设施无效任务，不将有效子集包装为 AndroidWorld 总体成绩。
+在未参与开发的固定任务清单中获得 30 个有效配对，V2.2 完成 9 题、V1 完成 0 题；同时披露 21 个双方失败、4 个实际观测到的初始化失败和 2 个共享依赖同族排除，不将有效子集包装为 AndroidWorld 总体成绩。
 
 ## 面试时必须主动补充
 
 1. `0/30 → 9/30` 是**冻结 36 题清单里的 30 个基础设施有效配对**，不是 AndroidWorld 总榜；
-2. 6 个无效任务来自 OsmAnd 目录缺失与 Windows SQLite FTS4，不是 Agent 失败；
+2. 6 个未配对任务必须拆开说：4 个实际在 Agent 接管前观测到初始化失败，2 个 Recipe 删除题因共享已确认的 Broccoli/FTS4 验证链路而未运行；
 3. 9 个成功里只有 3 个是严格 Recovery 救回，其余主要来自动作/答案契约和正常执行闭环；
 4. V2.2 仍有 21/30 失败，复杂表单、跨 App 长任务和页面理解没有解决；
 5. V2.2 用更多调用换可靠性：目录价约 ¥1.65 vs ¥1.44；
