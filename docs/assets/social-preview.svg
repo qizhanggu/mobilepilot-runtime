@@ -1,14 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
-  <title id="title">MobilePilot social preview</title><desc id="desc">MobilePilot, an auditable Android GUI Agent Runtime, with frozen paired evaluation and recovery metrics.</desc>
-  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07111F"/><stop offset=".55" stop-color="#172554"/><stop offset="1" stop-color="#312E81"/></linearGradient><radialGradient id="glow"><stop stop-color="#22D3EE" stop-opacity=".22"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></radialGradient><style>.brand{font:800 66px Inter,Segoe UI,sans-serif;fill:#F8FAFC;letter-spacing:-2px}.sub{font:500 25px Inter,Segoe UI,sans-serif;fill:#CBD5E1}.flow{font:700 19px Inter,Segoe UI,sans-serif;fill:#67E8F9}.num{font:800 38px Inter,Segoe UI,sans-serif;fill:#F8FAFC}.label{font:600 15px Inter,Segoe UI,sans-serif;fill:#94A3B8}.scope{font:500 14px Inter,Segoe UI,sans-serif;fill:#94A3B8}</style></defs>
+  <title id="title">MobilePilot bilingual social preview</title><desc id="desc">MobilePilot, an auditable Android GUI Agent Runtime, with a Chinese value statement and frozen paired evaluation metrics.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07111F"/><stop offset=".55" stop-color="#172554"/><stop offset="1" stop-color="#312E81"/></linearGradient><radialGradient id="glow"><stop stop-color="#22D3EE" stop-opacity=".22"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></radialGradient><style>.brand{font:800 66px Inter,Segoe UI,sans-serif;fill:#F8FAFC;letter-spacing:-2px}.sub{font:500 25px Inter,Segoe UI,sans-serif;fill:#CBD5E1}.cn{font:700 22px "Microsoft YaHei","Noto Sans CJK SC",Segoe UI,sans-serif;fill:#67E8F9}.flow{font:600 16px Inter,Segoe UI,sans-serif;fill:#A5B4FC}.num{font:800 38px Inter,Segoe UI,sans-serif;fill:#F8FAFC}.label{font:600 15px Inter,Segoe UI,sans-serif;fill:#94A3B8}.scope{font:500 14px "Microsoft YaHei","Noto Sans CJK SC",Segoe UI,sans-serif;fill:#94A3B8}</style></defs>
   <rect width="1280" height="640" fill="url(#bg)"/><circle cx="1060" cy="90" r="360" fill="url(#glow)"/><circle cx="1150" cy="520" r="240" fill="none" stroke="#818CF8" stroke-opacity=".18" stroke-width="2"/><circle cx="1150" cy="520" r="180" fill="none" stroke="#22D3EE" stroke-opacity=".16" stroke-width="2"/>
   <rect x="72" y="62" width="58" height="58" rx="16" fill="#2563EB"/><path d="M89 91h24M101 79v24" stroke="#FFF" stroke-width="7" stroke-linecap="round"/><circle cx="101" cy="91" r="20" fill="none" stroke="#67E8F9" stroke-width="3"/>
-  <text x="72" y="190" class="brand">MobilePilot</text>
-  <text x="72" y="234" class="sub">Auditable Android GUI Agent Runtime</text>
-  <text x="72" y="295" class="flow">Trace  →  RCA  →  Recovery  →  Frozen Evaluation</text>
+  <text x="72" y="178" class="brand">MobilePilot</text>
+  <text x="72" y="222" class="sub">Auditable Android GUI Agent Runtime</text>
+  <text x="72" y="268" class="cn">可审计 · 可恢复 · 可冻结评测</text>
+  <text x="72" y="310" class="flow">Trace  →  RCA  →  Recovery  →  Frozen Evaluation</text>
   <g><rect x="72" y="354" width="330" height="122" rx="20" fill="#0F172A" fill-opacity=".72" stroke="#334155"/><text x="98" y="407" class="num">0/30 → 9/30</text><text x="98" y="443" class="label">FROZEN PAIRED SUCCESS</text></g>
   <g><rect x="426" y="354" width="250" height="122" rx="20" fill="#0F172A" fill-opacity=".72" stroke="#334155"/><text x="452" y="407" class="num">3 / 25</text><text x="452" y="443" class="label">STRICT RESCUES</text></g>
   <g><rect x="700" y="354" width="230" height="122" rx="20" fill="#0F172A" fill-opacity=".72" stroke="#334155"/><text x="726" y="407" class="num">186</text><text x="726" y="443" class="label">TESTS PASSED</text></g>
-  <text x="72" y="552" class="scope">30 valid pairs from a pre-frozen 36-task list · not an AndroidWorld-wide 30% claim</text>
-  <text x="72" y="584" class="scope">Structured actions · progress verification · on-demand UI Tree · bounded recovery</text>
+  <text x="72" y="552" class="scope">30 个有效配对来自预冻结 36 题清单 · 不代表 AndroidWorld 总体 30% 成功率</text>
+  <text x="72" y="584" class="scope">结构化动作 · 进展验证 · 按需 UI Tree · 有限 Recovery</text>
 </svg>
